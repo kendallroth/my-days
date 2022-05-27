@@ -1,0 +1,107 @@
+{
+  "_comment": "src/localization/en/translation.json",
+  "dayAddEdit": {
+    "titleAdd": "Add Day",
+    "titleEdit": "Update Day",
+    "dayDateLabel": "Date",
+    "dayDateFormatError": "Format 'YYYY-MM-DD'",
+    "dayTitleLabel": "Title",
+    "dayAddSuccess": "Added day",
+    "dayEditSuccess": "Updated {{title}}"
+  },
+  "dayList": {
+    "title": "Days"
+  },
+  "dayShared": {
+    "deleteDayConfirmTitle": "Remove Day",
+    "deleteDayConfirmDescription": "Are you sure you want to remove this day?",
+    "deleteDaySuccess": "Removed {{title}}"
+  },
+  "home": {
+    "title": "Home",
+    "welcomeText": "Welcome!"
+  },
+  "settings": {
+    "title": "Settings",
+    "listItemBug": "Report a bug",
+    "listItemAppearance": "Appearance",
+    "listItemBehaviours": "Behaviours",
+    "listItemLanguage": "Language",
+    "listItemSuggestion": "Suggest an improvement",
+    "listSectionCustomize": "Customize",
+    "listSectionHelp": "Help"
+  },
+  "settingsAbout": {
+    "title": "About",
+    "appDescription": "“My Days” is intended to provide a quick overview of the time until/from an important event. Never forget when the next important date is with “My Days”!",
+    "appDeveloper": "Developed by Kendall Roth © {{date}}",
+    "appSummary": "“My Days” is a simple mobile app to count down/up to important dates!",
+    "guideStep1": "Add and manage dates",
+    "guideStep2": "View date details",
+    "guideStep3": "Track dates on dashboard",
+    "chipContact": "Contact",
+    "chipPortfolio": "Portfolio",
+    "chipRepository": "Repository"
+  },
+  "settingsAppReset": {
+    "title": "Reset App",
+    "actionSubmit": "Reset Selected",
+    "listItemDays": "Days",
+    "listItemSettings": "Settings"
+  },
+  "settingsBehaviours": {
+    "title": "Behaviours"
+  },
+  "settingsContributors": {
+    "title": "Contributors",
+    "contributorPrompt": "Interested in helping out?",
+    "contributorThanks": "Special thanks to all the people who have helped this project so far!"
+  },
+  "settingsDeveloper": {
+    "title": "Debug",
+    "exitDeveloperButton": "Exit Developer Mode",
+    "exitDeveloperConfirmDescription": "Are you sure you want to exit developer mode?",
+    "exitDeveloperConfirmTitle": "Exit Developer Mode?",
+    "listItemBuild": "Build",
+    "listItemDeviceModel": "Model",
+    "listItemDeviceOS": "OS",
+    "listItemDeviceType": "Type",
+    "listItemDeviceTypeEmulator": "Emulator",
+    "listItemDeviceTypePhone": "Phone",
+    "listItemExpo": "Expo Go",
+    "listItemEnvironment": "Release",
+    "listItemPlatform": "Platform",
+    "listItemPopulateTitle": "Add Debug Data",
+    "listItemPopulateDescription": "Press and hold to insert debug app data",
+    "listItemResetTitle": "Reset App",
+    "listItemResetDescription": "Press and hold to reset app data",
+    "listItemVersion": "Version",
+    "listSectionActions": "Developer Actions",
+    "listSectionApp": "App",
+    "listSectionDevice": "Device",
+    "populateDataDescription": "Added debug data can be removed easily once added!",
+    "populateDataLoading": "Populating app...",
+    "populateDataSuccess": "Debug app data has been added",
+    "populateDataTitle": "Add Debug Data",
+    "resetDataDescription": "This will reset the selected app state and is irreversible!",
+    "resetDataLoading": "Resetting app...",
+    "resetDataSuccess": "App data has been reset",
+    "resetDataTitle": "Reset App Data"
+  },
+  "settingsLanguage": {
+    "title": "Select Language",
+    "betaWarning": "Beta translations are incomplete!"
+  },
+  "settingsReportBug": {
+    "title": "Report a Bug",
+    "reportTitle": "Oh no!",
+    "reportDescription": "We are sorry to hear that something went wrong! Please provide a detailed report of the steps leading up to the issue, and the expected vs actual result.\n\nBug reports must currently be created in the GitHub repository. Please be sure to check for similar reports, to avoid creating duplicates!\n\nRemember, the more detail and steps provided, the easier it will be resolve the issue!",
+    "actionGitHub": "GitHub Issues"
+  },
+  "settingsTheme": {
+    "title": "Select Theme",
+    "itemAuto": "Auto",
+    "itemDark": "Dark",
+    "itemLight": "Light"
+  }
+}

@@ -1,0 +1,13 @@
+diff --git a/node_modules/@react-native-community/eslint-config/index.js b/node_modules/@react-native-community/eslint-config/index.js
+index 9df5cce..24d8bb4 100644
+--- a/node_modules/@react-native-community/eslint-config/index.js
++++ b/node_modules/@react-native-community/eslint-config/index.js
+@@ -36,7 +36,7 @@ module.exports = {
+   overrides: [
+     {
+       files: ['*.js'],
+-      parser: 'babel-eslint',
++      parser: '@babel/eslint-parser',
+       plugins: ['flowtype'],
+       rules: {
+         // Flow Plugin

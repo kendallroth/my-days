@@ -1,0 +1,107 @@
+{
+  "_comment": "src/localization/es/screens.json",
+  "dayAddEdit": {
+    "titleAdd": "Agregar día",
+    "titleEdit": "Actualizar día",
+    "dayDateLabel": "Día",
+    "dayDateFormatError": "Formato 'YYYY-MM-DD'",
+    "dayTitleLabel": "Título",
+    "dayAddSuccess": "Evento agregada",
+    "dayEditSuccess": "{{title}} actualizado"
+  },
+  "dayList": {
+    "title": "Días"
+  },
+  "dayShared": {
+    "deleteDayConfirmTitle": "Eliminar Día",
+    "deleteDayConfirmDescription": "¿Está seguro de que desea eliminar esta día?",
+    "deleteDaySuccess": "{{title}} eliminado"
+  },
+  "home": {
+    "title": "Inicio",
+    "welcomeText": "¡Bienvenido!"
+  },
+  "settings": {
+    "title": "Configuración",
+    "listItemBug": "Reportar un error",
+    "listItemAppearance": "Apariencia",
+    "listItemBehaviours": "Comportamientos",
+    "listItemLanguage": "Idioma",
+    "listItemSuggestion": "Sugerir una mejora",
+    "listSectionCustomize": "Personalizar",
+    "listSectionHelp": "Ayudar"
+  },
+  "settingsAbout": {
+    "title": "Sobre",
+    "appDescription": "“My Days” is intended to provide a quick overview of the time until/from an important event. Never forget when the next important date is with “My Days”!",
+    "appDeveloper": "Desarrollado por Kendall Roth © {{date}}",
+    "appSummary": "“My Days” is a simple mobile app to count down/up to important dates!",
+    "guideStep1": "N/A",
+    "guideStep2": "N/A",
+    "guideStep3": "N/A",
+    "chipContact": "Contacto",
+    "chipPortfolio": "Portafolio",
+    "chipRepository": "Repositorio"
+  },
+  "settingsAppReset": {
+    "title": "Restablecer la App",
+    "actionSubmit": "Restablecer Seleccionado",
+    "listItemDays": "Días",
+    "listItemSettings": "Configuración"
+  },
+  "settingsBehaviours": {
+    "title": "Comportamientos"
+  },
+  "settingsContributors": {
+    "title": "Colaboradores",
+    "contributorPrompt": "¿Interesado en ayudar?",
+    "contributorThanks": "¡Un agradecimiento especial a todas las personas que han ayudado a este proyecto hasta ahora!"
+  },
+  "settingsDeveloper": {
+    "title": "Depurar",
+    "exitDeveloperButton": "Salir del Modo de Desarrollo",
+    "exitDeveloperConfirmDescription": "¿Está seguro de que desea salir del modo de desarrollo?",
+    "exitDeveloperConfirmTitle": "¿Salir del modo de desarrollo?",
+    "listItemBuild": "Construcción",
+    "listItemDeviceModel": "Modelo",
+    "listItemDeviceOS": "S.O.",
+    "listItemDeviceType": "Tipo",
+    "listItemDeviceTypeEmulator": "Emulador",
+    "listItemDeviceTypePhone": "Celular",
+    "listItemExpo": "Expo Go",
+    "listItemEnvironment": "Entorno",
+    "listItemPlatform": "Plataforma",
+    "listItemPopulateTitle": "Agregar Datos de Depuración",
+    "listItemPopulateDescription": "Mantenga presionado para insertar datos de la aplicación de depuración",
+    "listItemResetTitle": "Restablecer App",
+    "listItemResetDescription": "Mantenga presionado para restablecer los datos de la aplicación",
+    "listItemVersion": "Versión",
+    "listSectionActions": "Acciones del Desarrollador",
+    "listSectionApp": "Aplicación",
+    "listSectionDevice": "Dispositivo",
+    "populateDataDescription": "¡Se puede eliminar fácilmente los datos de depuración agregados!",
+    "populateDataLoading": "Poblando la App...",
+    "populateDataSuccess": "Se han agregado los datos de la aplicación de depuración",
+    "populateDataTitle": "Agregar Datos de Depuración",
+    "resetDataDescription": "¡Esto restablecerá el estado de la aplicación y es irreversible!",
+    "resetDataLoading": "Restableciendo la aplicación ...",
+    "resetDataSuccess": "Se han restablecido los datos de la aplicación",
+    "resetDataTitle": "Restablecer Datos de la Aplicación"
+  },
+  "settingsLanguage": {
+    "title": "Seleccionar el idioma",
+    "betaWarning": "¡Los idiomas beta están incompletos!"
+  },
+  "settingsReportBug": {
+    "title": "Reportar un error",
+    "reportTitle": "¡Oh, no!",
+    "reportDescription": "Lamentamos que algo ha salido mal. Por favor, proporcione un informe detallado de los pasos que condujeron al problema y el resultado esperado frente al real.\n\nLos informes de errores deben ser creados actualmente en el repositorio de GitHub. ¡Por favor, asegúrese de comprobar que no existen informes similares para evitar crear duplicados!\n\nRecuerde, cuantos más detalles y pasos proporcione, más fácil será resolver el problema.",
+    "actionGitHub": "Problemas en GitHub"
+  },
+  "settingsTheme": {
+    "title": "Seleccionar el tema",
+    "itemAuto": "Automático",
+    "itemDark": "Oscuro",
+    "itemLight": "Claro"
+  }
+}

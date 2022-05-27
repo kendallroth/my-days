@@ -1,0 +1,34 @@
+{
+  "_comment": "src/localization/en/translation.json",
+  "actions": {
+    "add": "Add",
+    "back": "Back",
+    "delete": "Delete",
+    "edit": "Edit",
+    "remove": "Remove",
+    "save": "Save"
+  },
+  "app": {},
+  "choices": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "no": "No",
+    "yes": "Yes"
+  },
+  "errors": {
+    "notImplemented": "Not implemented yet"
+  },
+  "phrases": {
+    "beta": "beta",
+    "comingSoon": "Coming Soon!",
+    "optional": "Optional",
+    "search": "Search"
+  },
+  "validations": {
+    "invalid": "{{path}} is invalid",
+    "invalidType": "{{path}} must be a {{type}}",
+    "match": "{{path}} has invalid format",
+    "required": "{{path}} is required",
+    "stringMin": "{{path}} must be at least {{min}} characters"
+  }
+}

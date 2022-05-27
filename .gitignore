@@ -1,0 +1,29 @@
+# Manual builds
+builds/
+
+# Dependencies
+node_modules/
+
+# Test files
+coverage/
+
+# Expo
+.expo/
+web-build/
+
+# NPM files
+npm-debug.*
+
+# Certificates/credentials
+EAS_AndroidAuthKey*
+EAS_AppleAuthKey*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+credentials.json
+
+# OS-specific
+.DS_Store
