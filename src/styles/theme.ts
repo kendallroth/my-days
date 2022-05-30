@@ -33,7 +33,7 @@ const colorPrimary = "#8bc34a";
 
 /** Shared theme colors (typically literals) */
 const sharedColors = {
-  accent: "#eb144c",
+  accent: "#C34A8B",
   black: "#000000",
   error: "#c62828",
   // TODO: Figure out how to handle grey colors per theme!

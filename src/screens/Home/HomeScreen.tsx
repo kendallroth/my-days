@@ -7,15 +7,16 @@ import { Text } from "react-native-paper";
 
 // Components
 import { AppBar, Page } from "@components/layout";
+import { Alert } from "@components/typography";
 
 // Utilities
 import { useAppSelector, useSnackbar } from "@hooks";
 import { selectDays } from "@store/slices/days";
+import { lightColors, sharedColors } from "@styles/theme";
 
 // Types
 import { RootRouterNavigation } from "src/AppRouter";
-import { Alert } from "@components/typography";
-import { lightColors, sharedColors } from "@styles/theme";
+import DayDashboard from "./DayDashboard";
 
 const HomeScreen = (): ReactElement | null => {
   const navigation = useNavigation<RootRouterNavigation>();
@@ -30,7 +31,8 @@ const HomeScreen = (): ReactElement | null => {
     weekDay: today.format("dddd"),
   };
 
-  const [dashboardView, setDashboardView] = useState(false);
+  // TODO: Use tabs to animate between dashboard and list view
+  const [dashboardView, setDashboardView] = useState(true);
 
   /** Toggle between dashboard and list views */
   const handleToggleView = (): void => {
@@ -51,9 +53,13 @@ const HomeScreen = (): ReactElement | null => {
         <Text style={styles.pageHeaderDate}>{dateDisplay.date}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.pageScroll}>
-        <View style={styles.notImplemented}>
-          <Alert>{t("common:errors.notImplemented")}</Alert>
-        </View>
+        {dashboardView ? (
+          <DayDashboard />
+        ) : (
+          <View style={styles.notImplemented}>
+            <Alert>{t("common:errors.notImplemented")}</Alert>
+          </View>
+        )}
       </ScrollView>
     </Page>
   );
@@ -79,8 +85,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   notImplemented: {
-    marginTop: 48,
-    marginBottom: 24,
+    marginTop: 32,
+    marginBottom: 8,
     alignSelf: "center",
   },
 });

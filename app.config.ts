@@ -3,7 +3,7 @@ import { ExpoConfig } from "@expo/config";
 // Utilities
 import { version } from "./package.json";
 
-const primaryColor = "#2196f3";
+const primaryColor = "#8bc34a";
 
 /**
  * Semantic version name (viewable)

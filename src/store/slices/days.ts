@@ -84,6 +84,8 @@ const daysSlice = createSlice({
 
 export const daysSelectors = daysAdapter.getSelectors<RootState>((state) => state.days);
 
+// TODO: Expand selectors to calculate day offset
+
 /**
  * Select a specific day
  *

@@ -6,9 +6,11 @@
 // import { format, parseISO } from "date-fns";
 import dayjs from "dayjs";
 
-// Human-readable date format
+/** Shortened human-readable date format */
 export const DATE_FORMAT_NICE = "YYYY-MMM-DD";
-// Shortened ISO date format
+/** Human-readable date format */
+export const DATE_FORMAT_LONG = "MMMM DD, YYYY";
+/** Shortened ISO date format */
 export const DATE_FORMAT_ISO_SHORT = "YYYY-MM-DD";
 
 /**
