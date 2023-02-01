@@ -19,8 +19,8 @@ type FakeDayNew = Pick<IDay, "title" | "date" | "repeats" | "type">;
 const createFakeDay = (day: FakeDayNew): IDay => {
   return {
     id: uuidv4(),
-    archivedAt: null,
     createdAt: fakeDate.past(1).toISOString(),
+    pinned: false,
     ...day,
   };
 };
@@ -29,26 +29,26 @@ const createFakeDay = (day: FakeDayNew): IDay => {
 //         Additionally, these values are used in fake days (caution)!
 const fakeDays: IDay[] = [
   createFakeDay({
-    date: dayjs().subtract(5, "day").format(DATE_FORMAT_ISO_SHORT),
-    title: "Pickup Hockey",
+    date: dayjs("2022-05-12").format(DATE_FORMAT_ISO_SHORT),
+    title: "App Creation",
     repeats: null,
     type: "countup",
   }),
   createFakeDay({
-    date: dayjs().subtract(2, "day").format(DATE_FORMAT_ISO_SHORT),
-    title: "Painting Class",
-    repeats: "year",
-    type: "countdown",
+    date: dayjs("2022-04-21").format(DATE_FORMAT_ISO_SHORT),
+    title: "Relationship",
+    repeats: null,
+    type: "countup",
   }),
   createFakeDay({
-    date: dayjs().add(3, "day").format(DATE_FORMAT_ISO_SHORT),
-    title: "Ice Skating",
+    date: dayjs("2022-10-29").format(DATE_FORMAT_ISO_SHORT),
+    title: "Friend's Wedding",
     repeats: null,
     type: "countdown",
   }),
   createFakeDay({
-    date: dayjs().add(10, "day").format(DATE_FORMAT_ISO_SHORT),
-    title: "Camping Trip",
+    date: dayjs("2022-12-25").format(DATE_FORMAT_ISO_SHORT),
+    title: "Christmas",
     repeats: "year",
     type: "countdown",
   }),

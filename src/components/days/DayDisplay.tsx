@@ -1,6 +1,7 @@
+import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import React, { ReactElement } from "react";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Surface, Text, Title } from "react-native-paper";
+import { Surface, Text, Title, useTheme } from "react-native-paper";
 
 // Utilities
 import { lightColors, sharedColors } from "@styles/theme";
@@ -18,16 +19,27 @@ type DayDisplayProps = {
 const DayDisplay = (props: DayDisplayProps): ReactElement => {
   const { day, style } = props;
 
+  const theme = useTheme();
+
   // TODO: Potentially format date differently based on meta
   const dateDisplay = formatDateString(day.date, DATE_FORMAT_LONG);
   const dateCount = getDayDisplay(day);
 
+  const countdown = day.type === "countdown";
+
   return (
     <Surface style={[style, styles.day]}>
       <View style={styles.dayHeader}>
-        <Title style={styles.dayHeaderTitle}>{day.title}</Title>
+        <Title numberOfLines={1} style={styles.dayHeaderTitle}>
+          {day.title}
+        </Title>
       </View>
       <View style={styles.dayContent}>
+        <Icon
+          color={dateCount.valid ? theme.colors.primary : theme.colors.error}
+          name={countdown ? "arrow-down" : "arrow-up"}
+          style={styles.dayContentIcon}
+        />
         <Title style={styles.dayContentCount}>{dateCount.count}</Title>
         <Title style={styles.dayContentLabel}>{dateCount.label}</Title>
       </View>
@@ -53,6 +65,10 @@ const styles = StyleSheet.create({
     fontSize: 32,
     lineHeight: 32 * 1.25,
     fontWeight: "800",
+  },
+  dayContentIcon: {
+    marginRight: 4,
+    fontSize: 24,
   },
   dayContentLabel: {
     marginLeft: 8,

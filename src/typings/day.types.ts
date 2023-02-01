@@ -12,10 +12,8 @@ export interface IDayBase {
 }
 
 export interface IDay extends IDayBase {
-  /** When day was archived */
-  archivedAt: string | null;
   /** When day was created */
   createdAt: string;
-  /** Day description */
-  description?: string;
+  /** Whether day is pinned to dashboard */
+  pinned: boolean;
 }

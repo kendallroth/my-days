@@ -52,7 +52,7 @@ const HomeScreen = (): ReactElement | null => {
         <Text style={styles.pageHeaderDay}>{dateDisplay.weekDay}</Text>
         <Text style={styles.pageHeaderDate}>{dateDisplay.date}</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.pageScroll}>
+      <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
         {dashboardView ? (
           <DayDashboard />
         ) : (
@@ -66,6 +66,7 @@ const HomeScreen = (): ReactElement | null => {
 };
 
 const styles = StyleSheet.create({
+  pageContent: {},
   pageHeader: {
     padding: 24,
     paddingTop: 8,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   pageScroll: {
-    flexGrow: 1,
+    flex: 1,
   },
   notImplemented: {
     marginTop: 32,

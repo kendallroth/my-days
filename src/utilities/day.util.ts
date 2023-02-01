@@ -4,8 +4,12 @@ import dayjs from "dayjs";
 import { IDayBase } from "@typings/day.types";
 
 interface IDayCountDisplay {
+  /** Day count value (can be negative if invalid!) */
   count: number;
+  /** Day count label (ie. "days", etc) */
   label: string;
+  /** Whether today is within expected countdown/countup range */
+  valid: boolean;
 }
 
 /**
@@ -28,9 +32,12 @@ const getDayCounter = (day: IDayBase): number => {
  * @returns Day display label
  */
 const getDayDisplay = (day: IDayBase): IDayCountDisplay => {
+  const count = getDayCounter(day);
+
   return {
-    count: getDayCounter(day),
+    count,
     label: "days",
+    valid: count >= 0,
   };
 };
 

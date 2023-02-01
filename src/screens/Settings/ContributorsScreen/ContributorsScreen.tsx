@@ -42,16 +42,6 @@ const contributors: Contributor[] = [
     name: "Kendall Roth",
     website: "https://www.kendallroth.ca",
   },
-  {
-    actions: [{ description: "Spanish", type: "localization" }],
-    color: "#3F51B5",
-    name: "Lukasz Antos",
-  },
-  {
-    actions: [{ description: "Testing", type: "testing" }],
-    color: "#FFA500",
-    name: "Kyle Roth",
-  },
 ];
 
 const ContributorsScreen = (): ReactElement => {

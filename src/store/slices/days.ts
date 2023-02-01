@@ -10,7 +10,8 @@ import { RootState } from "../index";
 import { IDay, IDayBase } from "@typings/day.types";
 
 interface IDaysState {
-  sample: string;
+  /** Indicate primary countdown/countup on dashboard */
+  primary: string | null;
 }
 
 export const daysAdapter = createEntityAdapter<IDay>({
@@ -22,8 +23,7 @@ export const daysAdapter = createEntityAdapter<IDay>({
 ////////////////////////////////////////////////////////////////////////////////
 
 const initialState = daysAdapter.getInitialState<IDaysState>({
-  // NOTE: Sample only intended to provide example of additional state (other than entity adapter)
-  sample: "key",
+  primary: null,
 });
 
 const daysSlice = createSlice({
@@ -33,8 +33,8 @@ const daysSlice = createSlice({
     addDay(state, action: PayloadAction<IDayBase>): void {
       const newDay: IDay = {
         ...action.payload,
-        archivedAt: null,
         createdAt: dayjs().toISOString(),
+        pinned: false,
         title: action.payload.title.trim(),
       };
 
