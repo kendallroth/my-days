@@ -1,19 +1,22 @@
 /** Base day shape */
-export interface IDayBase {
+export interface DayBase {
   id: string;
   /** Day occurrence */
   date: string;
-  /** When a day repeats */
-  repeats: null | "year";
+  /**
+   * Whether interval repeats each year
+   *
+   * - With repetition: counts will use the next yearly occurance.
+   * - Without repetition: counts will always use the same fixed date.
+   */
+  repeats: boolean;
   /** Day name/title */
   title: string;
-  /** Whether day uses a countdown/countup mode */
-  type: "countdown" | "countup";
 }
 
-export interface IDay extends IDayBase {
+export interface Day extends DayBase {
   /** When day was created */
   createdAt: string;
-  /** Whether day is pinned to dashboard */
-  pinned: boolean;
+  color?: string;
+  icon?: string;
 }

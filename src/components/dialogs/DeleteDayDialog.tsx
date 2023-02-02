@@ -7,11 +7,11 @@ import { Text } from "react-native-paper";
 import ConfirmDialog from "./ConfirmDialog";
 
 // Types
-import { IDay } from "@typings/day.types";
+import { Day } from "@typings/day.types";
 
 export type DeleteDayDialogProps = {
   /** Day being deleted */
-  day: IDay | null;
+  day: Day | null;
   /** Whether modal is visible */
   visible: boolean;
   /** Cancel callback */

@@ -6,9 +6,9 @@ import { v4 as uuidv4 } from "uuid";
 import { DATE_FORMAT_ISO_SHORT } from "@utilities/date.util";
 
 // Types
-import { IDay } from "@typings/day.types";
+import { Day } from "@typings/day.types";
 
-type FakeDayNew = Pick<IDay, "title" | "date" | "repeats" | "type">;
+type FakeDayNew = Pick<Day, "title" | "date" | "repeats">;
 
 /**
  * Create a fake day
@@ -16,41 +16,36 @@ type FakeDayNew = Pick<IDay, "title" | "date" | "repeats" | "type">;
  * @param   day - Partial details
  * @returns Fake day
  */
-const createFakeDay = (day: FakeDayNew): IDay => {
+const createFakeDay = (day: FakeDayNew): Day => {
   return {
     id: uuidv4(),
     createdAt: fakeDate.past(1).toISOString(),
-    pinned: false,
     ...day,
   };
 };
 
 // NOTE: Static exports are only calculated once when app loads!
 //         Additionally, these values are used in fake days (caution)!
-const fakeDays: IDay[] = [
+const fakeDays: Day[] = [
   createFakeDay({
-    date: dayjs("2022-05-12").format(DATE_FORMAT_ISO_SHORT),
-    title: "App Creation",
-    repeats: null,
-    type: "countup",
-  }),
-  createFakeDay({
-    date: dayjs("2022-04-21").format(DATE_FORMAT_ISO_SHORT),
-    title: "Relationship",
-    repeats: null,
-    type: "countup",
+    date: dayjs("2022-04-20").format(DATE_FORMAT_ISO_SHORT),
+    title: "Dating",
+    repeats: false,
   }),
   createFakeDay({
     date: dayjs("2022-10-29").format(DATE_FORMAT_ISO_SHORT),
     title: "Friend's Wedding",
-    repeats: null,
-    type: "countdown",
+    repeats: false,
   }),
   createFakeDay({
-    date: dayjs("2022-12-25").format(DATE_FORMAT_ISO_SHORT),
+    date: dayjs("2000-12-25").format(DATE_FORMAT_ISO_SHORT),
     title: "Christmas",
-    repeats: "year",
-    type: "countdown",
+    repeats: true,
+  }),
+  createFakeDay({
+    date: dayjs("2023-02-13").format(DATE_FORMAT_ISO_SHORT),
+    title: "Vacation Trip",
+    repeats: false,
   }),
 ];
 

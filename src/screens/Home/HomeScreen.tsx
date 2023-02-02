@@ -1,29 +1,20 @@
 import dayjs from "dayjs";
 import { useNavigation } from "@react-navigation/native";
 import React, { ReactElement, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 
-// Components
-import { AppBar, Page } from "@components/layout";
-import { Alert } from "@components/typography";
-
-// Utilities
-import { useAppSelector, useSnackbar } from "@hooks";
-import { selectDays } from "@store/slices/days";
+import { AppBar, ComingSoon, Page } from "@components/layout";
+import { useSnackbar } from "@hooks";
 import { lightColors, sharedColors } from "@styles/theme";
+import DayList from "./DayList";
 
-// Types
-import { RootRouterNavigation } from "src/AppRouter";
-import DayDashboard from "./DayDashboard";
+import type { RootRouterNavigation } from "src/AppRouter";
 
 const HomeScreen = (): ReactElement | null => {
   const navigation = useNavigation<RootRouterNavigation>();
 
-  const { notifyError } = useSnackbar();
-  const days = useAppSelector(selectDays);
-  const { t } = useTranslation(["common", "screens"]);
+  const { notifyNotImplemented } = useSnackbar();
 
   const today = dayjs();
   const dateDisplay = {
@@ -32,18 +23,19 @@ const HomeScreen = (): ReactElement | null => {
   };
 
   // TODO: Use tabs to animate between dashboard and list view
-  const [dashboardView, setDashboardView] = useState(true);
+  const [listView, setListView] = useState(true);
 
   /** Toggle between dashboard and list views */
   const handleToggleView = (): void => {
-    setDashboardView(!dashboardView);
+    setListView(!listView);
+    // notifyNotImplemented();
   };
 
   return (
     <Page>
       <AppBar back={false} background={lightColors.primary} logo>
         <AppBar.Action
-          icon={dashboardView ? "view-dashboard" : "view-list"}
+          icon={listView ? "view-list" : "view-dashboard"}
           onPress={handleToggleView}
         />
         <AppBar.Action icon="cog" onPress={(): void => navigation.navigate("SettingsRouter")} />
@@ -52,21 +44,15 @@ const HomeScreen = (): ReactElement | null => {
         <Text style={styles.pageHeaderDay}>{dateDisplay.weekDay}</Text>
         <Text style={styles.pageHeaderDate}>{dateDisplay.date}</Text>
       </View>
-      <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
-        {dashboardView ? (
-          <DayDashboard />
-        ) : (
-          <View style={styles.notImplemented}>
-            <Alert>{t("common:errors.notImplemented")}</Alert>
-          </View>
-        )}
-      </ScrollView>
+      <View style={styles.pageContent}>{listView ? <DayList /> : <ComingSoon />}</View>
     </Page>
   );
 };
 
 const styles = StyleSheet.create({
-  pageContent: {},
+  pageContent: {
+    flex: 1,
+  },
   pageHeader: {
     padding: 24,
     paddingTop: 8,
@@ -81,14 +67,6 @@ const styles = StyleSheet.create({
     color: sharedColors.white,
     fontSize: 32,
     fontWeight: "700",
-  },
-  pageScroll: {
-    flex: 1,
-  },
-  notImplemented: {
-    marginTop: 32,
-    marginBottom: 8,
-    alignSelf: "center",
   },
 });
 

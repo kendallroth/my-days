@@ -1,4 +1,5 @@
 import React, { ReactElement, useReducer } from "react";
+import { useTranslation } from "react-i18next";
 import { Snackbar, useTheme } from "react-native-paper";
 
 // Delay snackbar slightly to allow previous snackbars to close (animate) properly
@@ -24,6 +25,8 @@ export interface ISnackbarContext {
   notify: (message: string, options?: SnackbarOptions) => void;
   /** Notify user (error) */
   notifyError: (message: string, options?: SnackbarOptions) => void;
+  /** Notify user (not implemented) */
+  notifyNotImplemented: (options?: SnackbarOptions) => void;
   /** Snackbar state/options */
   snackbar: ISnackbarState;
 }
@@ -74,6 +77,7 @@ const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
   const { children } = props;
   const [snackbar, snackbarDispatch] = useReducer(reducer, initialState);
 
+  const { t } = useTranslation(["common"]);
   const { colors } = useTheme();
 
   let snackbarStyle = {};
@@ -133,8 +137,19 @@ const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
     notify(message, { ...options, type: "error" });
   };
 
+  /**
+   * Open a not implemented notification
+   *
+   * @param options - Snackbar options
+   */
+  const notifyNotImplemented = (options: SnackbarOptions = {}): void => {
+    notify(t("common:errors.notImplemented"), { ...options, type: "error" });
+  };
+
   return (
-    <SnackbarContext.Provider value={{ closeNotification, notify, notifyError, snackbar }}>
+    <SnackbarContext.Provider
+      value={{ closeNotification, notify, notifyError, notifyNotImplemented, snackbar }}
+    >
       {children}
       <Snackbar
         // @ts-ignore - Cannot cast to snackbar actions

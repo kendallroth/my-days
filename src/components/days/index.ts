@@ -1,1 +1,1 @@
-export { default as DayDisplay } from "./DayDisplay";
+export { default as DayListItem } from "./DayListItem";

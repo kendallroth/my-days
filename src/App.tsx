@@ -6,7 +6,7 @@ import { StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { Provider as ReduxProvider } from "react-redux";
 import { enableScreens } from "react-native-screens";
-import "react-native-gesture-handler";
+// import "react-native-gesture-handler";
 import * as yup from "yup";
 
 // Components

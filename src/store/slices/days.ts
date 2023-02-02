@@ -7,14 +7,14 @@ import { fakeDays } from "../data/days";
 import { RootState } from "../index";
 
 // Types
-import { IDay, IDayBase } from "@typings/day.types";
+import { Day, DayBase } from "@typings/day.types";
 
 interface IDaysState {
   /** Indicate primary countdown/countup on dashboard */
   primary: string | null;
 }
 
-export const daysAdapter = createEntityAdapter<IDay>({
+export const daysAdapter = createEntityAdapter<Day>({
   sortComparer: (a, b) => b.date.localeCompare(a.date),
 });
 
@@ -30,11 +30,10 @@ const daysSlice = createSlice({
   name: "days",
   initialState,
   reducers: {
-    addDay(state, action: PayloadAction<IDayBase>): void {
-      const newDay: IDay = {
+    addDay(state, action: PayloadAction<DayBase>): void {
+      const newDay: Day = {
         ...action.payload,
         createdAt: dayjs().toISOString(),
-        pinned: false,
         title: action.payload.title.trim(),
       };
 
@@ -44,14 +43,13 @@ const daysSlice = createSlice({
       // NOTE: Cleaning up attendance is handled by 'attendance' slice
       daysAdapter.removeOne(state, action.payload);
     },
-    updateDay(state, action: PayloadAction<IDay>): void {
-      const update: Update<IDay> = {
+    updateDay(state, action: PayloadAction<Day>): void {
+      const update: Update<Day> = {
         id: action.payload.id,
         changes: {
           date: action.payload.date,
           repeats: action.payload.repeats,
           title: action.payload.title,
-          type: action.payload.type,
         },
       };
 
@@ -93,7 +91,7 @@ export const daysSelectors = daysAdapter.getSelectors<RootState>((state) => stat
  * @param   id    - Day ID
  * @returns Selected day
  */
-export const selectDay = (state: RootState, id: string): IDay | undefined =>
+export const selectDay = (state: RootState, id: string): Day | undefined =>
   daysSelectors.selectById(state, id);
 /**
  * Select a list of all days (ordered by date)

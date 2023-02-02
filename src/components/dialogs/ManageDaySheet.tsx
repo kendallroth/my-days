@@ -12,7 +12,7 @@ import { DateTimeInput, TextInput } from "@components/form";
 import BottomSheet from "./BottomSheet";
 
 // Types
-import { IDay, IDayBase } from "@typings/day.types";
+import { Day, DayBase } from "@typings/day.types";
 import { BottomSheetRef } from "./BottomSheet";
 
 interface IFormData {
@@ -22,16 +22,15 @@ interface IFormData {
 
 type ManageDaySheetProps = {
   /** Day to update */
-  day?: IDay | null;
+  day?: Day | null;
   /** Add day callback */
-  onAdd?: (day: IDayBase) => void;
+  onAdd?: (day: DayBase) => void;
   /** Cancellation callback */
   onCancel: () => void;
   /** Update day callback */
-  onEdit?: (day: IDay) => void;
+  onEdit?: (day: Day) => void;
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const getSchema = (t: TFunction<("common" | "screens")[], undefined>) => {
   return yup.object({
     date: yup
@@ -95,8 +94,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
         onAdd({
           ...data,
           id: uuidv4(),
-          repeats: null,
-          type: "countdown",
+          repeats: false,
         });
       } else {
         if (!onEdit) return;

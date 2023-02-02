@@ -107,7 +107,7 @@ const DeveloperScreen = (): ReactElement => {
         />
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemDeviceOS")}
-          value={`${Device.osName} ${Device.osVersion}`}
+          value={`${Device.osName?.split("/")[0]} @ v${Device.osVersion}`}
         />
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemDeviceType")}
