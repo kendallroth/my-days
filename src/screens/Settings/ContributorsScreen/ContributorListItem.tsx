@@ -3,10 +3,10 @@ import React, { ReactElement } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Chip, IconButton, Text, useTheme } from "react-native-paper";
 
+import { getShadowStyles } from "@styles/utilities";
 import { getInitials } from "@utilities/string";
 
 import type { Contributor, ContributorActionType } from "./ContributorsScreen";
-import type { getShadowStyles } from "@styles/utilities";
 import type { LeftRight, MaterialCommunityIcons } from "@typings/app.types";
 
 type ContributorListItemProps = {

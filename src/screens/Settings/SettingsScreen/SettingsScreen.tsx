@@ -18,6 +18,7 @@ import {
   setAppTheme,
 } from "@store/slices/settings";
 import { sharedColors } from "@theme";
+import { LANGUAGES } from "@utilities/constants";
 import { sleep } from "@utilities/misc.util";
 
 import { AppResetModal } from "./AppResetModal";
@@ -27,7 +28,6 @@ import { ThemeModal } from "./ThemeModal";
 
 import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
 import type { AppLanguage, AppTheme, IAppResetOptions } from "@typings/settings.types";
-import type { LANGUAGES } from "@utilities/constants";
 
 const DEVELOPER_MODE_TAPS = 10;
 

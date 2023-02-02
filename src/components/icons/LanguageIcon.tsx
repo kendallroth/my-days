@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   },
   languageIconParent: {
     position: "relative",
+    justifyContent: "center",
   },
 });
 

@@ -5,12 +5,12 @@ import { List } from "react-native-paper";
 
 import { BottomSheet } from "@components/dialogs";
 import { LanguageIcon } from "@components/icons";
+import { AppLanguage } from "@typings/settings.types";
+import { LANGUAGES } from "@utilities/constants";
 
 import SettingsModalListItem from "../SettingsModalListItem";
 
 import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import type { AppLanguage } from "@typings/settings.types";
-import type { LANGUAGES } from "@utilities/constants";
 
 type LanguageModalProps = {
   /** Current language */
