@@ -1,19 +1,18 @@
-import React, { forwardRef, ReactElement, useEffect, useRef } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import React, { forwardRef, ReactElement, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { TFunction, useTranslation } from "react-i18next";
-import { StyleSheet, TextInput as RNTextInput, View } from "react-native";
+import { TextInput as RNTextInput, StyleSheet, View } from "react-native";
 import { Button, Dialog, useTheme } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
-// Components
 import { DateTimeInput, TextInput } from "@components/form";
+
 import BottomSheet from "./BottomSheet";
 
-// Types
-import { Day, DayBase } from "@typings/day.types";
-import { BottomSheetRef } from "./BottomSheet";
+import type { BottomSheetRef } from "./BottomSheet";
+import type { Day, DayBase } from "@typings/day.types";
 
 interface IFormData {
   date: string;

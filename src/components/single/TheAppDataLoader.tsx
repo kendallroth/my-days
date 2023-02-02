@@ -4,8 +4,8 @@
  * Adapted from: https://github.com/rt2zz/redux-persist/blob/master/src/integration/react.js
  */
 
-import React, { useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
+import React, { useEffect, useState } from "react";
 import { Persistor, PersistorSubscribeCallback } from "redux-persist/es/types";
 
 type AppDataLoaderProps = {

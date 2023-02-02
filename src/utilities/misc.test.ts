@@ -1,4 +1,3 @@
-// Utilities
 import { lerpColor } from "./misc.util";
 
 describe("'lerpColor'", () => {

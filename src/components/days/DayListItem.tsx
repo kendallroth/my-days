@@ -3,13 +3,11 @@ import React, { ReactElement } from "react";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { Surface, Text, Title, useTheme } from "react-native-paper";
 
-// Utilities
 import { lightColors, sharedColors } from "@styles/theme";
 import { DATE_FORMAT_LONG, formatDateString } from "@utilities/date.util";
 import { getDayDisplay } from "@utilities/day.util";
 
-// Types
-import { DayBase } from "@typings/day.types";
+import type { DayBase } from "@typings/day.types";
 
 type DayDisplayProps = {
   day: DayBase;

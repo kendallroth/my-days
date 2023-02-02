@@ -1,4 +1,3 @@
-// Utilities
 import { formatDateString } from "./date.util";
 
 describe("'formatDateString'", () => {

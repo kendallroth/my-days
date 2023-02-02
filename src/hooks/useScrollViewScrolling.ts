@@ -1,8 +1,7 @@
+import { useFocusEffect } from "@react-navigation/native";
 import { RefObject, useCallback, useRef, useState } from "react";
 import { FlatList } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
 
-// Types
 import { ScrollEvent } from "@typings/app.types";
 
 interface IScrollProps {

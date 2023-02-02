@@ -1,7 +1,6 @@
 import { RefObject, useState } from "react";
 import { FlatList } from "react-native";
 
-// Types
 import { ScrollEvent } from "@typings/app.types";
 
 import { useScrollViewScrolling } from "./useScrollViewScrolling";

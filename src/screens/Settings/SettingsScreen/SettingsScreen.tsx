@@ -1,18 +1,11 @@
-import React, { ReactElement, useRef, useState } from "react";
 import { openURL } from "expo-linking";
+import React, { ReactElement, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Platform, StyleSheet, View } from "react-native";
 import { List, Text, useTheme } from "react-native-paper";
 
-// Components
 import { LanguageIcon } from "@components/icons";
 import { AppBar, Page } from "@components/layout";
-import { AppResetModal } from "./AppResetModal";
-import { LanguageModal } from "./LanguageModal";
-import { ThemeModal } from "./ThemeModal";
-import SettingsListItem from "./SettingsListItem";
-
-// Utilities
 import config from "@config";
 import { useAppDispatch, useAppLoader, useAppSelector, useSnackbar } from "@hooks";
 import {
@@ -27,10 +20,14 @@ import {
 import { sharedColors } from "@theme";
 import { sleep } from "@utilities/misc.util";
 
-// Types
-import { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import { AppLanguage, AppTheme, IAppResetOptions } from "@typings/settings.types";
-import { LANGUAGES } from "@utilities/constants";
+import { AppResetModal } from "./AppResetModal";
+import { LanguageModal } from "./LanguageModal";
+import SettingsListItem from "./SettingsListItem";
+import { ThemeModal } from "./ThemeModal";
+
+import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
+import type { AppLanguage, AppTheme, IAppResetOptions } from "@typings/settings.types";
+import type { LANGUAGES } from "@utilities/constants";
 
 const DEVELOPER_MODE_TAPS = 10;
 

@@ -2,7 +2,6 @@ import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { HelperText } from "react-native-paper";
 
-// Types
 import { IValidationError } from "@localization/yup-locale";
 
 type InputHelperTextProps = {

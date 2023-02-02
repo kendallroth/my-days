@@ -1,6 +1,5 @@
 import { ExpoConfig } from "@expo/config";
 
-// Utilities
 import { version } from "./package.json";
 
 const primaryColor = "#8bc34a";

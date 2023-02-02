@@ -2,7 +2,6 @@ import React, { forwardRef, useImperativeHandle, useState } from "react";
 import { StyleSheet, ViewStyle } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
 
-// Types
 import { MaterialCommunityIcons } from "@typings/app.types";
 
 type AppBarMenuProps = {

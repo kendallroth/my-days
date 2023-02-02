@@ -1,11 +1,8 @@
 import { locale } from "expo-localization";
 import { Appearance } from "react-native";
 
-// Utilities
-import { validateEnum } from "@utilities/enum.util";
-
-// Types
 import { AppLanguage, AppTheme } from "@typings/settings.types";
+import { validateEnum } from "@utilities/enum.util";
 
 class SettingsService {
   /** Language defaults to English */

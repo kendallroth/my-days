@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { SvgXml } from "react-native-svg";
 import { Badge, useTheme } from "react-native-paper";
+import { SvgXml } from "react-native-svg";
 
 type LanguageIconProps = {
   /** Whether language is in beta (warning badge) */

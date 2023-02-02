@@ -3,11 +3,9 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
-// Components
 import ConfirmDialog from "./ConfirmDialog";
 
-// Types
-import { Day } from "@typings/day.types";
+import type { Day } from "@typings/day.types";
 
 export type DeleteDayDialogProps = {
   /** Day being deleted */

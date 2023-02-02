@@ -1,4 +1,3 @@
-// Utilities
 import { flatListIdExtractor } from "./list.util";
 
 describe("'flatListIdExtractor'", () => {

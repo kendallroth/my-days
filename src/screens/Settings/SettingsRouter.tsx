@@ -1,16 +1,15 @@
-import React, { ReactElement } from "react";
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
+import React, { ReactElement } from "react";
 
-// Components
 import { AboutScreen } from "./AboutScreen";
 import { BehavioursScreen } from "./BehavioursScreen";
 import { ContributorsScreen } from "./ContributorsScreen";
 import { DeveloperScreen } from "./DeveloperScreen";
-import { SettingsScreen } from "./SettingsScreen";
 import { ReportBugScreen } from "./ReportBug";
+import { SettingsScreen } from "./SettingsScreen";
 
 export type SettingsRouterParams = {
   About: undefined;

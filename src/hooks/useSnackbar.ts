@@ -1,7 +1,6 @@
-import { useCallback, useContext } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useContext } from "react";
 
-// Utilities
 import { ISnackbarContext, SnackbarContext } from "@contexts";
 
 interface ISnackbarHookOptions {

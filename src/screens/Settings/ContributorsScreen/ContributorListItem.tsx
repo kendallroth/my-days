@@ -1,15 +1,13 @@
-import React, { ReactElement } from "react";
 import { openURL } from "expo-linking";
+import React, { ReactElement } from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Chip, IconButton, Text, useTheme } from "react-native-paper";
 
-// Utilities
 import { getInitials } from "@utilities/string";
 
-// Types
-import { Contributor, ContributorActionType } from "./ContributorsScreen";
-import { LeftRight, MaterialCommunityIcons } from "@typings/app.types";
-import { getShadowStyles } from "@styles/utilities";
+import type { Contributor, ContributorActionType } from "./ContributorsScreen";
+import type { getShadowStyles } from "@styles/utilities";
+import type { LeftRight, MaterialCommunityIcons } from "@typings/app.types";
 
 type ContributorListItemProps = {
   /** List item alignment */

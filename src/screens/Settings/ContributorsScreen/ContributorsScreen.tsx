@@ -1,16 +1,14 @@
-import React, { ReactElement } from "react";
 import { openURL } from "expo-linking";
+import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-
-// Components
-import { AppBar, Page } from "@components/layout";
-import { Quote } from "@components/typography";
-import ContributorListItem from "./ContributorListItem";
 import { Button } from "react-native-paper";
 
-// Utilities
+import { AppBar, Page } from "@components/layout";
+import { Quote } from "@components/typography";
 import config from "@config";
+
+import ContributorListItem from "./ContributorListItem";
 
 export type ContributorActionType = "development" | "documentation" | "localization" | "testing";
 

@@ -1,12 +1,11 @@
-import React, { ReactElement } from "react";
-import { useTheme } from "react-native-paper";
 import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
+import React, { ReactElement } from "react";
+import { useTheme } from "react-native-paper";
 
-// Components
 import { HomeScreen } from "@screens/Home";
 import { SettingsRouter } from "@screens/Settings";
 

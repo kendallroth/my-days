@@ -2,11 +2,9 @@ import dayjs from "dayjs";
 import { date as fakeDate } from "faker";
 import { v4 as uuidv4 } from "uuid";
 
-// Utilities
 import { DATE_FORMAT_ISO_SHORT } from "@utilities/date.util";
 
-// Types
-import { Day } from "@typings/day.types";
+import type { Day } from "@typings/day.types";
 
 type FakeDayNew = Pick<Day, "title" | "date" | "repeats">;
 

@@ -1,9 +1,8 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { ComponentProps, ReactElement } from "react";
 import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
-import { useIsFocused } from "@react-navigation/native";
 
-// Types
 import { MaterialCommunityIcons } from "@typings/app.types";
 
 type ScreenFABProps = {

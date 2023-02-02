@@ -1,5 +1,5 @@
-import dayjs from "dayjs";
 import { useNavigation } from "@react-navigation/native";
+import dayjs from "dayjs";
 import React, { ReactElement, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
@@ -7,6 +7,7 @@ import { Text } from "react-native-paper";
 import { AppBar, ComingSoon, Page } from "@components/layout";
 import { useSnackbar } from "@hooks";
 import { lightColors, sharedColors } from "@styles/theme";
+
 import DayList from "./DayList";
 
 import type { RootRouterNavigation } from "src/AppRouter";

@@ -1,4 +1,4 @@
-import { NativeSyntheticEvent, NativeScrollEvent } from "react-native";
+import { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
 /** Left or right direction */
 export type LeftRight = "left" | "right";

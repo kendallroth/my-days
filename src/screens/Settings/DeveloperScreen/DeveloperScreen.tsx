@@ -1,23 +1,20 @@
-import React, { ReactElement } from "react";
+import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
+import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, ScrollView, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { Button, List, useTheme } from "react-native-paper";
 
-// Components
 import { AppBar, Page } from "@components/layout";
-import DeveloperListItem from "./DeveloperListItem";
-
-// Utilities
 import config from "@config";
 import { useAppDispatch, useAppLoader, useSnackbar } from "@hooks";
 import { addDebugDataThunk, setAppDeveloper } from "@store/slices/settings";
 
-// Types
-import { SettingsRouterNavigation } from "@screens/Settings/SettingsRouter";
-import { IAppPopulateOptions } from "@typings/settings.types";
+import DeveloperListItem from "./DeveloperListItem";
+
+import type { SettingsRouterNavigation } from "@screens/Settings/SettingsRouter";
+import type { IAppPopulateOptions } from "@typings/settings.types";
 
 const DeveloperScreen = (): ReactElement => {
   const loader = useAppLoader();

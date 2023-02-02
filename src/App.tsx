@@ -4,27 +4,25 @@ import { StatusBar } from "expo-status-bar";
 import React, { ReactElement } from "react";
 import { StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
-import { Provider as ReduxProvider } from "react-redux";
 import { enableScreens } from "react-native-screens";
+import { Provider as ReduxProvider } from "react-redux";
+// TODO: Not sure if important or not? Remove it along with upgrading react-native-modal seemed to fix bug with back???
 // import "react-native-gesture-handler";
 import * as yup from "yup";
 
-// Components
 import { TheAppDataLoader } from "@components/single";
 import ContextProvider from "@contexts/ContextProvider";
-import AppRouter from "./AppRouter";
-
-// Utilities
 import { useAppSelector } from "@hooks";
 import { SettingsService } from "@services";
-import { selectThemeConfig } from "@store/slices/settings";
 import setupStore from "@store";
+import { selectThemeConfig } from "@store/slices/settings";
 import { darkTheme, lightTheme } from "@styles/theme";
-import "./localization/config";
+import { AppTheme } from "@typings/settings.types";
+
+import AppRouter from "./AppRouter";
 import { yupLocale } from "./localization/yup-locale";
 
-// Types
-import { AppTheme } from "@typings/settings.types";
+import "./localization/config";
 
 // NOTE: Optimize React Navigation memory usage/performance?
 // Source: https://reactnavigation.org/docs/react-native-screens/

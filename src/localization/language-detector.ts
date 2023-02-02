@@ -1,6 +1,5 @@
 import { LanguageDetectorModule } from "i18next";
 
-// Utilities
 import { SettingsService } from "@services";
 
 const languageDetector: LanguageDetectorModule = {

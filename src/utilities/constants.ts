@@ -1,6 +1,5 @@
 import { ES, FR, US } from "country-flag-icons/string/3x2";
 
-// Types
 import {
   AppLanguage,
   AppTheme,

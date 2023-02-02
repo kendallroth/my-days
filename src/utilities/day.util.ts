@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 
-// Utilities
 import { DayBase } from "@typings/day.types";
+
 import { DATE_FORMAT_ISO_SHORT } from "./date.util";
 
 interface IDayCountDisplay {

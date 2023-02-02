@@ -1,13 +1,11 @@
-import dayjs from "dayjs";
 import { createEntityAdapter, createSlice, PayloadAction, Update } from "@reduxjs/toolkit";
+import dayjs from "dayjs";
 
-// Utilites
+import { Day, DayBase } from "@typings/day.types";
+
+import { RootState } from "..";
 import { addDebugDataAction, resetAppAction } from "../actions";
 import { fakeDays } from "../data/days";
-import { RootState } from "../index";
-
-// Types
-import { Day, DayBase } from "@typings/day.types";
 
 interface IDaysState {
   /** Indicate primary countdown/countup on dashboard */
