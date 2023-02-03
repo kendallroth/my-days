@@ -51,7 +51,7 @@ export default (): ExpoConfig => ({
       foregroundImage: "./assets/android_launcher.png",
       backgroundColor: primaryColor,
     },
-    package: "ca.kendallroth.my-days",
+    package: "ca.kendallroth.my_days",
     permissions: [],
     versionCode: androidVersionCode,
   },

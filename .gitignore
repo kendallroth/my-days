@@ -1,5 +1,6 @@
 # Manual builds
 builds/
+dist/
 
 # Dependencies
 node_modules/
