@@ -16,7 +16,7 @@ const ReportBugScreen = (): ReactElement => {
   const { links } = config;
 
   /** Open GitHub issues */
-  const onOpenGitHub = (): void => {
+  const onOpenGitHub = () => {
     openURL(`${links.repositoryUrl}/issues`);
   };
 

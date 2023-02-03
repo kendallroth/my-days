@@ -26,7 +26,7 @@ const AppBarMenu = forwardRef<AppBarMenuRef, AppBarMenuProps>((props: AppBarMenu
 
   useImperativeHandle(ref, (): AppBarMenuRef => {
     return {
-      close: (): void => setMenuOpen(false),
+      close: () => setMenuOpen(false),
     };
   });
 
@@ -36,12 +36,12 @@ const AppBarMenu = forwardRef<AppBarMenuRef, AppBarMenuProps>((props: AppBarMenu
         <Appbar.Action
           color={dark ? colors.white : colors.black}
           icon={icon}
-          onPress={(): void => setMenuOpen(true)}
+          onPress={() => setMenuOpen(true)}
         />
       }
       style={[styles.menuStyle, style]}
       visible={menuOpen}
-      onDismiss={(): void => setMenuOpen(false)}
+      onDismiss={() => setMenuOpen(false)}
     >
       {children}
     </Menu>

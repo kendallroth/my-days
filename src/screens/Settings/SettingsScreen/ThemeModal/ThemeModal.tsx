@@ -38,7 +38,7 @@ const ThemeModal = forwardRef<BottomSheetRef, ThemeModalProps>(
               )}
               selected={currentTheme === theme.code}
               title={t(theme.title as any)}
-              onPress={(): void => onSelect(theme.code)}
+              onPress={() => onSelect(theme.code)}
             />
           ),
         )}

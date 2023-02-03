@@ -52,7 +52,7 @@ const LanguageModal = forwardRef<BottomSheetRef, LanguageModalProps>(
               )}
               title={`${language.title}${language.beta ? betaPhrase : ""}`}
               selected={currentLanguage === language.code}
-              onPress={(): void => onSelect(language.code)}
+              onPress={() => onSelect(language.code)}
             />
           ),
         )}

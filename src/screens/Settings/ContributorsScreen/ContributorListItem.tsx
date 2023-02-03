@@ -74,7 +74,7 @@ const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
           color={colors.accent}
           icon="link"
           style={styles.contributorWebsite}
-          onPress={(): void => onLink(contributor.website as string)}
+          onPress={() => onLink(contributor.website as string)}
         />
       )}
     </View>

@@ -6,7 +6,7 @@ const languageDetector: LanguageDetectorModule = {
   type: "languageDetector",
   // If true, the detect function receives a callback function to set language (for async retrieval)
   // async: false,
-  init: (): void => {
+  init: () => {
     // Use services and options...
   },
   /**
@@ -25,7 +25,7 @@ const languageDetector: LanguageDetectorModule = {
    *
    * @param lng - Current user language
    */
-  cacheUserLanguage: (): void => {},
+  cacheUserLanguage: () => {},
 };
 
 export default languageDetector;

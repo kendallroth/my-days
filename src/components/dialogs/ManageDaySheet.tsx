@@ -174,7 +174,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
           label={t("screens:dayAddEdit.dayTitleLabel")}
           name="title"
           returnKeyType="next"
-          onSubmitEditing={(): void => dateRef.current?.focus()}
+          onSubmitEditing={() => dateRef.current?.focus()}
         />
         <DateTimeInput
           // Prevent keyboard from flickering when moving to next field

@@ -56,7 +56,7 @@ const useScrollViewScrolling = (args?: IScrollProps): IScrollViewScrolling => {
     // Reset scroll view position when leaving page (likely expected)?
     //   This is necessary to show FAB on refocus if hidden previously.
     useCallback(() => {
-      return (): void => {
+      return () => {
         if (scrollToTopOnFocus) {
           scrollViewRef.current?.scrollToOffset({ animated: false, offset: 0 });
         }

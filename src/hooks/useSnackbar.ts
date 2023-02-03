@@ -22,7 +22,7 @@ const useSnackbar = (options?: ISnackbarHookOptions): ISnackbarContext => {
   // Remove snackbar when leaving page by default
   useFocusEffect(
     useCallback(() => {
-      return (): void => {
+      return () => {
         if (shouldRemoveOnTransition) {
           snackbar.closeNotification();
         }

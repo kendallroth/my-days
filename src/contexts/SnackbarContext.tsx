@@ -100,7 +100,7 @@ const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
   /**
    * Handle closing the snackbar
    */
-  const onDismiss = (): void => {
+  const onDismiss = () => {
     closeNotification();
 
     snackbar?.onDismiss();
@@ -109,7 +109,7 @@ const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
   /**
    * Close the notification
    */
-  const closeNotification = (): void => snackbarDispatch({ type: "close" });
+  const closeNotification = () => snackbarDispatch({ type: "close" });
 
   /**
    * Open a notification

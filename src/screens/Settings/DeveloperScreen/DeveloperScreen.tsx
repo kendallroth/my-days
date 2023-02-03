@@ -27,7 +27,7 @@ const DeveloperScreen = (): ReactElement => {
   /**
    * Populate the app state
    */
-  const onAppPopulate = (): void => {
+  const onAppPopulate = () => {
     const populateOptions: IAppPopulateOptions = {
       days: true,
     };
@@ -53,7 +53,7 @@ const DeveloperScreen = (): ReactElement => {
   /**
    * Exit developer mode
    */
-  const onExitDeveloper = (): void => {
+  const onExitDeveloper = () => {
     Alert.alert(
       t("screens:settingsDeveloper.exitDeveloperConfirmTitle"),
       t("screens:settingsDeveloper.exitDeveloperConfirmDescription"),
@@ -122,7 +122,7 @@ const DeveloperScreen = (): ReactElement => {
           left={(leftProps): ReactElement => <List.Icon {...leftProps} icon="database-plus" />}
           title={t("screens:settingsDeveloper.listItemPopulateTitle")}
           onLongPress={onAppPopulate}
-          onPress={(): void => {}}
+          onPress={() => {}}
         />
         <Button color={colors.error} style={styles.exitButton} onPress={onExitDeveloper}>
           {t("screens:settingsDeveloper.exitDeveloperButton")}

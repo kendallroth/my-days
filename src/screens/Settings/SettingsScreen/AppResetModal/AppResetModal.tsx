@@ -40,7 +40,7 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
     /**
      * Reset the modal when opening
      */
-    const onModalOpen = (): void => {
+    const onModalOpen = () => {
       setResetOptions(initialOptions);
     };
 
@@ -73,7 +73,7 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
                 key={option}
                 label={resetOptionsMap[option]}
                 status={resetOptions[option] ? "checked" : "unchecked"}
-                onPress={(): void => onOptionPress(option)}
+                onPress={() => onOptionPress(option)}
               />
             ),
           )}
@@ -82,7 +82,7 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
           color={colors.error}
           disabled={!hasSelection}
           style={styles.actionConfirm}
-          onPress={(): void => onReset(resetOptions)}
+          onPress={() => onReset(resetOptions)}
         >
           {t("screens:settingsAppReset.actionSubmit")}
         </Button>

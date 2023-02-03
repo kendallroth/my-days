@@ -126,7 +126,7 @@ const AboutScreen = (): ReactElement => {
                 )}
                 style={[styles.aboutDeveloperActionsChip, themeStyles.developerChips]}
                 textStyle={styles.aboutDeveloperActionsText}
-                onPress={(): void => onLink(action.url)}
+                onPress={() => onLink(action.url)}
               >
                 {action.name}
               </Chip>

@@ -73,7 +73,7 @@ const ContributorsScreen = (): ReactElement => {
           <Button
             icon="github"
             style={styles.alignContributorsPromptButton}
-            onPress={(): void => onLink(`${config.links.repositoryUrl}/issues`)}
+            onPress={() => onLink(`${config.links.repositoryUrl}/issues`)}
           >
             GitHub
           </Button>

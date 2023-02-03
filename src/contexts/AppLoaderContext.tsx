@@ -73,7 +73,7 @@ const AppLoaderProvider = (props: AppLoaderProviderProps): ReactElement => {
   /**
    * Dismiss the loading indicator
    */
-  const stopLoading = (): void => loadingDispatch({ type: "close" });
+  const stopLoading = () => loadingDispatch({ type: "close" });
 
   const loader = { hide: stopLoading, show: startLoading };
 
