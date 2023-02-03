@@ -3,11 +3,11 @@ import dayjs from "dayjs";
 import React, { ReactElement, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, Vibration, View } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { Text } from "react-native-paper";
 
 import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
-import { useAppDispatch, useAppSelector, useScrollingFab, useSnackbar } from "@hooks";
+import { useAppDispatch, useAppSelector, useAppTheme, useScrollingFab, useSnackbar } from "@hooks";
 import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
 
 import DayList from "./DayList";
@@ -23,7 +23,7 @@ const HomeScreen = (): ReactElement | null => {
   const { t } = useTranslation(["common", "screens"]);
   const { notify } = useSnackbar();
 
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const dispatch = useAppDispatch();
 
   const days = useAppSelector(selectDays);

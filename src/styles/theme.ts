@@ -119,16 +119,26 @@ const sharedColors = {
   white: "#ffffff",
 };
 
+// TODO: Fix warning colors (had to reverse light/dark from MD3 tool???)
+
 /** Light theme colors */
 const lightColors = {
   ...LightTheme.colors,
   ...customLightColors,
+  warning: "#ffbb01",
+  onWarning: "#412d00",
+  warningContainer: "#5d4200",
+  onWarningContainer: "#ffdea5",
 };
 
 /** Dark theme colors */
 const darkColors = {
   ...DarkTheme.colors,
   ...customDarkColors,
+  warning: "#7b5800",
+  onWarning: "#ffffff",
+  warningContainer: "#ffdea5",
+  onWarningContainer: "#261900",
 };
 
 const darkTheme = {

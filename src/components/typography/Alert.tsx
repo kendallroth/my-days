@@ -1,8 +1,9 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import React, { ReactElement } from "react";
 import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
-import { Text, useTheme } from "react-native-paper";
+import { Text } from "react-native-paper";
 
+import { useAppTheme } from "@hooks";
 import { MaterialCommunityIcons } from "@typings/app.types";
 
 type AlertType = "info" | "error" | "warning";
@@ -32,18 +33,18 @@ const Alert = (props: AlertProps): ReactElement | null => {
     type = "warning",
   } = props;
 
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   const iconColorMap: Record<AlertType, string> = {
     error: colors.error,
     info: colors.primary,
     // TODO: Add warning color
-    warning: "orange",
+    warning: colors.warning,
   };
 
   const themeStyles = {
     alertText: {
-      color: colors.onSecondary,
+      color: colors.secondary,
     },
   };
 

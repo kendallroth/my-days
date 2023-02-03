@@ -1,7 +1,9 @@
 import React, { ReactElement } from "react";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Badge, useTheme } from "react-native-paper";
+import { Badge } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
+
+import { useAppTheme } from "@hooks";
 
 type LanguageIconProps = {
   /** Whether language is in beta (warning badge) */
@@ -19,7 +21,7 @@ type LanguageIconProps = {
 const LanguageIcon = (props: LanguageIconProps): ReactElement => {
   const { beta = false, flag, selected = false, size, style } = props;
 
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   // Flags are a constant 3x2 ratio
   const heightRatio = 2 / 3;
@@ -30,8 +32,7 @@ const LanguageIcon = (props: LanguageIconProps): ReactElement => {
       borderColor: colors.outline,
     },
     languageIconBadge: {
-      // TODO: Add warning color
-      backgroundColor: "orange",
+      backgroundColor: colors.warning,
     },
     languageIconSelected: {
       borderColor: colors.primary,
