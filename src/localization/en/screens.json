@@ -20,7 +20,10 @@
   "daySelectMenu": {
     "cancel": "Cancel",
     "delete": "Delete",
-    "edit": "Edit"
+    "edit": "Edit",
+    "moveDown": "Move down",
+    "moveUp": "Move up",
+    "position": "{{position}} of {{count}}"
   },
   "home": {
     "title": "Home",
@@ -46,7 +49,8 @@
     "guideStep3": "Track dates on dashboard",
     "guideTipTitle": "Tips",
     "guideTip1": "Dates can be managed by long pressing on a list item and selecting \"Edit\" or \"Delete\" from the selection menu.",
-    "guideTip2": "Icons can be added by tapping the icon in the \"Add\" or \"Edit\" dialogs.",
+    "guideTip2": "Dates can be reordered from the list item selection menu.",
+    "guideTip3": "Icons can be added by tapping the icon in the \"Add\" or \"Edit\" dialogs.",
     "chipContact": "Contact",
     "chipPortfolio": "Portfolio",
     "chipRepository": "Repository"

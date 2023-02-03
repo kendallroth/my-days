@@ -48,7 +48,11 @@ const AboutScreen = (): ReactElement => {
     t("screens:settingsAbout.guideStep2"),
     t("screens:settingsAbout.guideStep3"),
   ];
-  const tips = [t("screens:settingsAbout.guideTip1"), t("screens:settingsAbout.guideTip2")];
+  const tips = [
+    t("screens:settingsAbout.guideTip1"),
+    t("screens:settingsAbout.guideTip2"),
+    t("screens:settingsAbout.guideTip3"),
+  ];
 
   const themeStyles = useMemo(
     () => ({
@@ -73,7 +77,7 @@ const AboutScreen = (): ReactElement => {
       <ScrollView contentContainerStyle={styles.pageContent}>
         <Quote>{t("screens:settingsAbout.appSummary")}</Quote>
         <Text style={styles.aboutDescription}>{t("screens:settingsAbout.appDescription")}</Text>
-        <View>
+        <View style={styles.aboutSteps}>
           {steps.map((step, idx) => (
             <View key={step} style={styles.aboutStepsStep}>
               <Icon
@@ -88,7 +92,7 @@ const AboutScreen = (): ReactElement => {
           ))}
         </View>
         <Text style={styles.aboutTipTitle}>{t("screens:settingsAbout.guideTipTitle")}</Text>
-        <View>
+        <View style={styles.aboutSteps}>
           {tips.map((tip) => (
             <View key={tip} style={styles.aboutStepsStep}>
               <Icon
@@ -97,7 +101,7 @@ const AboutScreen = (): ReactElement => {
                 size={24}
                 style={styles.aboutStepsStepIcon}
               />
-              <Text style={styles.aboutStepsStepText}>{tip}</Text>
+              <Text style={[styles.aboutStepsStepText, { fontSize: 16 }]}>{tip}</Text>
             </View>
           ))}
         </View>
@@ -158,6 +162,9 @@ const styles = StyleSheet.create({
   },
   aboutDeveloperText: {
     textAlign: "center",
+  },
+  aboutSteps: {
+    paddingRight: pagePadding,
   },
   aboutStepsStep: {
     flexDirection: "row",

@@ -1,6 +1,7 @@
 import { createEntityAdapter, createSlice, PayloadAction, Update } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
+import { UpDown } from "@typings/app.types";
 import { Day, DayNew } from "@typings/day.types";
 
 import { RootState } from "..";
@@ -25,7 +26,7 @@ const daysSlice = createSlice({
   name: "days",
   initialState,
   reducers: {
-    addDay(state, action: PayloadAction<DayNew>): void {
+    addDay(state, action: PayloadAction<DayNew>) {
       const newDay: Day = {
         ...action.payload,
         createdAt: dayjs().toISOString(),
@@ -35,11 +36,24 @@ const daysSlice = createSlice({
 
       daysAdapter.addOne(state, newDay);
     },
-    removeDay(state, action: PayloadAction<string>): void {
-      // NOTE: Cleaning up attendance is handled by 'attendance' slice
+    moveDay(state, action: PayloadAction<{ id: string; direction: UpDown }>) {
+      const { direction, id } = action.payload;
+
+      const currentIdx = state.ids.findIndex((i) => i === id);
+      // (currentIdx === 0 && direction === "up") || (currentIdx === state.ids.length - 1 && direction === "down")
+      if (currentIdx < 0) return;
+
+      const targetIdx = direction === "up" ? currentIdx - 1 : currentIdx + 1;
+      if (targetIdx > state.ids.length - 1 || targetIdx < 0) return;
+
+      // NOTE: Likely only works because immer captures direct mutations via proxies
+      state.ids.splice(currentIdx, 1);
+      state.ids.splice(targetIdx, 0, id);
+    },
+    removeDay(state, action: PayloadAction<string>) {
       daysAdapter.removeOne(state, action.payload);
     },
-    updateDay(state, action: PayloadAction<Day>): void {
+    updateDay(state, action: PayloadAction<Day>) {
       const update: Update<Day> = {
         id: action.payload.id,
         changes: {
@@ -103,6 +117,6 @@ export const selectDays = daysSelectors.selectAll;
  */
 export const selectDaysCount = daysSelectors.selectTotal;
 
-export const { addDay, removeDay, updateDay } = daysSlice.actions;
+export const { addDay, removeDay, moveDay, updateDay } = daysSlice.actions;
 
 export default daysSlice.reducer;

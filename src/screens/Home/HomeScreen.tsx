@@ -7,9 +7,10 @@ import { Text } from "react-native-paper";
 
 import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
-import { useAppDispatch, useSnackbar } from "@hooks";
-import { addDay, removeDay, updateDay } from "@store/slices/days";
+import { useAppDispatch, useAppSelector, useSnackbar } from "@hooks";
+import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
 import { lightColors, sharedColors } from "@styles/theme";
+import { UpDown } from "@typings/app.types";
 
 import DayList from "./DayList";
 import SelectedDayModal from "./SelectedDayModal";
@@ -25,7 +26,11 @@ const HomeScreen = (): ReactElement | null => {
 
   const dispatch = useAppDispatch();
 
+  const days = useAppSelector(selectDays);
   const [selectedDay, setSelectedDay] = useState<Day | null>(null);
+  const selectedDayPosition = selectedDay
+    ? { count: days.length, position: days.findIndex((d) => d.id === selectedDay.id) + 1 }
+    : null;
   const dayOptionsRef = useRef<BottomSheetRef>(null);
 
   const manageDayRef = useRef<BottomSheetRef>(null);
@@ -115,6 +120,12 @@ const HomeScreen = (): ReactElement | null => {
     notify(t("screens:dayAddEdit.dayEditSuccess", { title: day.title }));
   };
 
+  const onDayMove = (direction: UpDown) => {
+    if (!selectedDay) return;
+
+    dispatch(moveDay({ id: selectedDay.id, direction }));
+  };
+
   return (
     <Page>
       <AppBar back={false} background={lightColors.primary} logo>
@@ -129,7 +140,7 @@ const HomeScreen = (): ReactElement | null => {
         <Text style={styles.pageHeaderDate}>{dateDisplay.date}</Text>
       </View>
       <View style={styles.pageContent}>
-        <DayList onItemLongPress={onDaySelect} />
+        <DayList days={days} onItemLongPress={onDaySelect} />
       </View>
       <ScreenFAB icon="calendar-plus" onPress={() => manageDayRef.current?.open()} />
       <ManageDaySheet
@@ -148,9 +159,11 @@ const HomeScreen = (): ReactElement | null => {
       <SelectedDayModal
         ref={dayOptionsRef}
         day={selectedDay}
+        dayPosition={selectedDayPosition}
         onClose={onDaySelectCancel}
         onEdit={onDayEditPress}
         onDelete={onDayDeletePress}
+        onMove={onDayMove}
       />
     </Page>
   );

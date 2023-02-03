@@ -5,18 +5,16 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { DayListItem } from "@components/days";
 import { EmptyMessage } from "@components/layout";
 import { Alert } from "@components/typography";
-import { useAppSelector } from "@hooks";
-import { selectDays } from "@store/slices/days";
 import { Day } from "@typings/day.types";
 
 interface DayListProps {
+  days: Day[];
   onItemLongPress?: (day: Day) => void;
 }
 
 const DayList = (props: DayListProps): ReactElement | null => {
-  const { onItemLongPress } = props;
+  const { days, onItemLongPress } = props;
 
-  const days = useAppSelector(selectDays);
   const { t } = useTranslation(["common", "screens"]);
 
   // TODO: Support reordering via long-press on item
