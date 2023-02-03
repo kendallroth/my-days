@@ -2,7 +2,7 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Avatar, Surface, Text, Title, useTheme } from "react-native-paper";
+import { Avatar, Surface, Text, Title, TouchableRipple, useTheme } from "react-native-paper";
 
 import { sharedColors } from "@styles/theme";
 import { DATE_FORMAT_LONG, formatDateString } from "@utilities/date.util";
@@ -13,10 +13,11 @@ import type { Day } from "@typings/day.types";
 type DayDisplayProps = {
   day: Day;
   style?: StyleProp<ViewStyle>;
+  onLongPress?: (day: Day) => void;
 };
 
 const DayListItem = (props: DayDisplayProps): ReactElement | null => {
-  const { day, style } = props;
+  const { day, style, onLongPress } = props;
 
   const theme = useTheme();
   const { t } = useTranslation(["common", "screens"]);
@@ -24,53 +25,61 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
   const dateDisplay = day.repeats
     ? `${formatDateString(day.date, DATE_FORMAT_LONG.split(",")[0])}`
     : formatDateString(day.date, DATE_FORMAT_LONG);
-  // TODO: Recalculate based on repeats, etc
   const dateCount = getDayDisplay(day);
 
   const isToday = dateCount.count === 0;
   const countingDown = dateCount.count >= 0;
 
-  const countdownColor = theme.colors.accent;
-  const countupColor = theme.colors.primary;
+  const countdownColor = theme.colors.accentDark;
+  const countupColor = theme.colors.accentLight;
   const mainColor = countingDown ? countdownColor : countupColor;
 
   return (
-    <Surface style={[style, styles.day, { borderColor: mainColor }]}>
-      <Avatar.Icon
-        color={sharedColors.white}
-        icon={day.icon ?? "calendar"}
-        size={40}
-        style={[styles.dayIcon, { backgroundColor: day.color ?? mainColor }]}
-      />
+    <TouchableRipple
+      rippleColor="transparent"
+      onPress={() => {}}
+      onLongPress={() => onLongPress?.(day)}
+    >
+      <Surface style={[style, styles.day, { borderColor: mainColor }]}>
+        <Avatar.Icon
+          color={sharedColors.white}
+          icon={day.icon ?? ""}
+          size={40}
+          style={[styles.dayIcon, { backgroundColor: day.color ?? mainColor }]}
+        />
 
-      <View style={styles.dayContent}>
-        <Title numberOfLines={1} style={styles.dayContentTitle}>
-          {day.title}
-        </Title>
-        <Text numberOfLines={1} style={styles.dayContentDate}>
-          {dateDisplay}
-        </Text>
-      </View>
-
-      <View style={[styles.dayStats, { backgroundColor: mainColor }]}>
-        {!isToday && (
-          <View
-            style={[
-              styles.dayStatsIconOutline,
-              { backgroundColor: countingDown ? mainColor : theme.colors.white },
-            ]}
-          >
-            <Icon
-              color={countingDown ? theme.colors.white : mainColor}
-              name={countingDown ? "menu-down" : "menu-up"}
-              style={styles.dayStatsIcon}
-            />
+        <View style={styles.dayContent}>
+          <Title numberOfLines={1} style={styles.dayContentTitle}>
+            {day.title}
+          </Title>
+          <View style={styles.dayContentFooter}>
+            <Text numberOfLines={1} style={styles.dayContentFooterDate}>
+              {dateDisplay}
+            </Text>
+            {day.repeats && <Icon name="update" style={styles.dayContentFooterIcon} />}
           </View>
-        )}
-        <Title style={styles.dayStatsCount}>{Math.abs(dateCount.count)}</Title>
-        <Text style={styles.dayStatsUnit}>{t("common:timeUnits.days")}</Text>
-      </View>
-    </Surface>
+        </View>
+
+        <View style={[styles.dayStats, { backgroundColor: mainColor }]}>
+          {!isToday && (
+            <View
+              style={[
+                styles.dayStatsIconOutline,
+                { backgroundColor: countingDown ? mainColor : theme.colors.white },
+              ]}
+            >
+              <Icon
+                color={countingDown ? theme.colors.white : mainColor}
+                name={countingDown ? "menu-down" : "menu-up"}
+                style={styles.dayStatsIcon}
+              />
+            </View>
+          )}
+          <Title style={styles.dayStatsCount}>{Math.abs(dateCount.count)}</Title>
+          <Text style={styles.dayStatsUnit}>{t("common:timeUnits.days")}</Text>
+        </View>
+      </Surface>
+    </TouchableRipple>
   );
 };
 
@@ -91,11 +100,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  dayContentDate: {
+  dayContentFooter: {
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 8,
+    opacity: 0.6,
+  },
+  dayContentFooterDate: {
     fontSize: 14,
     lineHeight: 14 * 1.1,
-    opacity: 0.6,
+  },
+  dayContentFooterIcon: {
+    marginTop: -2,
+    marginLeft: 4,
+    fontSize: 14,
   },
   dayContentTitle: {
     fontSize: 18,
@@ -111,6 +129,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: counterWidth,
+    // overflow: "hidden",
   },
   dayStatsCount: {
     fontSize: 28,

@@ -48,6 +48,7 @@ const AboutScreen = (): ReactElement => {
     t("screens:settingsAbout.guideStep2"),
     t("screens:settingsAbout.guideStep3"),
   ];
+  const tips = [t("screens:settingsAbout.guideTip1"), t("screens:settingsAbout.guideTip2")];
 
   const themeStyles = useMemo(
     () => ({
@@ -62,7 +63,7 @@ const AboutScreen = (): ReactElement => {
   );
 
   /** Open an external link */
-  const onLink = (link: string): void => {
+  const onLink = (link: string) => {
     openURL(link);
   };
 
@@ -72,7 +73,7 @@ const AboutScreen = (): ReactElement => {
       <ScrollView contentContainerStyle={styles.pageContent}>
         <Quote>{t("screens:settingsAbout.appSummary")}</Quote>
         <Text style={styles.aboutDescription}>{t("screens:settingsAbout.appDescription")}</Text>
-        <View style={styles.aboutSteps}>
+        <View>
           {steps.map((step, idx) => (
             <View key={step} style={styles.aboutStepsStep}>
               <Icon
@@ -83,6 +84,20 @@ const AboutScreen = (): ReactElement => {
                 style={styles.aboutStepsStepIcon}
               />
               <Text style={styles.aboutStepsStepText}>{step}</Text>
+            </View>
+          ))}
+        </View>
+        <Text style={styles.aboutTipTitle}>{t("screens:settingsAbout.guideTipTitle")}</Text>
+        <View>
+          {tips.map((tip) => (
+            <View key={tip} style={styles.aboutStepsStep}>
+              <Icon
+                color={colors.accent}
+                name="circle-medium"
+                size={24}
+                style={styles.aboutStepsStepIcon}
+              />
+              <Text style={styles.aboutStepsStepText}>{tip}</Text>
             </View>
           ))}
         </View>
@@ -144,7 +159,6 @@ const styles = StyleSheet.create({
   aboutDeveloperText: {
     textAlign: "center",
   },
-  aboutSteps: {},
   aboutStepsStep: {
     flexDirection: "row",
     marginVertical: 4,
@@ -155,6 +169,12 @@ const styles = StyleSheet.create({
   aboutStepsStepText: {
     marginLeft: 8,
     fontSize: 18,
+  },
+  aboutTipTitle: {
+    marginTop: 24,
+    marginBottom: 4,
+    fontSize: 16,
+    fontWeight: "700",
   },
   aboutSpace: {
     flexGrow: 1,

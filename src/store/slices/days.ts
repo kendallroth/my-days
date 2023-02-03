@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice, PayloadAction, Update } from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
-import { Day, DayBase } from "@typings/day.types";
+import { Day, DayNew } from "@typings/day.types";
 
 import { RootState } from "..";
 import { addDebugDataAction, resetAppAction } from "../actions";
@@ -25,7 +25,7 @@ const daysSlice = createSlice({
   name: "days",
   initialState,
   reducers: {
-    addDay(state, action: PayloadAction<Day>): void {
+    addDay(state, action: PayloadAction<DayNew>): void {
       const newDay: Day = {
         ...action.payload,
         createdAt: dayjs().toISOString(),
@@ -46,7 +46,7 @@ const daysSlice = createSlice({
           date: action.payload.date,
           icon: action.payload.icon,
           repeats: action.payload.repeats,
-          title: action.payload.title,
+          title: action.payload.title.trim(),
           unit: action.payload.unit,
         },
       };

@@ -1,29 +1,32 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { forwardRef, ReactElement, useEffect, useRef } from "react";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
 import { TFunction, useTranslation } from "react-i18next";
 import { TextInput as RNTextInput, StyleSheet, View } from "react-native";
-import { Button, Dialog, useTheme } from "react-native-paper";
+import { Badge, Button, Dialog, IconButton, useTheme } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
-import { DateTimeInput, TextInput } from "@components/form";
+import { Checkbox, DateTimeInput, TextInput } from "@components/form";
+import { DayIcons } from "@components/icons";
 
 import BottomSheet from "./BottomSheet";
 
 import type { BottomSheetRef } from "./BottomSheet";
-import type { Day, DayBase } from "@typings/day.types";
+import type { Day, DayNew } from "@typings/day.types";
 
 interface IFormData {
   date: string;
+  icon?: string;
   title: string;
+  repeats: boolean;
 }
 
 type ManageDaySheetProps = {
   /** Day to update */
   day?: Day | null;
   /** Add day callback */
-  onAdd?: (day: DayBase) => void;
+  onAdd?: (day: DayNew) => void;
   /** Cancellation callback */
   onCancel: () => void;
   /** Update day callback */
@@ -48,14 +51,26 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
     const titleRef = useRef<RNTextInput | null>(null);
     const dateRef = useRef<RNTextInput | null>(null);
 
+    const iconList = Object.values(DayIcons);
+
     const { colors } = useTheme();
     const { t } = useTranslation(["common", "screens"]);
     const form = useForm<IFormData>({
       defaultValues: {
         date: day?.date ?? "",
+        icon: day?.icon ?? undefined,
         title: day?.title ?? "",
+        repeats: day?.repeats ?? false,
       },
       resolver: yupResolver(getSchema(t)),
+    });
+
+    // NOTE: Need dynamic access to the selected icon for display purposes
+    const {
+      field: { value: iconValue },
+    } = useController({
+      control: form.control,
+      name: "icon",
     });
 
     const editing = Boolean(day);
@@ -64,14 +79,14 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
     useEffect(() => {
       form.reset({
         date: day?.date ?? "",
+        icon: day?.icon ?? undefined,
         title: day?.title ?? "",
+        repeats: day?.repeats ?? false,
       });
     }, [day, form]);
 
-    /**
-     * Prepare modal when opened
-     */
-    const onOpen = (): void => {
+    /** Prepare modal when opened */
+    const onOpen = () => {
       // NOTE: Short timeout necessary to access ref and open keyboard!
       setTimeout(() => {
         titleRef.current?.focus();
@@ -81,19 +96,36 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
       form.reset();
     };
 
-    /**
-     * Add/update the entered day
-     *
-     * @param data - Submitted form data
-     */
-    const onSubmit = (data: IFormData): void => {
+    const onIconClear = () => {
+      form.setValue("icon", undefined);
+    };
+
+    /** Cycle through icons */
+    const onIconCycle = (direction: "next" | "back") => {
+      const formValues = form.getValues();
+
+      let targetIdx = 0;
+      if (formValues.icon) {
+        const currentIconIdx = iconList.indexOf(formValues.icon);
+        const wrapIdx = (idx: number, length: number) => (idx + length) % length;
+        if (currentIconIdx >= 0) {
+          targetIdx = direction === "next" ? currentIconIdx + 1 : currentIconIdx - 1;
+          targetIdx = wrapIdx(targetIdx, iconList.length);
+        }
+      }
+
+      form.setValue("icon", iconList[targetIdx]);
+    };
+
+    /** Add/update the entered day */
+    const onSubmit = (data: IFormData) => {
       // NOTE: Must use 'day' rather than 'editing' due to TypeScript inference
       if (!day) {
         if (!onAdd) return;
         onAdd({
           ...data,
           id: uuidv4(),
-          repeats: false,
+          unit: "day",
         });
       } else {
         if (!onEdit) return;
@@ -109,6 +141,28 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
         ref={ref}
         style={styles.sheetContent}
         title={editing ? t("screens:dayAddEdit.titleEdit") : t("screens:dayAddEdit.titleAdd")}
+        titleRight={
+          <View style={styles.sheetTitleRight}>
+            <IconButton
+              icon="menu-left"
+              size={20}
+              style={{ marginVertical: -8 }}
+              onPress={() => onIconCycle("back")}
+            />
+            <IconButton
+              color="white"
+              icon={iconValue ?? "calendar"}
+              size={24}
+              style={{
+                backgroundColor: iconValue ? colors.primary : colors.grey.base,
+                marginVertical: -8,
+              }}
+              onPress={() => onIconCycle("next")}
+              onLongPress={onIconClear}
+            />
+            <Badge style={styles.sheetTitleRightBadge} size={12} visible={!iconValue} />
+          </View>
+        }
         onOpen={onOpen}
       >
         <TextInput
@@ -122,27 +176,17 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
           returnKeyType="next"
           onSubmitEditing={(): void => dateRef.current?.focus()}
         />
-        <View style={styles.sheetFormRow}>
-          <DateTimeInput
-            // Prevent keyboard from flickering when moving to next field
-            blurOnSubmit={false}
-            control={form.control}
-            innerRef={dateRef}
-            label={t("screens:dayAddEdit.dayDateLabel")}
-            name="date"
-            returnKeyType="next"
-            onSelect={(): void => {
-              // TODO: Move to next field
-              /*setTimeout(
-                  () => costRef.current?.focus(),
-                  // NOTE: Delay needed on iOS to prevent picker from re-opening (unknown)
-                  Platform.OS === "ios" ? 400 : 0,
-                );*/
-            }}
-            // TODO: Move to next field
-            // onSubmitEditing={(): void => costRef.current?.focus()}
-          />
-        </View>
+        <DateTimeInput
+          // Prevent keyboard from flickering when moving to next field
+          blurOnSubmit={false}
+          control={form.control}
+          innerRef={dateRef}
+          label={t("screens:dayAddEdit.dayDateLabel")}
+          name="date"
+          returnKeyType="next"
+          style={{ marginTop: 4 }}
+        />
+        <Checkbox control={form.control} hideHint label="Repeats (yearly)" name="repeats" />
         <Dialog.Actions style={styles.sheetActions}>
           <Button color={colors.grey.dark} onPress={onCancel}>
             {t("common:choices.cancel")}
@@ -162,9 +206,15 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   sheetContent: {},
-  sheetFormRow: {
+  sheetTitleRight: {
+    position: "relative",
     flexDirection: "row",
-    marginTop: 4,
+    alignItems: "center",
+  },
+  sheetTitleRightBadge: {
+    position: "absolute",
+    top: -10,
+    right: 4,
   },
 });
 

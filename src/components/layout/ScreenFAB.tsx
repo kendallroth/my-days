@@ -3,7 +3,9 @@ import React, { ComponentProps, ReactElement } from "react";
 import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 
-import { MaterialCommunityIcons } from "@typings/app.types";
+import { lightColors } from "@styles/theme";
+
+import type { MaterialCommunityIcons } from "@typings/app.types";
 
 type ScreenFABProps = {
   /** FAB icon */
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     margin: 16,
+    backgroundColor: lightColors.primary,
   },
 });
 

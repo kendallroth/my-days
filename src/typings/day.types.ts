@@ -1,8 +1,13 @@
-/** Base day shape */
-export interface DayBase {
+import { Optional } from "./app.types";
+
+/** Day shape */
+export interface Day {
   id: string;
+  createdAt: string;
+  color?: string;
   /** Day occurrence */
   date: string;
+  icon?: string;
   /**
    * Whether interval repeats each year
    *
@@ -16,9 +21,4 @@ export interface DayBase {
   unit: "day" | "week" | "month" | "year";
 }
 
-export interface Day extends DayBase {
-  /** When day was created */
-  createdAt: string;
-  color?: string;
-  icon?: string;
-}
+export type DayNew = Optional<Day, "createdAt">;

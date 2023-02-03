@@ -5,9 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { DayIcons } from "@components/icons";
 import { DATE_FORMAT_ISO_SHORT } from "@utilities/date.util";
 
-import type { Day } from "@typings/day.types";
-
-type FakeDayNew = Pick<Day, "color" | "title" | "date" | "icon" | "repeats" | "unit">;
+import type { Day, DayNew } from "@typings/day.types";
 
 /**
  * Create a fake day
@@ -15,7 +13,7 @@ type FakeDayNew = Pick<Day, "color" | "title" | "date" | "icon" | "repeats" | "u
  * @param   day - Partial details
  * @returns Fake day
  */
-const createFakeDay = (day: FakeDayNew): Day => {
+const createFakeDay = (day: Omit<DayNew, "id">): Day => {
   return {
     id: uuidv4(),
     createdAt: fakeDate.past(1).toISOString(),

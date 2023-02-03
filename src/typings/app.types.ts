@@ -1,5 +1,7 @@
 import { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
+export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+
 /** Left or right direction */
 export type LeftRight = "left" | "right";
 

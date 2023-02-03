@@ -1,4 +1,4 @@
-import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer, NavigatorScreenParams } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
@@ -8,10 +8,11 @@ import { useTheme } from "react-native-paper";
 
 import { HomeScreen } from "@screens/Home";
 import { SettingsRouter } from "@screens/Settings";
+import { SettingsRouterParams } from "@screens/Settings/SettingsRouter";
 
 export type RootRouterParams = {
   HomeScreen: undefined;
-  SettingsRouter: undefined;
+  SettingsRouter: NavigatorScreenParams<SettingsRouterParams> | undefined;
 };
 
 export type RootRouterNavigation = NativeStackNavigationProp<RootRouterParams>;

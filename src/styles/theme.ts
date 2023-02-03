@@ -10,6 +10,8 @@ import { DarkTheme, DefaultTheme as LightTheme } from "react-native-paper";
 declare global {
   namespace ReactNativePaper {
     interface ThemeColors {
+      accentDark: string;
+      accentLight: string;
       black: string;
       grey: {
         dark: string;
@@ -23,9 +25,9 @@ declare global {
       warning: string;
     }
 
-    /*interface Theme {
-      myOwnProperty: boolean;
-    }*/
+    interface Theme {
+      // myOwnProperty: boolean;
+    }
   }
 }
 
@@ -34,6 +36,10 @@ const colorPrimary = "#8bc34a";
 /** Shared theme colors (typically literals) */
 const sharedColors = {
   accent: "#C34A8B",
+  accentDark: "#AF3677",
+  // accentDark: "#A52C6D",
+  accentLight: "#D75E9F",
+  // accentLight: "#CD5495",
   black: "#000000",
   error: "#c62828",
   // TODO: Figure out how to handle grey colors per theme!

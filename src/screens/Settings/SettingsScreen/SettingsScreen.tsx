@@ -194,12 +194,12 @@ const SettingsScreen = (): ReactElement => {
         title={t("screens:settings.listItemAppearance")}
         onPress={onOpenTheme}
       />
-      <SettingsListItem
+      {/* <SettingsListItem
         disabled
         icon="tools"
         route="Behaviours"
         title={t("screens:settings.listItemBehaviours")}
-      />
+      /> */}
       <List.Subheader>{t("screens:settings.listSectionHelp")}</List.Subheader>
       <SettingsListItem icon="bug" route="ReportBug" title={t("screens:settings.listItemBug")} />
       <SettingsListItem

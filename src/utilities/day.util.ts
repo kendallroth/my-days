@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-import { DayBase } from "@typings/day.types";
+import { Day } from "@typings/day.types";
 
 import { DATE_FORMAT_ISO_SHORT } from "./date.util";
 
@@ -20,7 +20,7 @@ interface IDayCountDisplay {
  * @param   startDate  - Optional start date (defaults to today)
  * @returns Day count since date
  */
-const getDayCounter = (targetDate: DayBase, startDate?: string): number => {
+const getDayCounter = (targetDate: Day, startDate?: string): number => {
   // NOTE: Must zero out today's date for accurate calculations!
   const baseDate = startDate ? dayjs(startDate) : dayjs(dayjs().format(DATE_FORMAT_ISO_SHORT));
   let comparison = dayjs(targetDate.date);
@@ -48,7 +48,7 @@ const getDayCounter = (targetDate: DayBase, startDate?: string): number => {
  * @param   startDate  - Optional start date (defaults to today)
  * @returns Day display label
  */
-const getDayDisplay = (targetDate: DayBase, startDate?: string): IDayCountDisplay => {
+const getDayDisplay = (targetDate: Day, startDate?: string): IDayCountDisplay => {
   const count = getDayCounter(targetDate, startDate);
 
   return {

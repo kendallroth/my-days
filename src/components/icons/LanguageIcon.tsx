@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1.025 }],
   },
   languageIconParent: {
+    alignSelf: "center",
     position: "relative",
-    justifyContent: "center",
   },
 });
 
