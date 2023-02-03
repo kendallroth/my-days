@@ -6,7 +6,6 @@
 
 import React, { ReactElement } from "react";
 
-// Utilities
 import { AppLoaderProvider } from "./AppLoaderContext";
 import { SnackbarProvider } from "./SnackbarContext";
 

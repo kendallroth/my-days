@@ -3,19 +3,28 @@
   "dayAddEdit": {
     "titleAdd": "Agregar día",
     "titleEdit": "Actualizar día",
+    "dayAddSuccess": "\"{{title}}\" agregada",
+    "dayEditSuccess": "\"{{title}}\" actualizado",
     "dayDateLabel": "Día",
     "dayDateFormatError": "Formato 'YYYY-MM-DD'",
-    "dayTitleLabel": "Título",
-    "dayAddSuccess": "Evento agregada",
-    "dayEditSuccess": "{{title}} actualizado"
+    "dayRepeatsLabel": "Repeticiones (anuales)",
+    "dayTitleLabel": "Título"
+  },
+  "dayDelete": {
+    "title": "Eliminar Día",
+    "description": "¿Está seguro de que desea eliminar esta día?",
+    "deleteSuccess": "\"{{title}}\" eliminado"
   },
   "dayList": {
     "title": "Días"
   },
-  "dayShared": {
-    "deleteDayConfirmTitle": "Eliminar Día",
-    "deleteDayConfirmDescription": "¿Está seguro de que desea eliminar esta día?",
-    "deleteDaySuccess": "{{title}} eliminado"
+  "daySelectMenu": {
+    "cancel": "Cancelar",
+    "delete": "Borrar",
+    "edit": "Editar",
+    "moveDown": "Mover hacia abajo",
+    "moveUp": "Mover hacia arriba",
+    "position": "{{position}} de {{count}}"
   },
   "home": {
     "title": "Inicio",
@@ -33,12 +42,16 @@
   },
   "settingsAbout": {
     "title": "Sobre",
-    "appDescription": "“My Days” is intended to provide a quick overview of the time until/from an important event. Never forget when the next important date is with “My Days”!",
+    "appDescription": "“My Days” está destinado a proporcionar una visión general rápida del tiempo hasta/desde un evento importante. ¡Nunca olvides cuando la próxima fecha importante sea con “My Days”!",
     "appDeveloper": "Desarrollado por Kendall Roth © {{date}}",
-    "appSummary": "“My Days” is a simple mobile app to count down/up to important dates!",
-    "guideStep1": "N/A",
-    "guideStep2": "N/A",
-    "guideStep3": "N/A",
+    "appSummary": "¡“My Days” es una aplicación móvil simple para contar hacia atrás/hasta fechas importantes!",
+    "guideStep1": "Agregar y administrar fechas",
+    "guideStep2": "Ver detalles de la fecha",
+    "guideStep3": "Seguimiento de fechas en el tablero",
+    "guideTipTitle": "Consejos",
+    "guideTip1": "Las fechas se pueden administrar presionando prolongadamente un elemento de la lista y seleccionando \"Editar\" o \"Eliminar\" en el menú de selección.",
+    "guideTip2": "Las fechas se pueden reordenar desde el menú de selección de elementos de la lista.",
+    "guideTip3": "Los iconos se pueden agregar tocando el icono en los cuadros de diálogo \"Agregar\" o \"Editar\".",
     "chipContact": "Contacto",
     "chipPortfolio": "Portafolio",
     "chipRepository": "Repositorio"

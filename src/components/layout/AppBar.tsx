@@ -1,13 +1,11 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { ReactElement } from "react";
 import { Image, StatusBar, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { Appbar as BaseAppBar, useTheme } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
 
-// Components
-import AppBarMenu from "./AppBarMenu";
-
-// Utilities
 import { lightColors, sharedColors } from "@styles/theme";
+
+import AppBarMenu from "./AppBarMenu";
 
 export type Props = {
   /** Background color */

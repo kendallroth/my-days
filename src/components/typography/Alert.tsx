@@ -1,9 +1,8 @@
-import React, { ReactElement } from "react";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import React, { ReactElement } from "react";
 import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 
-// Types
 import { MaterialCommunityIcons } from "@typings/app.types";
 
 type AlertType = "info" | "error" | "warning";

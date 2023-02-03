@@ -1,14 +1,11 @@
-import React, { ReactElement } from "react";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { openURL } from "expo-linking";
+import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
 import { Button, Text, useTheme } from "react-native-paper";
 
-// Components
 import { AppBar, Page } from "@components/layout";
-
-// Utilities
 import config from "@config";
 
 const ReportBugScreen = (): ReactElement => {

@@ -1,11 +1,8 @@
 import { locale } from "expo-localization";
 import { Appearance } from "react-native";
 
-// Utilities
-import { validateEnum } from "@utilities/enum.util";
-
-// Types
 import { AppLanguage, AppTheme } from "@typings/settings.types";
+import { validateEnum } from "@utilities/enum.util";
 
 class SettingsService {
   /** Language defaults to English */
@@ -14,9 +11,7 @@ class SettingsService {
   /**
    * Get device language
    *
-   * NOTE: Only accepts languages defined in 'AppLanguage'!
-   *
-   * @returns Device language
+   * NOTE: Only accepts/returns languages defined in 'AppLanguage'!
    */
   getDeviceLanguage(): AppLanguage {
     const localeString = locale?.split("-")[0];
@@ -31,11 +26,7 @@ class SettingsService {
     return language;
   }
 
-  /**
-   * Get device theme
-   *
-   * @returns Device theme
-   */
+  /** Get device theme */
   getDeviceTheme(): AppTheme {
     // NOTE: Apparently colour scheme can be 'null' (indicating no selection)
     const colorScheme = Appearance.getColorScheme();

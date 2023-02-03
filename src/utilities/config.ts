@@ -1,7 +1,6 @@
 import * as Application from "expo-application";
 import Constants from "expo-constants";
 
-// Utilities
 import { version as packageVersion } from "../../package.json";
 
 const runningInExpo = Constants.appOwnership === "expo";

@@ -2,16 +2,13 @@ import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
 
-// Components
 import { AppBar, Page } from "@components/layout";
-import BehavioursScreenListItemSwitch from "./BehavioursScreenListItemSwitch";
-
-// Utilities
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { selectBehaviours, setAppBehaviour } from "@store/slices/settings";
 
-// Types
-import { IAppBehaviours } from "@typings/settings.types";
+import BehavioursScreenListItemSwitch from "./BehavioursScreenListItemSwitch";
+
+import type { IAppBehaviours } from "@typings/settings.types";
 
 const BehavioursScreen = (): ReactElement => {
   const dispatch = useAppDispatch();

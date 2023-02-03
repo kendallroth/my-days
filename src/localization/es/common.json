@@ -1,5 +1,5 @@
 {
-  "_comment": "src/localization/es/translation.json",
+  "_comment": "src/localization/es/common.json",
   "actions": {
     "add": "Agregar",
     "back": "Regresar",
@@ -16,6 +16,7 @@
     "yes": "Sí"
   },
   "errors": {
+    "noDays": "Aún no se han añadido días",
     "notImplemented": "Aún no implementado"
   },
   "phrases": {
@@ -23,6 +24,12 @@
     "comingSoon": "Próximamente!",
     "optional": "Opcional",
     "search": "Buscar"
+  },
+  "timeUnits": {
+    "days": "días",
+    "months": "meses",
+    "weeks": "semanas",
+    "years": "años"
   },
   "validations": {
     "invalid": "{{path}} es inválido",

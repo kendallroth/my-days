@@ -1,14 +1,15 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { ReactElement, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
 import { List, useTheme } from "react-native-paper";
 
-// Utilities
 import { useSnackbar } from "@hooks";
 
-// Types
-import { SettingsRouterNavigation, SettingsRouterParams } from "@screens/Settings/SettingsRouter";
-import { MaterialCommunityIcons } from "@typings/app.types";
+import type {
+  SettingsRouterNavigation,
+  SettingsRouterParams,
+} from "@screens/Settings/SettingsRouter";
+import type { MaterialCommunityIcons } from "@typings/app.types";
 
 export type Props = {
   /** Whether list item is disabled */

@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";

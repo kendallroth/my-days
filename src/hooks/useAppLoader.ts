@@ -1,6 +1,5 @@
 import { useContext } from "react";
 
-// Utilities
 import { AppLoaderContext, IAppLoaderContext } from "@contexts/AppLoaderContext";
 
 /**

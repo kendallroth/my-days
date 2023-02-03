@@ -1,9 +1,8 @@
 import { ExpoConfig } from "@expo/config";
 
-// Utilities
 import { version } from "./package.json";
 
-const primaryColor = "#2196f3";
+const primaryColor = "#8bc34a";
 
 /**
  * Semantic version name (viewable)
@@ -15,20 +14,21 @@ const versionName = version;
 /**
  * Android build code (increment with each submitted build)
  */
-const androidVersionCode = 8;
+const androidVersionCode = 1;
 /**
  * iOS semantic build code (increment with each submitted build)
  *
  * NOTE: Different from Android version code in that it may be reset
  *         with each version change; however, this is deemed confusing!
  */
-const iosBuildNumber = 5;
+const iosBuildNumber = 1;
 
 export default (): ExpoConfig => ({
   // Information
   name: "My Days",
   slug: "my-days",
   version: versionName,
+  owner: "kendallroth",
   orientation: "portrait",
   platforms: ["android", "ios"],
   entryPoint: "index.js",
@@ -43,9 +43,6 @@ export default (): ExpoConfig => ({
     backgroundColor: primaryColor,
   },
 
-  updates: {
-    fallbackToCacheTimeout: 0,
-  },
   assetBundlePatterns: ["**/*"],
 
   // Android overrides
@@ -69,5 +66,20 @@ export default (): ExpoConfig => ({
     // Icon must be 1024x1024 (no transparency)
     icon: "./assets/icon.png",
     supportsTablet: false,
+  },
+
+  // Deployment
+  extra: {
+    eas: {
+      projectId: "0f596901-0769-4dcf-af51-73106137d331",
+    },
+  },
+  updates: {
+    fallbackToCacheTimeout: 0,
+    url: "https://u.expo.dev/0f596901-0769-4dcf-af51-73106137d331",
+  },
+  runtimeVersion: {
+    // policy: "appVersion",
+    policy: "sdkVersion",
   },
 });

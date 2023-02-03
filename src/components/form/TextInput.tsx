@@ -3,7 +3,6 @@ import { Control, useController } from "react-hook-form";
 import { TextInput as RNTextInput } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
 
-// Components
 import InputHelperText from "./InputHelperText";
 
 type TextInputProps = {

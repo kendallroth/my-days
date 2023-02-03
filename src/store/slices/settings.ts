@@ -1,12 +1,7 @@
-import i18n from "i18next";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import i18n from "i18next";
 
-// Utilities
 import { SettingsService } from "@services";
-import { LANGUAGES, THEMES } from "@utilities/constants";
-import { addDebugDataAction, resetAppAction } from "../actions";
-
-// Types
 import {
   AppLanguage,
   AppTheme,
@@ -16,7 +11,10 @@ import {
   IAppResetOptions,
   IAppThemeConfig,
 } from "@typings/settings.types";
-import { RootState } from "../index";
+import { LANGUAGES, THEMES } from "@utilities/constants";
+
+import { RootState } from "..";
+import { addDebugDataAction, resetAppAction } from "../actions";
 
 interface SettingsState {
   /** App behaviour settings */

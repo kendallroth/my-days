@@ -1,9 +1,8 @@
 import React, { ReactElement, useReducer } from "react";
 import { StyleSheet } from "react-native";
-import { ActivityIndicator, Portal } from "react-native-paper";
 import Spinner from "react-native-loading-spinner-overlay";
+import { ActivityIndicator, Portal } from "react-native-paper";
 
-// Utilities
 import { sharedColors } from "@theme";
 
 interface IAppLoaderState {

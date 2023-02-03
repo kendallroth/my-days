@@ -3,15 +3,13 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
 
-// Components
 import ConfirmDialog from "./ConfirmDialog";
 
-// Types
-import { IDay } from "@typings/day.types";
+import type { Day } from "@typings/day.types";
 
 export type DeleteDayDialogProps = {
   /** Day being deleted */
-  day: IDay | null;
+  day: Day | null;
   /** Whether modal is visible */
   visible: boolean;
   /** Cancel callback */
@@ -29,12 +27,12 @@ const DeleteDayDialog = (props: DeleteDayDialogProps): ReactElement | null => {
 
   return (
     <ConfirmDialog
-      title={t("screens:dayShared.deleteDayConfirmTitle")}
+      title={t("screens:dayDelete.title")}
       visible={visible}
       onCancel={onCancel}
       onConfirm={onConfirm}
     >
-      <Text>{t("screens:dayShared.deleteDayConfirmDescription")}</Text>
+      <Text>{t("screens:dayDelete.description")}</Text>
       <Text style={styles.deleteDialogDay}>{day.title}</Text>
     </ConfirmDialog>
   );

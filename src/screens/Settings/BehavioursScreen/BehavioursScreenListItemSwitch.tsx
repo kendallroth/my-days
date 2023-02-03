@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import { List, Switch } from "react-native-paper";
 
-// Types
 import { IAppBehaviours } from "@typings/settings.types";
 
 type BehavioursScreenListItemSwitchProps = {

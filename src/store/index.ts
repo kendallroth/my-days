@@ -1,23 +1,22 @@
-import i18n from "i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { configureStore } from "@reduxjs/toolkit";
+import i18n from "i18next";
 import {
-  persistReducer,
-  persistStore,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
+  persistReducer,
+  persistStore,
   PURGE,
   REGISTER,
+  REHYDRATE,
 } from "redux-persist";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Utilities
 import config from "@config";
+
 import reducers from "./reducers";
 
-// Types
-import { Persistor } from "redux-persist/es/types";
+import type { Persistor } from "redux-persist/es/types";
 
 interface IStoreExport {
   persistor: Persistor;

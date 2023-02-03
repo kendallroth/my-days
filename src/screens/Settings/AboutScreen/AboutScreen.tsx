@@ -1,21 +1,17 @@
-import React, { ReactElement, useMemo } from "react";
-import dayjs from "dayjs";
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import dayjs from "dayjs";
 import { openURL } from "expo-linking";
+import React, { ReactElement, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Chip, Text, useTheme } from "react-native-paper";
 
-// Components
 import { AppBar, Page } from "@components/layout";
 import { Quote } from "@components/typography";
-
-// Utilities
 import config from "@config";
 import { sharedColors } from "@theme";
 
-// Types
-import { MaterialCommunityIcons } from "@typings/app.types";
+import type { MaterialCommunityIcons } from "@typings/app.types";
 
 interface IDeveloperActions {
   icon: keyof MaterialCommunityIcons;
@@ -52,6 +48,11 @@ const AboutScreen = (): ReactElement => {
     t("screens:settingsAbout.guideStep2"),
     t("screens:settingsAbout.guideStep3"),
   ];
+  const tips = [
+    t("screens:settingsAbout.guideTip1"),
+    t("screens:settingsAbout.guideTip2"),
+    t("screens:settingsAbout.guideTip3"),
+  ];
 
   const themeStyles = useMemo(
     () => ({
@@ -66,14 +67,14 @@ const AboutScreen = (): ReactElement => {
   );
 
   /** Open an external link */
-  const onLink = (link: string): void => {
+  const onLink = (link: string) => {
     openURL(link);
   };
 
   return (
     <Page>
       <AppBar title={t("screens:settingsAbout.title")} />
-      <ScrollView contentContainerStyle={styles.pageContent}>
+      <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
         <Quote>{t("screens:settingsAbout.appSummary")}</Quote>
         <Text style={styles.aboutDescription}>{t("screens:settingsAbout.appDescription")}</Text>
         <View style={styles.aboutSteps}>
@@ -87,6 +88,20 @@ const AboutScreen = (): ReactElement => {
                 style={styles.aboutStepsStepIcon}
               />
               <Text style={styles.aboutStepsStepText}>{step}</Text>
+            </View>
+          ))}
+        </View>
+        <Text style={styles.aboutTipTitle}>{t("screens:settingsAbout.guideTipTitle")}</Text>
+        <View style={styles.aboutSteps}>
+          {tips.map((tip) => (
+            <View key={tip} style={styles.aboutStepsStep}>
+              <Icon
+                color={colors.accent}
+                name="circle-medium"
+                size={24}
+                style={styles.aboutStepsStepIcon}
+              />
+              <Text style={[styles.aboutStepsStepText, { fontSize: 16 }]}>{tip}</Text>
             </View>
           ))}
         </View>
@@ -148,7 +163,9 @@ const styles = StyleSheet.create({
   aboutDeveloperText: {
     textAlign: "center",
   },
-  aboutSteps: {},
+  aboutSteps: {
+    paddingRight: pagePadding,
+  },
   aboutStepsStep: {
     flexDirection: "row",
     marginVertical: 4,
@@ -160,12 +177,21 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 18,
   },
+  aboutTipTitle: {
+    marginTop: 24,
+    marginBottom: 4,
+    fontSize: 16,
+    fontWeight: "700",
+  },
   aboutSpace: {
     flexGrow: 1,
   },
   pageContent: {
     flexGrow: 1,
     padding: pagePadding,
+  },
+  pageScroll: {
+    flex: 1,
   },
 });
 

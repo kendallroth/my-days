@@ -2,13 +2,10 @@ import dayjs from "dayjs";
 import { date as fakeDate } from "faker";
 import { v4 as uuidv4 } from "uuid";
 
-// Utilities
+import { DayIcons } from "@components/icons";
 import { DATE_FORMAT_ISO_SHORT } from "@utilities/date.util";
 
-// Types
-import { IDay } from "@typings/day.types";
-
-type FakeDayNew = Pick<IDay, "title" | "date" | "repeats" | "type">;
+import type { Day, DayNew } from "@typings/day.types";
 
 /**
  * Create a fake day
@@ -16,10 +13,9 @@ type FakeDayNew = Pick<IDay, "title" | "date" | "repeats" | "type">;
  * @param   day - Partial details
  * @returns Fake day
  */
-const createFakeDay = (day: FakeDayNew): IDay => {
+const createFakeDay = (day: Omit<DayNew, "id">): Day => {
   return {
     id: uuidv4(),
-    archivedAt: null,
     createdAt: fakeDate.past(1).toISOString(),
     ...day,
   };
@@ -27,30 +23,34 @@ const createFakeDay = (day: FakeDayNew): IDay => {
 
 // NOTE: Static exports are only calculated once when app loads!
 //         Additionally, these values are used in fake days (caution)!
-const fakeDays: IDay[] = [
+const fakeDays: Day[] = [
   createFakeDay({
-    date: dayjs().subtract(5, "day").format(DATE_FORMAT_ISO_SHORT),
-    title: "Pickup Hockey",
-    repeats: null,
-    type: "countup",
+    // color: "#D01760",
+    date: dayjs("2022-04-20").format(DATE_FORMAT_ISO_SHORT),
+    icon: DayIcons.heart,
+    title: "Dating",
+    repeats: false,
+    unit: "day",
   }),
   createFakeDay({
-    date: dayjs().subtract(2, "day").format(DATE_FORMAT_ISO_SHORT),
-    title: "Painting Class",
-    repeats: "year",
-    type: "countdown",
+    date: dayjs("2022-10-29").format(DATE_FORMAT_ISO_SHORT),
+    icon: DayIcons.wedding,
+    title: "Friend's Wedding",
+    repeats: false,
+    unit: "day",
   }),
   createFakeDay({
-    date: dayjs().add(3, "day").format(DATE_FORMAT_ISO_SHORT),
-    title: "Ice Skating",
-    repeats: null,
-    type: "countdown",
+    date: dayjs("2000-12-25").format(DATE_FORMAT_ISO_SHORT),
+    title: "Christmas",
+    repeats: true,
+    unit: "day",
   }),
   createFakeDay({
-    date: dayjs().add(10, "day").format(DATE_FORMAT_ISO_SHORT),
-    title: "Camping Trip",
-    repeats: "year",
-    type: "countdown",
+    date: dayjs("2023-02-13").format(DATE_FORMAT_ISO_SHORT),
+    icon: DayIcons.airplane,
+    title: "Vacation Trip",
+    repeats: false,
+    unit: "day",
   }),
 ];
 

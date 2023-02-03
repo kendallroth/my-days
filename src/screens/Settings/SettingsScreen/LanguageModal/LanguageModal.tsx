@@ -3,15 +3,14 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { List } from "react-native-paper";
 
-// Components
 import { BottomSheet } from "@components/dialogs";
 import { LanguageIcon } from "@components/icons";
-import SettingsModalListItem from "../SettingsModalListItem";
-
-// Types
-import { BottomSheetRef } from "@components/dialogs/BottomSheet";
 import { AppLanguage } from "@typings/settings.types";
 import { LANGUAGES } from "@utilities/constants";
+
+import SettingsModalListItem from "../SettingsModalListItem";
+
+import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
 
 type LanguageModalProps = {
   /** Current language */

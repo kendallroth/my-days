@@ -1,6 +1,5 @@
 import { Platform, ViewStyle } from "react-native";
 
-// Utilities
 import { sharedColors } from "./theme";
 
 /**

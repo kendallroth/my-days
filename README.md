@@ -10,6 +10,18 @@ Simple app that counts down/up to important dates!
 > [Expo - `release`](https://expo.dev/@kendallroth/my-days)<br />
 > [Expo - `testing`](https://expo.dev/@kendallroth/my-days?release-channel=testing)
 
+## Task List
+
+- [x] Display dates in list
+- [x] Reorder dates in list (via menu)
+- [ ] Reorder dates in list (via drag)
+- [ ] Customize date count unit
+- [ ] Show date details (additional units)
+- [x] Add new dates
+- [x] Edit existing dates
+- [x] Delete existing dates
+- [x] Customize date icon
+
 ## Contributing
 
 Thanks to [all those](CONTRIBUTORS.md) who have contributed to this project so far!

@@ -3,16 +3,13 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { List } from "react-native-paper";
 
-// Components
 import { BottomSheet } from "@components/dialogs";
-import SettingsModalListItem from "../SettingsModalListItem";
-
-// Utilities
 import { THEMES } from "@utilities/constants";
 
-// Types
-import { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import { AppTheme } from "@typings/settings.types";
+import SettingsModalListItem from "../SettingsModalListItem";
+
+import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
+import type { AppTheme } from "@typings/settings.types";
 
 type ThemeModalProps = {
   /** Current theme */

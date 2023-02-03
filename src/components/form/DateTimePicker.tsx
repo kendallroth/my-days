@@ -1,16 +1,14 @@
-import React, { ComponentProps, Fragment, ReactElement, useState } from "react";
 import dayjs from "dayjs";
-import { useTranslation } from "react-i18next";
+import React, { ComponentProps, Fragment, ReactElement, useState } from "react";
 import { useController } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { TextInput as RNPTextInput, useTheme } from "react-native-paper";
 
-// Components
-import TextInput from "./TextInput";
-
-// Utilities
 import { DATE_FORMAT_ISO_SHORT, formatDateString } from "@utilities/date.util";
+
+import TextInput from "./TextInput";
 
 type DatePickerInputProps = {
   /** Parent selection callback */
