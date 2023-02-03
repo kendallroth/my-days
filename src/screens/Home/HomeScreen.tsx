@@ -7,7 +7,7 @@ import { Text } from "react-native-paper";
 
 import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
-import { useAppDispatch, useAppSelector, useSnackbar } from "@hooks";
+import { useAppDispatch, useAppSelector, useScrollingFab, useSnackbar } from "@hooks";
 import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
 import { lightColors, sharedColors } from "@styles/theme";
 import { UpDown } from "@typings/app.types";
@@ -33,6 +33,9 @@ const HomeScreen = (): ReactElement | null => {
     : null;
   const dayOptionsRef = useRef<BottomSheetRef>(null);
 
+  // FAB should disappear when scrolling down and reappear when scrolling back up
+  const { fabVisible, onListScroll } = useScrollingFab();
+
   const manageDayRef = useRef<BottomSheetRef>(null);
   const [editedDay, setEditedDay] = useState<Day | null>(null);
 
@@ -47,6 +50,8 @@ const HomeScreen = (): ReactElement | null => {
   /** Open selected day options menu */
   const onDaySelect = (day: Day) => {
     setSelectedDay(day);
+    setDeletedDay(null);
+    setEditedDay(null);
     Vibration.vibrate(100);
     dayOptionsRef.current?.open();
   };
@@ -91,6 +96,7 @@ const HomeScreen = (): ReactElement | null => {
   /** Cleanup day add/edit dialog */
   const onDayManageCancel = () => {
     manageDayRef.current?.close();
+    setEditedDay(null);
   };
 
   const onDayAdd = (day: DayNew) => {
@@ -140,9 +146,13 @@ const HomeScreen = (): ReactElement | null => {
         <Text style={styles.pageHeaderDate}>{dateDisplay.date}</Text>
       </View>
       <View style={styles.pageContent}>
-        <DayList days={days} onItemLongPress={onDaySelect} />
+        <DayList days={days} onItemLongPress={onDaySelect} onScroll={onListScroll} />
       </View>
-      <ScreenFAB icon="calendar-plus" onPress={() => manageDayRef.current?.open()} />
+      <ScreenFAB
+        icon="calendar-plus"
+        visible={fabVisible}
+        onPress={() => manageDayRef.current?.open()}
+      />
       <ManageDaySheet
         ref={manageDayRef}
         day={editedDay}

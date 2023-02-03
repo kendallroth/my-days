@@ -22,7 +22,7 @@ interface IScrollingFab {
 const useScrollingFab = (): IScrollingFab => {
   const [fabVisible, setFabVisible] = useState(true);
   const { scroll, scrollViewRef, onListScroll } = useScrollViewScrolling({
-    threshold: 50,
+    threshold: 25,
   });
 
   // NOTE: Previously tried reshowing FAB when parent navigator was focused,

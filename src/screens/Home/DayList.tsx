@@ -5,15 +5,18 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { DayListItem } from "@components/days";
 import { EmptyMessage } from "@components/layout";
 import { Alert } from "@components/typography";
-import { Day } from "@typings/day.types";
+
+import type { ScrollEvent } from "@typings/app.types";
+import type { Day } from "@typings/day.types";
 
 interface DayListProps {
   days: Day[];
   onItemLongPress?: (day: Day) => void;
+  onScroll?: (event: ScrollEvent) => void;
 }
 
 const DayList = (props: DayListProps): ReactElement | null => {
-  const { days, onItemLongPress } = props;
+  const { days, onItemLongPress, onScroll } = props;
 
   const { t } = useTranslation(["common", "screens"]);
 
@@ -32,6 +35,7 @@ const DayList = (props: DayListProps): ReactElement | null => {
       keyExtractor={(item) => item.id}
       ListEmptyComponent={<Alert>{t("common:errors.noDays")}</Alert>}
       renderItem={({ item }) => <DayListItem day={item} onLongPress={onItemLongPress} />}
+      onScroll={onScroll}
     />
   );
 };

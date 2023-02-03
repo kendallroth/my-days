@@ -151,7 +151,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
             />
             <IconButton
               color="white"
-              icon={iconValue ?? "calendar"}
+              icon={iconValue ?? "help"}
               size={24}
               style={{
                 backgroundColor: iconValue ? colors.primary : colors.grey.base,
