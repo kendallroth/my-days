@@ -38,11 +38,6 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
         onClick: onEdit,
       },
       {
-        icon: "delete",
-        label: t("screens:daySelectMenu.delete"),
-        onClick: onDelete,
-      },
-      {
         disabled: dayPosition ? dayPosition.position <= 1 : false,
         icon: "arrow-up",
         label: t("screens:daySelectMenu.moveUp"),
@@ -55,9 +50,9 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
         onClick: () => onMove("down"),
       },
       {
-        icon: "close",
-        label: t("screens:daySelectMenu.cancel"),
-        onClick: onClose,
+        icon: "delete",
+        label: t("screens:daySelectMenu.delete"),
+        onClick: onDelete,
       },
     ];
 
@@ -77,6 +72,7 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
             </Text>
           ) : undefined
         }
+        onClose={onClose}
       >
         {selectedDayOptions.map((option) => (
           <List.Item

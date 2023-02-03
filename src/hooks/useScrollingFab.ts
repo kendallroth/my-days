@@ -1,4 +1,4 @@
-import { RefObject, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { FlatList } from "react-native";
 
 import { ScrollEvent } from "@typings/app.types";
@@ -16,11 +16,7 @@ interface ScrollingFab {
   onListScroll: (event: ScrollEvent) => void;
 }
 
-/**
- * Hide FAB whle scrolling down in a ScrollView
- *
- * @returns FAB visibility and scroll callback
- */
+/** Hide FAB whle scrolling down in a ScrollView */
 const useScrollingFab = (): ScrollingFab => {
   const [fabVisible, setFabVisible] = useState(true);
   const { scroll, scrollViewRef, onListScroll } = useScrollViewScrolling({
@@ -33,22 +29,20 @@ const useScrollingFab = (): ScrollingFab => {
 
   const movingDown = scroll.direction === "down";
 
-  // Only update whether FAB is visible during scroll events (not each render!)
-  const onListScrollHandler = (event: ScrollEvent) => {
-    onListScroll(event);
-
+  // Only update whether FAB is visible after scroll event changes (not each render)
+  useEffect(() => {
     if (movingDown && fabVisible && !scroll.nearTop) {
       setFabVisible(false);
     } else if (!movingDown && !fabVisible && !scroll.nearBottom) {
       setFabVisible(true);
     }
-  };
+  }, [movingDown, fabVisible, scroll.nearTop, scroll.nearBottom]);
 
   return {
     fabVisible,
     scrollViewRef,
     toggleFab: setFabVisible,
-    onListScroll: onListScrollHandler,
+    onListScroll,
   };
 };
 

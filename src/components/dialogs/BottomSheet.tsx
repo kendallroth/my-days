@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactElement, useImperativeHandle, useState } from "react";
+import React, { forwardRef, ReactElement, useImperativeHandle, useRef, useState } from "react";
 import { Keyboard, Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import Modal from "react-native-modal";
 import { Text, useTheme } from "react-native-paper";
@@ -26,9 +26,17 @@ export type BottomSheetProps = {
   onOpen?: () => void;
 };
 
+type HideCallback = () => void;
+
 export type BottomSheetRef = {
-  /** Close the modal */
-  close: () => void;
+  /**
+   * Close the modal
+   *
+   * @source https://github.com/react-native-modal/react-native-modal#i-cant-show-multiple-modals-one-after-another
+   *
+   * @param onHide - Callback executed after modal finished hide animation
+   */
+  close: (onHide?: HideCallback) => void;
   /** Open the modal */
   open: () => void;
 };
@@ -45,6 +53,14 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>((props: BottomS
     onClose,
     onOpen,
   } = props;
+
+  /**
+   * Allow passing a callback on close to wait until modal is fully closed before responding,
+   *   as only one modal can be displayed at once (causes iOS issues first).
+   *
+   * @source: https://github.com/react-native-modal/react-native-modal#i-cant-show-multiple-modals-one-after-another
+   */
+  const onHideCallbackRef = useRef<HideCallback | undefined>();
 
   const [isOpen, setIsOpen] = useState(false);
   const { colors, dark } = useTheme();
@@ -63,28 +79,48 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>((props: BottomS
 
   /**
    * Close the modal (from external source)
+   *
+   * @param onHide - Callback executed after modal is finished hide animation
    */
-  const close = (): void => {
+  const close = (onHide?: HideCallback) => {
     if (!isOpen) return;
     setIsOpen(false);
+
+    // Store a reference to the closure callback function to ensure dialog is fully closed
+    //   before trying to show another modal (edge case, but causes bugs).
+    onHideCallbackRef.current = typeof onHide === "function" ? onHide : undefined;
 
     // NOTE: Manually hiding keyboard ensures a smoother transition than
     //         the automatic closure when inputs unmount (where needed)!
     Keyboard.dismiss();
 
     // Notify parent component that modal has closed (only for internal closures)!
-    onClose && onClose();
+    onClose?.();
   };
 
   /**
    * Open the modal
    */
-  const open = (): void => {
+  const open = () => {
     if (isOpen) return;
     setIsOpen(true);
 
+    // Ensure closure callback reference has been cleaned up
+    onHideCallbackRef.current = undefined;
+
     // Notify parent component that modal has opened (only for internal closures)!
-    onOpen && onOpen();
+    onOpen?.();
+  };
+
+  const onHide = () => {
+    // Call the closure callback once hide animation has finished, at which point another
+    //   modal could be displayed (earliest gug-free point).
+    onHideCallbackRef.current?.();
+
+    // Clean up the 'onHide' callback ref soon after completing the closure
+    setTimeout(() => {
+      onHideCallbackRef.current = undefined;
+    }, 250);
   };
 
   return (
@@ -101,6 +137,7 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>((props: BottomS
       onBackdropPress={dismissable ? close : undefined}
       // TODO: Determine if this should always close modal (maybe allow confirming?)
       onBackButtonPress={close}
+      onModalHide={onHide}
     >
       <View
         style={[styles.sheetContent, themeStyles, inset ? styles.sheetInset : undefined, style]}

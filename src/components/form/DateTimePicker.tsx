@@ -55,18 +55,17 @@ const DatePickerInput = (props: DatePickerInputProps): ReactElement => {
         control={control}
         name={name}
         readonly
-        right={<RNPTextInput.Icon name="calendar" onPress={(): void => setOpen(true)} />}
+        right={<RNPTextInput.Icon name="calendar" onPress={() => setOpen(true)} />}
         // Prevent text input (no input mask)
-        onChange={(): void => {}}
+        onChange={() => {}}
         // NOTE: On iOS the input field apparently gets focused immediately again
         //         after focusing on the next field (unknown reason)...
-        onFocus={(): void => setOpen(true)}
+        onFocus={() => setOpen(true)}
       />
       <DateTimePickerModal
         cancelTextIOS={t("common:choices.cancel")} // iOS only
         confirmTextIOS={t("common:choices.confirm")} // iOS only
         date={valueDate}
-        // @ts-ignore
         display={Platform.OS === "ios" ? "inline" : "default"}
         isDarkModeEnabled={dark} // iOS only
         isVisible={open}
