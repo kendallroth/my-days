@@ -34,5 +34,6 @@
       "@typings/*": ["src/typings/*"],
       "@utilities/*": ["src/utilities/*"]
     }
-  }
+  },
+  "exclude": ["node_modules", "dist"]
 }

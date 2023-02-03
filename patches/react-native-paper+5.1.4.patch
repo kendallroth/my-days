@@ -1,3 +1,39 @@
+diff --git a/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts b/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts
+index a3031be..179e1c7 100644
+--- a/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts
++++ b/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts
+@@ -6,6 +6,8 @@ export declare type Props = React.ComponentPropsWithRef<typeof View> & {
+      * Content of the `DialogActions`.
+      */
+     children: React.ReactNode;
++    /** Whether Dialog Action buttons should be compact */
++    compact?: boolean;
+     style?: StyleProp<ViewStyle>;
+     /**
+      * @optional
+diff --git a/node_modules/react-native-paper/src/components/Dialog/DialogActions.tsx b/node_modules/react-native-paper/src/components/Dialog/DialogActions.tsx
+index 4b812b0..28c99f2 100644
+--- a/node_modules/react-native-paper/src/components/Dialog/DialogActions.tsx
++++ b/node_modules/react-native-paper/src/components/Dialog/DialogActions.tsx
+@@ -10,6 +10,8 @@ export type Props = React.ComponentPropsWithRef<typeof View> & {
+    * Content of the `DialogActions`.
+    */
+   children: React.ReactNode;
++  /** Whether Dialog Action buttons should be compact */
++  compact?: boolean;
+   style?: StyleProp<ViewStyle>;
+   /**
+    * @optional
+@@ -63,7 +65,8 @@ const DialogActions = (props: Props) => {
+       {React.Children.map(props.children, (child, i) =>
+         React.isValidElement(child)
+           ? React.cloneElement(child as React.ReactElement<any>, {
+-              compact: true,
++              // Allow overriding compact prop via 'DialogAction'
++              compact: props.compact ?? false,
+               uppercase: !isV3,
+               style: isV3 && {
+                 paddingRight: i + 1 === actionsLength ? 0 : 8,
 diff --git a/node_modules/react-native-paper/src/components/List/ListItem.tsx b/node_modules/react-native-paper/src/components/List/ListItem.tsx
 index 2a5b3f6..03d051b 100644
 --- a/node_modules/react-native-paper/src/components/List/ListItem.tsx

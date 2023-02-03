@@ -208,7 +208,8 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
 const styles = StyleSheet.create({
   sheetActions: {
     marginTop: 8,
-    padding: 0,
+    paddingBottom: 0,
+    paddingHorizontal: 0,
   },
   sheetContent: {},
   sheetTitleRight: {

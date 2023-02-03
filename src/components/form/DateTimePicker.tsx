@@ -4,7 +4,7 @@ import { useController } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { TextInput as RNPTextInput, useTheme } from "react-native-paper";
+import { TextInput as RNPTextInput } from "react-native-paper";
 
 import { DATE_FORMAT_ISO_SHORT, formatDateString } from "@utilities/date.util";
 
@@ -24,7 +24,6 @@ const DatePickerInput = (props: DatePickerInputProps): ReactElement => {
     control,
     name,
   });
-  const { dark } = useTheme();
   const { t } = useTranslation(["common", "screens"]);
 
   const valueDate = field.value ? dayjs(field.value).toDate() : new Date();
@@ -67,7 +66,6 @@ const DatePickerInput = (props: DatePickerInputProps): ReactElement => {
         confirmTextIOS={t("common:choices.confirm")} // iOS only
         date={valueDate}
         display={Platform.OS === "ios" ? "inline" : "default"}
-        isDarkModeEnabled={dark} // iOS only
         isVisible={open}
         mode="date"
         onCancel={onChange}
