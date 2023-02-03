@@ -13,12 +13,14 @@ Simple app that counts down/up to important dates!
 ## Task List
 
 - [x] Display dates in list
-- [ ] Reorder dates in list
+- [x] Reorder dates in list (via menu)
+- [ ] Reorder dates in list (via drag)
 - [ ] Customize date count unit
-- [ ] Add new dates
-- [ ] Edit existing dates
-- [ ] Delete existing dates
-- [ ] Customize date color/icon
+- [ ] Show date details (additional units)
+- [x] Add new dates
+- [x] Edit existing dates
+- [x] Delete existing dates
+- [x] Customize date icon
 
 ## Contributing
 
