@@ -74,7 +74,7 @@ const AboutScreen = (): ReactElement => {
   return (
     <Page>
       <AppBar title={t("screens:settingsAbout.title")} />
-      <ScrollView contentContainerStyle={styles.pageContent}>
+      <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
         <Quote>{t("screens:settingsAbout.appSummary")}</Quote>
         <Text style={styles.aboutDescription}>{t("screens:settingsAbout.appDescription")}</Text>
         <View style={styles.aboutSteps}>
@@ -189,6 +189,9 @@ const styles = StyleSheet.create({
   pageContent: {
     flexGrow: 1,
     padding: pagePadding,
+  },
+  pageScroll: {
+    flex: 1,
   },
 });
 

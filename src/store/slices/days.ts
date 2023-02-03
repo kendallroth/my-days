@@ -40,7 +40,6 @@ const daysSlice = createSlice({
       const { direction, id } = action.payload;
 
       const currentIdx = state.ids.findIndex((i) => i === id);
-      // (currentIdx === 0 && direction === "up") || (currentIdx === state.ids.length - 1 && direction === "down")
       if (currentIdx < 0) return;
 
       const targetIdx = direction === "up" ? currentIdx - 1 : currentIdx + 1;

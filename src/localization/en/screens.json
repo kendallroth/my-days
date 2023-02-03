@@ -3,11 +3,12 @@
   "dayAddEdit": {
     "titleAdd": "Add Day",
     "titleEdit": "Update Day",
+    "dayAddSuccess": "Added \"{{title}}\"",
+    "dayEditSuccess": "Updated \"{{title}}\"",
     "dayDateLabel": "Date",
     "dayDateFormatError": "Format 'YYYY-MM-DD'",
-    "dayTitleLabel": "Title",
-    "dayAddSuccess": "Added \"{{title}}\"",
-    "dayEditSuccess": "Updated \"{{title}}\""
+    "dayRepeatsLabel": "Repeats (yearly)",
+    "dayTitleLabel": "Title"
   },
   "dayDelete": {
     "title": "Remove Day",

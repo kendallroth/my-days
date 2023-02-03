@@ -186,7 +186,12 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
           returnKeyType="next"
           style={{ marginTop: 4 }}
         />
-        <Checkbox control={form.control} hideHint label="Repeats (yearly)" name="repeats" />
+        <Checkbox
+          control={form.control}
+          hideHint
+          label={t("screens:dayAddEdit.dayRepeatsLabel")}
+          name="repeats"
+        />
         <Dialog.Actions style={styles.sheetActions}>
           <Button color={colors.grey.dark} onPress={onCancel}>
             {t("common:choices.cancel")}
