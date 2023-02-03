@@ -7,32 +7,30 @@ import { RootState } from "..";
 import { addDebugDataAction, resetAppAction } from "../actions";
 import { fakeDays } from "../data/days";
 
-interface IDaysState {
-  /** Indicate primary countdown/countup on dashboard */
-  primary: string | null;
+interface DaysState {
+  // NOTE: Additional state items can be added here
 }
 
 export const daysAdapter = createEntityAdapter<Day>({
-  sortComparer: (a, b) => b.date.localeCompare(a.date),
+  // sortComparer: (a, b) => b.date.localeCompare(a.date),
 });
 
 ////////////////////////////////////////////////////////////////////////////////
 // Slice
 ////////////////////////////////////////////////////////////////////////////////
 
-const initialState = daysAdapter.getInitialState<IDaysState>({
-  primary: null,
-});
+const initialState = daysAdapter.getInitialState<DaysState>({});
 
 const daysSlice = createSlice({
   name: "days",
   initialState,
   reducers: {
-    addDay(state, action: PayloadAction<DayBase>): void {
+    addDay(state, action: PayloadAction<Day>): void {
       const newDay: Day = {
         ...action.payload,
         createdAt: dayjs().toISOString(),
         title: action.payload.title.trim(),
+        unit: action.payload.unit ?? "day",
       };
 
       daysAdapter.addOne(state, newDay);
@@ -46,8 +44,10 @@ const daysSlice = createSlice({
         id: action.payload.id,
         changes: {
           date: action.payload.date,
+          icon: action.payload.icon,
           repeats: action.payload.repeats,
           title: action.payload.title,
+          unit: action.payload.unit,
         },
       };
 

@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
   },
   pageHeader: {
     padding: 24,
-    paddingTop: 8,
+    paddingTop: 0,
     backgroundColor: lightColors.primary,
   },
   pageHeaderDate: {

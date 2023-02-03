@@ -12,6 +12,8 @@ export interface DayBase {
   repeats: boolean;
   /** Day name/title */
   title: string;
+  /** Time unit used for display purposes */
+  unit: "day" | "week" | "month" | "year";
 }
 
 export interface Day extends DayBase {

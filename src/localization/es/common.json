@@ -25,6 +25,12 @@
     "optional": "Opcional",
     "search": "Buscar"
   },
+  "timeUnits": {
+    "days": "días",
+    "months": "meses",
+    "weeks": "semanas",
+    "years": "años"
+  },
   "validations": {
     "invalid": "{{path}} es inválido",
     "invalidType": "{{path}} debe ser {{type}}",
