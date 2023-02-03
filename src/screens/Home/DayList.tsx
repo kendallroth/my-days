@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 
 import { DayListItem } from "@components/days";
 import { EmptyMessage } from "@components/layout";
@@ -11,12 +11,13 @@ import type { Day } from "@typings/day.types";
 
 interface DayListProps {
   days: Day[];
+  style?: StyleProp<ViewStyle>;
   onItemLongPress?: (day: Day) => void;
   onScroll?: (event: ScrollEvent) => void;
 }
 
 const DayList = (props: DayListProps): ReactElement | null => {
-  const { days, onItemLongPress, onScroll } = props;
+  const { days, style, onItemLongPress, onScroll } = props;
 
   const { t } = useTranslation(["common", "screens"]);
 
@@ -29,7 +30,7 @@ const DayList = (props: DayListProps): ReactElement | null => {
 
   return (
     <FlatList
-      contentContainerStyle={styles.list}
+      contentContainerStyle={[styles.list, style]}
       data={days}
       ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
       keyExtractor={(item) => item.id}

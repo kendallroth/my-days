@@ -192,12 +192,13 @@ const HomeScreen = (): ReactElement | null => {
   );
 };
 
+const pagePadding = 24;
 const styles = StyleSheet.create({
   pageContent: {
     flex: 1,
   },
   pageHeader: {
-    padding: 24,
+    padding: pagePadding,
     paddingTop: 0,
   },
   pageHeaderDate: {
