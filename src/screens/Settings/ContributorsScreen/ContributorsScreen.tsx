@@ -1,8 +1,8 @@
 import { openURL } from "expo-linking";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-paper";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { Button, Text } from "react-native-paper";
 
 import { AppBar, Page } from "@components/layout";
 import { Quote } from "@components/typography";

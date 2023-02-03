@@ -1,0 +1,26 @@
+diff --git a/node_modules/react-native-paper/src/components/List/ListItem.tsx b/node_modules/react-native-paper/src/components/List/ListItem.tsx
+index 2a5b3f6..03d051b 100644
+--- a/node_modules/react-native-paper/src/components/List/ListItem.tsx
++++ b/node_modules/react-native-paper/src/components/List/ListItem.tsx
+@@ -191,7 +191,9 @@ const ListItem = ({
+ 
+   const renderTitle = () => {
+     const titleColor = theme.isV3
+-      ? theme.colors.onSurface
++      ? !rest.disabled
++        ? theme.colors.onSurface
++        : theme.colors.onSurfaceDisabled
+       : color(theme.colors.text).alpha(0.87).rgb().string();
+ 
+     return typeof title === 'function' ? (
+@@ -214,7 +216,9 @@ const ListItem = ({
+   };
+ 
+   const descriptionColor = theme.isV3
+-    ? theme.colors.onSurfaceVariant
++    ? !rest.disabled
++      ? theme.colors.onSurfaceVariant
++      : theme.colors.onSurfaceDisabled
+     : color(theme.colors.text).alpha(0.54).rgb().string();
+ 
+   return (

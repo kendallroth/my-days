@@ -71,7 +71,11 @@ const SettingsListItem = (props: Props): ReactElement => {
       {...props}
       disabled={disabled}
       left={(leftProps): ReactElement => (
-        <List.Icon {...leftProps} color={colors.primary} icon={icon} />
+        <List.Icon
+          {...leftProps}
+          color={!disabled ? colors.primary : leftProps.color}
+          icon={icon}
+        />
       )}
       title={title}
       right={renderRight}

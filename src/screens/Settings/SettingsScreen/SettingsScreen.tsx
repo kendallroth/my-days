@@ -194,12 +194,12 @@ const SettingsScreen = (): ReactElement => {
         title={t("screens:settings.listItemAppearance")}
         onPress={onOpenTheme}
       />
-      {/* <SettingsListItem
+      <SettingsListItem
         disabled
         icon="tools"
         route="Behaviours"
         title={t("screens:settings.listItemBehaviours")}
-      /> */}
+      />
       <List.Subheader>{t("screens:settings.listSectionHelp")}</List.Subheader>
       <SettingsListItem icon="bug" route="ReportBug" title={t("screens:settings.listItemBug")} />
       <SettingsListItem
@@ -229,7 +229,9 @@ const SettingsScreen = (): ReactElement => {
           <Text style={styles.settingsFooterVersion} onPress={onTapVersion}>
             v{config.version}
           </Text>
-          {showEnvironment && <Text style={styles.settingsFooterEnvironment}>{releaseString}</Text>}
+          {showEnvironment && (
+            <Text style={{ color: colors.onSurfaceDisabled }}>{releaseString}</Text>
+          )}
         </View>
       </View>
       <AppResetModal ref={appResetRef} onReset={onAppReset} />
@@ -249,9 +251,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     padding: 8,
-  },
-  settingsFooterEnvironment: {
-    color: sharedColors.grey.base,
   },
   settingsFooterVersion: {},
   settingsLanguageIcon: {

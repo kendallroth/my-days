@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import { openURL } from "expo-linking";
-import React, { ReactElement, useMemo } from "react";
+import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Chip, Text, useTheme } from "react-native-paper";
@@ -9,7 +9,6 @@ import { Chip, Text, useTheme } from "react-native-paper";
 import { AppBar, Page } from "@components/layout";
 import { Quote } from "@components/typography";
 import config from "@config";
-import { sharedColors } from "@theme";
 
 import type { MaterialCommunityIcons } from "@typings/app.types";
 
@@ -54,18 +53,6 @@ const AboutScreen = (): ReactElement => {
     t("screens:settingsAbout.guideTip3"),
   ];
 
-  const themeStyles = useMemo(
-    () => ({
-      aboutSummary: {
-        borderLeftColor: colors.primary,
-      },
-      developerChips: {
-        backgroundColor: `${colors.primary}aa`,
-      },
-    }),
-    [colors],
-  );
-
   /** Open an external link */
   const onLink = (link: string) => {
     openURL(link);
@@ -81,7 +68,7 @@ const AboutScreen = (): ReactElement => {
           {steps.map((step, idx) => (
             <View key={step} style={styles.aboutStepsStep}>
               <Icon
-                color={colors.accent}
+                color={colors.tertiary}
                 // @ts-ignore
                 name={`numeric-${idx + 1}-circle`}
                 size={24}
@@ -96,7 +83,7 @@ const AboutScreen = (): ReactElement => {
           {tips.map((tip) => (
             <View key={tip} style={styles.aboutStepsStep}>
               <Icon
-                color={colors.accent}
+                color={colors.tertiary}
                 name="circle-medium"
                 size={24}
                 style={styles.aboutStepsStepIcon}
@@ -117,15 +104,9 @@ const AboutScreen = (): ReactElement => {
               <Chip
                 key={action.name}
                 icon={(iconProps): ReactElement => (
-                  <Icon
-                    {...iconProps}
-                    color={`${sharedColors.white}aa`}
-                    name={action.icon}
-                    size={20}
-                  />
+                  <Icon {...iconProps} name={action.icon} size={20} />
                 )}
-                style={[styles.aboutDeveloperActionsChip, themeStyles.developerChips]}
-                textStyle={styles.aboutDeveloperActionsText}
+                style={styles.aboutDeveloperActionsChip}
                 onPress={() => onLink(action.url)}
               >
                 {action.name}
@@ -155,10 +136,6 @@ const styles = StyleSheet.create({
   aboutDeveloperActionsChip: {
     marginBottom: 8,
     marginRight: 8,
-  },
-  aboutDeveloperActionsText: {
-    color: sharedColors.white,
-    fontSize: 15,
   },
   aboutDeveloperText: {
     textAlign: "center",

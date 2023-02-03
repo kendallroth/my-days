@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { ComponentProps, Fragment, ReactElement, useState } from "react";
+import React, { ComponentPropsWithoutRef, Fragment, ReactElement, useState } from "react";
 import { useController } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";
@@ -13,7 +13,7 @@ import TextInput from "./TextInput";
 type DatePickerInputProps = {
   /** Parent selection callback */
   onSelect?: (value: string) => void;
-} & ComponentProps<typeof TextInput>;
+} & ComponentPropsWithoutRef<typeof TextInput>;
 
 const DatePickerInput = (props: DatePickerInputProps): ReactElement => {
   const { control, name, onSelect, ...rest } = props;
@@ -55,7 +55,7 @@ const DatePickerInput = (props: DatePickerInputProps): ReactElement => {
         control={control}
         name={name}
         readonly
-        right={<RNPTextInput.Icon name="calendar" onPress={() => setOpen(true)} />}
+        right={<RNPTextInput.Icon icon="calendar" onPress={() => setOpen(true)} />}
         // Prevent text input (no input mask)
         onChange={() => {}}
         // NOTE: On iOS the input field apparently gets focused immediately again

@@ -3,18 +3,17 @@ import dayjs from "dayjs";
 import React, { ReactElement, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, Vibration, View } from "react-native";
-import { Text } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 
 import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
 import { useAppDispatch, useAppSelector, useScrollingFab, useSnackbar } from "@hooks";
 import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
-import { lightColors, sharedColors } from "@styles/theme";
-import { UpDown } from "@typings/app.types";
 
 import DayList from "./DayList";
 import SelectedDayModal from "./SelectedDayModal";
 
+import type { UpDown } from "@typings/app.types";
 import type { Day, DayNew } from "@typings/day.types";
 import type { RootRouterNavigation } from "src/AppRouter";
 
@@ -24,6 +23,7 @@ const HomeScreen = (): ReactElement | null => {
   const { t } = useTranslation(["common", "screens"]);
   const { notify } = useSnackbar();
 
+  const { colors } = useTheme();
   const dispatch = useAppDispatch();
 
   const days = useAppSelector(selectDays);
@@ -139,17 +139,24 @@ const HomeScreen = (): ReactElement | null => {
   };
 
   return (
-    <Page>
-      <AppBar back={false} background={lightColors.primary} logo>
+    <Page invertStatusBar>
+      <AppBar back={false} background={colors.primary} logo>
         <AppBar.Action
+          color={colors.onPrimary}
           icon="help-circle"
           onPress={() => navigation.navigate("SettingsRouter", { screen: "About" })}
         />
-        <AppBar.Action icon="cog" onPress={() => navigation.navigate("SettingsRouter")} />
+        <AppBar.Action
+          color={colors.onPrimary}
+          icon="cog"
+          onPress={() => navigation.navigate("SettingsRouter")}
+        />
       </AppBar>
-      <View style={styles.pageHeader}>
-        <Text style={styles.pageHeaderDay}>{dateDisplay.weekDay}</Text>
-        <Text style={styles.pageHeaderDate}>{dateDisplay.date}</Text>
+      <View style={[styles.pageHeader, { backgroundColor: colors.primary }]}>
+        <Text style={[styles.pageHeaderDay, { color: colors.onPrimary }]}>
+          {dateDisplay.weekDay}
+        </Text>
+        <Text style={[styles.pageHeaderDate, { color: colors.onPrimary }]}>{dateDisplay.date}</Text>
       </View>
       <View style={styles.pageContent}>
         <DayList days={days} onItemLongPress={onDaySelect} onScroll={onListScroll} />
@@ -192,15 +199,12 @@ const styles = StyleSheet.create({
   pageHeader: {
     padding: 24,
     paddingTop: 0,
-    backgroundColor: lightColors.primary,
   },
   pageHeaderDate: {
-    color: sharedColors.white,
     fontSize: 24,
   },
   pageHeaderDay: {
     marginBottom: 4,
-    color: sharedColors.white,
     fontSize: 32,
     fontWeight: "700",
   },

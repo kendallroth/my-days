@@ -30,7 +30,7 @@ const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
 
   const themeStyles = {
     contributor: {
-      backgroundColor: colors.surface,
+      backgroundColor: colors.surfaceVariant,
     },
     contributorAvatar: {
       backgroundColor: contributor.color,
@@ -62,7 +62,7 @@ const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
           {contributor.actions.map((a): ReactElement => {
             const icon = ContributorActionIconMap[a.type];
             return (
-              <Chip key={a.type} icon={icon} style={styles.contributorActionsChip}>
+              <Chip key={a.type} icon={icon} style={styles.contributorActionsChip} mode="outlined">
                 {a.description}
               </Chip>
             );
@@ -71,7 +71,7 @@ const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
       </View>
       {Boolean(contributor.website) && (
         <IconButton
-          color={colors.accent}
+          iconColor={colors.primary}
           icon="link"
           style={styles.contributorWebsite}
           onPress={() => onLink(contributor.website as string)}

@@ -30,9 +30,9 @@ const ReportBugScreen = (): ReactElement => {
           {t("screens:settingsReportBug.reportDescription")}
         </Text>
         <Button
-          color={colors.error}
           icon="open-in-new"
           style={styles.pageActionGitHub}
+          textColor={colors.error}
           onPress={onOpenGitHub}
         >
           {t("screens:settingsReportBug.actionGitHub")}

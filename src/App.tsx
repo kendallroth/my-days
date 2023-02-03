@@ -35,27 +35,22 @@ yup.setLocale(yupLocale);
 const { persistor, store } = setupStore();
 
 const AppWrapped = (): ReactElement => {
-  // QUESTION: Does this actually react to changes?
-  // NOTE: Cannot use Redux selectors because Redux context does not exist
-  // const themeConfig = store.getState().settings.theme;
   const themeConfig = useAppSelector(selectThemeConfig);
 
   const themeType: AppTheme =
     themeConfig.code === AppTheme.AUTO ? SettingsService.getDeviceTheme() : themeConfig.code;
-  const theme = themeType === AppTheme.DARK ? darkTheme : lightTheme;
-  const statusTheme = themeType === AppTheme.DARK ? "light" : "dark";
 
-  const appStyles = {
-    backgroundColor: theme.colors.background,
-  };
+  const componentTheme = themeType === AppTheme.DARK ? darkTheme : lightTheme;
+  // NOTE: Status bar color is overridden in each page to ensure proper match with header and theme
+  const statusTheme = themeType === AppTheme.DARK ? "light" : "dark";
 
   return (
     <ReduxProvider store={store}>
-      <PaperProvider theme={theme}>
+      <PaperProvider theme={componentTheme}>
         <ContextProvider>
           {/* NOTE: Children are not rendered until app is fully loaded! */}
           <TheAppDataLoader persistor={persistor}>
-            <View style={[styles.app, appStyles]}>
+            <View style={styles.app}>
               <StatusBar style={statusTheme} />
               <AppRouter />
             </View>

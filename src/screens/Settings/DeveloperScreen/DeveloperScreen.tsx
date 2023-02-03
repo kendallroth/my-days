@@ -124,7 +124,7 @@ const DeveloperScreen = (): ReactElement => {
           onLongPress={onAppPopulate}
           onPress={() => {}}
         />
-        <Button color={colors.error} style={styles.exitButton} onPress={onExitDeveloper}>
+        <Button style={styles.exitButton} textColor={colors.error} onPress={onExitDeveloper}>
           {t("screens:settingsDeveloper.exitDeveloperButton")}
         </Button>
       </ScrollView>

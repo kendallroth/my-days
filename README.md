@@ -22,6 +22,13 @@ Simple app that counts down/up to important dates!
 - [x] Delete existing dates
 - [x] Customize date icon
 
+### Material You
+
+- [ ] Use `themeStyles` object pattern
+- [ ] Update `Text` styles to use provided `variant` prop
+- [x] Update broken/invalid theme colors
+- [ ] Finish theme colors overhaul (add new ones?)
+
 ## Contributing
 
 Thanks to [all those](CONTRIBUTORS.md) who have contributed to this project so far!
@@ -50,15 +57,7 @@ Releases can be deployed through Expo Go (for testing) or the Expo managed build
 
 Testing releases are released through Expo Go, which allows releasing for several environments. Specific release channels can be tested by visiting the release channel link, stored at the top of this file.
 
-```sh
-# Publish to a default environment
-expo publish
-
-# Publish to a specific environment
-expo publish --release-channel <ENVIRONMENT>
-```
-
-> **NOTE:** Remember to properly set the **release channel** for each deployment (if needed)!
+> **_Coming Soon!_**
 
 ### Production Releases
 
@@ -105,9 +104,7 @@ Apple submissions are not automatically released to an internal testing track, b
 
 #### Production Updates
 
-Production updates are currently only available with the `expo-updates` package (not configured in this project), but there will soon be public support for [EAS Update](https://docs.expo.dev/eas-update/introduction/).
-
-**_Coming Soon!_**
+> **_Coming Soon!_**
 
 ## UI
 
@@ -138,4 +135,3 @@ Even with Expo SDK 45, `@react-native-community/eslint-config` does not quite pr
 ## TODOs
 
 - Explore localized date formatting with ([`i18n Formatting`](https://www.i18next.com/translation-function/formatting)) (alternative at [Brains and Beards](https://brainsandbeards.com/blog/i18n-in-react-native-apps#formatting))
-- Improve theme colors (especially dark theme)

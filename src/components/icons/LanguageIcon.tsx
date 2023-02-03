@@ -27,10 +27,11 @@ const LanguageIcon = (props: LanguageIconProps): ReactElement => {
 
   const themeStyles = {
     languageIcon: {
-      borderColor: colors.grey.light,
+      borderColor: colors.outline,
     },
     languageIconBadge: {
-      backgroundColor: colors.warning,
+      // TODO: Add warning color
+      backgroundColor: "orange",
     },
     languageIconSelected: {
       borderColor: colors.primary,

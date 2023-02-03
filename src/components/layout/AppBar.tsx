@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { ReactElement } from "react";
 import { Image, StatusBar, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Appbar as BaseAppBar, useTheme } from "react-native-paper";
+import { Appbar as RNPAppBar, useTheme } from "react-native-paper";
 
-import { lightColors, sharedColors } from "@styles/theme";
+import { sharedColors } from "@styles/theme";
 
 import AppBarMenu from "./AppBarMenu";
 
@@ -18,8 +18,6 @@ export type Props = {
   logo?: boolean;
   /** Custom status bar height */
   statusBarHeight?: number;
-  /** Page subtitle */
-  subtitle?: string;
   /** Page title */
   title?: string;
   /** Custom back handler */
@@ -27,16 +25,7 @@ export type Props = {
 };
 
 const AppBar = (props: Props): ReactElement => {
-  const {
-    background,
-    back = true,
-    children,
-    logo = false,
-    statusBarHeight,
-    subtitle,
-    title,
-    onBack,
-  } = props;
+  const { background, back = true, children, logo = false, statusBarHeight, title, onBack } = props;
 
   const navigation = useNavigation();
   const { dark } = useTheme();
@@ -47,10 +36,10 @@ const AppBar = (props: Props): ReactElement => {
   };
 
   return (
-    <BaseAppBar.Header
+    <RNPAppBar.Header
       dark={transparentBackground ? dark : true}
       statusBarHeight={statusBarHeight ?? StatusBar.currentHeight}
-      style={[styles.header, backgroundStyle]}
+      style={backgroundStyle}
     >
       {logo && (
         <View style={styles.headerLogo}>
@@ -62,25 +51,20 @@ const AppBar = (props: Props): ReactElement => {
           />
         </View>
       )}
-      {back && <BaseAppBar.BackAction onPress={onBack ? onBack : navigation.goBack} />}
-      <BaseAppBar.Content subtitle={subtitle} title={title} />
+      {back && <RNPAppBar.BackAction onPress={onBack ? onBack : navigation.goBack} />}
+      <RNPAppBar.Content title={title} />
       {children}
-    </BaseAppBar.Header>
+    </RNPAppBar.Header>
   );
 };
 
 const logoSize = 32;
 const styles = StyleSheet.create({
-  header: {
-    elevation: 0,
-    shadowOpacity: 0,
-  },
   headerLogo: {
     padding: 4,
     marginLeft: 8,
     borderRadius: logoSize,
-    // backgroundColor: `${sharedColors.white}44`,
-    backgroundColor: `${lightColors.primary}`,
+    backgroundColor: `${sharedColors.white}44`,
   },
   headerLogoImage: {
     width: logoSize,
@@ -88,7 +72,7 @@ const styles = StyleSheet.create({
   },
 });
 
-AppBar.Action = BaseAppBar.Action;
+AppBar.Action = RNPAppBar.Action;
 AppBar.ActionMenu = AppBarMenu;
 
 export default AppBar;

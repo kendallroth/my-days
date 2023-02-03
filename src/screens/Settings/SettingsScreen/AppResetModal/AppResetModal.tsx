@@ -79,9 +79,9 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
           )}
         </View>
         <Button
-          color={colors.error}
           disabled={!hasSelection}
           style={styles.actionConfirm}
+          textColor={colors.error}
           onPress={() => onReset(resetOptions)}
         >
           {t("screens:settingsAppReset.actionSubmit")}

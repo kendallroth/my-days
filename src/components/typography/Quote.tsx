@@ -24,7 +24,8 @@ const Quote = (props: QuoteProps): ReactElement => {
         borderLeftColor: color ?? colors.primary,
       },
       quoteText: {
-        color: colors.grey.dark,
+        color: colors.onSecondaryContainer,
+        opacity: 0.8,
       },
     }),
     [color, colors],

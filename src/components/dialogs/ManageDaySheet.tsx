@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import React, { forwardRef, ReactElement, useEffect, useRef } from "react";
 import { useController, useForm } from "react-hook-form";
 import { TFunction, useTranslation } from "react-i18next";
-import { TextInput as RNTextInput, StyleSheet, View } from "react-native";
+import { TextInput as RNPTextInput, StyleSheet, View } from "react-native";
 import { Badge, Button, Dialog, IconButton, useTheme } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
@@ -48,8 +48,8 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
   (props: ManageDaySheetProps, ref): ReactElement => {
     const { day, onAdd, onCancel, onEdit } = props;
 
-    const titleRef = useRef<RNTextInput | null>(null);
-    const dateRef = useRef<RNTextInput | null>(null);
+    const titleRef = useRef<RNPTextInput | null>(null);
+    const dateRef = useRef<RNPTextInput | null>(null);
 
     const iconList = Object.values(DayIcons);
 
@@ -150,11 +150,11 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
               onPress={() => onIconCycle("back")}
             />
             <IconButton
-              color="white"
+              containerColor={iconValue ? colors.primary : colors.secondary}
+              iconColor={colors.surface}
               icon={iconValue ?? "help"}
               size={24}
               style={{
-                backgroundColor: iconValue ? colors.primary : colors.grey.base,
                 marginVertical: -8,
               }}
               onPress={() => onIconCycle("next")}
@@ -193,7 +193,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
           name="repeats"
         />
         <Dialog.Actions style={styles.sheetActions}>
-          <Button color={colors.grey.dark} onPress={onCancel}>
+          <Button textColor={colors.secondary} onPress={onCancel}>
             {t("common:choices.cancel")}
           </Button>
           <Button onPress={form.handleSubmit(onSubmit)}>

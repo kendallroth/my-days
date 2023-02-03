@@ -19,7 +19,7 @@ type DayDisplayProps = {
 const DayListItem = (props: DayDisplayProps): ReactElement | null => {
   const { day, style, onLongPress } = props;
 
-  const theme = useTheme();
+  const { colors } = useTheme();
   const { t } = useTranslation(["common", "screens"]);
 
   const dateDisplay = day.repeats
@@ -30,9 +30,12 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
   const isToday = dateCount.count === 0;
   const countingDown = dateCount.count >= 0;
 
-  const countdownColor = theme.colors.accentDark;
-  const countupColor = theme.colors.accentLight;
+  const countdownColor = colors.primary;
+  const countupColor = colors.tertiary;
+
+  const backgroundColor = colors.surfaceVariant;
   const mainColor = countingDown ? countdownColor : countupColor;
+  const mainColorText = countingDown ? colors.onPrimary : colors.onTertiary;
 
   return (
     <TouchableRipple
@@ -40,23 +43,31 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
       onPress={() => {}}
       onLongPress={() => onLongPress?.(day)}
     >
-      <Surface style={[style, styles.day, { borderColor: mainColor }]}>
+      <Surface
+        elevation={1}
+        style={[style, styles.day, { backgroundColor: backgroundColor, borderColor: mainColor }]}
+      >
         <Avatar.Icon
-          color={sharedColors.white}
+          color={backgroundColor}
           icon={day.icon ?? ""}
           size={40}
           style={[styles.dayIcon, { backgroundColor: day.color ?? mainColor }]}
         />
 
         <View style={styles.dayContent}>
-          <Title numberOfLines={1} style={styles.dayContentTitle}>
+          <Title
+            numberOfLines={1}
+            style={[styles.dayContentTitle, { color: colors.onSurfaceVariant }]}
+          >
             {day.title}
           </Title>
           <View style={styles.dayContentFooter}>
             <Text numberOfLines={1} style={styles.dayContentFooterDate}>
               {dateDisplay}
             </Text>
-            {day.repeats && <Icon name="update" style={styles.dayContentFooterIcon} />}
+            {day.repeats && (
+              <Icon color={colors.secondary} name="update" style={styles.dayContentFooterIcon} />
+            )}
           </View>
         </View>
 
@@ -65,18 +76,22 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
             <View
               style={[
                 styles.dayStatsIconOutline,
-                { backgroundColor: countingDown ? mainColor : theme.colors.white },
+                { backgroundColor: countingDown ? mainColor : backgroundColor },
               ]}
             >
               <Icon
-                color={countingDown ? theme.colors.white : mainColor}
+                color={countingDown ? backgroundColor : mainColor}
                 name={countingDown ? "menu-down" : "menu-up"}
                 style={styles.dayStatsIcon}
               />
             </View>
           )}
-          <Title style={styles.dayStatsCount}>{Math.abs(dateCount.count)}</Title>
-          <Text style={styles.dayStatsUnit}>{t("common:timeUnits.days")}</Text>
+          <Title style={[styles.dayStatsCount, { color: mainColorText }]}>
+            {Math.abs(dateCount.count)}
+          </Title>
+          <Text style={[styles.dayStatsUnit, { color: mainColorText }]}>
+            {t("common:timeUnits.days")}
+          </Text>
         </View>
       </Surface>
     </TouchableRipple>
@@ -91,7 +106,6 @@ const styles = StyleSheet.create({
   day: {
     flexDirection: "row",
     borderRadius: 8,
-    elevation: 1,
     overflow: "hidden",
     borderWidth: 2,
   },
@@ -129,12 +143,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: counterWidth,
-    // overflow: "hidden",
   },
   dayStatsCount: {
     fontSize: 28,
     lineHeight: 28 * 1.1,
-    color: sharedColors.white,
     fontWeight: "800",
   },
   dayStatsIcon: {
@@ -152,7 +164,6 @@ const styles = StyleSheet.create({
   dayStatsUnit: {
     position: "absolute",
     bottom: 6,
-    color: sharedColors.white,
     opacity: 0.8,
   },
 });

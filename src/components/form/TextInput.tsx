@@ -1,4 +1,4 @@
-import React, { ComponentProps, Fragment, ReactElement, RefObject } from "react";
+import React, { ComponentPropsWithoutRef, Fragment, ReactElement, RefObject } from "react";
 import { Control, useController } from "react-hook-form";
 import { TextInput as RNTextInput } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
@@ -16,7 +16,7 @@ type TextInputProps = {
   name: string;
   /** Whether field is readonly (allows focus) */
   readonly?: boolean;
-} & ComponentProps<typeof RNPTextInput>;
+} & ComponentPropsWithoutRef<typeof RNPTextInput>;
 
 const TextInput = (props: TextInputProps): ReactElement => {
   const { control, hint, innerRef, name, readonly = false, ...rest } = props;

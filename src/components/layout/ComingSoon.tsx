@@ -18,6 +18,7 @@ const ComingSoon = (props: ComingSoonProps): ReactElement => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
+        {/* TODO: Fix colors */}
         <Icon color={`${colors.primary}aa`} name="hammer-wrench" size={96} />
         <Text style={styles.contentTitle}>{t("common:phrases.comingSoon")}</Text>
         {Boolean(description) && <Text style={styles.contentDescription}>{description}</Text>}

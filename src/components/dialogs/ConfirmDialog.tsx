@@ -46,7 +46,7 @@ const ConfirmDialog = (props: ConfirmDialogProps): ReactElement => {
         {Boolean(children) && <Dialog.Content>{children}</Dialog.Content>}
         <Dialog.Actions>
           {Boolean(onCancel) && (
-            <Button color={colors.grey.dark} onPress={onCancel}>
+            <Button textColor={colors.secondary} onPress={onCancel}>
               {cancelText}
             </Button>
           )}

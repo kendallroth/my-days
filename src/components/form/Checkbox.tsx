@@ -1,4 +1,4 @@
-import React, { ComponentProps, Fragment, ReactElement } from "react";
+import React, { ComponentPropsWithoutRef, Fragment, ReactElement } from "react";
 import { Control, useController } from "react-hook-form";
 import { Checkbox as RNPCheckbox } from "react-native-paper";
 
@@ -14,7 +14,7 @@ type CheckboxProps = {
   hint?: string;
   /** Form control name */
   name: string;
-} & Optional<ComponentProps<typeof RNPCheckbox.Item>, "status">;
+} & Optional<ComponentPropsWithoutRef<typeof RNPCheckbox.Item>, "status">;
 
 const Checkbox = (props: CheckboxProps): ReactElement => {
   const { control, hint, hideHint, name, position = "trailing", ...rest } = props;
@@ -31,7 +31,7 @@ const Checkbox = (props: CheckboxProps): ReactElement => {
   // Numbers must be cast to strings (type warnings)
   const fieldValue = field.value ? `${field.value}` : field.value;
 
-  const checkboxStatus: ComponentProps<typeof RNPCheckbox.Item>["status"] = fieldValue
+  const checkboxStatus: ComponentPropsWithoutRef<typeof RNPCheckbox.Item>["status"] = fieldValue
     ? "checked"
     : "unchecked";
 

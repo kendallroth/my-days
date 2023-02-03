@@ -34,19 +34,20 @@ const Alert = (props: AlertProps): ReactElement | null => {
 
   const { colors } = useTheme();
 
-  const childIsString = typeof children === "string";
-
   const iconColorMap: Record<AlertType, string> = {
     error: colors.error,
     info: colors.primary,
-    warning: colors.warning,
+    // TODO: Add warning color
+    warning: "orange",
   };
 
   const themeStyles = {
     alertText: {
-      color: colors.grey.dark,
+      color: colors.onSecondary,
     },
   };
+
+  const childIsString = typeof children === "string";
 
   return (
     <View style={[styles.alert, style]}>

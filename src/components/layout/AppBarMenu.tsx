@@ -22,7 +22,7 @@ const AppBarMenu = forwardRef<AppBarMenuRef, AppBarMenuProps>((props: AppBarMenu
   const { children, icon = "dots-vertical", style } = props;
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const { colors, dark } = useTheme();
+  const { colors } = useTheme();
 
   useImperativeHandle(ref, (): AppBarMenuRef => {
     return {
@@ -33,11 +33,7 @@ const AppBarMenu = forwardRef<AppBarMenuRef, AppBarMenuProps>((props: AppBarMenu
   return (
     <Menu
       anchor={
-        <Appbar.Action
-          color={dark ? colors.white : colors.black}
-          icon={icon}
-          onPress={() => setMenuOpen(true)}
-        />
+        <Appbar.Action color={colors.onPrimary} icon={icon} onPress={() => setMenuOpen(true)} />
       }
       style={[styles.menuStyle, style]}
       visible={menuOpen}
