@@ -1,5 +1,5 @@
 {
-  "_comment": "src/localization/en/translation.json",
+  "_comment": "src/localization/en/common.json",
   "actions": {
     "add": "Add",
     "back": "Back",

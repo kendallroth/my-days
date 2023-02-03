@@ -2,18 +2,18 @@ import { useNavigation } from "@react-navigation/native";
 import dayjs from "dayjs";
 import React, { ReactElement, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
-import { List, Text } from "react-native-paper";
+import { StyleSheet, Vibration, View } from "react-native";
+import { Text } from "react-native-paper";
 
-import { BottomSheet, BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
+import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
 import { useAppDispatch, useSnackbar } from "@hooks";
 import { addDay, removeDay, updateDay } from "@store/slices/days";
 import { lightColors, sharedColors } from "@styles/theme";
 
 import DayList from "./DayList";
+import SelectedDayModal from "./SelectedDayModal";
 
-import type { MaterialCommunityIcons } from "@typings/app.types";
 import type { Day, DayNew } from "@typings/day.types";
 import type { RootRouterNavigation } from "src/AppRouter";
 
@@ -39,15 +39,10 @@ const HomeScreen = (): ReactElement | null => {
     weekDay: today.format("dddd"),
   };
 
-  interface SelectedDayOption {
-    icon: keyof MaterialCommunityIcons;
-    label: string;
-    onClick: () => void;
-  }
-
   /** Open selected day options menu */
   const onDaySelect = (day: Day) => {
     setSelectedDay(day);
+    Vibration.vibrate(100);
     dayOptionsRef.current?.open();
   };
 
@@ -82,7 +77,7 @@ const HomeScreen = (): ReactElement | null => {
     dispatch(removeDay(deletedDay.id));
 
     notify(
-      t("screens:dayShared.deleteDaySuccess", {
+      t("screens:dayDelete.deleteSuccess", {
         title: deletedDayTitle,
       }),
     );
@@ -120,25 +115,6 @@ const HomeScreen = (): ReactElement | null => {
     notify(t("screens:dayAddEdit.dayEditSuccess", { title: day.title }));
   };
 
-  // NOTE: Must follow all referenced function definitions!
-  const selectedDayOptions: SelectedDayOption[] = [
-    {
-      icon: "pencil",
-      label: "Edit",
-      onClick: onDayEditPress,
-    },
-    {
-      icon: "delete",
-      label: "Delete",
-      onClick: onDayDeletePress,
-    },
-    {
-      icon: "close",
-      label: "Cancel",
-      onClick: onDaySelectCancel,
-    },
-  ];
-
   return (
     <Page>
       <AppBar back={false} background={lightColors.primary} logo>
@@ -169,21 +145,13 @@ const HomeScreen = (): ReactElement | null => {
         onCancel={onDayDeleteCancel}
         onConfirm={onDayDeleteConfirm}
       />
-      <BottomSheet
+      <SelectedDayModal
         ref={dayOptionsRef}
-        dismissable
-        inset={false}
-        title={selectedDay?.title ?? "N/A"}
-      >
-        {selectedDayOptions.map((option) => (
-          <List.Item
-            key={option.label}
-            left={(props) => <List.Icon {...props} icon={option.icon} />}
-            title={option.label}
-            onPress={option.onClick}
-          />
-        ))}
-      </BottomSheet>
+        day={selectedDay}
+        onClose={onDaySelectCancel}
+        onEdit={onDayEditPress}
+        onDelete={onDayDeletePress}
+      />
     </Page>
   );
 };

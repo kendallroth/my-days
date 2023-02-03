@@ -27,12 +27,12 @@ const DeleteDayDialog = (props: DeleteDayDialogProps): ReactElement | null => {
 
   return (
     <ConfirmDialog
-      title={t("screens:dayShared.deleteDayConfirmTitle")}
+      title={t("screens:dayDelete.title")}
       visible={visible}
       onCancel={onCancel}
       onConfirm={onConfirm}
     >
-      <Text>{t("screens:dayShared.deleteDayConfirmDescription")}</Text>
+      <Text>{t("screens:dayDelete.description")}</Text>
       <Text style={styles.deleteDialogDay}>{day.title}</Text>
     </ConfirmDialog>
   );

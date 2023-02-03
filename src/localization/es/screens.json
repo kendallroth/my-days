@@ -6,16 +6,21 @@
     "dayDateLabel": "Día",
     "dayDateFormatError": "Formato 'YYYY-MM-DD'",
     "dayTitleLabel": "Título",
-    "dayAddSuccess": "Evento agregada",
-    "dayEditSuccess": "{{title}} actualizado"
+    "dayAddSuccess": "\"{{title}}\" agregada",
+    "dayEditSuccess": "\"{{title}}\" actualizado"
+  },
+  "dayDelete": {
+    "title": "Eliminar Día",
+    "description": "¿Está seguro de que desea eliminar esta día?",
+    "deleteSuccess": "\"{{title}}\" eliminado"
   },
   "dayList": {
     "title": "Días"
   },
-  "dayShared": {
-    "deleteDayConfirmTitle": "Eliminar Día",
-    "deleteDayConfirmDescription": "¿Está seguro de que desea eliminar esta día?",
-    "deleteDaySuccess": "{{title}} eliminado"
+  "daySelectMenu": {
+    "cancel": "Cancelar",
+    "delete": "Borrar",
+    "edit": "Editar"
   },
   "home": {
     "title": "Inicio",
