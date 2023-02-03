@@ -17,7 +17,6 @@ import {
   setAppLanguage,
   setAppTheme,
 } from "@store/slices/settings";
-import { sharedColors } from "@theme";
 import { LANGUAGES } from "@utilities/constants";
 import { sleep } from "@utilities/misc.util";
 
@@ -253,9 +252,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   settingsFooterVersion: {},
-  settingsLanguageIcon: {
-    left: -12,
-  },
+  settingsLanguageIcon: {},
 });
 
 export default SettingsScreen;
