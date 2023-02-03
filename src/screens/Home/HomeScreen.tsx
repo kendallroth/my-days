@@ -34,7 +34,7 @@ const HomeScreen = (): ReactElement | null => {
   const dayOptionsRef = useRef<BottomSheetRef>(null);
 
   // FAB should disappear when scrolling down and reappear when scrolling back up
-  const { fabVisible, onListScroll } = useScrollingFab();
+  const { fabVisible, toggleFab, onListScroll } = useScrollingFab();
 
   const manageDayRef = useRef<BottomSheetRef>(null);
   const [editedDay, setEditedDay] = useState<Day | null>(null);
@@ -85,6 +85,11 @@ const HomeScreen = (): ReactElement | null => {
     const deletedDayTitle = deletedDay.title;
     setDeletedDay(null);
     dispatch(removeDay(deletedDay.id));
+
+    // Ensure FAB can be seen (if deleting last scrollable item when FAB was hidden)
+    setTimeout(() => {
+      toggleFab(true);
+    }, 250);
 
     notify(
       t("screens:dayDelete.deleteSuccess", {
