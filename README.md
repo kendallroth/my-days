@@ -46,11 +46,17 @@ Releases can be deployed through Expo Go (for testing) or the Expo managed build
 
 > **NOTE:** Remember to update the `version` in `package.json` before each release/deployment! This is especially important for App Store releases
 
+### Credentials
+
+Credentials are managed entirely by EAS, to avoid losing local credentials.
+
 ### Testing Releases
 
-Testing releases are released through Expo Go, which allows releasing for several environments. Specific release channels can be tested by visiting the release channel link, stored at the top of this file.
-
 > **_Coming Soon!_**
+
+#### Android (APK) ([docs](https://docs.expo.dev/build-reference/apk/))
+
+An APK can be generated for manual device testing with `eas build -p android --profile [profile]`, where profile is either `development` (development build) or `preview:apk` (production-like build). Once the remote build finishes, the resulting APK can be installed by following the directions either from the terminal (if still running) or the "Install" button within Expo.dev. An APK can be downloaded and will need to be allowed through security and installed on the device.
 
 ### Production Releases
 
@@ -111,7 +117,7 @@ Vector images are taken from [UnDraw](https://undraw.co/illustrations) and edite
 
 ### App Icons
 
-Icons were generated with the [Build Icon](https://buildicon.netlify.app/?color=white&emoji=palms_up_together) tool.
+Icons were generated with the [Build Icon](https://buildicon.netlify.app) tool or [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/).
 
 ## Notes
 
@@ -121,10 +127,6 @@ Icons were generated with the [Build Icon](https://buildicon.netlify.app/?color=
 - [i18n Localization](https://brainsandbeards.com/blog/i18n-in-react-native-apps)
 - [React Navigation TypeScript](https://reactnavigation.org/docs/typescript)
 
-#### Linting
+#### Patchas
 
-Even with Expo SDK 45, `@react-native-community/eslint-config` does not quite properly install all dependencies. I have attempted to fix this via a patch, but if it does not work in other setups it may be best to manually install all its dependencies.
-
-## TODOs
-
-- Explore localized date formatting with ([`i18n Formatting`](https://www.i18next.com/translation-function/formatting)) (alternative at [Brains and Beards](https://brainsandbeards.com/blog/i18n-in-react-native-apps#formatting))
+`patch-package` is used to patch a variety of bugs or undesired functionality in a few packages. Note that editing/patching source files works in development, but the build files must be patched for use in production!
