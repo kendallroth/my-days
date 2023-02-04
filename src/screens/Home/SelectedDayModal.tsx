@@ -64,7 +64,7 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
         title={day?.title ?? "N/A"}
         titleRight={
           dayPosition ? (
-            <Text style={styles.titleRight}>
+            <Text style={styles.titleRight} variant="labelLarge">
               {t("screens:daySelectMenu.position", {
                 count: dayPosition.count,
                 position: dayPosition.position,

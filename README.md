@@ -22,13 +22,6 @@ Simple app that counts down/up to important dates!
 - [x] Delete existing dates
 - [x] Customize date icon
 
-### Material You
-
-- [ ] Use `themeStyles` object pattern
-- [ ] Update `Text` styles to use provided `variant` prop
-- [x] Update broken/invalid theme colors
-- [ ] Finish theme colors overhaul (add new ones?)
-
 ## Contributing
 
 Thanks to [all those](CONTRIBUTORS.md) who have contributed to this project so far!

@@ -153,10 +153,12 @@ const HomeScreen = (): ReactElement | null => {
         />
       </AppBar>
       <View style={[styles.pageHeader, { backgroundColor: colors.primary }]}>
-        <Text style={[styles.pageHeaderDay, { color: colors.onPrimary }]}>
+        <Text style={[styles.pageHeaderDay, { color: colors.onPrimary }]} variant="headlineLarge">
           {dateDisplay.weekDay}
         </Text>
-        <Text style={[styles.pageHeaderDate, { color: colors.onPrimary }]}>{dateDisplay.date}</Text>
+        <Text style={[{ color: colors.onPrimary }]} variant="headlineSmall">
+          {dateDisplay.date}
+        </Text>
       </View>
       <View style={styles.pageContent}>
         <DayList days={days} onItemLongPress={onDaySelect} onScroll={onListScroll} />
@@ -201,12 +203,7 @@ const styles = StyleSheet.create({
     padding: pagePadding,
     paddingTop: 0,
   },
-  pageHeaderDate: {
-    fontSize: 24,
-  },
   pageHeaderDay: {
-    marginBottom: 4,
-    fontSize: 32,
     fontWeight: "700",
   },
 });

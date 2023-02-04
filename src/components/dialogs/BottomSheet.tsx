@@ -144,7 +144,9 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>((props: BottomS
       >
         {Boolean(title) && (
           <View style={[styles.sheetTitle, inset ? undefined : styles.sheetInset]}>
-            <Text style={[styles.sheetTitleText, titleStyle]}>{title}</Text>
+            <Text style={[styles.sheetTitleText, titleStyle]} variant="titleLarge">
+              {title}
+            </Text>
             {titleRight}
           </View>
         )}
@@ -177,8 +179,6 @@ const styles = StyleSheet.create({
   },
   sheetTitleText: {
     marginRight: "auto",
-    fontSize: 18,
-    fontWeight: "700",
   },
 });
 

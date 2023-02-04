@@ -57,7 +57,7 @@ const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
         style={[styles.contributorAvatar, themeStyles.contributorAvatar]}
       />
       <View style={styles.contributorContent}>
-        <Text style={styles.contributorName}>{contributor.name}</Text>
+        <Text variant="titleMedium">{contributor.name}</Text>
         <View style={styles.contributorActions}>
           {contributor.actions.map((a): ReactElement => {
             const icon = ContributorActionIconMap[a.type];
@@ -116,10 +116,6 @@ const styles = StyleSheet.create({
   contributorContent: {
     flexShrink: 1,
     marginLeft: 16,
-  },
-  contributorName: {
-    fontSize: 16,
-    fontWeight: "bold",
   },
   contributorWebsite: {
     marginLeft: 8,

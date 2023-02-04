@@ -54,7 +54,9 @@ const Alert = (props: AlertProps): ReactElement | null => {
     <View style={[styles.alert, style]}>
       <Icon color={iconColorMap[type]} name={icon} size={iconSize} style={styles.alertIcon} />
       {childIsString ? (
-        <Text style={[styles.alertText, themeStyles.alertText, textStyle]}>{children}</Text>
+        <Text style={[styles.alertText, themeStyles.alertText, textStyle]} variant="bodyLarge">
+          {children}
+        </Text>
       ) : (
         children
       )}
@@ -73,7 +75,6 @@ const styles = StyleSheet.create({
   },
   alertText: {
     flexShrink: 1,
-    fontSize: 16,
   },
 });
 

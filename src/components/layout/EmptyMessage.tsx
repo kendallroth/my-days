@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Image, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Title, useTheme } from "react-native-paper";
+import { Text, useTheme } from "react-native-paper";
 
 interface EmptyMessageProps {
   action?: () => ReactElement;
@@ -27,7 +27,9 @@ const EmptyMessage = (props: EmptyMessageProps): ReactElement => {
         source={emptyImage}
         style={{ width: imageSize, height: imageSize }}
       />
-      <Title style={styles.contentText}>{text}</Title>
+      <Text style={styles.contentText} variant="titleMedium">
+        {text}
+      </Text>
       {action?.()}
     </View>
   );
@@ -40,7 +42,6 @@ const styles = StyleSheet.create({
     padding: 32,
   },
   contentText: {
-    fontWeight: "700",
     marginTop: 16,
   },
 });
