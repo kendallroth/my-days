@@ -28,6 +28,10 @@
   },
   "home": {
     "title": "Home",
+    "listItemDate": "{{date, MMMM DD, YYYY}}",
+    "listItemDate_noYear": "{{date, MMMM DD}}",
+    "todayDay": "{{date, dddd}}",
+    "todayDate": "{{date, MMMM DD, YYYY}}",
     "welcomeText": "Welcome!"
   },
   "settings": {

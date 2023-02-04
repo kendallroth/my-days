@@ -1,11 +1,11 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import dayjs from "dayjs";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { Avatar, Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
 
 import { sharedColors } from "@styles/theme";
-import { DATE_FORMAT_LONG, formatDateString } from "@utilities/date.util";
 import { getDayDisplay } from "@utilities/day.util";
 
 import type { Day } from "@typings/day.types";
@@ -22,9 +22,10 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
   const { colors } = useTheme();
   const { t } = useTranslation(["common", "screens"]);
 
-  const dateDisplay = day.repeats
-    ? `${formatDateString(day.date, DATE_FORMAT_LONG.split(",")[0])}`
-    : formatDateString(day.date, DATE_FORMAT_LONG);
+  const dateDisplay = t("screens:home.listItemDate", {
+    context: day.repeats ? "noYear" : undefined,
+    date: dayjs(day.date),
+  });
   const dateCount = getDayDisplay(day);
 
   const isToday = dateCount.count === 0;

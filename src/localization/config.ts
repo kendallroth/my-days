@@ -1,4 +1,6 @@
+import "dayjs/locale/es";
 import "intl-pluralrules";
+import dayjs from "dayjs";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
@@ -32,6 +34,13 @@ i18n
     interpolation: {
       // NOTE: Not needed for React!
       escapeValue: false,
+      format: (value, format, language) => {
+        if (dayjs.isDayjs(value)) {
+          return value.locale(language ?? "en").format(format);
+        }
+
+        return value;
+      },
     },
     resources,
   });
