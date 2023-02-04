@@ -4,7 +4,6 @@ import { Optional } from "./app.types";
 export interface Day {
   id: string;
   createdAt: string;
-  color?: string;
   /** Day occurrence */
   date: string;
   icon?: string;

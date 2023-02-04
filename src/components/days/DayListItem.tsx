@@ -51,7 +51,7 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
           color={backgroundColor}
           icon={day.icon ?? ""}
           size={40}
-          style={[styles.dayIcon, { backgroundColor: day.color ?? mainColor }]}
+          style={[styles.dayIcon, { backgroundColor: mainColor }]}
         />
 
         <View style={styles.dayContent}>
@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
   },
   dayContent: {
     flexGrow: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    flexShrink: 1,
+    padding: 12,
   },
   dayContentFooter: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 8,
+    marginTop: 4,
     opacity: 0.6,
   },
   dayContentFooterDate: {
@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: counterWidth,
+    flexShrink: 0,
   },
   dayStatsCount: {
     fontSize: 28,
