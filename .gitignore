@@ -2,6 +2,9 @@
 builds/
 dist/
 
+# Assets
+assets/ic_icons/
+
 # Dependencies
 node_modules/
 

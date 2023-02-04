@@ -117,6 +117,7 @@ const HomeScreen = (): ReactElement | null => {
 
     if (!selectedDay) return;
     setEditedDay(selectedDay);
+    // TODO: Move this (or both?) to after the dialog has closed (to avoid flicker while closing)
     setSelectedDay(null);
   };
 

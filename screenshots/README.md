@@ -4,10 +4,11 @@ App screenshots are necessary for promoting the app in the app stores. Screensho
 
 ## Recommended Screenshots
 
-1. App Dashboard
-2. Day List
-3. Day Details
-4. Settings
+1. App Dashboard (light)
+2. App Dashboard (dark)
+3. Date Selection
+4. Date Edit
+5. Settings
 
 > **NOTE:** Ensure to have a good mixture of day types and states to demonstrate range of functionality!
 

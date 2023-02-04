@@ -46,17 +46,19 @@ Releases can be deployed through Expo Go (for testing) or the Expo managed build
 
 > **NOTE:** Remember to update the `version` in `package.json` before each release/deployment! This is especially important for App Store releases
 
-### Credentials
+### Credentials ([docs](https://docs.expo.dev/app-signing/app-credentials/))
 
 Credentials are managed entirely by EAS, to avoid losing local credentials.
 
-### Testing Releases
-
-> **_Coming Soon!_**
+### Testing Releases ([docs](https://docs.expo.dev/build/internal-distribution/))
 
 #### Android (APK) ([docs](https://docs.expo.dev/build-reference/apk/))
 
-An APK can be generated for manual device testing with `eas build -p android --profile [profile]`, where profile is either `development` (development build) or `preview:apk` (production-like build). Once the remote build finishes, the resulting APK can be installed by following the directions either from the terminal (if still running) or the "Install" button within Expo.dev. An APK can be downloaded and will need to be allowed through security and installed on the device.
+An APK can be generated for manual device testing with `eas build -p android --profile [profile]`, where profile is either `development` (development build) or `preview:apk` (production-like build). Once the remote build finishes, the resulting APK can be installed by following the directions either from the terminal or Expo site. An APK can be downloaded and will need to be allowed through security and installed on the device.
+
+#### iOS Ad Hock ([docs](https://docs.expo.dev/build/internal-distribution/#22-configure-app-signing-credentials-for-ios))
+
+iOS builds can be generated for specifically provisioned phones, via an ad hoc provisioning process (requires registering device via UDID with Apple). Once provisioned, builds can be generated for manual device testing with `eas build -p ios --profile [profile]`, where profile is either `development` (development build) or `preview` (production-like build). Once the remote build finishes, the resulting bundle can be installed on a provisioned device from the terminal or Expo site.
 
 ### Production Releases
 
@@ -117,7 +119,7 @@ Vector images are taken from [UnDraw](https://undraw.co/illustrations) and edite
 
 ### App Icons
 
-Icons were generated with the [Build Icon](https://buildicon.netlify.app) tool or [Android Asset Studio](https://romannurik.github.io/AndroidAssetStudio/).
+Icons were generated with the [Build Icon](https://buildicon.netlify.app) tool or [Icon Kitchen](https://icon.kitchen/).
 
 ## Notes
 
