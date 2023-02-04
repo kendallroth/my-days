@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { Image, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Title } from "react-native-paper";
+import { Title, useTheme } from "react-native-paper";
 
 interface EmptyMessageProps {
   action?: () => ReactElement;
@@ -13,12 +13,18 @@ const EmptyMessage = (props: EmptyMessageProps): ReactElement => {
 
   const imageSize = 280;
 
+  const { dark } = useTheme();
+
+  const emptyImage = !dark
+    ? require("@assets/illustrations/illustration_taken_light.png")
+    : require("@assets/illustrations/illustration_taken_dark.png");
+
   return (
     <View style={[styles.content, style]}>
       <Image
         fadeDuration={100}
         resizeMode="contain"
-        source={require("@assets/illustration_taken.png")}
+        source={emptyImage}
         style={{ width: imageSize, height: imageSize }}
       />
       <Title style={styles.contentText}>{text}</Title>
