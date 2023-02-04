@@ -48,8 +48,8 @@ export default (): ExpoConfig => ({
   // Android overrides
   android: {
     adaptiveIcon: {
-      foregroundImage: "./assets/android_launcher.png",
-      backgroundColor: primaryColor,
+      foregroundImage: "./assets/android_launcher_foreground.png",
+      backgroundColor: "#00629E",
     },
     package: "ca.kendallroth.my_days",
     permissions: [],
