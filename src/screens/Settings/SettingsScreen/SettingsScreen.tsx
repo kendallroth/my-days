@@ -181,7 +181,6 @@ const SettingsScreen = (): ReactElement => {
             beta={languageConfig.beta}
             flag={languageConfig.flag}
             size={30}
-            style={styles.settingsLanguageIcon}
           />
         )}
         title={t("screens:settings.listItemLanguage")}
@@ -225,9 +224,7 @@ const SettingsScreen = (): ReactElement => {
       )}
       <View style={styles.settingsFooter}>
         <View style={styles.settingsFooterDebug}>
-          <Text style={styles.settingsFooterVersion} onPress={onTapVersion}>
-            v{config.version}
-          </Text>
+          <Text onPress={onTapVersion}>v{config.version}</Text>
           {showEnvironment && (
             <Text style={{ color: colors.onSurfaceDisabled }}>{releaseString}</Text>
           )}
@@ -251,8 +248,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 8,
   },
-  settingsFooterVersion: {},
-  settingsLanguageIcon: {},
 });
 
 export default SettingsScreen;

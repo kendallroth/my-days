@@ -1,11 +1,11 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
+import dayjs from "dayjs";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
-import { Avatar, Surface, Text, Title, TouchableRipple, useTheme } from "react-native-paper";
+import { Avatar, Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
 
 import { sharedColors } from "@styles/theme";
-import { DATE_FORMAT_LONG, formatDateString } from "@utilities/date.util";
 import { getDayDisplay } from "@utilities/day.util";
 
 import type { Day } from "@typings/day.types";
@@ -22,9 +22,10 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
   const { colors } = useTheme();
   const { t } = useTranslation(["common", "screens"]);
 
-  const dateDisplay = day.repeats
-    ? `${formatDateString(day.date, DATE_FORMAT_LONG.split(",")[0])}`
-    : formatDateString(day.date, DATE_FORMAT_LONG);
+  const dateDisplay = t("screens:home.listItemDate", {
+    context: day.repeats ? "noYear" : undefined,
+    date: dayjs(day.date),
+  });
   const dateCount = getDayDisplay(day);
 
   const isToday = dateCount.count === 0;
@@ -51,18 +52,15 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
           color={backgroundColor}
           icon={day.icon ?? ""}
           size={40}
-          style={[styles.dayIcon, { backgroundColor: day.color ?? mainColor }]}
+          style={[styles.dayIcon, { backgroundColor: mainColor }]}
         />
 
         <View style={styles.dayContent}>
-          <Title
-            numberOfLines={1}
-            style={[styles.dayContentTitle, { color: colors.onSurfaceVariant }]}
-          >
+          <Text numberOfLines={1} style={{ color: colors.onSurfaceVariant }} variant="titleMedium">
             {day.title}
-          </Title>
+          </Text>
           <View style={styles.dayContentFooter}>
-            <Text numberOfLines={1} style={styles.dayContentFooterDate}>
+            <Text numberOfLines={1} variant="bodySmall">
               {dateDisplay}
             </Text>
             {day.repeats && (
@@ -86,11 +84,11 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
               />
             </View>
           )}
-          <Title style={[styles.dayStatsCount, { color: mainColorText }]}>
+          <Text style={[styles.dayStatsCount, { color: mainColorText }]} variant="headlineMedium">
             {Math.abs(dateCount.count)}
-          </Title>
-          <Text style={[styles.dayStatsUnit, { color: mainColorText }]}>
-            {t("common:timeUnits.days")}
+          </Text>
+          <Text style={[styles.dayStatsUnit, { color: mainColorText }]} variant="bodySmall">
+            {t("common:timeUnits.days", { count: Math.abs(dateCount.count) })}
           </Text>
         </View>
       </Surface>
@@ -111,28 +109,20 @@ const styles = StyleSheet.create({
   },
   dayContent: {
     flexGrow: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
+    flexShrink: 1,
+    paddingHorizontal: 12,
+    paddingVertical: 14,
   },
   dayContentFooter: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 8,
+    marginTop: 2,
     opacity: 0.6,
-  },
-  dayContentFooterDate: {
-    fontSize: 14,
-    lineHeight: 14 * 1.1,
   },
   dayContentFooterIcon: {
     marginTop: -2,
     marginLeft: 4,
     fontSize: 14,
-  },
-  dayContentTitle: {
-    fontSize: 18,
-    lineHeight: 18 * 1.1,
-    fontWeight: "700",
   },
   dayIcon: {
     alignSelf: "center",
@@ -143,11 +133,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: counterWidth,
+    flexShrink: 0,
   },
   dayStatsCount: {
-    fontSize: 28,
-    lineHeight: 28 * 1.1,
-    fontWeight: "800",
+    fontWeight: "700",
   },
   dayStatsIcon: {
     fontSize: iconFontSize,
@@ -163,7 +152,7 @@ const styles = StyleSheet.create({
   },
   dayStatsUnit: {
     position: "absolute",
-    bottom: 6,
+    bottom: 4,
     opacity: 0.8,
   },
 });

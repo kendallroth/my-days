@@ -3,6 +3,7 @@ export const DayIcons = {
   baby: "baby-carriage",
   calendar: "calendar",
   camera: "camera",
+  cake: "cake",
   camping: "campfire",
   christmas: "pine-tree",
   clock: "clock",

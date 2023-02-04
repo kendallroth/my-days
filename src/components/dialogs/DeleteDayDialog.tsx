@@ -33,7 +33,9 @@ const DeleteDayDialog = (props: DeleteDayDialogProps): ReactElement | null => {
       onConfirm={onConfirm}
     >
       <Text>{t("screens:dayDelete.description")}</Text>
-      <Text style={styles.deleteDialogDay}>{day.title}</Text>
+      <Text style={styles.deleteDialogDay} variant="titleMedium">
+        {day.title}
+      </Text>
     </ConfirmDialog>
   );
 };
@@ -41,7 +43,6 @@ const DeleteDayDialog = (props: DeleteDayDialogProps): ReactElement | null => {
 const styles = StyleSheet.create({
   deleteDialogDay: {
     marginTop: 12,
-    fontWeight: "bold",
   },
 });
 

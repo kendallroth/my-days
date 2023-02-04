@@ -25,10 +25,10 @@ const ReportBugScreen = (): ReactElement => {
       <AppBar title={t("screens:settingsReportBug.title")} />
       <ScrollView contentContainerStyle={styles.pageContent}>
         <Icon color={colors.error} name="bug" size={64} style={styles.pageIcon} />
-        <Text style={styles.pageTitle}>{t("screens:settingsReportBug.reportTitle")}</Text>
-        <Text style={styles.pageDescription}>
-          {t("screens:settingsReportBug.reportDescription")}
+        <Text style={styles.pageTitle} variant="titleLarge">
+          {t("screens:settingsReportBug.reportTitle")}
         </Text>
+        <Text variant="bodyMedium">{t("screens:settingsReportBug.reportDescription")}</Text>
         <Button
           icon="open-in-new"
           style={styles.pageActionGitHub}
@@ -48,9 +48,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: pagePadding,
   },
-  pageDescription: {
-    fontSize: 16,
-  },
   pageIcon: {
     alignSelf: "center",
     marginBottom: 16,
@@ -62,8 +59,6 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     marginBottom: 24,
-    fontSize: 24,
-    fontWeight: "bold",
     textAlign: "center",
   },
 });

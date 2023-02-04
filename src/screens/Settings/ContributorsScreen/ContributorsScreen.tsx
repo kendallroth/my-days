@@ -67,9 +67,7 @@ const ContributorsScreen = (): ReactElement => {
           )}
         </View>
         <View style={styles.aboutContributorsPrompt}>
-          <Text style={styles.alignContributorsPromptText}>
-            {t("screens:settingsContributors.contributorPrompt")}
-          </Text>
+          <Text variant="bodyMedium">{t("screens:settingsContributors.contributorPrompt")}</Text>
           <Button
             icon="github"
             style={styles.alignContributorsPromptButton}
@@ -94,9 +92,6 @@ const styles = StyleSheet.create({
   },
   alignContributorsPromptButton: {
     marginVertical: 16,
-  },
-  alignContributorsPromptText: {
-    fontSize: 16,
   },
   pageContent: {
     flexGrow: 1,

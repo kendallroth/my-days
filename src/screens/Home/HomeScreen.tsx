@@ -42,10 +42,6 @@ const HomeScreen = (): ReactElement | null => {
   const [deletedDay, setDeletedDay] = useState<Day | null>(null);
 
   const today = dayjs();
-  const dateDisplay = {
-    date: today.format("MMMM DD, YYYY"),
-    weekDay: today.format("dddd"),
-  };
 
   /** Open selected day options menu */
   const onDaySelect = (day: Day) => {
@@ -153,10 +149,12 @@ const HomeScreen = (): ReactElement | null => {
         />
       </AppBar>
       <View style={[styles.pageHeader, { backgroundColor: colors.primary }]}>
-        <Text style={[styles.pageHeaderDay, { color: colors.onPrimary }]}>
-          {dateDisplay.weekDay}
+        <Text style={[styles.pageHeaderDay, { color: colors.onPrimary }]} variant="headlineLarge">
+          {t("screens:home.todayDay", { date: today })}
         </Text>
-        <Text style={[styles.pageHeaderDate, { color: colors.onPrimary }]}>{dateDisplay.date}</Text>
+        <Text style={[{ color: colors.onPrimary }]} variant="headlineSmall">
+          {t("screens:home.todayDate", { date: today })}
+        </Text>
       </View>
       <View style={styles.pageContent}>
         <DayList days={days} onItemLongPress={onDaySelect} onScroll={onListScroll} />
@@ -201,12 +199,7 @@ const styles = StyleSheet.create({
     padding: pagePadding,
     paddingTop: 0,
   },
-  pageHeaderDate: {
-    fontSize: 24,
-  },
   pageHeaderDay: {
-    marginBottom: 4,
-    fontSize: 32,
     fontWeight: "700",
   },
 });

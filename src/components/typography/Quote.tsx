@@ -33,7 +33,9 @@ const Quote = (props: QuoteProps): ReactElement => {
 
   return (
     <View style={[styles.quote, themeStyles.quote, style]}>
-      <Text style={[styles.quoteText, themeStyles.quoteText, textStyle]}>{children}</Text>
+      <Text style={[themeStyles.quoteText, textStyle]} variant="bodyLarge">
+        {children}
+      </Text>
     </View>
   );
 };
@@ -44,10 +46,6 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     borderLeftWidth: 4,
     borderRadius: 4,
-  },
-  quoteText: {
-    fontSize: 18,
-    lineHeight: 24,
   },
 });
 

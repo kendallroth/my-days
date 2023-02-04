@@ -63,7 +63,9 @@ const AboutScreen = (): ReactElement => {
       <AppBar title={t("screens:settingsAbout.title")} />
       <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
         <Quote>{t("screens:settingsAbout.appSummary")}</Quote>
-        <Text style={styles.aboutDescription}>{t("screens:settingsAbout.appDescription")}</Text>
+        <Text style={styles.aboutDescription} variant="bodyMedium">
+          {t("screens:settingsAbout.appDescription")}
+        </Text>
         <View style={styles.aboutSteps}>
           {steps.map((step, idx) => (
             <View key={step} style={styles.aboutStepsStep}>
@@ -74,11 +76,15 @@ const AboutScreen = (): ReactElement => {
                 size={24}
                 style={styles.aboutStepsStepIcon}
               />
-              <Text style={styles.aboutStepsStepText}>{step}</Text>
+              <Text style={styles.aboutStepsStepText} variant="bodyLarge">
+                {step}
+              </Text>
             </View>
           ))}
         </View>
-        <Text style={styles.aboutTipTitle}>{t("screens:settingsAbout.guideTipTitle")}</Text>
+        <Text style={styles.aboutTipTitle} variant="titleMedium">
+          {t("screens:settingsAbout.guideTipTitle")}
+        </Text>
         <View style={styles.aboutSteps}>
           {tips.map((tip) => (
             <View key={tip} style={styles.aboutStepsStep}>
@@ -88,7 +94,9 @@ const AboutScreen = (): ReactElement => {
                 size={24}
                 style={styles.aboutStepsStepIcon}
               />
-              <Text style={[styles.aboutStepsStepText, { fontSize: 16 }]}>{tip}</Text>
+              <Text style={[styles.aboutStepsStepText]} variant="bodyMedium">
+                {tip}
+              </Text>
             </View>
           ))}
         </View>
@@ -123,7 +131,6 @@ const pagePadding = 24;
 const styles = StyleSheet.create({
   aboutDescription: {
     marginVertical: 24,
-    fontSize: 16,
   },
   aboutDeveloper: {
     marginTop: 24,
@@ -152,13 +159,10 @@ const styles = StyleSheet.create({
   },
   aboutStepsStepText: {
     marginLeft: 8,
-    fontSize: 18,
   },
   aboutTipTitle: {
     marginTop: 24,
     marginBottom: 4,
-    fontSize: 16,
-    fontWeight: "700",
   },
   aboutSpace: {
     flexGrow: 1,

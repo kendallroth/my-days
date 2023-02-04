@@ -25,31 +25,44 @@ const createFakeDay = (day: Omit<DayNew, "id">): Day => {
 //         Additionally, these values are used in fake days (caution)!
 const fakeDays: Day[] = [
   createFakeDay({
-    // color: "#D01760",
-    date: dayjs("2022-04-20").format(DATE_FORMAT_ISO_SHORT),
+    date: dayjs().subtract(174, "days").format(DATE_FORMAT_ISO_SHORT),
     icon: DayIcons.heart,
-    title: "Dating",
+    title: "Relationship",
     repeats: false,
     unit: "day",
   }),
   createFakeDay({
-    date: dayjs("2022-10-29").format(DATE_FORMAT_ISO_SHORT),
+    date: dayjs().add(17, "days").format(DATE_FORMAT_ISO_SHORT),
+    icon: DayIcons.airplane,
+    title: "Vacation",
+    repeats: false,
+    unit: "day",
+  }),
+  createFakeDay({
+    date: dayjs().add(64, "days").format(DATE_FORMAT_ISO_SHORT),
     icon: DayIcons.wedding,
     title: "Friend's Wedding",
     repeats: false,
     unit: "day",
   }),
   createFakeDay({
+    date: dayjs().subtract(1, "days").format(DATE_FORMAT_ISO_SHORT),
+    title: "Diet",
+    repeats: false,
+    unit: "day",
+  }),
+  createFakeDay({
     date: dayjs("2000-12-25").format(DATE_FORMAT_ISO_SHORT),
+    icon: DayIcons.christmas,
     title: "Christmas",
     repeats: true,
     unit: "day",
   }),
   createFakeDay({
-    date: dayjs("2023-02-13").format(DATE_FORMAT_ISO_SHORT),
-    icon: DayIcons.airplane,
-    title: "Vacation Trip",
-    repeats: false,
+    date: dayjs(dayjs().add(108, "days")).format(DATE_FORMAT_ISO_SHORT),
+    icon: DayIcons.cake,
+    title: "Birthday",
+    repeats: true,
     unit: "day",
   }),
 ];

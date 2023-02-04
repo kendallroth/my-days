@@ -1,4 +1,9 @@
-import { MD3DarkTheme as DarkTheme, MD3LightTheme as LightTheme } from "react-native-paper";
+import {
+  configureFonts,
+  MD3DarkTheme as DarkTheme,
+  MD3LightTheme as LightTheme,
+} from "react-native-paper";
+import { MD3Type } from "react-native-paper/lib/typescript/types";
 
 /*
  * Backdrop   - Backdrops of modals
@@ -18,6 +23,30 @@ import { MD3DarkTheme as DarkTheme, MD3LightTheme as LightTheme } from "react-na
     }
   }
 }*/
+
+const fontConfig: Record<string, Partial<MD3Type>> = {
+  // TODO: Increase font weight for labels
+  bodySmall: {
+    fontSize: 14,
+  },
+  bodyMedium: {
+    fontSize: 16,
+  },
+  bodyLarge: {
+    fontSize: 18,
+  },
+  titleSmall: {
+    fontWeight: "700",
+  },
+  titleMedium: {
+    fontWeight: "700",
+  },
+  titleLarge: {
+    fontWeight: "700",
+  },
+};
+
+const fontTheme = configureFonts({ config: fontConfig });
 
 // TODO: Consider copying in custom color generation code for theme colors
 // Source: https://github.com/callstack/react-native-paper/blob/main/docs/pages/src/utils/createDynamicColorTheme.js
@@ -144,11 +173,13 @@ const darkColors = {
 const darkTheme = {
   ...DarkTheme,
   colors: darkColors,
+  fonts: fontTheme,
 };
 
 const lightTheme = {
   ...LightTheme,
   colors: lightColors,
+  fonts: fontTheme,
 };
 
 export { darkColors, darkTheme, lightColors, lightTheme, sharedColors };
