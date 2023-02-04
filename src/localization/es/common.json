@@ -26,10 +26,14 @@
     "search": "Buscar"
   },
   "timeUnits": {
-    "days": "días",
-    "months": "meses",
-    "weeks": "semanas",
-    "years": "años"
+    "days_one": "día",
+    "days_other": "días",
+    "months_one": "mes",
+    "months_other": "meses",
+    "weeks_one": "semana",
+    "weeks_other": "semanas",
+    "years_one": "año",
+    "years_other": "años"
   },
   "validations": {
     "invalid": "{{path}} es inválido",

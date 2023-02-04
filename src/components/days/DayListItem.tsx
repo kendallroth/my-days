@@ -87,7 +87,7 @@ const DayListItem = (props: DayDisplayProps): ReactElement | null => {
             {Math.abs(dateCount.count)}
           </Text>
           <Text style={[styles.dayStatsUnit, { color: mainColorText }]} variant="bodySmall">
-            {t("common:timeUnits.days")}
+            {t("common:timeUnits.days", { count: Math.abs(dateCount.count) })}
           </Text>
         </View>
       </Surface>
