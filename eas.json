@@ -19,7 +19,8 @@
       "extends": "preview",
       "android": {
         "buildType": "apk"
-      }
+      },
+      "channel": "preview"
     },
     "production": {
       "node": "16.6.0",

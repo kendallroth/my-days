@@ -78,10 +78,6 @@ const DeveloperScreen = (): ReactElement => {
         <List.Subheader style={styles.listSubheader}>
           {t("screens:settingsDeveloper.listSectionApp")}
         </List.Subheader>
-        <DeveloperListItem
-          title={t("screens:settingsDeveloper.listItemEnvironment")}
-          value={config.environment}
-        />
         {/* NOTE: 'Application.nativeAppVersion' shows Expo version if running in Expo! */}
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemVersion")}
@@ -90,6 +86,14 @@ const DeveloperScreen = (): ReactElement => {
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemBuild")}
           value={config.versionBuild}
+        />
+        <DeveloperListItem
+          title={t("screens:settingsDeveloper.listItemReleaseChannel")}
+          value={config.releaseChannel}
+        />
+        <DeveloperListItem
+          title={t("screens:settingsDeveloper.listItemRuntimeVersion")}
+          value={config.runtimeVersion}
         />
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemExpo")}

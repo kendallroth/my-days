@@ -46,7 +46,7 @@ const SettingsScreen = (): ReactElement => {
   const themeConfig = useAppSelector(selectThemeConfig);
   const developerMode = useAppSelector(selectDeveloperMode);
 
-  const releaseString = config.environment && ` @ ${config.environment}`;
+  const releaseString = config.releaseChannel && ` @ ${config.releaseChannel}`;
   const showEnvironment = developerMode && Boolean(releaseString);
 
   /**

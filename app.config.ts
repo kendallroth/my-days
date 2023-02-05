@@ -1,8 +1,7 @@
 import { ExpoConfig } from "@expo/config";
 
-import { version } from "./package.json";
-
-const primaryColor = "#004d7d";
+// Light variation of the "technical" primary colour, but matching the actual "primary" light theme color.
+const lightenedPrimaryColor = "#00629E";
 
 /**
  * Semantic version name (viewable)
@@ -10,9 +9,9 @@ const primaryColor = "#004d7d";
  * Android - 'versionName'
  * iOS     - 'CFBundleShortVersionString'
  */
-const versionName = version;
+const versionName = "0.1.0";
 /**
- * Android build code (increment with each submitted build)
+ * Android build code (must increment with each submitted build)
  */
 const androidVersionCode = 1;
 /**
@@ -23,17 +22,34 @@ const androidVersionCode = 1;
  */
 const iosBuildNumber = 1;
 
+/**
+ * Runtime version associated with build manifest, used when applying OTA updates.
+ *
+ * Expo will attempt to apply OTA updates as long as the runtime version of the update matches
+ *   the previously installed runtime version. This field should be updated whenever native
+ *   code changes or any non-backwards compatible changes are made!
+ *
+ * @source https://docs.expo.dev/eas-update/runtime-versions/
+ */
+const runtimeVersion: ExpoConfig["runtimeVersion"] = {
+  // NOTE: Custom runtime version fields prevent using the Expo Go app (in favour of custom dev client)
+  // TODO: Investigate using custom dev client, which may require simulator for development updates???
+  // Source: https://docs.expo.dev/build/updates/#previewing-updates-in-development-builds
+  policy: "sdkVersion",
+};
+
 export default (): ExpoConfig => ({
   // Information
   name: "My Days",
   slug: "my-days",
   githubUrl: "https://github.com/kendallroth/my-days",
-  // User-facing app version
   version: versionName,
+  runtimeVersion,
   owner: "kendallroth",
   orientation: "portrait",
   platforms: ["android", "ios"],
   entryPoint: "index.js",
+  primaryColor: lightenedPrimaryColor,
 
   jsEngine: "hermes",
 
@@ -42,7 +58,7 @@ export default (): ExpoConfig => ({
   splash: {
     image: "./assets/splash.png",
     resizeMode: "cover",
-    backgroundColor: primaryColor,
+    backgroundColor: lightenedPrimaryColor,
   },
 
   assetBundlePatterns: ["**/*"],
@@ -51,11 +67,10 @@ export default (): ExpoConfig => ({
   android: {
     adaptiveIcon: {
       foregroundImage: "./assets/android_launcher_foreground.png",
-      backgroundColor: "#00629E",
+      backgroundColor: lightenedPrimaryColor,
     },
     package: "ca.kendallroth.my_days",
     permissions: [],
-    // Developer-facing build version ('versionCode')
     versionCode: androidVersionCode,
     playStoreUrl: "https://play.google.com/store/apps/details?id=ca.kendallroth.my_days",
   },
@@ -66,7 +81,6 @@ export default (): ExpoConfig => ({
 
   // iOS overrides
   ios: {
-    // Developer-facing build version ('CFBundleVersion')
     buildNumber: `${iosBuildNumber}`,
     bundleIdentifier: "ca.kendallroth.my-days",
     // Icon must be 1024x1024 (no transparency)

@@ -61,14 +61,13 @@ const HomeScreen = (): ReactElement | null => {
 
   /** Prepare deletion confirmation dialog (in response to selection menu choice) */
   const onDayDeletePress = () => {
+    // NOTE: Ensure previous modal has finished closing before displaying another
     dayOptionsRef.current?.close(() => {
-      // NOTE: Ensure previous modal has finished closing before displaying another
       if (!selectedDay) return;
-      setDeletedDay(selectedDay);
-    });
 
-    if (!selectedDay) return;
-    setSelectedDay(null);
+      setDeletedDay(selectedDay);
+      setSelectedDay(null);
+    });
   };
 
   const onDayDeleteCancel = () => {
@@ -109,16 +108,15 @@ const HomeScreen = (): ReactElement | null => {
 
   /** Prepare edit dialog (in response to selection menu choice) */
   const onDayEditPress = () => {
+    // NOTE: Ensure previous modal has finished closing before displaying another
     dayOptionsRef.current?.close(() => {
-      // NOTE: Ensure previous modal has finished closing before displaying another
       if (!selectedDay) return;
+
+      setEditedDay(selectedDay);
+      setSelectedDay(null);
+
       manageDayRef.current?.open();
     });
-
-    if (!selectedDay) return;
-    setEditedDay(selectedDay);
-    // TODO: Move this (or both?) to after the dialog has closed (to avoid flicker while closing)
-    setSelectedDay(null);
   };
 
   const onDayEdit = (day: Day) => {
