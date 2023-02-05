@@ -67,7 +67,7 @@ Production builds and releases are handled with [EAS Build](https://docs.expo.de
 
 > **NOTE:** Remember to properly update the `version` (`package.json`) and increment the `androidVersionCode`/`iosBuildNumber` (`app.config.ts`) before each release intended for submission!
 
-#### Production Builds
+#### Production Builds ([EAS Build](https://docs.expo.dev/build/introduction/))
 
 Production builds utilize the [EAS CLI](https://github.com/expo/eas-cli) and [EAS Build](https://docs.expo.dev/build/introduction/) to automatically upload and build native artifacts for later submission. The EAS CLI requires some minor input for both Android and iOS platforms (credentials, paths, etc), which could be abstracted to `eas.json` but is not for security. Once the build(s) have been started, links are provided to view the build progress. An artifact download link will be generated once the build has completed; however, EAS Submit can automatically pull builds from EAS Build.
 
@@ -82,7 +82,7 @@ eas build --platform ios
 
 By default, these artifacts are intended for submission and cannot be used for testing (due to output format).
 
-#### Production Submission
+#### Production Submission ([EAS Submit](https://docs.expo.dev/submit/introduction/))
 
 Production builds utilize the [EAS CLI](https://github.com/expo/eas-cli) and [EAS Submit](https://docs.expo.dev/submit/introduction/) to automatically submit builds to the app stores. The EAS CLI requires some minor input for both Android and iOS platforms (bundle, credentials, etc), similar to the build workflow. Submission is typically a very fast process, and once the apps have been submitted they may be included in app store releases.
 
@@ -91,8 +91,6 @@ Production builds utilize the [EAS CLI](https://github.com/expo/eas-cli) and [EA
 eas submit --platform android
 eas submit --platform ios
 ```
-
-#### Production Releases
 
 Once a production app has been built and submitted, a release can be created in the appropriate app store.
 
@@ -104,9 +102,13 @@ Google Play submissions are automatically released to the "Internal" track, whic
 
 Apple submissions are not automatically released to an internal testing track, but instead must have a new release created from the App Connect dashboard. The new release will inherit information from previous releases, and needs to have its version updated, release notes added, and a bundle selected. The release can then be submitted to TestFlight, allowing internal testing, before submitting for production review.
 
-#### Production Updates
+#### Production Updates ([EAS Update](https://docs.expo.dev/eas-update/how-eas-update-works/))
 
-> **_Coming Soon!_**
+EAS Update is used to provide minor bug fixes and improvements over-the-air, without requiring publishing an update to app stores and waiting for users to download it. Changes made this way should then be made into a published fix/patch or batched with a variety of similar changes. Since the app version technically does not get incremented during OTA updates (since they are non-native), any changes should be considered part of the subsequent version.
+
+Updates are only applied if the "runtime version" of the installed build and the target "runtime version" of the update are identical (currently set to `appVersion` in config).
+
+Updates can be created with `eas update --auto`, which will auto-populate the EAS branch and update message from last Git commit. Optionally, branches can be specified specifically with `eas update --branch [branch] --message [message]`.
 
 ## UI
 

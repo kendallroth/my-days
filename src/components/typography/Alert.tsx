@@ -38,7 +38,6 @@ const Alert = (props: AlertProps): ReactElement | null => {
   const iconColorMap: Record<AlertType, string> = {
     error: colors.error,
     info: colors.primary,
-    // TODO: Add warning color
     warning: colors.warning,
   };
 
