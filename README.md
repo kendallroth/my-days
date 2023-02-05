@@ -80,7 +80,7 @@ eas build --platform android
 eas build --platform ios
 ```
 
-By default, these artifacts are intended for submission and cannot be used for testing (due to output format). EAS Build has documention for [testing APKs](https://docs.expo.dev/build-reference/apk/) as well as building for [ios Simulators](https://docs.expo.dev/build-reference/simulators/).
+By default, these artifacts are intended for submission and cannot be used for testing (due to output format).
 
 #### Production Submission
 
