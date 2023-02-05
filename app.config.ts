@@ -95,7 +95,7 @@ export default (): ExpoConfig => ({
     },
   },
   updates: {
-    fallbackToCacheTimeout: 250,
+    fallbackToCacheTimeout: 0,
     url: "https://u.expo.dev/0f596901-0769-4dcf-af51-73106137d331",
   },
 });
