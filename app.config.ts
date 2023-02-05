@@ -27,6 +27,8 @@ export default (): ExpoConfig => ({
   // Information
   name: "My Days",
   slug: "my-days",
+  githubUrl: "https://github.com/kendallroth/my-days",
+  // User-facing app version
   version: versionName,
   owner: "kendallroth",
   orientation: "portrait",
@@ -36,7 +38,7 @@ export default (): ExpoConfig => ({
   jsEngine: "hermes",
 
   // Theme
-  icon: "./assets/icon.png",
+  icon: "./assets/icon_shadow.png",
   splash: {
     image: "./assets/splash.png",
     resizeMode: "cover",
@@ -53,18 +55,22 @@ export default (): ExpoConfig => ({
     },
     package: "ca.kendallroth.my_days",
     permissions: [],
+    // Developer-facing build version ('versionCode')
     versionCode: androidVersionCode,
+    playStoreUrl: "https://play.google.com/store/apps/details?id=ca.kendallroth.my_days",
   },
   androidNavigationBar: {
+    // TODO: Explore customizing colour perhaps???
     barStyle: "light-content",
   },
 
   // iOS overrides
   ios: {
+    // Developer-facing build version ('CFBundleVersion')
     buildNumber: `${iosBuildNumber}`,
     bundleIdentifier: "ca.kendallroth.my-days",
     // Icon must be 1024x1024 (no transparency)
-    icon: "./assets/icon.png",
+    icon: "./assets/icon_shadow.png",
     supportsTablet: false,
   },
 
@@ -77,9 +83,5 @@ export default (): ExpoConfig => ({
   updates: {
     fallbackToCacheTimeout: 0,
     url: "https://u.expo.dev/0f596901-0769-4dcf-af51-73106137d331",
-  },
-  runtimeVersion: {
-    // policy: "appVersion",
-    policy: "sdkVersion",
   },
 });

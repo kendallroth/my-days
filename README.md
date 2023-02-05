@@ -7,8 +7,9 @@
 
 Simple app that counts down/up to important dates!
 
-> [Expo - `release`](https://expo.dev/@kendallroth/my-days)<br />
-> [Expo - `testing`](https://expo.dev/@kendallroth/my-days?release-channel=testing)
+<a href='https://play.google.com/store/apps/details?id=ca.kendallroth.my_days&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+  <img alt='Get it on Google Play' height="50" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' />
+</a>
 
 ## Task List
 
