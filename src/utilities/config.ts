@@ -1,6 +1,6 @@
-import Application from "expo-application";
+import * as Application from "expo-application";
 import Constants from "expo-constants";
-import Updates from "expo-updates";
+import * as Updates from "expo-updates";
 
 import { version as packageVersion } from "../../package.json";
 
@@ -39,9 +39,10 @@ const config: IAppConfig = {
     developerUrl: "https://www.kendallroth.ca",
     repositoryUrl: "https://github.com/kendallroth/my-days",
   },
-  // NOTE: Release channel is only present with update workflow (and not in development builds)!
-  releaseChannel: Updates.channel ?? "default",
-  runtimeVersion: Updates.runtimeVersion ?? "N/A",
+  // NOTE: Release channel and runtime version are only present with update workflow (and not in development builds)!
+  // NOTE: Loose falsey checks are used to avoid empty strings (development)
+  releaseChannel: Updates.channel || "default",
+  runtimeVersion: Updates.runtimeVersion || "N/A",
   version: version ?? packageVersion,
   versionBuild: versionBuild ?? packageVersion,
 };

@@ -32,10 +32,10 @@ const iosBuildNumber = 1;
  * @source https://docs.expo.dev/eas-update/runtime-versions/
  */
 const runtimeVersion: ExpoConfig["runtimeVersion"] = {
-  // Runtime version will be updated to use the app version, as EAS update should really only be
-  //   used for small bug fixes and vital improvements, which should then be applied in a
-  //   published release (app stores).
-  policy: "appVersion",
+  // NOTE: Custom runtime version fields prevent using the Expo Go app (in favour of custom dev client)
+  // TODO: Investigate using custom dev client, which may require simulator for development updates???
+  // Source: https://docs.expo.dev/build/updates/#previewing-updates-in-development-builds
+  policy: "sdkVersion",
 };
 
 export default (): ExpoConfig => ({
