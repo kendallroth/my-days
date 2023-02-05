@@ -48,6 +48,7 @@
     "title": "Sobre",
     "appDescription": "“My Days” está destinado a proporcionar una visión general rápida del tiempo hasta/desde un evento importante. ¡Nunca olvides cuando la próxima fecha importante sea con “My Days”!",
     "appDeveloper": "Desarrollado por Kendall Roth © {{date}}",
+    "appReason": "¡Creado con ❤️ para una persona especial!",
     "appSummary": "¡“My Days” es una aplicación móvil simple para contar hacia atrás/hasta fechas importantes!",
     "guideStep1": "Agregar y administrar fechas",
     "guideStep2": "Ver detalles de la fecha",

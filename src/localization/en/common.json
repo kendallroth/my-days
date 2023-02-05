@@ -8,7 +8,9 @@
     "remove": "Remove",
     "save": "Save"
   },
-  "app": {},
+  "app": {
+    "title": "My Days"
+  },
   "choices": {
     "cancel": "Cancel",
     "confirm": "Confirm",

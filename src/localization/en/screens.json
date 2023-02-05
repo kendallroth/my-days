@@ -48,6 +48,7 @@
     "title": "About",
     "appDescription": "“My Days” is intended to provide a quick overview of the time until/from an important event. Never forget when the next important date is with “My Days”!",
     "appDeveloper": "Developed by Kendall Roth © {{date}}",
+    "appReason": "Created with ❤️ for a special person!",
     "appSummary": "“My Days” is a simple mobile app to count down/up to important dates!",
     "guideStep1": "Add and manage dates",
     "guideStep2": "View date details",

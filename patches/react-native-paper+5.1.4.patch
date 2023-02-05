@@ -1,3 +1,89 @@
+diff --git a/node_modules/react-native-paper/lib/commonjs/components/Dialog/DialogActions.js b/node_modules/react-native-paper/lib/commonjs/components/Dialog/DialogActions.js
+index 2af0dc7..afb49b9 100644
+--- a/node_modules/react-native-paper/lib/commonjs/components/Dialog/DialogActions.js
++++ b/node_modules/react-native-paper/lib/commonjs/components/Dialog/DialogActions.js
+@@ -52,7 +52,7 @@ const DialogActions = props => {
+   return /*#__PURE__*/React.createElement(_reactNative.View, _extends({}, props, {
+     style: [isV3 ? styles.v3Container : styles.container, props.style]
+   }), React.Children.map(props.children, (child, i) => /*#__PURE__*/React.isValidElement(child) ? /*#__PURE__*/React.cloneElement(child, {
+-    compact: true,
++    compact: props.compact ?? false,
+     uppercase: !isV3,
+     style: isV3 && {
+       paddingRight: i + 1 === actionsLength ? 0 : 8
+diff --git a/node_modules/react-native-paper/lib/commonjs/components/List/ListItem.js b/node_modules/react-native-paper/lib/commonjs/components/List/ListItem.js
+index 963ad89..0071fc6 100644
+--- a/node_modules/react-native-paper/lib/commonjs/components/List/ListItem.js
++++ b/node_modules/react-native-paper/lib/commonjs/components/List/ListItem.js
+@@ -87,7 +87,11 @@ const ListItem = _ref => {
+     }, description);
+   };
+   const renderTitle = () => {
+-    const titleColor = theme.isV3 ? theme.colors.onSurface : (0, _color.default)(theme.colors.text).alpha(0.87).rgb().string();
++    const titleColor = theme.isV3
++      ? !rest.disabled
++        ? theme.colors.onSurface
++        : theme.colors.onSurfaceDisabled
++      : (0, _color.default)(theme.colors.text).alpha(0.87).rgb().string();
+     return typeof title === 'function' ? title({
+       selectable: false,
+       ellipsizeMode: titleEllipsizeMode,
+@@ -102,7 +106,11 @@ const ListItem = _ref => {
+       }, titleStyle]
+     }, title);
+   };
+-  const descriptionColor = theme.isV3 ? theme.colors.onSurfaceVariant : (0, _color.default)(theme.colors.text).alpha(0.54).rgb().string();
++  const descriptionColor = theme.isV3
++     ? !rest.disabled 
++        ? theme.colors.onSurfaceVariant
++        : theme.colors.onSurfaceDisabled
++    : (0, _color.default)(theme.colors.text).alpha(0.54).rgb().string();
+   return /*#__PURE__*/React.createElement(_TouchableRipple.default, _extends({}, rest, {
+     style: [theme.isV3 ? styles.containerV3 : styles.container, style],
+     onPress: onPress,
+diff --git a/node_modules/react-native-paper/lib/module/components/Dialog/DialogActions.js b/node_modules/react-native-paper/lib/module/components/Dialog/DialogActions.js
+index 0434b3d..89f3fd9 100644
+--- a/node_modules/react-native-paper/lib/module/components/Dialog/DialogActions.js
++++ b/node_modules/react-native-paper/lib/module/components/Dialog/DialogActions.js
+@@ -44,7 +44,7 @@ const DialogActions = props => {
+   return /*#__PURE__*/React.createElement(View, _extends({}, props, {
+     style: [isV3 ? styles.v3Container : styles.container, props.style]
+   }), React.Children.map(props.children, (child, i) => /*#__PURE__*/React.isValidElement(child) ? /*#__PURE__*/React.cloneElement(child, {
+-    compact: true,
++    compact: props.compact ?? false,
+     uppercase: !isV3,
+     style: isV3 && {
+       paddingRight: i + 1 === actionsLength ? 0 : 8
+diff --git a/node_modules/react-native-paper/lib/module/components/List/ListItem.js b/node_modules/react-native-paper/lib/module/components/List/ListItem.js
+index 8633697..5fff053 100644
+--- a/node_modules/react-native-paper/lib/module/components/List/ListItem.js
++++ b/node_modules/react-native-paper/lib/module/components/List/ListItem.js
+@@ -78,7 +78,11 @@ const ListItem = _ref => {
+     }, description);
+   };
+   const renderTitle = () => {
+-    const titleColor = theme.isV3 ? theme.colors.onSurface : color(theme.colors.text).alpha(0.87).rgb().string();
++    const titleColor = theme.isV3
++     ? !rest.disabled 
++        ? theme.colors.onSurface
++        : theme.colors.onSurfaceDisabled
++    : color(theme.colors.text).alpha(0.87).rgb().string();
+     return typeof title === 'function' ? title({
+       selectable: false,
+       ellipsizeMode: titleEllipsizeMode,
+@@ -93,7 +97,11 @@ const ListItem = _ref => {
+       }, titleStyle]
+     }, title);
+   };
+-  const descriptionColor = theme.isV3 ? theme.colors.onSurfaceVariant : color(theme.colors.text).alpha(0.54).rgb().string();
++  const descriptionColor = theme.isV3
++     ? !rest.disabled 
++        ? theme.colors.onSurfaceVariant
++        : theme.colors.onSurfaceDisabled
++    : color(theme.colors.text).alpha(0.54).rgb().string();
+   return /*#__PURE__*/React.createElement(TouchableRipple, _extends({}, rest, {
+     style: [theme.isV3 ? styles.containerV3 : styles.container, style],
+     onPress: onPress,
 diff --git a/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts b/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts
 index a3031be..179e1c7 100644
 --- a/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts

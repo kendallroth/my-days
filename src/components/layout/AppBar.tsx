@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { ReactElement } from "react";
-import { Image, StatusBar, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { Image, StatusBar, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
 import { Appbar as RNPAppBar, useTheme } from "react-native-paper";
 
 import { sharedColors } from "@styles/theme";
@@ -12,6 +12,8 @@ export type Props = {
   background?: string;
   /** App bar actions (right side) */
   children?: any;
+  /** App header content style */
+  contentStyle?: StyleProp<TextStyle>;
   /** Whether back navigation is enabled */
   back?: boolean;
   /** Whether logo should be shown */
@@ -20,12 +22,23 @@ export type Props = {
   statusBarHeight?: number;
   /** Page title */
   title?: string;
+  titleStyle?: StyleProp<TextStyle>;
   /** Custom back handler */
   onBack?: () => void;
 };
 
 const AppBar = (props: Props): ReactElement => {
-  const { background, back = true, children, logo = false, statusBarHeight, title, onBack } = props;
+  const {
+    background,
+    back = true,
+    children,
+    contentStyle,
+    logo = false,
+    statusBarHeight,
+    title,
+    titleStyle,
+    onBack,
+  } = props;
 
   const navigation = useNavigation();
   const { dark } = useTheme();
@@ -52,7 +65,7 @@ const AppBar = (props: Props): ReactElement => {
         </View>
       )}
       {back && <RNPAppBar.BackAction onPress={onBack ? onBack : navigation.goBack} />}
-      <RNPAppBar.Content title={title} />
+      <RNPAppBar.Content style={contentStyle} title={title ?? ""} titleStyle={titleStyle} />
       {children}
     </RNPAppBar.Header>
   );

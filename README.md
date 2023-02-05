@@ -7,8 +7,9 @@
 
 Simple app that counts down/up to important dates!
 
-> [Expo - `release`](https://expo.dev/@kendallroth/my-days)<br />
-> [Expo - `testing`](https://expo.dev/@kendallroth/my-days?release-channel=testing)
+<a href='https://play.google.com/store/apps/details?id=ca.kendallroth.my_days&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+  <img alt='Get it on Google Play' height="50" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' />
+</a>
 
 ## Task List
 
@@ -46,11 +47,19 @@ Releases can be deployed through Expo Go (for testing) or the Expo managed build
 
 > **NOTE:** Remember to update the `version` in `package.json` before each release/deployment! This is especially important for App Store releases
 
-### Testing Releases
+### Credentials ([docs](https://docs.expo.dev/app-signing/app-credentials/))
 
-Testing releases are released through Expo Go, which allows releasing for several environments. Specific release channels can be tested by visiting the release channel link, stored at the top of this file.
+Credentials are managed entirely by EAS, to avoid losing local credentials.
 
-> **_Coming Soon!_**
+### Testing Releases ([docs](https://docs.expo.dev/build/internal-distribution/))
+
+#### Android (APK) ([docs](https://docs.expo.dev/build-reference/apk/))
+
+An APK can be generated for manual device testing with `eas build -p android --profile [profile]`, where profile is either `development` (development build) or `preview:apk` (production-like build). Once the remote build finishes, the resulting APK can be installed by following the directions either from the terminal or Expo site. An APK can be downloaded and will need to be allowed through security and installed on the device.
+
+#### iOS Ad Hock ([docs](https://docs.expo.dev/build/internal-distribution/#22-configure-app-signing-credentials-for-ios))
+
+iOS builds can be generated for specifically provisioned phones, via an ad hoc provisioning process (requires registering device via UDID with Apple). Once provisioned, builds can be generated for manual device testing with `eas build -p ios --profile [profile]`, where profile is either `development` (development build) or `preview` (production-like build). Once the remote build finishes, the resulting bundle can be installed on a provisioned device from the terminal or Expo site.
 
 ### Production Releases
 
@@ -111,7 +120,7 @@ Vector images are taken from [UnDraw](https://undraw.co/illustrations) and edite
 
 ### App Icons
 
-Icons were generated with the [Build Icon](https://buildicon.netlify.app/?color=white&emoji=palms_up_together) tool.
+Icons were generated with the [Build Icon](https://buildicon.netlify.app) tool or [Icon Kitchen](https://icon.kitchen/).
 
 ## Notes
 
@@ -121,10 +130,6 @@ Icons were generated with the [Build Icon](https://buildicon.netlify.app/?color=
 - [i18n Localization](https://brainsandbeards.com/blog/i18n-in-react-native-apps)
 - [React Navigation TypeScript](https://reactnavigation.org/docs/typescript)
 
-#### Linting
+#### Patchas
 
-Even with Expo SDK 45, `@react-native-community/eslint-config` does not quite properly install all dependencies. I have attempted to fix this via a patch, but if it does not work in other setups it may be best to manually install all its dependencies.
-
-## TODOs
-
-- Explore localized date formatting with ([`i18n Formatting`](https://www.i18next.com/translation-function/formatting)) (alternative at [Brains and Beards](https://brainsandbeards.com/blog/i18n-in-react-native-apps#formatting))
+`patch-package` is used to patch a variety of bugs or undesired functionality in a few packages. Note that editing/patching source files works in development, but the build files must be patched for use in production!

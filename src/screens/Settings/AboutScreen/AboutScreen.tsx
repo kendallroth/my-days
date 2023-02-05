@@ -4,7 +4,7 @@ import { openURL } from "expo-linking";
 import React, { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Chip, Text, useTheme } from "react-native-paper";
+import { Chip, Surface, Text, useTheme } from "react-native-paper";
 
 import { AppBar, Page } from "@components/layout";
 import { Quote } from "@components/typography";
@@ -121,6 +121,17 @@ const AboutScreen = (): ReactElement => {
               </Chip>
             ))}
           </View>
+          <Surface
+            elevation={0}
+            style={[styles.aboutReason, { backgroundColor: colors.tertiaryContainer }]}
+          >
+            <Text
+              style={[styles.aboutReasonText, { color: colors.onTertiaryContainer }]}
+              variant="bodySmall"
+            >
+              {t("screens:settingsAbout.appReason")}
+            </Text>
+          </Surface>
         </View>
       </ScrollView>
     </Page>
@@ -166,6 +177,15 @@ const styles = StyleSheet.create({
   },
   aboutSpace: {
     flexGrow: 1,
+  },
+  aboutReason: {
+    marginVertical: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+  aboutReasonText: {
+    textAlign: "center",
   },
   pageContent: {
     flexGrow: 1,

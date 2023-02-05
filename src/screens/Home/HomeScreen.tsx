@@ -117,6 +117,7 @@ const HomeScreen = (): ReactElement | null => {
 
     if (!selectedDay) return;
     setEditedDay(selectedDay);
+    // TODO: Move this (or both?) to after the dialog has closed (to avoid flicker while closing)
     setSelectedDay(null);
   };
 
@@ -136,7 +137,14 @@ const HomeScreen = (): ReactElement | null => {
 
   return (
     <Page invertStatusBar>
-      <AppBar back={false} background={colors.primary} logo>
+      <AppBar
+        back={false}
+        background={colors.primary}
+        contentStyle={styles.appBarContent}
+        logo
+        title={t("common:app.title")}
+        titleStyle={{ color: colors.onPrimary, opacity: 0.75 }}
+      >
         <AppBar.Action
           color={colors.onPrimary}
           icon="help-circle"
@@ -201,6 +209,10 @@ const styles = StyleSheet.create({
   },
   pageHeaderDay: {
     fontWeight: "700",
+  },
+  appBarContent: {
+    alignItems: "flex-start",
+    paddingLeft: 16,
   },
 });
 
