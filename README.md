@@ -116,6 +116,8 @@ Updates can be created with `eas update --auto`, which will auto-populate the EA
 
 Apparently updates published with a custom `runtimeVersion` field **cannot** be used in the Expo Go app! Additionally, Expo Go cannot even be used for development with a non-SDK version specified! This is very poorly documented in ([EAS Build docs](https://docs.expo.dev/build/updates/#previewing-updates-in-development-builds)), with no mention in EAS Update docs!
 
+Due to this major caveat, EAS Update must _only_ be used for critical bug fixes and tweaks, and absolutely avoided if there are any native packages changed/added!
+
 ## UI
 
 ### Components
