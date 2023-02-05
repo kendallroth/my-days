@@ -45,7 +45,7 @@ Developing in WSL2 requires some [additional configuration](./docs/expo-with-wsl
 
 Releases can be deployed through Expo Go (for testing) or the Expo managed build system (for release). The app version is taken from the `package.json`, which should be updated before every major deployment. App environment configuration is possible with the `expo-updates` package, which exposes the value of the `releaseChannel` used when building the app.
 
-> **NOTE:** Remember to update the `version` in `package.json` before each release/deployment! This is especially important for App Store releases
+> **NOTE:** Remember to update the semantic `versionName` **and** increment `androidVersionCode`/`iosBuildNumber` in `app.config.ts` before each release/deployment!
 
 ### Credentials ([docs](https://docs.expo.dev/app-signing/app-credentials/))
 
