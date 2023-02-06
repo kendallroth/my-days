@@ -7,8 +7,11 @@
 
 Simple app that counts down/up to important dates!
 
-<a href='https://play.google.com/store/apps/details?id=ca.kendallroth.my_days&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
-  <img alt='Get it on Google Play' height="50" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' />
+<a href="https://play.google.com/store/apps/details?id=ca.kendallroth.my_days&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1">
+  <img alt="Get it on Google Play" height="64" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" />
+</a>
+<a href="https://apps.apple.com/us/app/my-days/id1669868291?itsct=apps_box_badge&amp;itscg=30200">
+  <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1675641600" alt="Download on the App Store" height="64" style="padding: 10px; box-sizing: border-box" >
 </a>
 
 ## Task List
