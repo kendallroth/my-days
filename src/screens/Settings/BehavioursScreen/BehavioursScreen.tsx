@@ -35,7 +35,6 @@ const BehavioursScreen = (): ReactElement => {
       <ScrollView contentContainerStyle={styles.pageContent}>
         <BehavioursScreenListItemSwitch
           description={t("screens:settingsBehaviours.behaviourItemConfirmSharedDaysDescription")}
-          disabled
           stateKey="confirmSharedDays"
           title={t("screens:settingsBehaviours.behaviourItemConfirmSharedDaysTitle")}
           value={appBehaviours.confirmSharedDays}

@@ -34,7 +34,7 @@ interface SettingsState {
 // Provide some basic defaults until app settings are loaded
 const initialState: SettingsState = {
   behaviours: {
-    confirmSharedDays: false,
+    confirmSharedDays: true,
   },
   developer: false,
   language: SettingsService.getDeviceLanguage(),
