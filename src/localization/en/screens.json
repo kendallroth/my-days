@@ -27,12 +27,17 @@
     "position": "{{position}} of {{count}}",
     "share": "Share"
   },
+  "daySharedLink": {
+    "dayAddConfirmDescription": "Are you sure you want to add this shared day ({{ date, MMM DD, YYYY }})?",
+    "dayAddConfirmTitle": "Add '{{ title }}'?",
+    "dayAddDuplicateError": "Shared day was already added",
+    "dayAddSuccess": "Added shared day ('{{ title }}')",
+    "linkError": "Error opening external link"
+  },
   "home": {
     "title": "Home",
     "listItemDate": "{{date, MMMM DD, YYYY}}",
     "listItemDate_noYear": "{{date, MMMM DD}}",
-    "sharedDayAdded": "Added shared day ('{{ title }}')",
-    "sharedDayError": "Error opening external link",
     "todayDay": "{{date, dddd}}",
     "todayDate": "{{date, MMMM DD, YYYY}}",
     "welcomeText": "Welcome!"

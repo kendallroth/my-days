@@ -27,12 +27,17 @@
     "position": "{{position}} de {{count}}",
     "share": "Compartir"
   },
+  "daySharedLink": {
+    "dayAddConfirmDescription": "¿Estás seguro de que quieres añadir este día compartido ({{ date, DD-MMM-YYYY }})?",
+    "dayAddConfirmTitle": "¿Añadir '{{ title }}'?",
+    "dayAddDuplicateError": "Ya se agregó el día compartido",
+    "dayAddSuccess": "Añadido día compartido ('{{ title }}')",
+    "linkError": "Error al abrir enlace externo"
+  },
   "home": {
     "title": "Inicio",
     "listItemDate": "{{date, DD-MMM-YYYY}}",
     "listItemDate_noYear": "{{date, DD-MMM}}",
-    "sharedDayAdded": "Añadido día compartido ('{{ title }}')",
-    "sharedDayError": "Error al abrir enlace externo",
     "todayDay": "{{date, dddd}}",
     "todayDate": "{{date, DD [de] MMMM [de] YYYY}}",
     "welcomeText": "¡Bienvenido!"
