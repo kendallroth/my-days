@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Share days via config URL
+- Ability to share days via config URL
+- Behaviour setting to confirm adding a shared day (disabled)
 
 ## [0.1.1] - 2023-02-05
 
