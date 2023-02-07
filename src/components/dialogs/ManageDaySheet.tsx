@@ -8,13 +8,12 @@ import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
+import { type MaterialCommunityIcons } from "@typings/app.types";
+import { type Day, type DayNew } from "@typings/day.types";
 import { dayIcons } from "@utilities/icons.util";
 
 import BottomSheet from "./BottomSheet";
-
-import type { BottomSheetRef } from "./BottomSheet";
-import type { MaterialCommunityIcons } from "@typings/app.types";
-import type { Day, DayNew } from "@typings/day.types";
+import { type BottomSheetRef } from "./BottomSheet";
 
 interface IFormData {
   date: string;

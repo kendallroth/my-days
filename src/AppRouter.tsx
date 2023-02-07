@@ -8,15 +8,14 @@ import React, { ReactElement, useEffect, useState } from "react";
 
 import { HomeScreen } from "@screens/Home";
 import { SettingsRouter } from "@screens/Settings";
+import { type SettingsRouterParams } from "@screens/Settings/SettingsRouter";
 import { store } from "@store";
 import { addDay } from "@store/slices/days";
+import { type Day } from "@typings/day.types";
 import { parseDay } from "@utilities/day.util";
 
 import { useSnackbar } from "./hooks/useSnackbar";
 import { useAppDispatch } from "./hooks/useStore";
-
-import type { SettingsRouterParams } from "@screens/Settings/SettingsRouter";
-import type { Day } from "@typings/day.types";
 
 export type RootRouterParams = {
   HomeScreen: {

@@ -2,9 +2,9 @@ import { MaterialCommunityIcons as MuiIcons } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import { v4 as uuid, validate as validateUuid } from "uuid";
 
-import { DATE_FORMAT_ISO_SHORT } from "./date.util";
+import { type Day } from "@typings/day.types";
 
-import type { Day } from "@typings/day.types";
+import { DATE_FORMAT_ISO_SHORT } from "./date.util";
 
 interface IDayCountDisplay {
   /** Day count value (can be negative if invalid!) */

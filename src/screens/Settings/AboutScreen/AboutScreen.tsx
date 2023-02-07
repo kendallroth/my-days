@@ -9,8 +9,7 @@ import { Chip, Surface, Text, useTheme } from "react-native-paper";
 import { AppBar, Page } from "@components/layout";
 import { Quote } from "@components/typography";
 import config from "@config";
-
-import type { MaterialCommunityIcons } from "@typings/app.types";
+import { type MaterialCommunityIcons } from "@typings/app.types";
 
 interface IDeveloperActions {
   icon: keyof MaterialCommunityIcons;

@@ -4,12 +4,11 @@ import { StyleSheet } from "react-native";
 import { List } from "react-native-paper";
 
 import { BottomSheet } from "@components/dialogs";
+import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
+import { type AppTheme } from "@typings/settings.types";
 import { THEMES } from "@utilities/constants";
 
 import SettingsModalListItem from "../SettingsModalListItem";
-
-import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import type { AppTheme } from "@typings/settings.types";
 
 type ThemeModalProps = {
   /** Current theme */

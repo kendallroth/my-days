@@ -4,10 +4,10 @@ import { StyleSheet, View } from "react-native";
 import { Avatar, Chip, IconButton, Text, useTheme } from "react-native-paper";
 
 import { getShadowStyles } from "@styles/utilities";
+import { type LeftRight, type MaterialCommunityIcons } from "@typings/app.types";
 import { getInitials } from "@utilities/string";
 
-import type { Contributor, ContributorActionType } from "./ContributorsScreen";
-import type { LeftRight, MaterialCommunityIcons } from "@typings/app.types";
+import { type Contributor, type ContributorActionType } from "./ContributorsScreen";
 
 type ContributorListItemProps = {
   /** List item alignment */

@@ -10,13 +10,12 @@ import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dia
 import { AppBar, Page, ScreenFAB } from "@components/layout";
 import { useAppDispatch, useAppSelector, useAppTheme, useScrollingFab, useSnackbar } from "@hooks";
 import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
+import { type UpDown } from "@typings/app.types";
+import { type Day, type DayNew } from "@typings/day.types";
+import { type RootRouterNavigation } from "src/AppRouter";
 
 import DayList from "./DayList";
 import SelectedDayModal from "./SelectedDayModal";
-
-import type { UpDown } from "@typings/app.types";
-import type { Day, DayNew } from "@typings/day.types";
-import type { RootRouterNavigation } from "src/AppRouter";
 
 const HomeScreen = (): ReactElement | null => {
   const navigation = useNavigation<RootRouterNavigation>();

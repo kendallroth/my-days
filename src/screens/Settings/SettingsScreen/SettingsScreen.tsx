@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Alert, Platform, StyleSheet, View } from "react-native";
 import { List, Text, useTheme } from "react-native-paper";
 
+import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
 import { LanguageIcon } from "@components/icons";
 import { AppBar, Page } from "@components/layout";
 import config from "@config";
@@ -17,6 +18,7 @@ import {
   setAppLanguage,
   setAppTheme,
 } from "@store/slices/settings";
+import { type AppLanguage, type AppTheme, type IAppResetOptions } from "@typings/settings.types";
 import { LANGUAGES } from "@utilities/constants";
 import { sleep } from "@utilities/misc.util";
 
@@ -24,9 +26,6 @@ import { AppResetModal } from "./AppResetModal";
 import { LanguageModal } from "./LanguageModal";
 import SettingsListItem from "./SettingsListItem";
 import { ThemeModal } from "./ThemeModal";
-
-import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import type { AppLanguage, AppTheme, IAppResetOptions } from "@typings/settings.types";
 
 const DEVELOPER_MODE_TAPS = 10;
 

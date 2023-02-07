@@ -2,9 +2,8 @@ import dayjs from "dayjs";
 import { date as fakeDate } from "faker";
 import { v4 as uuidv4 } from "uuid";
 
+import { type Day, type DayNew } from "@typings/day.types";
 import { DATE_FORMAT_ISO_SHORT } from "@utilities/date.util";
-
-import type { Day, DayNew } from "@typings/day.types";
 
 /**
  * Create a fake day

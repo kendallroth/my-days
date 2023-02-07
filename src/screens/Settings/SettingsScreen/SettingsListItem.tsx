@@ -4,12 +4,11 @@ import { useTranslation } from "react-i18next";
 import { List, useTheme } from "react-native-paper";
 
 import { useSnackbar } from "@hooks";
-
-import type {
-  SettingsRouterNavigation,
-  SettingsRouterParams,
+import {
+  type SettingsRouterNavigation,
+  type SettingsRouterParams,
 } from "@screens/Settings/SettingsRouter";
-import type { MaterialCommunityIcons } from "@typings/app.types";
+import { type MaterialCommunityIcons } from "@typings/app.types";
 
 export type Props = {
   /** Whether list item is disabled */

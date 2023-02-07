@@ -4,13 +4,12 @@ import { StyleSheet } from "react-native";
 import { List } from "react-native-paper";
 
 import { BottomSheet } from "@components/dialogs";
+import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
 import { LanguageIcon } from "@components/icons";
 import { AppLanguage } from "@typings/settings.types";
 import { LANGUAGES } from "@utilities/constants";
 
 import SettingsModalListItem from "../SettingsModalListItem";
-
-import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
 
 type LanguageModalProps = {
   /** Current language */

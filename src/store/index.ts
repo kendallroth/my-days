@@ -11,12 +11,11 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
+import { type Persistor } from "redux-persist/es/types";
 
 import config from "@config";
 
 import reducers from "./reducers";
-
-import type { Persistor } from "redux-persist/es/types";
 
 interface IStoreExport {
   persistor: Persistor;

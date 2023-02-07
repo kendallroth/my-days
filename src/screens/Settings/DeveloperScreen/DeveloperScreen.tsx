@@ -9,12 +9,11 @@ import { Button, List, useTheme } from "react-native-paper";
 import { AppBar, Page } from "@components/layout";
 import config from "@config";
 import { useAppDispatch, useAppLoader, useSnackbar } from "@hooks";
+import { type SettingsRouterNavigation } from "@screens/Settings/SettingsRouter";
 import { addDebugDataThunk, setAppDeveloper } from "@store/slices/settings";
+import { type IAppPopulateOptions } from "@typings/settings.types";
 
 import DeveloperListItem from "./DeveloperListItem";
-
-import type { SettingsRouterNavigation } from "@screens/Settings/SettingsRouter";
-import type { IAppPopulateOptions } from "@typings/settings.types";
 
 const DeveloperScreen = (): ReactElement => {
   const loader = useAppLoader();

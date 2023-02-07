@@ -5,9 +5,8 @@ import { FlatList, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { DayListItem } from "@components/days";
 import { EmptyMessage } from "@components/layout";
 import { Alert } from "@components/typography";
-
-import type { ScrollEvent } from "@typings/app.types";
-import type { Day } from "@typings/day.types";
+import { type ScrollEvent } from "@typings/app.types";
+import { type Day } from "@typings/day.types";
 
 interface DayListProps {
   days: Day[];

@@ -5,10 +5,9 @@ import { ScrollView, StyleSheet } from "react-native";
 import { AppBar, Page } from "@components/layout";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { selectBehaviours, setAppBehaviour } from "@store/slices/settings";
+import { type IAppBehaviours } from "@typings/settings.types";
 
 import BehavioursScreenListItemSwitch from "./BehavioursScreenListItemSwitch";
-
-import type { IAppBehaviours } from "@typings/settings.types";
 
 const BehavioursScreen = (): ReactElement => {
   const dispatch = useAppDispatch();

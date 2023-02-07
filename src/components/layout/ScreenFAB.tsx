@@ -3,7 +3,7 @@ import React, { ComponentPropsWithoutRef, ReactElement } from "react";
 import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 
-import type { MaterialCommunityIcons } from "@typings/app.types";
+import { type MaterialCommunityIcons } from "@typings/app.types";
 
 type ScreenFABProps = {
   /** FAB icon */

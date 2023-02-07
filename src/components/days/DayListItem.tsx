@@ -6,9 +6,8 @@ import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { Avatar, Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
 
 import { sharedColors } from "@styles/theme";
+import { type Day } from "@typings/day.types";
 import { getDayDisplay } from "@utilities/day.util";
-
-import type { Day } from "@typings/day.types";
 
 type DayDisplayProps = {
   day: Day;

@@ -1,6 +1,6 @@
 import { MaterialCommunityIcons as MuiIcons } from "@expo/vector-icons";
 
-import type { MaterialCommunityIcons } from "@typings/app.types";
+import { type MaterialCommunityIcons } from "@typings/app.types";
 
 /** Explicitly supported day icons (can technically use any from MUI) */
 export const dayIcons: (keyof MaterialCommunityIcons)[] = [

@@ -4,9 +4,8 @@ import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, useTheme } from "react-native-paper";
 
 import { BottomSheet } from "@components/dialogs";
-
-import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import type { IAppResetOptions } from "@typings/settings.types";
+import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
+import { type IAppResetOptions } from "@typings/settings.types";
 
 type AppResetModalProps = {
   /** App reset handler */

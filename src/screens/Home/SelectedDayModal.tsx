@@ -4,10 +4,9 @@ import { StyleSheet } from "react-native";
 import { List, Text } from "react-native-paper";
 
 import { BottomSheet } from "@components/dialogs";
-
-import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import type { MaterialCommunityIcons, UpDown } from "@typings/app.types";
-import type { Day } from "@typings/day.types";
+import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
+import { type MaterialCommunityIcons, type UpDown } from "@typings/app.types";
+import { type Day } from "@typings/day.types";
 
 type SelectedDayModalProps = {
   day: Day | null;

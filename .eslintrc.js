@@ -27,6 +27,8 @@ module.exports = {
     // Returning an async call within try/catch requires an 'await' keyword to be able to handle errors!
     "@typescript-eslint/return-await": ["error", "in-try-catch"],
     curly: "off",
+    // Types should be imported inline with other imports but with 'type' specifier
+    "import/consistent-type-specifier-style": ["warn", "prefer-inline"],
     // Prevent (and combine) duplicate import declarations
     "import/no-duplicates": "warn",
     // Sort imports into alphabetical groups (sorting import keys is handled by 'sort-imports')
@@ -45,7 +47,7 @@ module.exports = {
           "internal", // Internal aliases/paths (from TS config)
           ["parent", "sibling", "index"], // Relative paths
           "unknown", // All uncategorized imports
-          "type", // Specific type imports (ie 'import type {} ...')
+          "type", // Specific type imports (ie 'import type {} ...'), but technically ignored with inline types
         ],
         "newlines-between": "always",
         alphabetize: {
@@ -61,11 +63,11 @@ module.exports = {
     "no-console": "warn",
     "prettier/prettier": "warn",
     "prefer-const": "warn",
-    quotes: ["warn", "double"], // specify whether double or single quotes should be used
+    // NOTE: Uncertain why Prettier rules aren't respected if this is removed...
+    quotes: ["warn", "double"],
     "react/display-name": "off",
     "react-native/no-color-literals": "warn",
     "react-native/no-inline-styles": "off",
-    // TODO: Determine if this rule is working
     "react-native/no-unused-styles": "warn",
     "react/no-unstable-nested-components": "off",
     // Sort multiple import keys (sorting import declarations is handled by 'import/order')
