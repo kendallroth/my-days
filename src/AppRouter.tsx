@@ -1,4 +1,4 @@
-import { NavigatorScreenParams, useNavigation } from "@react-navigation/native";
+import { NavigatorScreenParams } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
@@ -16,13 +16,9 @@ import { useSnackbar } from "./hooks/useSnackbar";
 import { useAppDispatch } from "./hooks/useStore";
 
 import type { SettingsRouterParams } from "@screens/Settings/SettingsRouter";
-import type { Day } from "@typings/day.types";
 
 export type RootRouterParams = {
-  HomeScreen: {
-    /** Shared day parsed from external link  */
-    sharedDay?: Day;
-  };
+  HomeScreen: undefined;
   SettingsRouter: NavigatorScreenParams<SettingsRouterParams> | undefined;
 };
 
@@ -33,8 +29,6 @@ const Stack = createNativeStackNavigator<RootRouterParams>();
 const AppRouter = (): ReactElement => {
   // TODO: Investigate adapting React Navigation theme to use MD3 colors
   // Source: https://callstack.github.io/react-native-paper/theming.html
-
-  const navigation = useNavigation<RootRouterNavigation>();
 
   const { notify, notifyError } = useSnackbar();
   const dispatch = useAppDispatch();
@@ -78,7 +72,7 @@ const AppRouter = (): ReactElement => {
         return;
       }
     }
-  }, [dispatch, navigation, notify, notifyError, linkedUrl, previousLink]);
+  }, [dispatch, notify, notifyError, linkedUrl, previousLink]);
 
   // NOTE: Main 'NavigationContainer' is rendered by parent to allow accessing router here
   return (
