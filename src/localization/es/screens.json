@@ -71,7 +71,9 @@
     "listItemSettings": "Configuración"
   },
   "settingsBehaviours": {
-    "title": "Comportamientos"
+    "title": "Comportamientos",
+    "behaviourItemConfirmSharedDaysDescription": "Si los días compartidos a través del enlace deben confirmarse antes de agregar (seguridad).",
+    "behaviourItemConfirmSharedDaysTitle": "Confirmar días compartidos"
   },
   "settingsContributors": {
     "title": "Colaboradores",

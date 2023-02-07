@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     borderRadius: iconFontSize * 2,
   },
   dayStatsUnit: {
+    // TODO: Determine whether unit should be centered with day count (offsets it) or not
     position: "absolute",
     bottom: 4,
     opacity: 0.8,

@@ -71,7 +71,9 @@
     "listItemSettings": "Settings"
   },
   "settingsBehaviours": {
-    "title": "Behaviours"
+    "title": "Behaviours",
+    "behaviourItemConfirmSharedDaysDescription": "Whether days shared via link must be confirmed before adding (safety).",
+    "behaviourItemConfirmSharedDaysTitle": "Confirm shared days"
   },
   "settingsContributors": {
     "title": "Contributors",

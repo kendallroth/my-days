@@ -193,7 +193,6 @@ const SettingsScreen = (): ReactElement => {
         onPress={onOpenTheme}
       />
       <SettingsListItem
-        disabled
         icon="tools"
         route="Behaviours"
         title={t("screens:settings.listItemBehaviours")}
