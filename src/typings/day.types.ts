@@ -1,5 +1,7 @@
 import { MaterialCommunityIcons, Optional } from "./app.types";
 
+export type DayUnit = "day" | "week" | "month" | "year";
+
 /** Day shape */
 export interface Day {
   id: string;
@@ -17,7 +19,7 @@ export interface Day {
   /** Day name/title */
   title: string;
   /** Time unit used for display purposes */
-  unit: "day" | "week" | "month" | "year";
+  unit: DayUnit;
 }
 
 export type DayNew = Optional<Day, "createdAt">;

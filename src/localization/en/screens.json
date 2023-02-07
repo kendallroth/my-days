@@ -31,6 +31,8 @@
     "title": "Home",
     "listItemDate": "{{date, MMMM DD, YYYY}}",
     "listItemDate_noYear": "{{date, MMMM DD}}",
+    "sharedDayAdded": "Added shared day ('{{ title }}')",
+    "sharedDayError": "Error opening external link",
     "todayDay": "{{date, dddd}}",
     "todayDate": "{{date, MMMM DD, YYYY}}",
     "welcomeText": "Welcome!"

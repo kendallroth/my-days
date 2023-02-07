@@ -31,6 +31,8 @@
     "title": "Inicio",
     "listItemDate": "{{date, DD-MMM-YYYY}}",
     "listItemDate_noYear": "{{date, DD-MMM}}",
+    "sharedDayAdded": "Añadido día compartido ('{{ title }}')",
+    "sharedDayError": "Error al abrir enlace externo",
     "todayDay": "{{date, dddd}}",
     "todayDate": "{{date, DD [de] MMMM [de] YYYY}}",
     "welcomeText": "¡Bienvenido!"

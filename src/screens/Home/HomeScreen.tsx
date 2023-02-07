@@ -10,6 +10,7 @@ import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dia
 import { AppBar, Page, ScreenFAB } from "@components/layout";
 import { useAppDispatch, useAppSelector, useAppTheme, useScrollingFab, useSnackbar } from "@hooks";
 import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
+import { SHARED_DAY_VERSION } from "@utilities/day-parse.util";
 
 import DayList from "./DayList";
 import SelectedDayModal from "./SelectedDayModal";
@@ -140,6 +141,7 @@ const HomeScreen = (): ReactElement | null => {
         id: day.id,
         repeats: day.repeats ? "true" : "false",
         title: day.title,
+        version: `${SHARED_DAY_VERSION}`,
       },
     });
 

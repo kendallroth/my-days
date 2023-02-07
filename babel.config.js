@@ -11,6 +11,7 @@ module.exports = function (api) {
             "@components": "./src/components",
             "@contexts": "./src/contexts",
             "@config": "./src/utilities/config.ts",
+            "@errors": "./src/errors",
             "@hooks": "./src/hooks",
             "@localization": "./src/localization",
             "@services": "./src/services",
