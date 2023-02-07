@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import dayjs from "dayjs";
+import * as Linking from "expo-linking";
 import React, { ReactElement, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Vibration, View } from "react-native";
+import { Share, StyleSheet, Vibration, View } from "react-native";
 import { Text } from "react-native-paper";
 
 import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
@@ -31,7 +32,7 @@ const HomeScreen = (): ReactElement | null => {
   const selectedDayPosition = selectedDay
     ? { count: days.length, position: days.findIndex((d) => d.id === selectedDay.id) + 1 }
     : null;
-  const dayOptionsRef = useRef<BottomSheetRef>(null);
+  const selectedDayRef = useRef<BottomSheetRef>(null);
 
   // FAB should disappear when scrolling down and reappear when scrolling back up
   const { fabVisible, toggleFab, onListScroll } = useScrollingFab();
@@ -49,7 +50,7 @@ const HomeScreen = (): ReactElement | null => {
     setDeletedDay(null);
     setEditedDay(null);
     Vibration.vibrate(100);
-    dayOptionsRef.current?.open();
+    selectedDayRef.current?.open();
   };
 
   /** Close selected day options menu */
@@ -62,7 +63,7 @@ const HomeScreen = (): ReactElement | null => {
   /** Prepare deletion confirmation dialog (in response to selection menu choice) */
   const onDayDeletePress = () => {
     // NOTE: Ensure previous modal has finished closing before displaying another
-    dayOptionsRef.current?.close(() => {
+    selectedDayRef.current?.close(() => {
       if (!selectedDay) return;
 
       setDeletedDay(selectedDay);
@@ -93,23 +94,23 @@ const HomeScreen = (): ReactElement | null => {
     );
   };
 
-  /** Cleanup day add/edit dialog */
-  const onDayManageCancel = () => {
-    manageDayRef.current?.close();
-    setEditedDay(null);
-  };
-
-  const onDayAdd = (day: DayNew) => {
+  const onDayManageAdd = (day: DayNew) => {
     dispatch(addDay(day));
 
     manageDayRef.current?.close();
     notify(t("screens:dayAddEdit.dayAddSuccess", { title: day.title }));
   };
 
+  /** Cleanup day add/edit dialog */
+  const onDayManageCancel = () => {
+    manageDayRef.current?.close();
+    setEditedDay(null);
+  };
+
   /** Prepare edit dialog (in response to selection menu choice) */
   const onDayEditPress = () => {
     // NOTE: Ensure previous modal has finished closing before displaying another
-    dayOptionsRef.current?.close(() => {
+    selectedDayRef.current?.close(() => {
       if (!selectedDay) return;
 
       setEditedDay(selectedDay);
@@ -119,7 +120,7 @@ const HomeScreen = (): ReactElement | null => {
     });
   };
 
-  const onDayEdit = (day: Day) => {
+  const onDayManageEdit = (day: Day) => {
     dispatch(updateDay(day));
 
     manageDayRef.current?.close();
@@ -127,10 +128,30 @@ const HomeScreen = (): ReactElement | null => {
     notify(t("screens:dayAddEdit.dayEditSuccess", { title: day.title }));
   };
 
-  const onDayMove = (direction: UpDown) => {
-    if (!selectedDay) return;
+  const onDayMove = (day: Day, direction: UpDown) => {
+    dispatch(moveDay({ id: day.id, direction }));
+  };
 
-    dispatch(moveDay({ id: selectedDay.id, direction }));
+  const onDayShare = async (day: Day) => {
+    const url = Linking.createURL("day/shared", {
+      queryParams: {
+        date: day.date,
+        icon: day.icon,
+        id: day.id,
+        repeats: day.repeats ? "true" : "false",
+        title: day.title,
+      },
+    });
+
+    const shareMessage = `A day has been shared with you from My Days! Follow this link to add '${day.title}' to the app!\n\n${url}`;
+
+    // NOTE: Must either close selection dialog before sharing or not close it at all
+    selectedDayRef.current?.close(async () => {
+      await Share.share({
+        // Decided to use message over link as it contains more description (and link is iOS-only)
+        message: shareMessage,
+      });
+    });
   };
 
   return (
@@ -173,9 +194,9 @@ const HomeScreen = (): ReactElement | null => {
       <ManageDaySheet
         ref={manageDayRef}
         day={editedDay}
+        onAdd={onDayManageAdd}
         onCancel={onDayManageCancel}
-        onAdd={onDayAdd}
-        onEdit={onDayEdit}
+        onEdit={onDayManageEdit}
       />
       <DeleteDayDialog
         day={deletedDay}
@@ -184,13 +205,14 @@ const HomeScreen = (): ReactElement | null => {
         onConfirm={onDayDeleteConfirm}
       />
       <SelectedDayModal
-        ref={dayOptionsRef}
+        ref={selectedDayRef}
         day={selectedDay}
         dayPosition={selectedDayPosition}
         onClose={onDaySelectCancel}
         onEdit={onDayEditPress}
         onDelete={onDayDeletePress}
         onMove={onDayMove}
+        onShare={onDayShare}
       />
     </Page>
   );

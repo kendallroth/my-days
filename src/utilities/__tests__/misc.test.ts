@@ -1,4 +1,4 @@
-import { lerpColor } from "./misc.util";
+import { lerpColor } from "../misc.util";
 
 describe("'lerpColor'", () => {
   it("lerps between colours", () => {

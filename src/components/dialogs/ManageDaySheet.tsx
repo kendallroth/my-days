@@ -8,16 +8,17 @@ import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
-import { DayIcons } from "@components/icons";
+import { dayIcons } from "@utilities/icons.util";
 
 import BottomSheet from "./BottomSheet";
 
 import type { BottomSheetRef } from "./BottomSheet";
+import type { MaterialCommunityIcons } from "@typings/app.types";
 import type { Day, DayNew } from "@typings/day.types";
 
 interface IFormData {
   date: string;
-  icon?: string;
+  icon?: keyof MaterialCommunityIcons;
   title: string;
   repeats: boolean;
 }
@@ -50,8 +51,6 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
 
     const titleRef = useRef<RNPTextInput | null>(null);
     const dateRef = useRef<RNPTextInput | null>(null);
-
-    const iconList = Object.values(DayIcons);
 
     const { colors } = useTheme();
     const { t } = useTranslation(["common", "screens"]);
@@ -106,15 +105,15 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
 
       let targetIdx = 0;
       if (formValues.icon) {
-        const currentIconIdx = iconList.indexOf(formValues.icon);
+        const currentIconIdx = dayIcons.indexOf(formValues.icon);
         const wrapIdx = (idx: number, length: number) => (idx + length) % length;
         if (currentIconIdx >= 0) {
           targetIdx = direction === "next" ? currentIconIdx + 1 : currentIconIdx - 1;
-          targetIdx = wrapIdx(targetIdx, iconList.length);
+          targetIdx = wrapIdx(targetIdx, dayIcons.length);
         }
       }
 
-      form.setValue("icon", iconList[targetIdx]);
+      form.setValue("icon", dayIcons[targetIdx]);
     };
 
     /** Add/update the entered day */

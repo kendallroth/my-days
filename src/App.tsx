@@ -1,5 +1,6 @@
 // Polyfill for 'getRandomValues': https://github.com/uuidjs/uuid#getrandomvalues-not-supported
 import "react-native-get-random-values";
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React, { ReactElement } from "react";
 import { StyleSheet, View } from "react-native";
@@ -34,6 +35,7 @@ yup.setLocale(yupLocale);
 
 const { persistor, store } = setupStore();
 
+/** Wrapped component to be able to access Redux store */
 const AppWrapped = (): ReactElement => {
   const themeConfig = useAppSelector(selectThemeConfig);
 
@@ -52,7 +54,9 @@ const AppWrapped = (): ReactElement => {
           <TheAppDataLoader persistor={persistor}>
             <View style={styles.app}>
               <StatusBar style={statusTheme} />
-              <AppRouter />
+              <NavigationContainer>
+                <AppRouter />
+              </NavigationContainer>
             </View>
           </TheAppDataLoader>
         </ContextProvider>

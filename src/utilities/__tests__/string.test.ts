@@ -3,7 +3,7 @@ import {
   includesSafeString,
   makeSafeString,
   stripNonAlphabetic,
-} from "./string";
+} from "../string";
 
 describe("'compareSafeStrings'", () => {
   it("Detects loosely identical strings", () => {

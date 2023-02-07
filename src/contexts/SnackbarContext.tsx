@@ -11,11 +11,12 @@ interface ISnackbarState {
   message: string;
   open: boolean;
   permanent: boolean;
-  type: string;
+  type: SnackbarType;
   onDismiss: () => void;
   onPress: () => void;
 }
 
+type SnackbarType = "info" | "error" | "warning";
 type SnackbarOptions = Partial<ISnackbarState>;
 
 export interface ISnackbarContext {
@@ -148,7 +149,13 @@ const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
 
   return (
     <SnackbarContext.Provider
-      value={{ closeNotification, notify, notifyError, notifyNotImplemented, snackbar }}
+      value={{
+        closeNotification,
+        notify,
+        notifyError,
+        notifyNotImplemented,
+        snackbar,
+      }}
     >
       {children}
       <Snackbar

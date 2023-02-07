@@ -24,7 +24,8 @@
     "edit": "Editar",
     "moveDown": "Mover hacia abajo",
     "moveUp": "Mover hacia arriba",
-    "position": "{{position}} de {{count}}"
+    "position": "{{position}} de {{count}}",
+    "share": "Compartir"
   },
   "home": {
     "title": "Inicio",

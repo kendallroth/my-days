@@ -13,21 +13,22 @@ type SelectedDayModalProps = {
   day: Day | null;
   dayPosition: { count: number; position: number } | null;
   onClose: () => void;
-  onEdit: () => void;
-  onDelete: () => void;
-  onMove: (direction: UpDown) => void;
+  onEdit: (day: Day) => void;
+  onDelete: (day: Day) => void;
+  onMove: (day: Day, direction: UpDown) => void;
+  onShare: (day: Day) => void;
 };
 
 interface SelectedDayOption {
   disabled?: boolean;
   icon: keyof MaterialCommunityIcons;
   label: string;
-  onClick: () => void;
+  onPress: (day: Day) => void;
 }
 
 const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
   (props: SelectedDayModalProps, ref): ReactElement => {
-    const { day, dayPosition, onClose, onEdit, onDelete, onMove } = props;
+    const { day, dayPosition, onClose, onEdit, onDelete, onMove, onShare } = props;
 
     const { t } = useTranslation(["screens"]);
 
@@ -35,24 +36,29 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
       {
         icon: "pencil",
         label: t("screens:daySelectMenu.edit"),
-        onClick: onEdit,
+        onPress: onEdit,
       },
       {
         disabled: dayPosition ? dayPosition.position <= 1 : false,
         icon: "arrow-up",
         label: t("screens:daySelectMenu.moveUp"),
-        onClick: () => onMove("up"),
+        onPress: () => onMove(day!, "up"),
       },
       {
         disabled: dayPosition ? dayPosition.position >= dayPosition.count : false,
         icon: "arrow-down",
         label: t("screens:daySelectMenu.moveDown"),
-        onClick: () => onMove("down"),
+        onPress: () => onMove(day!, "down"),
+      },
+      {
+        icon: "share",
+        label: t("screens:daySelectMenu.share"),
+        onPress: onShare,
       },
       {
         icon: "delete",
         label: t("screens:daySelectMenu.delete"),
-        onClick: onDelete,
+        onPress: onDelete,
       },
     ];
 
@@ -77,10 +83,10 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
         {selectedDayOptions.map((option) => (
           <List.Item
             key={option.label}
-            disabled={option.disabled}
+            disabled={option.disabled || !day}
             left={(innerProps) => <List.Icon {...innerProps} icon={option.icon} />}
             title={option.label}
-            onPress={option.onClick}
+            onPress={day ? () => option.onPress(day) : undefined}
           />
         ))}
       </BottomSheet>

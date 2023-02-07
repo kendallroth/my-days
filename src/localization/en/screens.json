@@ -24,7 +24,8 @@
     "edit": "Edit",
     "moveDown": "Move down",
     "moveUp": "Move up",
-    "position": "{{position}} of {{count}}"
+    "position": "{{position}} of {{count}}",
+    "share": "Share"
   },
   "home": {
     "title": "Home",

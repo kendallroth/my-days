@@ -1,4 +1,4 @@
-import { Optional } from "./app.types";
+import { MaterialCommunityIcons, Optional } from "./app.types";
 
 /** Day shape */
 export interface Day {
@@ -6,7 +6,7 @@ export interface Day {
   createdAt: string;
   /** Day occurrence */
   date: string;
-  icon?: string;
+  icon?: keyof MaterialCommunityIcons;
   /**
    * Whether interval repeats each year
    *

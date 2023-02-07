@@ -1,6 +1,6 @@
 import { AppLanguage } from "@typings/settings.types";
 
-import { isInEnum, validateEnum } from "./enum.util";
+import { isInEnum, validateEnum } from "../enum.util";
 
 describe("'isEnum'", () => {
   it("validates enum values properly", () => {
