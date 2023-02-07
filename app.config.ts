@@ -1,4 +1,4 @@
-import { ExpoConfig } from "@expo/config";
+import { type ExpoConfig } from "@expo/config";
 
 // Light variation of the "technical" primary colour, but matching the actual "primary" light theme color.
 const lightenedPrimaryColor = "#00629E";

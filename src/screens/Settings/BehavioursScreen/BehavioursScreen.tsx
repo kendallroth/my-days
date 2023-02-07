@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
 
@@ -9,7 +9,7 @@ import { type IAppBehaviours } from "@typings/settings.types";
 
 import BehavioursScreenListItemSwitch from "./BehavioursScreenListItemSwitch";
 
-const BehavioursScreen = (): ReactElement => {
+const BehavioursScreen = () => {
   const dispatch = useAppDispatch();
   const appBehaviours = useAppSelector(selectBehaviours);
   const { t } = useTranslation(["common", "screens"]);

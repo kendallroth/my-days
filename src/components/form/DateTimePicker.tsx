@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { ComponentPropsWithoutRef, Fragment, ReactElement, useState } from "react";
+import React, { type ComponentPropsWithoutRef, Fragment, useState } from "react";
 import { useController } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";
@@ -15,7 +15,7 @@ type DatePickerInputProps = {
   onSelect?: (value: string) => void;
 } & ComponentPropsWithoutRef<typeof TextInput>;
 
-const DatePickerInput = (props: DatePickerInputProps): ReactElement => {
+const DatePickerInput = (props: DatePickerInputProps) => {
   const { control, name, onSelect, ...rest } = props;
 
   const [open, setOpen] = useState(false);

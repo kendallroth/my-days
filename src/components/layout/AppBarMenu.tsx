@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { StyleSheet, ViewStyle } from "react-native";
+import { StyleSheet, type ViewStyle } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
 
-import { MaterialCommunityIcons } from "@typings/app.types";
+import { type MaterialCommunityIcons } from "@typings/app.types";
 
 type AppBarMenuProps = {
   /** Menu items */

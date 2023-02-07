@@ -1,6 +1,6 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { FlatList, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
 import { DayListItem } from "@components/days";
 import { EmptyMessage } from "@components/layout";
@@ -15,7 +15,7 @@ interface DayListProps {
   onScroll?: (event: ScrollEvent) => void;
 }
 
-const DayList = (props: DayListProps): ReactElement | null => {
+const DayList = (props: DayListProps) => {
   const { days, style, onItemLongPress, onScroll } = props;
 
   const { t } = useTranslation(["common", "screens"]);

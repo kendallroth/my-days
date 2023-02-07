@@ -1,12 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import dayjs from "dayjs";
 import * as Linking from "expo-linking";
-import React, { ReactElement, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Share, StyleSheet, Vibration, View } from "react-native";
 import { Text } from "react-native-paper";
 
-import { BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
+import { type BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
 import { useAppDispatch, useAppSelector, useAppTheme, useScrollingFab, useSnackbar } from "@hooks";
 import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
@@ -17,7 +17,7 @@ import { type RootRouterNavigation } from "src/AppRouter";
 import DayList from "./DayList";
 import SelectedDayModal from "./SelectedDayModal";
 
-const HomeScreen = (): ReactElement | null => {
+const HomeScreen = () => {
   const navigation = useNavigation<RootRouterNavigation>();
 
   const { t } = useTranslation(["common", "screens"]);

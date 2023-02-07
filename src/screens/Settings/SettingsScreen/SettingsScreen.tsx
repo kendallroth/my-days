@@ -1,5 +1,5 @@
 import { openURL } from "expo-linking";
-import React, { ReactElement, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Platform, StyleSheet, View } from "react-native";
 import { List, Text, useTheme } from "react-native-paper";
@@ -29,7 +29,7 @@ import { ThemeModal } from "./ThemeModal";
 
 const DEVELOPER_MODE_TAPS = 10;
 
-const SettingsScreen = (): ReactElement => {
+const SettingsScreen = () => {
   const appResetRef = useRef<BottomSheetRef>(null);
   const languageRef = useRef<BottomSheetRef>(null);
   const themeRef = useRef<BottomSheetRef>(null);
@@ -174,7 +174,7 @@ const SettingsScreen = (): ReactElement => {
       <List.Subheader>{t("screens:settings.listSectionCustomize")}</List.Subheader>
       <SettingsListItem
         icon="flag"
-        right={(rightProps): ReactElement => (
+        right={(rightProps) => (
           <LanguageIcon
             {...rightProps}
             beta={languageConfig.beta}
@@ -187,7 +187,7 @@ const SettingsScreen = (): ReactElement => {
       />
       <SettingsListItem
         icon="palette"
-        right={(rightProps): ReactElement => <List.Icon {...rightProps} icon={themeConfig.icon} />}
+        right={(rightProps) => <List.Icon {...rightProps} icon={themeConfig.icon} />}
         title={t("screens:settings.listItemAppearance")}
         onPress={onOpenTheme}
       />
@@ -202,14 +202,12 @@ const SettingsScreen = (): ReactElement => {
       <SettingsListItem
         icon="lightbulb-on"
         title={t("screens:settings.listItemSuggestion")}
-        right={(rightProps): ReactElement => <List.Icon {...rightProps} icon="email-send" />}
+        right={(rightProps) => <List.Icon {...rightProps} icon="email-send" />}
         onPress={onSuggestImprovement}
       />
       <List.Item
         description={t("screens:settingsDeveloper.listItemResetDescription")}
-        left={(leftProps): ReactElement => (
-          <List.Icon {...leftProps} color={colors.primary} icon="lock-reset" />
-        )}
+        left={(leftProps) => <List.Icon {...leftProps} color={colors.primary} icon="lock-reset" />}
         title={t("screens:settingsDeveloper.listItemResetTitle")}
         onLongPress={onOpenAppReset}
         onPress={(): void => {}}

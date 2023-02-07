@@ -1,5 +1,5 @@
-import React, { forwardRef, ReactElement, useImperativeHandle, useRef, useState } from "react";
-import { Keyboard, Platform, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import React, { forwardRef, type ReactElement, useImperativeHandle, useRef, useState } from "react";
+import { Keyboard, Platform, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 import Modal from "react-native-modal";
 import { Text, useTheme } from "react-native-paper";
 

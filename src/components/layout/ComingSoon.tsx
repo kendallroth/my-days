@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { Text, useTheme } from "react-native-paper";
@@ -9,7 +9,7 @@ export type ComingSoonProps = {
   description?: string;
 };
 
-const ComingSoon = (props: ComingSoonProps): ReactElement => {
+const ComingSoon = (props: ComingSoonProps) => {
   const { description } = props;
 
   const { colors } = useTheme();

@@ -23,12 +23,15 @@ module.exports = {
     // Disable for all files (enable for TS)
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    // TODO
+    "@typescript-eslint/consistent-type-imports": ["warn", { fixStyle: "inline-type-imports" }],
     "@typescript-eslint/no-unused-vars": ["warn", { varsIgnorePattern: "styles" }],
     // Returning an async call within try/catch requires an 'await' keyword to be able to handle errors!
     "@typescript-eslint/return-await": ["error", "in-try-catch"],
     curly: "off",
+    // TODO
     // Types should be imported inline with other imports but with 'type' specifier
-    "import/consistent-type-specifier-style": ["warn", "prefer-inline"],
+    // "import/consistent-type-specifier-style": ["warn", "prefer-inline"],
     // Prevent (and combine) duplicate import declarations
     "import/no-duplicates": "warn",
     // Sort imports into alphabetical groups (sorting import keys is handled by 'sort-imports')

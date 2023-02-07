@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { HelperText } from "react-native-paper";
 
-import { IValidationError } from "@localization/yup-locale";
+import { type IValidationError } from "@localization/yup-locale";
 
 type InputHelperTextProps = {
   /** Error message */
@@ -13,7 +13,7 @@ type InputHelperTextProps = {
   visible?: boolean;
 };
 
-const InputHelper = (props: InputHelperTextProps): ReactElement | null => {
+const InputHelper = (props: InputHelperTextProps) => {
   const { error, hint, visible = true } = props;
 
   const { t } = useTranslation();
@@ -24,7 +24,7 @@ const InputHelper = (props: InputHelperTextProps): ReactElement | null => {
    * @param   message - Error/hint message
    * @returns Helper text component
    */
-  const renderHelperText = (message: string | null | undefined): ReactElement => (
+  const renderHelperText = (message: string | null | undefined) => (
     <HelperText type={error ? "error" : "info"} visible={visible}>
       {/* NOTE: Need an extra check ('visible' prop flickers briefly...) */}
       {message}

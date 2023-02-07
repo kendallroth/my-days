@@ -3,26 +3,10 @@ import {
   MD3DarkTheme as DarkTheme,
   MD3LightTheme as LightTheme,
 } from "react-native-paper";
-import { MD3Type } from "react-native-paper/lib/typescript/types";
+import { type MD3Type } from "react-native-paper/lib/typescript/types";
 
-/*
- * Backdrop   - Backdrops of modals
- * Background - Appears behind scrollable content (pages, lists)
- * Surface    - Surfaces of components (cards, sheets, menus)
- */
-
-// Extend 'react-native-paper' ThemeColors type
-/*declare global {
-  namespace ReactNativePaper {
-    interface ThemeColors {
-      // warning: string;
-    }
-
-    interface Theme {
-      // myOwnProperty: boolean;
-    }
-  }
-}*/
+// NOTE: Base colour used to generate theme
+// const colorPrimary = "#004d7d";
 
 const fontConfig: Record<string, Partial<MD3Type>> = {
   // TODO: Increase font weight for labels
@@ -138,8 +122,6 @@ const customDarkColors = {
   onSurfaceDisabled: "rgba(226, 226, 229, 0.38)",
   backdrop: "rgba(44, 49, 55, 0.4)",
 };
-
-const colorPrimary = "#004d7d";
 
 /** Shared theme colors (typically literals) */
 const sharedColors = {

@@ -1,5 +1,5 @@
 import { useIsFocused } from "@react-navigation/native";
-import React, { ComponentPropsWithoutRef, ReactElement } from "react";
+import React, { type ComponentPropsWithoutRef } from "react";
 import { StyleSheet } from "react-native";
 import { FAB } from "react-native-paper";
 
@@ -12,7 +12,7 @@ type ScreenFABProps = {
   visible?: boolean;
 } & Omit<ComponentPropsWithoutRef<typeof FAB>, "icon">;
 
-const ScreenFAB = (props: ScreenFABProps): ReactElement => {
+const ScreenFAB = (props: ScreenFABProps) => {
   const { icon, visible = true, ...rest } = props;
 
   const isScreenFocused = useIsFocused();

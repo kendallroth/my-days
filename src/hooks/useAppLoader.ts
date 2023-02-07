@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { AppLoaderContext, IAppLoaderContext } from "@contexts/AppLoaderContext";
+import { AppLoaderContext, type IAppLoaderContext } from "@contexts/AppLoaderContext";
 
 /**
  * Expose app loading manager context as hook

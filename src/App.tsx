@@ -2,7 +2,7 @@
 import "react-native-get-random-values";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import React, { ReactElement } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { enableScreens } from "react-native-screens";
@@ -36,7 +36,7 @@ yup.setLocale(yupLocale);
 const { persistor, store } = setupStore();
 
 /** Wrapped component to be able to access Redux store */
-const AppWrapped = (): ReactElement => {
+const AppWrapped = () => {
   const themeConfig = useAppSelector(selectThemeConfig);
 
   const themeType: AppTheme =
@@ -65,7 +65,7 @@ const AppWrapped = (): ReactElement => {
   );
 };
 
-const App = (): ReactElement => (
+const App = () => (
   <ReduxProvider store={store}>
     <AppWrapped />
   </ReduxProvider>

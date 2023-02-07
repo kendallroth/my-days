@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
-import { Image, StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import React, { type ReactElement } from "react";
+import { Image, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 
 interface EmptyMessageProps {
@@ -8,7 +8,7 @@ interface EmptyMessageProps {
   text: string;
 }
 
-const EmptyMessage = (props: EmptyMessageProps): ReactElement => {
+const EmptyMessage = (props: EmptyMessageProps) => {
   const { action, style, text } = props;
 
   const imageSize = 280;

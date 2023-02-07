@@ -1,4 +1,4 @@
-import React, { ReactElement, useReducer } from "react";
+import React, { type ReactElement, useReducer } from "react";
 import { StyleSheet } from "react-native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { ActivityIndicator, Portal } from "react-native-paper";
@@ -58,7 +58,7 @@ const reducer = (state: IAppLoaderState, action: IAppLoaderAction): IAppLoaderSt
 // @ts-ignore - Will be set by context provider
 const AppLoaderContext = React.createContext<IAppLoaderContext>({});
 
-const AppLoaderProvider = (props: AppLoaderProviderProps): ReactElement => {
+const AppLoaderProvider = (props: AppLoaderProviderProps) => {
   const { children } = props;
   const [loading, loadingDispatch] = useReducer(reducer, initialState);
 

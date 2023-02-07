@@ -1,4 +1,4 @@
-import { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
+import { type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
 
 export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
@@ -10,6 +10,7 @@ export type UpDown = "up" | "down";
 
 /** Material community icons */
 export type MaterialCommunityIcons =
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   typeof import("react-native-vector-icons/glyphmaps/MaterialCommunityIcons.json");
 
 /** ScrollView scroll event */

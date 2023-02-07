@@ -1,19 +1,19 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import i18n from "i18next";
 
 import { SettingsService } from "@services";
 import {
-  AppLanguage,
-  AppTheme,
-  IAppBehaviours,
-  IAppLanguageConfig,
-  IAppPopulateOptions,
-  IAppResetOptions,
-  IAppThemeConfig,
+  type AppLanguage,
+  type AppTheme,
+  type IAppBehaviours,
+  type IAppLanguageConfig,
+  type IAppPopulateOptions,
+  type IAppResetOptions,
+  type IAppThemeConfig,
 } from "@typings/settings.types";
 import { LANGUAGES, THEMES } from "@utilities/constants";
 
-import { RootState } from "..";
+import { type RootState } from "..";
 import { addDebugDataAction, resetAppAction } from "../actions";
 
 interface SettingsState {

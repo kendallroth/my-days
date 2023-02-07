@@ -1,6 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { ReactElement } from "react";
-import { Image, StatusBar, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
+import React from "react";
+import {
+  Image,
+  StatusBar,
+  type StyleProp,
+  StyleSheet,
+  type TextStyle,
+  View,
+  type ViewStyle,
+} from "react-native";
 import { Appbar as RNPAppBar, useTheme } from "react-native-paper";
 
 import { sharedColors } from "@styles/theme";
@@ -27,7 +35,7 @@ export type Props = {
   onBack?: () => void;
 };
 
-const AppBar = (props: Props): ReactElement => {
+const AppBar = (props: Props) => {
   const {
     background,
     back = true,

@@ -1,7 +1,7 @@
-import { RefObject, useEffect, useState } from "react";
-import { FlatList } from "react-native";
+import { type RefObject, useEffect, useState } from "react";
+import { type FlatList } from "react-native";
 
-import { ScrollEvent } from "@typings/app.types";
+import { type ScrollEvent } from "@typings/app.types";
 
 import { useScrollViewScrolling } from "./useScrollViewScrolling";
 

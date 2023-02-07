@@ -4,7 +4,7 @@
  * Taken from: https://tobea.dev/post/global-state-cleanliness-with-react-context#lets-get-fancy
  */
 
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 
 import { AppLoaderProvider } from "./AppLoaderContext";
 import { SnackbarProvider } from "./SnackbarContext";
@@ -45,7 +45,7 @@ const ProviderComposer = (props: ProviderComposerProps): ReactElement => {
  *
  * @param {Node}     children  - React children
  */
-const ContextProvider = (props: ContextProviderProps): ReactElement => {
+const ContextProvider = (props: ContextProviderProps) => {
   const { children } = props;
 
   return (

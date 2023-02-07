@@ -1,7 +1,7 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { List, Switch } from "react-native-paper";
 
-import { IAppBehaviours } from "@typings/settings.types";
+import { type IAppBehaviours } from "@typings/settings.types";
 
 type BehavioursScreenListItemSwitchProps = {
   /** Switch description */
@@ -16,15 +16,13 @@ type BehavioursScreenListItemSwitchProps = {
   onChange: (behaviourKey: keyof IAppBehaviours, value: boolean) => void;
 };
 
-const BehavioursScreenListItemSwitch = (
-  props: BehavioursScreenListItemSwitchProps,
-): ReactElement => {
+const BehavioursScreenListItemSwitch = (props: BehavioursScreenListItemSwitchProps) => {
   const { description, stateKey, title, value, onChange } = props;
 
   return (
     <List.Item
       description={description}
-      right={(): ReactElement => (
+      right={() => (
         <Switch value={value} onValueChange={(val: boolean): void => onChange(stateKey, val)} />
       )}
       title={title}

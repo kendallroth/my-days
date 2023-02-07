@@ -1,4 +1,4 @@
-import { LanguageDetectorModule } from "i18next";
+import { type LanguageDetectorModule } from "i18next";
 
 import { SettingsService } from "@services";
 

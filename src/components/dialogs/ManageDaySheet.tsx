@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { forwardRef, ReactElement, useEffect, useRef } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
 import { useController, useForm } from "react-hook-form";
-import { TFunction, useTranslation } from "react-i18next";
-import { TextInput as RNPTextInput, StyleSheet, View } from "react-native";
+import { type TFunction, useTranslation } from "react-i18next";
+import { type TextInput as RNPTextInput, StyleSheet, View } from "react-native";
 import { Badge, Button, Dialog, IconButton, useTheme } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
@@ -45,7 +45,7 @@ const getSchema = (t: TFunction<("common" | "screens")[], undefined>) => {
 };
 
 const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
-  (props: ManageDaySheetProps, ref): ReactElement => {
+  (props: ManageDaySheetProps, ref) => {
     const { day, onAdd, onCancel, onEdit } = props;
 
     const titleRef = useRef<RNPTextInput | null>(null);

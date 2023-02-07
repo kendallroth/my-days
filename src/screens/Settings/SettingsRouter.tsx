@@ -1,8 +1,8 @@
 import {
   createNativeStackNavigator,
-  NativeStackNavigationProp,
+  type NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
-import React, { ReactElement } from "react";
+import React from "react";
 
 import { AboutScreen } from "./AboutScreen";
 import { BehavioursScreen } from "./BehavioursScreen";
@@ -24,7 +24,7 @@ export type SettingsRouterNavigation = NativeStackNavigationProp<SettingsRouterP
 
 const Stack = createNativeStackNavigator<SettingsRouterParams>();
 
-const SettingsStack = (): ReactElement => {
+const SettingsStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen component={SettingsScreen} name="Settings" />

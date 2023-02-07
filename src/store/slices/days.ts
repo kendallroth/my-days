@@ -1,10 +1,15 @@
-import { createEntityAdapter, createSlice, PayloadAction, Update } from "@reduxjs/toolkit";
+import {
+  createEntityAdapter,
+  createSlice,
+  type PayloadAction,
+  type Update,
+} from "@reduxjs/toolkit";
 import dayjs from "dayjs";
 
-import { UpDown } from "@typings/app.types";
-import { Day, DayNew } from "@typings/day.types";
+import { type UpDown } from "@typings/app.types";
+import { type Day, type DayNew } from "@typings/day.types";
 
-import { RootState } from "..";
+import { type RootState } from "..";
 import { addDebugDataAction, resetAppAction } from "../actions";
 import { fakeDays } from "../data/days";
 

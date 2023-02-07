@@ -1,5 +1,5 @@
-import React, { ReactElement, useMemo } from "react";
-import { StyleSheet, TextStyle, View, ViewStyle } from "react-native";
+import React, { useMemo } from "react";
+import { StyleSheet, type TextStyle, View, type ViewStyle } from "react-native";
 import { Text, useTheme } from "react-native-paper";
 
 type QuoteProps = {
@@ -13,7 +13,7 @@ type QuoteProps = {
   textStyle?: TextStyle;
 };
 
-const Quote = (props: QuoteProps): ReactElement => {
+const Quote = (props: QuoteProps) => {
   const { children, color, style, textStyle } = props;
 
   const { colors } = useTheme();

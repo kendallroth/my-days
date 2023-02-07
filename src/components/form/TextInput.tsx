@@ -1,6 +1,6 @@
-import React, { ComponentPropsWithoutRef, Fragment, ReactElement, RefObject } from "react";
-import { Control, useController } from "react-hook-form";
-import { TextInput as RNTextInput } from "react-native";
+import React, { type ComponentPropsWithoutRef, Fragment, type RefObject } from "react";
+import { type Control, useController } from "react-hook-form";
+import { type TextInput as RNTextInput } from "react-native";
 import { TextInput as RNPTextInput } from "react-native-paper";
 
 import InputHelperText from "./InputHelperText";
@@ -18,7 +18,7 @@ type TextInputProps = {
   readonly?: boolean;
 } & ComponentPropsWithoutRef<typeof RNPTextInput>;
 
-const TextInput = (props: TextInputProps): ReactElement => {
+const TextInput = (props: TextInputProps) => {
   const { control, hint, innerRef, name, readonly = false, ...rest } = props;
 
   const { field, fieldState, formState } = useController({

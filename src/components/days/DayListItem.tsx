@@ -1,8 +1,8 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import dayjs from "dayjs";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 import { Avatar, Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
 
 import { sharedColors } from "@styles/theme";
@@ -15,7 +15,7 @@ type DayDisplayProps = {
   onLongPress?: (day: Day) => void;
 };
 
-const DayListItem = (props: DayDisplayProps): ReactElement | null => {
+const DayListItem = (props: DayDisplayProps) => {
   const { day, style, onLongPress } = props;
 
   const { colors } = useTheme();

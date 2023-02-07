@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 import { StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";
 
@@ -10,7 +10,7 @@ export type Props = {
 };
 
 /** Common page component (currently just page styles) */
-const Page = (props: Props): ReactElement => {
+const Page = (props: Props) => {
   const { children, invertStatusBar } = props;
 
   const { colors, dark } = useTheme();

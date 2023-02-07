@@ -1,5 +1,5 @@
 import { openURL } from "expo-linking";
-import React, { ReactElement } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Chip, IconButton, Text, useTheme } from "react-native-paper";
 
@@ -23,7 +23,7 @@ const ContributorActionIconMap: Record<ContributorActionType, keyof MaterialComm
   testing: "test-tube",
 };
 
-const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
+const ContributorListItem = (props: ContributorListItemProps) => {
   const { align, contributor } = props;
 
   const { colors } = useTheme();
@@ -59,7 +59,7 @@ const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
       <View style={styles.contributorContent}>
         <Text variant="titleMedium">{contributor.name}</Text>
         <View style={styles.contributorActions}>
-          {contributor.actions.map((a): ReactElement => {
+          {contributor.actions.map((a) => {
             const icon = ContributorActionIconMap[a.type];
             return (
               <Chip key={a.type} icon={icon} style={styles.contributorActionsChip} mode="outlined">

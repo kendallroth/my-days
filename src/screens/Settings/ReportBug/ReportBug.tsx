@@ -1,6 +1,6 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { openURL } from "expo-linking";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
 import { Button, Text, useTheme } from "react-native-paper";
@@ -8,7 +8,7 @@ import { Button, Text, useTheme } from "react-native-paper";
 import { AppBar, Page } from "@components/layout";
 import config from "@config";
 
-const ReportBugScreen = (): ReactElement => {
+const ReportBugScreen = () => {
   const { t } = useTranslation(["screens"]);
 
   const { colors } = useTheme();

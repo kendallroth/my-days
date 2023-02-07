@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";
@@ -18,7 +18,7 @@ export type DeleteDayDialogProps = {
   onConfirm: () => void;
 };
 
-const DeleteDayDialog = (props: DeleteDayDialogProps): ReactElement | null => {
+const DeleteDayDialog = (props: DeleteDayDialogProps) => {
   const { day, visible, onCancel, onConfirm } = props;
 
   const { t } = useTranslation(["screens"]);

@@ -1,4 +1,4 @@
-import { MaterialCommunityIcons, Optional } from "./app.types";
+import { type MaterialCommunityIcons, type Optional } from "./app.types";
 
 /** Day shape */
 export interface Day {
