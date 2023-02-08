@@ -118,7 +118,7 @@ const SnackbarProvider = (props: SnackbarProviderProps) => {
    * @param message - Notification message
    * @param options - Snackbar options
    */
-  const notify = (message: string, options: SnackbarOptions = {}): void => {
+  const notify = (message: string, options: SnackbarOptions = {}) => {
     // Close the previous notification
     closeNotification();
 
@@ -134,7 +134,7 @@ const SnackbarProvider = (props: SnackbarProviderProps) => {
    * @param message - Notification message
    * @param options - Snackbar options
    */
-  const notifyError = (message: string, options: SnackbarOptions = {}): void => {
+  const notifyError = (message: string, options: SnackbarOptions = {}) => {
     notify(message, { ...options, type: "error" });
   };
 
@@ -143,7 +143,7 @@ const SnackbarProvider = (props: SnackbarProviderProps) => {
    *
    * @param options - Snackbar options
    */
-  const notifyNotImplemented = (options: SnackbarOptions = {}): void => {
+  const notifyNotImplemented = (options: SnackbarOptions = {}) => {
     notify(t("common:errors.notImplemented"), { ...options, type: "error" });
   };
 

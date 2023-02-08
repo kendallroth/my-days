@@ -46,7 +46,7 @@ const ContributorsScreen = () => {
   const { t } = useTranslation(["screens"]);
 
   /** Open an external link */
-  const onLink = (link: string): void => {
+  const onLink = (link: string) => {
     openURL(link);
   };
 

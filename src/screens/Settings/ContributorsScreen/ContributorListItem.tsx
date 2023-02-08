@@ -38,7 +38,7 @@ const ContributorListItem = (props: ContributorListItemProps) => {
   };
 
   /** Open an external link */
-  const onLink = (link: string): void => {
+  const onLink = (link: string) => {
     openURL(link);
   };
 

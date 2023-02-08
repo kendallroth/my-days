@@ -48,7 +48,7 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
      *
      * @param key - Selected reset option
      */
-    const onOptionPress = (key: AppResetOptionKeys): void => {
+    const onOptionPress = (key: AppResetOptionKeys) => {
       const newOptions: IAppResetOptions = {
         ...resetOptions,
         [key]: !resetOptions[key],

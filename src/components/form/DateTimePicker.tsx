@@ -33,7 +33,7 @@ const DatePickerInput = (props: DatePickerInputProps) => {
    *
    * @param date - Selected date
    */
-  const onChange = (date?: Date): void => {
+  const onChange = (date?: Date) => {
     if (!date) {
       setOpen(false);
       return;

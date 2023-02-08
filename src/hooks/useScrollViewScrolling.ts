@@ -64,7 +64,7 @@ const useScrollViewScrolling = (args?: IScrollProps): IScrollViewScrolling => {
     }, [scrollToTopOnFocus]),
   );
 
-  const onListScroll = (event: ScrollEvent): void => {
+  const onListScroll = (event: ScrollEvent) => {
     const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
 
     // TODO: Determine if height being less than thresholds or screen height will matter?

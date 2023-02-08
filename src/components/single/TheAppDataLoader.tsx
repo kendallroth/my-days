@@ -63,7 +63,7 @@ const AppDataLoader = (props: AppDataLoaderProps): React.ReactElement | null => 
    *
    * @param {function} unsubscribe - Persistor watch unsubscribe function
    */
-  const handlePersistor = (unsubscribe: () => void): void => {
+  const handlePersistor = (unsubscribe: () => void) => {
     const { bootstrapped } = persistor.getState();
     if (!bootstrapped) return;
 

@@ -67,7 +67,7 @@ const AppLoaderProvider = (props: AppLoaderProviderProps) => {
    *
    * @param {string} text - Loading text
    */
-  const startLoading = (text: string | null = null): void =>
+  const startLoading = (text: string | null = null) =>
     loadingDispatch({ type: "open", payload: { text } });
 
   /**

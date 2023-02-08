@@ -20,7 +20,7 @@ const BehavioursScreen = () => {
    * @param key   - Behaviour setting key
    * @param value - Behaviour value
    */
-  const onBooleanChange = (key: keyof IAppBehaviours, value: boolean): void => {
+  const onBooleanChange = (key: keyof IAppBehaviours, value: boolean) => {
     dispatch(
       setAppBehaviour({
         [key]: value,

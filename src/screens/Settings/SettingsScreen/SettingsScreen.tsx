@@ -51,21 +51,21 @@ const SettingsScreen = () => {
   /**
    * Open the language selector
    */
-  const onOpenLanguage = (): void => {
+  const onOpenLanguage = () => {
     languageRef.current?.open();
   };
 
   /**
    * Open the theme selector
    */
-  const onOpenTheme = (): void => {
+  const onOpenTheme = () => {
     themeRef.current?.open();
   };
 
   /**
    * Open the app reset selector
    */
-  const onOpenAppReset = (): void => {
+  const onOpenAppReset = () => {
     appResetRef.current?.open();
   };
 
@@ -74,7 +74,7 @@ const SettingsScreen = () => {
    *
    * @param resetOptions - App reset options
    */
-  const onAppReset = (resetOptions: IAppResetOptions): void => {
+  const onAppReset = (resetOptions: IAppResetOptions) => {
     Alert.alert(
       t("screens:settingsDeveloper.resetDataTitle"),
       t("screens:settingsDeveloper.resetDataDescription"),
@@ -105,7 +105,7 @@ const SettingsScreen = () => {
    *
    * @param value - App language
    */
-  const onSelectLanguage = (value: AppLanguage): void => {
+  const onSelectLanguage = (value: AppLanguage) => {
     // Skip updating app language if selection is current language
     if (value === languageConfig.code) {
       languageRef.current?.close();
@@ -132,7 +132,7 @@ const SettingsScreen = () => {
    *
    * @param value - App theme
    */
-  const onSelectTheme = (value: AppTheme): void => {
+  const onSelectTheme = (value: AppTheme) => {
     dispatch(setAppTheme(value));
 
     themeRef.current?.close();
@@ -141,14 +141,14 @@ const SettingsScreen = () => {
   /**
    * Allow users to suggest an improvement (via email)
    */
-  const onSuggestImprovement = (): void => {
+  const onSuggestImprovement = () => {
     openURL(`mailto:${config.links.developerEmail}?subject="My Days" Suggestion`);
   };
 
   /**
    * Increase developer tap counter
    */
-  const onTapVersion = (): void => {
+  const onTapVersion = () => {
     if (developerMode) return;
 
     const newCount = debugCounter + 1;
@@ -209,7 +209,7 @@ const SettingsScreen = () => {
         left={(leftProps) => <List.Icon {...leftProps} color={colors.primary} icon="lock-reset" />}
         title={t("screens:settingsDeveloper.listItemResetTitle")}
         onLongPress={onOpenAppReset}
-        onPress={(): void => {}}
+        onPress={() => {}}
       />
       {developerMode && (
         <SettingsListItem
