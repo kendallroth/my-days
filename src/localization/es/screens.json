@@ -27,6 +27,13 @@
     "position": "{{position}} de {{count}}",
     "share": "Compartir"
   },
+  "daySharedLink": {
+    "dayAddConfirmDate": "{{ date, DD-MMM-YYYY }}",
+    "dayAddConfirmTitle": "¿Añadir fecha compartida?",
+    "dayAddDuplicateError": "Ya se agregó el día compartido",
+    "dayAddSuccess": "Añadido día compartido ('{{ title }}')",
+    "linkError": "Error al abrir enlace externo"
+  },
   "home": {
     "title": "Inicio",
     "listItemDate": "{{date, DD-MMM-YYYY}}",
@@ -69,7 +76,9 @@
     "listItemSettings": "Configuración"
   },
   "settingsBehaviours": {
-    "title": "Comportamientos"
+    "title": "Comportamientos",
+    "behaviourItemConfirmSharedDaysDescription": "Si los días compartidos a través del enlace deben confirmarse antes de agregar (seguridad).",
+    "behaviourItemConfirmSharedDaysTitle": "Confirmar días compartidos"
   },
   "settingsContributors": {
     "title": "Colaboradores",

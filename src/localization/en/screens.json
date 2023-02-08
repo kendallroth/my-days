@@ -27,6 +27,13 @@
     "position": "{{position}} of {{count}}",
     "share": "Share"
   },
+  "daySharedLink": {
+    "dayAddConfirmDate": "{{ date, MMM DD, YYYY }}",
+    "dayAddConfirmTitle": "Add shared day?",
+    "dayAddDuplicateError": "Shared day was already added",
+    "dayAddSuccess": "Added shared day ('{{ title }}')",
+    "linkError": "Error opening external link"
+  },
   "home": {
     "title": "Home",
     "listItemDate": "{{date, MMMM DD, YYYY}}",
@@ -69,7 +76,9 @@
     "listItemSettings": "Settings"
   },
   "settingsBehaviours": {
-    "title": "Behaviours"
+    "title": "Behaviours",
+    "behaviourItemConfirmSharedDaysDescription": "Whether days shared via link must be confirmed before adding (safety).",
+    "behaviourItemConfirmSharedDaysTitle": "Confirm shared days"
   },
   "settingsContributors": {
     "title": "Contributors",

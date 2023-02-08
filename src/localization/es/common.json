@@ -19,7 +19,11 @@
   },
   "errors": {
     "noDays": "Aún no se han añadido días",
-    "notImplemented": "Aún no implementado"
+    "notImplemented": "Aún no implementado",
+    "parsing": {
+      "invalidParsedDay": "Día analizado no válido",
+      "invalidParsedDayVersion": "Versión de día analizada no válida (por favor actualice)"
+    }
   },
   "phrases": {
     "beta": "beta",

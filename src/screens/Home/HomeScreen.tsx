@@ -1,24 +1,35 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { type NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
 import * as Linking from "expo-linking";
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Share, StyleSheet, Vibration, View } from "react-native";
 import { Text } from "react-native-paper";
 
-import { type BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
+import {
+  AddSharedDayDialog,
+  type BottomSheetRef,
+  DeleteDayDialog,
+  ManageDaySheet,
+} from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
 import { useAppDispatch, useAppSelector, useAppTheme, useScrollingFab, useSnackbar } from "@hooks";
 import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
+import { selectBehaviours } from "@store/slices/settings";
 import { type UpDown } from "@typings/app.types";
 import { type Day, type DayNew } from "@typings/day.types";
-import { type RootRouterNavigation } from "src/AppRouter";
+import { SHARED_DAY_VERSION } from "@utilities/day-parse.util";
+import { type RootRouterParams } from "src/AppRouter";
 
 import DayList from "./DayList";
 import SelectedDayModal from "./SelectedDayModal";
 
+type HomeScreenRouteProps = NativeStackScreenProps<RootRouterParams, "HomeScreen">;
+
 const HomeScreen = () => {
-  const navigation = useNavigation<RootRouterNavigation>();
+  const navigation = useNavigation<HomeScreenRouteProps["navigation"]>();
+  const route = useRoute<HomeScreenRouteProps["route"]>();
 
   const { t } = useTranslation(["common", "screens"]);
   const { notify } = useSnackbar();
@@ -42,6 +53,35 @@ const HomeScreen = () => {
   const [deletedDay, setDeletedDay] = useState<Day | null>(null);
 
   const today = dayjs();
+
+  const appBehaviours = useAppSelector(selectBehaviours);
+  const [sharedDay, setSharedDay] = useState<Day | null>(null);
+
+  const onSharedDayConfirm = useCallback(
+    (day: Day) => {
+      dispatch(addDay(day));
+      notify(t("screens:daySharedLink.dayAddSuccess", { title: day.title }));
+      setSharedDay(null);
+    },
+    [dispatch, notify, t],
+  );
+
+  useEffect(() => {
+    const day = route.params?.sharedDay;
+    if (!day) return;
+
+    if (!appBehaviours.confirmSharedDays) {
+      onSharedDayConfirm(day);
+    } else {
+      // Must wait briefly for navigation to occur before displaying dialog
+      setTimeout(() => {
+        setSharedDay(day);
+      }, 100);
+    }
+
+    // Avoid re-handling shared day again on route re-render (if param is kept)!
+    navigation.setParams({ sharedDay: undefined });
+  }, [appBehaviours, navigation, route.params, onSharedDayConfirm]);
 
   /** Open selected day options menu */
   const onDaySelect = (day: Day) => {
@@ -139,6 +179,7 @@ const HomeScreen = () => {
         id: day.id,
         repeats: day.repeats ? "true" : "false",
         title: day.title,
+        version: `${SHARED_DAY_VERSION}`,
       },
     });
 
@@ -174,6 +215,7 @@ const HomeScreen = () => {
           onPress={() => navigation.navigate("SettingsRouter")}
         />
       </AppBar>
+
       <View style={[styles.pageHeader, { backgroundColor: colors.primary }]}>
         <Text style={[styles.pageHeaderDay, { color: colors.onPrimary }]} variant="headlineLarge">
           {t("screens:home.todayDay", { date: today })}
@@ -182,6 +224,7 @@ const HomeScreen = () => {
           {t("screens:home.todayDate", { date: today })}
         </Text>
       </View>
+
       <View style={styles.pageContent}>
         <DayList days={days} onItemLongPress={onDaySelect} onScroll={onListScroll} />
       </View>
@@ -189,6 +232,13 @@ const HomeScreen = () => {
         icon="calendar-plus"
         visible={fabVisible}
         onPress={() => manageDayRef.current?.open()}
+      />
+
+      <AddSharedDayDialog
+        day={sharedDay}
+        visible={!!sharedDay}
+        onCancel={() => setSharedDay(null)}
+        onConfirm={() => onSharedDayConfirm(sharedDay!)}
       />
       <ManageDaySheet
         ref={manageDayRef}

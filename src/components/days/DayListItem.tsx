@@ -1,10 +1,11 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import dayjs from "dayjs";
-import React from "react";
+import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
-import { Avatar, Surface, Text, TouchableRipple, useTheme } from "react-native-paper";
+import { Avatar, Surface, Text, TouchableRipple } from "react-native-paper";
 
+import { useAppTheme } from "@hooks";
 import { sharedColors } from "@styles/theme";
 import { type Day } from "@typings/day.types";
 import { getDayDisplay } from "@utilities/day.util";
@@ -18,7 +19,7 @@ type DayDisplayProps = {
 const DayListItem = (props: DayDisplayProps) => {
   const { day, style, onLongPress } = props;
 
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const { t } = useTranslation(["common", "screens"]);
 
   const dateDisplay = t("screens:home.listItemDate", {
@@ -45,7 +46,15 @@ const DayListItem = (props: DayDisplayProps) => {
     >
       <Surface
         elevation={1}
-        style={[style, styles.day, { backgroundColor: backgroundColor, borderColor: mainColor }]}
+        style={[
+          style,
+          styles.day,
+          {
+            backgroundColor: backgroundColor,
+            borderColor: mainColor,
+            borderWidth: isToday ? 4 : 2,
+          },
+        ]}
       >
         <Avatar.Icon
           color={backgroundColor}
@@ -69,26 +78,40 @@ const DayListItem = (props: DayDisplayProps) => {
         </View>
 
         <View style={[styles.dayStats, { backgroundColor: mainColor }]}>
-          {!isToday && (
-            <View
-              style={[
-                styles.dayStatsIconOutline,
-                { backgroundColor: countingDown ? mainColor : backgroundColor },
-              ]}
-            >
+          {!isToday ? (
+            <Fragment>
+              <View
+                style={[
+                  styles.dayStatsIconOutline,
+                  { backgroundColor: countingDown ? mainColor : backgroundColor },
+                ]}
+              >
+                <Icon
+                  color={countingDown ? backgroundColor : mainColor}
+                  name={countingDown ? "menu-down" : "menu-up"}
+                  style={styles.dayStatsIcon}
+                />
+              </View>
+              <Text
+                style={[styles.dayStatsCount, { color: mainColorText }]}
+                variant="headlineMedium"
+              >
+                {Math.abs(dateCount.count)}
+              </Text>
+              <Text style={[styles.dayStatsUnit, { color: mainColorText }]} variant="bodySmall">
+                {t("common:timeUnits.days", { count: Math.abs(dateCount.count) })}
+              </Text>
+            </Fragment>
+          ) : (
+            <Fragment>
               <Icon
-                color={countingDown ? backgroundColor : mainColor}
-                name={countingDown ? "menu-down" : "menu-up"}
-                style={styles.dayStatsIcon}
+                color={colors.warning}
+                // name="calendar-check"
+                name="alert-decagram"
+                style={styles.dayStatsTodayIcon}
               />
-            </View>
+            </Fragment>
           )}
-          <Text style={[styles.dayStatsCount, { color: mainColorText }]} variant="headlineMedium">
-            {Math.abs(dateCount.count)}
-          </Text>
-          <Text style={[styles.dayStatsUnit, { color: mainColorText }]} variant="bodySmall">
-            {t("common:timeUnits.days", { count: Math.abs(dateCount.count) })}
-          </Text>
         </View>
       </Surface>
     </TouchableRipple>
@@ -104,7 +127,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderRadius: 8,
     overflow: "hidden",
-    borderWidth: 2,
   },
   dayContent: {
     flexGrow: 1,
@@ -149,7 +171,11 @@ const styles = StyleSheet.create({
     left: -(iconFontSize / 2 - iconFontOffset),
     borderRadius: iconFontSize * 2,
   },
+  dayStatsTodayIcon: {
+    fontSize: iconFontSize * 1.25,
+  },
   dayStatsUnit: {
+    // TODO: Determine whether unit should be centered with day count (offsets it) or not
     position: "absolute",
     bottom: 4,
     opacity: 0.8,
