@@ -87,6 +87,9 @@
   },
   "settingsDeveloper": {
     "title": "Depurar",
+    "copyDebugDescription": "Mantenga presionado para copiar la información de depuración",
+    "copyDebugTitle": "Copiar información de depuración",
+    "copyDebugSuccess": "Información de depuración copiada",
     "exitDeveloperButton": "Salir del Modo de Desarrollo",
     "exitDeveloperConfirmDescription": "¿Está seguro de que desea salir del modo de desarrollo?",
     "exitDeveloperConfirmTitle": "¿Salir del modo de desarrollo?",

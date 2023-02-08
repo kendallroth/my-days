@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import * as Clipboard from "expo-clipboard";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
 import React from "react";
@@ -49,6 +50,35 @@ const DeveloperScreen = () => {
     );
   };
 
+  const onCopyDebugInformation = async () => {
+    interface DeviceInfoItem {
+      key: string;
+      value: string;
+    }
+
+    const buildInfoItems: DeviceInfoItem[] = [
+      { key: "buildVersion", value: config.build.version },
+      { key: "buildNumber", value: config.build.versionBuild },
+      { key: "buildHash", value: config.build.versionHash },
+      { key: "releaseChannel", value: config.build.releaseChannel },
+      { key: "runtimeVersion", value: config.build.runtimeVersion },
+    ];
+    const buildInfo = buildInfoItems.map((i) => `${i.key}: ${i.value}`).join("\n");
+    const buildSection = `=== Build =====\n${buildInfo}`;
+
+    const deviceInfoItems: DeviceInfoItem[] = [
+      { key: "model", value: Device.modelName ?? "N/A" },
+      { key: "os", value: Device.osName ?? "N/A" },
+      { key: "type", value: Device.isDevice ? "phone" : "emulator" },
+    ];
+    const deviceInfo = deviceInfoItems.map((i) => `${i.key}: ${i.value}`).join("\n");
+    const deviceSection = `=== Device =====\n${deviceInfo}`;
+
+    await Clipboard.setStringAsync(`MyDays Device Info\n\n${buildSection}\n\n${deviceSection}`);
+
+    notify(t("screens:settingsDeveloper.copyDebugSuccess"));
+  };
+
   /**
    * Exit developer mode
    */
@@ -73,7 +103,7 @@ const DeveloperScreen = () => {
   return (
     <Page>
       <AppBar title={t("screens:settingsDeveloper.title")} />
-      <ScrollView contentContainerStyle={styles.pageContent}>
+      <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
         <List.Subheader style={styles.listSubheader}>
           {t("screens:settingsDeveloper.listSectionApp")}
         </List.Subheader>
@@ -132,6 +162,13 @@ const DeveloperScreen = () => {
           onLongPress={onAppPopulate}
           onPress={() => {}}
         />
+        <List.Item
+          description={t("screens:settingsDeveloper.copyDebugDescription")}
+          left={(leftProps) => <List.Icon {...leftProps} icon="content-copy" />}
+          title={t("screens:settingsDeveloper.copyDebugTitle")}
+          onLongPress={onCopyDebugInformation}
+          onPress={() => {}}
+        />
         <Button style={styles.exitButton} textColor={colors.error} onPress={onExitDeveloper}>
           {t("screens:settingsDeveloper.exitDeveloperButton")}
         </Button>
@@ -143,6 +180,9 @@ const DeveloperScreen = () => {
 const styles = StyleSheet.create({
   pageContent: {
     flexGrow: 1,
+  },
+  pageScroll: {
+    flex: 1,
   },
   listSubheader: {
     marginTop: 16,
