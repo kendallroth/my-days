@@ -8,7 +8,7 @@ const runningInExpo = Constants.appOwnership === "expo";
 
 // Some application items use the Expo Go version when running through Expo app
 const applicationId = !runningInExpo ? Application.applicationId ?? "N/A" : "N/A";
-const version = !runningInExpo ? Application.nativeApplicationVersion : packageVersion;
+const version = !runningInExpo ? Application.nativeApplicationVersion : `${packageVersion}*`;
 const versionBuild = !runningInExpo ? Application.nativeBuildVersion : "N/A";
 
 /** App build information */
@@ -44,6 +44,10 @@ interface AppConfig {
   links: AppConfigLinks;
 }
 
+// NOTE: Fix an odd bug in development where env variable was an empty object???
+const versionHashRaw = Constants.expoConfig?.extra?.easBuildGitCommit;
+const versionHash = typeof versionHashRaw === "string" ? versionHashRaw.substring(0, 8) : "N/A";
+
 const config: AppConfig = {
   build: {
     applicationId,
@@ -53,7 +57,7 @@ const config: AppConfig = {
     runtimeVersion: Updates.runtimeVersion || "N/A",
     version: version ?? packageVersion,
     versionBuild: versionBuild ?? packageVersion,
-    versionHash: Constants.expoConfig?.extra?.easBuildGitCommit?.substring(0, 8) ?? "N/A",
+    versionHash,
   },
   links: {
     developerEmail: "kendall@kendallroth.ca",

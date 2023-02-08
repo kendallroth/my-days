@@ -10,12 +10,15 @@ import { ExpoConfig } from "@expo/config";
 const appVariant = process.env.APP_VARIANT;
 let appVariantAppIdSuffix = "";
 let appVariantNameSuffix = "";
+let appVariantSchemeSuffix = "";
 if (appVariant === "development") {
   appVariantAppIdSuffix = ".dev";
   appVariantNameSuffix = " (dev)";
+  appVariantSchemeSuffix = "-dev";
 } else if (appVariant === "preview") {
   appVariantAppIdSuffix = ".preview";
   appVariantNameSuffix = " (preview)";
+  appVariantSchemeSuffix = "-preview";
 }
 
 // Light variation of the "technical" primary colour, but matching the actual "primary" light theme color.
@@ -71,7 +74,7 @@ export default (): ExpoConfig => ({
 
   jsEngine: "hermes",
   // External link configuration prefix/scheme
-  scheme: "my-days",
+  scheme: `my-days${appVariantSchemeSuffix}`,
 
   // Theme
   icon: "./assets/icon_shadow.png",
