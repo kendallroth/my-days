@@ -28,8 +28,8 @@
     "share": "Share"
   },
   "daySharedLink": {
-    "dayAddConfirmDescription": "Are you sure you want to add this shared day ({{ date, MMM DD, YYYY }})?",
-    "dayAddConfirmTitle": "Add '{{ title }}'?",
+    "dayAddConfirmDate": "{{ date, MMM DD, YYYY }}",
+    "dayAddConfirmTitle": "Add shared day?",
     "dayAddDuplicateError": "Shared day was already added",
     "dayAddSuccess": "Added shared day ('{{ title }}')",
     "linkError": "Error opening external link"

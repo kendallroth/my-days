@@ -8,11 +8,15 @@ import React, { ReactElement } from "react";
 import { HomeScreen } from "@screens/Home";
 import { SettingsRouter } from "@screens/Settings";
 import { type SettingsRouterParams } from "@screens/Settings/SettingsRouter";
+import { type Day } from "@typings/day.types";
 
 import { useAppOpenLink } from "./app-link.hook";
 
 export type RootRouterParams = {
-  HomeScreen: undefined;
+  HomeScreen: {
+    /** Shared day parsed from external link  */
+    sharedDay?: Day;
+  };
   SettingsRouter: NavigatorScreenParams<SettingsRouterParams> | undefined;
 };
 

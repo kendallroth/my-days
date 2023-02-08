@@ -1,21 +1,20 @@
-import dayjs from "dayjs";
+import { useNavigation } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 import { QueryParams } from "expo-linking";
 import { useTranslation } from "react-i18next";
-import { Alert } from "react-native";
 
 import { CodedError } from "@errors";
-import { useAppDispatch, useMounted, useSnackbar } from "@hooks";
+import { useMounted, useSnackbar } from "@hooks";
 import { store } from "@store";
-import { addDay } from "@store/slices/days";
 import { Day } from "@typings/day.types";
 import { parseDay } from "@utilities/day-parse.util";
-import { sleep } from "@utilities/misc.util";
+
+import { RootRouterNavigation } from "./AppRouter";
 
 /** Detect and handle external links used to open the app */
 export const useAppOpenLink = () => {
-  const { notify, notifyError } = useSnackbar();
-  const dispatch = useAppDispatch();
+  const { notifyError } = useSnackbar();
+  const navigation = useNavigation<RootRouterNavigation>();
   const { t } = useTranslation(["common", "screens"]);
 
   /** Determine how to handle various external links */
@@ -56,32 +55,7 @@ export const useAppOpenLink = () => {
       return;
     }
 
-    // NOTE: Considered navigating to HomeScreen and pre-filling "Add Day" form, but discarded
-    //         as it required more work to only happen once when linked and added little...
-
-    // NOTE: Must directly access store state as selectors are not updated (due to 'onMounted'?)
-    if (!storeState.settings.behaviours.confirmSharedDays) {
-      dispatch(addDay(day));
-      notify(t("screens:daySharedLink.dayAddSuccess", { title: day.title }));
-      return;
-    }
-
-    // Briefly pause to allow alert to display properly
-    await sleep(100);
-    Alert.alert(
-      t("screens:daySharedLink.dayAddConfirmTitle", { title: day.title }),
-      t("screens:daySharedLink.dayAddConfirmDescription", { date: dayjs(day.date) }),
-      [
-        { text: t("common:choices.no"), style: "cancel" },
-        {
-          text: t("common:choices.yes"),
-          onPress: () => {
-            dispatch(addDay(day));
-            notify(t("screens:daySharedLink.dayAddSuccess", { title: day.title }));
-          },
-        },
-      ],
-    );
+    navigation.navigate("HomeScreen", { sharedDay: day });
   };
 
   // Check whether app was opened via a link, as well as handle updates to the "opening" link.
