@@ -77,8 +77,6 @@ An APK can be generated for manual device testing with `eas build -p android --p
 
 iOS builds can be generated for specifically provisioned phones, via an ad hoc provisioning process (requires registering device via UDID with Apple). Once provisioned, builds can be generated for manual device testing with `eas build -p ios --profile [profile]`, where profile is either `development` (development build) or `preview` (production-like build). Once the remote build finishes, the resulting bundle can be installed on a provisioned device from the terminal or Expo site.
 
-> **NOTE:** Need to finish investigating Apple ad-hoc distribution and document, then replace current simulator `preview` configuration in `eas.json`.
-
 ### Production Releases
 
 Production builds and releases are handled with [EAS Build](https://docs.expo.dev/build/introduction/) and [EAS Submit](https://docs.expo.dev/submit/introduction/).
