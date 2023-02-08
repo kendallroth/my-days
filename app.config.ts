@@ -12,10 +12,10 @@ let appVariantAppIdSuffix = "";
 let appVariantNameSuffix = "";
 if (appVariant === "development") {
   appVariantAppIdSuffix = ".dev";
-  appVariantNameSuffix = "(dev)";
+  appVariantNameSuffix = " (dev)";
 } else if (appVariant === "preview") {
   appVariantAppIdSuffix = ".preview";
-  appVariantNameSuffix = "(pre)";
+  appVariantNameSuffix = " (preview)";
 }
 
 // Light variation of the "technical" primary colour, but matching the actual "primary" light theme color.
