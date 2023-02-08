@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ability to share days via config link
 - Behaviour setting to confirm adding a shared day
 - App build Git hash on Debug page
+- Ability to copy device debug info
 
 ### Changed
 
