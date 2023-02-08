@@ -1,4 +1,5 @@
-import { type ExpoConfig } from "@expo/config";
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import { ExpoConfig } from "@expo/config";
 
 /**
  * App variant is used to support multiple installed variants of the app, utilizing

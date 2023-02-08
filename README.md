@@ -45,6 +45,18 @@ npm run start -- --clear
 
 Developing in WSL2 requires some [additional configuration](./docs/expo-with-wsl2.md) and different start up process.
 
+## Environment Variables
+
+Environment variables can be used to configure the build process (`app.config.ts`) or the app itself (accessed via `Constants.expoConfig.extras`). However, env variables **must** be set differently depending on the execution environment! In development, env variables must be passed into the NPM script. In EAS Build, environment variables come from `eas.json`. In EAS Update, environment variables come from the local environment. Knowing this distinction is crucial to proper build/updates!
+
+- [EAS Build](https://docs.expo.dev/build-reference/variables/)
+- [EAS Update](https://docs.expo.dev/eas-update/environment-variables/)
+
+| Name | Description |
+|------|-------------|
+| `APP_VARIANT` | App variant determines whether a suffix should be added to Package/Bundle ID to allow multiple installations (non-prod)
+
+
 ## Releases
 
 Releases can be deployed through Expo Go (for testing) or the Expo managed build system (for release). The app version is taken from the `package.json`, which should be updated before every major deployment. App environment configuration is possible with the `expo-updates` package, which exposes the value of the `releaseChannel` used when building the app.
