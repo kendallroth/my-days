@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import * as Application from "expo-application";
 import * as Clipboard from "expo-clipboard";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
@@ -62,6 +63,7 @@ const DeveloperScreen = () => {
       { key: "buildHash", value: config.build.versionHash },
       { key: "releaseChannel", value: config.build.releaseChannel },
       { key: "runtimeVersion", value: config.build.runtimeVersion },
+      { key: "applicationId", value: Application.applicationId ?? "N/A" },
     ];
     const buildInfo = buildInfoItems.map((i) => `${i.key}: ${i.value}`).join("\n");
     const buildSection = `=== Build =====\n${buildInfo}`;
@@ -129,9 +131,15 @@ const DeveloperScreen = () => {
           value={config.build.runtimeVersion}
         />
         <DeveloperListItem
-          title={t("screens:settingsDeveloper.listItemExpo")}
-          value={Constants.expoVersion ?? "N/A"}
+          title={t("screens:settingsDeveloper.listItemApplicationId")}
+          value={config.build.applicationId}
         />
+        {Constants.expoVersion && (
+          <DeveloperListItem
+            title={t("screens:settingsDeveloper.listItemExpo")}
+            value={Constants.expoVersion ?? "N/A"}
+          />
+        )}
         <List.Subheader style={styles.listSubheader}>
           {t("screens:settingsDeveloper.listSectionDevice")}
         </List.Subheader>

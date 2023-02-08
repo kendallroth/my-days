@@ -93,6 +93,7 @@
     "exitDeveloperButton": "Salir del Modo de Desarrollo",
     "exitDeveloperConfirmDescription": "¿Está seguro de que desea salir del modo de desarrollo?",
     "exitDeveloperConfirmTitle": "¿Salir del modo de desarrollo?",
+    "listItemApplicationId": "ID de aplicación",
     "listItemBuildHash": "Construir hash",
     "listItemBuildNumber": "Número de compilación",
     "listItemBuildVersion": "Versión",

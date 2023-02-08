@@ -6,12 +6,15 @@ import { version as packageVersion } from "../../package.json";
 
 const runningInExpo = Constants.appOwnership === "expo";
 
-// Application versions use the Expo Go version when running through Expo app
+// Some application items use the Expo Go version when running through Expo app
+const applicationId = !runningInExpo ? Application.applicationId ?? "N/A" : "N/A";
 const version = !runningInExpo ? Application.nativeApplicationVersion : packageVersion;
 const versionBuild = !runningInExpo ? Application.nativeBuildVersion : "N/A";
 
 /** App build information */
 interface AppBuildInfo {
+  /** Package (Android) / Bundle ID (iOS) */
+  applicationId: string;
   /** EAS Build/Update release channel */
   releaseChannel: string;
   /** EAS Updates runtime version (limits updates to matching versions) */
@@ -43,6 +46,7 @@ interface AppConfig {
 
 const config: AppConfig = {
   build: {
+    applicationId,
     // NOTE: Release channel and runtime version are only present with update workflow (and not in development builds)!
     // NOTE: Loose falsey checks are used to avoid empty strings (development)
     releaseChannel: Updates.channel || "default",

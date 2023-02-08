@@ -93,6 +93,7 @@
     "exitDeveloperButton": "Exit Developer Mode",
     "exitDeveloperConfirmDescription": "Are you sure you want to exit developer mode?",
     "exitDeveloperConfirmTitle": "Exit Developer Mode?",
+    "listItemApplicationId": "Application ID",
     "listItemBuildHash": "Build Hash",
     "listItemBuildNumber": "Build Number",
     "listItemBuildVersion": "Version",
