@@ -53,7 +53,7 @@ const config: AppConfig = {
     runtimeVersion: Updates.runtimeVersion || "N/A",
     version: version ?? packageVersion,
     versionBuild: versionBuild ?? packageVersion,
-    versionHash: Constants.expoConfig?.extra?.EAS_BUILD_GIT_COMMIT_HASH?.substring(0, 8) ?? "N/A",
+    versionHash: Constants.expoConfig?.extra?.easBuildGitCommit?.substring(0, 8) ?? "N/A",
   },
   links: {
     developerEmail: "kendall@kendallroth.ca",

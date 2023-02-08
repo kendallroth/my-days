@@ -11,11 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Ability to share days via config link
 - Behaviour setting to confirm adding a shared day
-- App build Git hash on Debug page
+- Show build Git hash and application ID on Debug page
 - Ability to copy device debug info
 
 ### Changed
 
+- Support multiple installs with dynamic application ID
 - Indicate when countdown/countup day is current date
 
 ## [0.1.1] - 2023-02-05

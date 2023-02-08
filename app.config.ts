@@ -8,11 +8,14 @@ import { ExpoConfig } from "@expo/config";
  * @source https://docs.expo.dev/build-reference/variants/
  */
 const appVariant = process.env.APP_VARIANT;
-let appVariantSuffix = "";
+let appVariantAppIdSuffix = "";
+let appVariantNameSuffix = "";
 if (appVariant === "development") {
-  appVariantSuffix = ".dev";
+  appVariantAppIdSuffix = ".dev";
+  appVariantNameSuffix = "(dev)";
 } else if (appVariant === "preview") {
-  appVariantSuffix = ".preview";
+  appVariantAppIdSuffix = ".preview";
+  appVariantNameSuffix = "(pre)";
 }
 
 // Light variation of the "technical" primary colour, but matching the actual "primary" light theme color.
@@ -55,7 +58,7 @@ const runtimeVersion: ExpoConfig["runtimeVersion"] = {
 
 export default (): ExpoConfig => ({
   // Information
-  name: "My Days",
+  name: `My Days${appVariantNameSuffix}`,
   slug: "my-days",
   githubUrl: "https://github.com/kendallroth/my-days",
   version: versionName,
@@ -86,7 +89,7 @@ export default (): ExpoConfig => ({
       foregroundImage: "./assets/android_launcher_foreground.png",
       backgroundColor: lightenedPrimaryColor,
     },
-    package: `ca.kendallroth.my_days${appVariantSuffix}`,
+    package: `ca.kendallroth.my_days${appVariantAppIdSuffix}`,
     permissions: [],
     versionCode: androidVersionCode,
     playStoreUrl: "https://play.google.com/store/apps/details?id=ca.kendallroth.my_days",
@@ -99,7 +102,7 @@ export default (): ExpoConfig => ({
   // iOS overrides
   ios: {
     buildNumber: `${iosBuildNumber}`,
-    bundleIdentifier: `ca.kendallroth.my-days${appVariantSuffix}`,
+    bundleIdentifier: `ca.kendallroth.my-days${appVariantAppIdSuffix}`,
     // Icon must be 1024x1024 (no transparency)
     icon: "./assets/icon_shadow.png",
     supportsTablet: false,
@@ -107,6 +110,7 @@ export default (): ExpoConfig => ({
 
   // Deployment
   extra: {
+    easBuildGitCommit: process.env.EAS_BUILD_GIT_COMMIT_HASH ?? null,
     eas: {
       projectId: "0f596901-0769-4dcf-af51-73106137d331",
     },
