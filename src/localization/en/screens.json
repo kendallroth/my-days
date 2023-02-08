@@ -87,6 +87,9 @@
   },
   "settingsDeveloper": {
     "title": "Debug",
+    "copyDebugDescription": "Press and hold to copy debug information",
+    "copyDebugTitle": "Copy debug information",
+    "copyDebugSuccess": "Copied debug information",
     "exitDeveloperButton": "Exit Developer Mode",
     "exitDeveloperConfirmDescription": "Are you sure you want to exit developer mode?",
     "exitDeveloperConfirmTitle": "Exit Developer Mode?",
