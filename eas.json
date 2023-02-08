@@ -27,7 +27,10 @@
       "channel": "preview",
       "env": {
         "APP_VARIANT": "preview"
-      },
+      }
+    },
+    "preview:simulator": {
+      "extends": "preview",
       "ios": {
         "simulator": true
       }

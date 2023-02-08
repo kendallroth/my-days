@@ -45,7 +45,9 @@ const parseDay = (day: any): Day => {
 
 /** Safely parse/transform a parameterized query string */
 const parseParamString = (params: QueryParams, key: string): string | undefined => {
-  const raw = params[key];
+  // NOTE: Sometimes iOS parses the link incorrectly and escapes the '&' characters, which adds
+  //         an extra 'amp;' in front of subsequent keys (needs to be checked)...
+  const raw = params[key] ?? params[`amp;${key}`];
   if (!raw) return undefined;
 
   const createdAtSingle = Array.isArray(raw) ? raw[0] : raw;
