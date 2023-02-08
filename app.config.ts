@@ -1,5 +1,19 @@
 import { type ExpoConfig } from "@expo/config";
 
+/**
+ * App variant is used to support multiple installed variants of the app, utilizing
+ *   a customized Package ID (Android) or Bundle ID (iOS) for development builds.
+ *
+ * @source https://docs.expo.dev/build-reference/variants/
+ */
+const appVariant = process.env.APP_VARIANT;
+let appVariantSuffix = "";
+if (appVariant === "development") {
+  appVariantSuffix = ".dev";
+} else if (appVariant === "preview") {
+  appVariantSuffix = ".preview";
+}
+
 // Light variation of the "technical" primary colour, but matching the actual "primary" light theme color.
 const lightenedPrimaryColor = "#00629E";
 
@@ -9,18 +23,18 @@ const lightenedPrimaryColor = "#00629E";
  * Android - 'versionName'
  * iOS     - 'CFBundleShortVersionString'
  */
-const versionName = "0.1.1";
+const versionName = "0.2.0";
 /**
  * Android build code (must increment with each submitted build)
  */
-const androidVersionCode = 2;
+const androidVersionCode = 3;
 /**
  * iOS semantic build code (increment with each submitted build)
  *
  * NOTE: Different from Android version code in that it may be reset
  *         with each version change; however, this is deemed confusing!
  */
-const iosBuildNumber = 2;
+const iosBuildNumber = 3;
 
 /**
  * Runtime version associated with build manifest, used when applying OTA updates.
@@ -71,7 +85,7 @@ export default (): ExpoConfig => ({
       foregroundImage: "./assets/android_launcher_foreground.png",
       backgroundColor: lightenedPrimaryColor,
     },
-    package: "ca.kendallroth.my_days",
+    package: `ca.kendallroth.my_days${appVariantSuffix}`,
     permissions: [],
     versionCode: androidVersionCode,
     playStoreUrl: "https://play.google.com/store/apps/details?id=ca.kendallroth.my_days",
@@ -84,7 +98,7 @@ export default (): ExpoConfig => ({
   // iOS overrides
   ios: {
     buildNumber: `${iosBuildNumber}`,
-    bundleIdentifier: "ca.kendallroth.my-days",
+    bundleIdentifier: `ca.kendallroth.my-days${appVariantSuffix}`,
     // Icon must be 1024x1024 (no transparency)
     icon: "./assets/icon_shadow.png",
     supportsTablet: false,

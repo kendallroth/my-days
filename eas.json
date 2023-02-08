@@ -6,21 +6,31 @@
   "build": {
     "development": {
       "extends": "production",
-      "developmentClient": true,
-      "distribution": "internal",
-      "channel": "development"
-    },
-    "preview": {
-      "extends": "production",
-      "distribution": "internal",
-      "channel": "preview"
-    },
-    "preview:apk": {
-      "extends": "preview",
       "android": {
         "buildType": "apk"
       },
-      "channel": "preview"
+      "distribution": "internal",
+      "channel": "development",
+      "env": {
+        "APP_VARIANT": "development"
+      },
+      "ios": {
+        "simulator": true
+      }
+    },
+    "preview": {
+      "extends": "production",
+      "android": {
+        "buildType": "apk"
+      },
+      "distribution": "internal",
+      "channel": "preview",
+      "env": {
+        "APP_VARIANT": "preview"
+      },
+      "ios": {
+        "simulator": true
+      }
     },
     "production": {
       "node": "16.6.0",
