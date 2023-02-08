@@ -52,6 +52,8 @@ export default (): ExpoConfig => ({
   primaryColor: lightenedPrimaryColor,
 
   jsEngine: "hermes",
+  // External link configuration prefix/scheme
+  scheme: "my-days",
 
   // Theme
   icon: "./assets/icon_shadow.png",

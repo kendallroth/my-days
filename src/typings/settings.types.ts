@@ -1,6 +1,7 @@
 /** Customizable app behaviour settings */
 export interface IAppBehaviours {
-  // TODO
+  /** Whether to prompt for confirmation before adding shared day via link */
+  confirmSharedDays: boolean;
 }
 
 /** Supported app languages */

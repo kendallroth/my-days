@@ -113,11 +113,14 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>((props: BottomS
   };
 
   const onHide = () => {
-    // Call the closure callback once hide animation has finished, at which point another
-    //   modal could be displayed (earliest gug-free point).
-    onHideCallbackRef.current?.();
+    // Call the closure callback once hide animation has finished, at which point another modal
+    //   could be displayed (earliest point). However, this still isn't quite enough and sometimes
+    //   requires waiting an additional brief period to ensure modal has completely hidden.
+    setTimeout(() => {
+      onHideCallbackRef.current?.();
+    }, 10);
 
-    // Clean up the 'onHide' callback ref soon after completing the closure
+    // Clean up the 'onHide' callback ref soon after completing the modal closure
     setTimeout(() => {
       onHideCallbackRef.current = undefined;
     }, 250);

@@ -1,4 +1,5 @@
 import React, { ReactElement } from "react";
+import { StyleSheet } from "react-native";
 import { List, Switch } from "react-native-paper";
 
 import { IAppBehaviours } from "@typings/settings.types";
@@ -6,6 +7,7 @@ import { IAppBehaviours } from "@typings/settings.types";
 type BehavioursScreenListItemSwitchProps = {
   /** Switch description */
   description?: string;
+  disabled?: boolean;
   /** Behaviour state key */
   stateKey: keyof IAppBehaviours;
   /** Switch title */
@@ -19,17 +21,29 @@ type BehavioursScreenListItemSwitchProps = {
 const BehavioursScreenListItemSwitch = (
   props: BehavioursScreenListItemSwitchProps,
 ): ReactElement => {
-  const { description, stateKey, title, value, onChange } = props;
+  const { description, disabled, stateKey, title, value, onChange } = props;
 
   return (
     <List.Item
       description={description}
+      disabled={disabled}
       right={(): ReactElement => (
-        <Switch value={value} onValueChange={(val: boolean): void => onChange(stateKey, val)} />
+        <Switch
+          disabled={disabled}
+          style={styles.itemSwitch}
+          value={value}
+          onValueChange={(val: boolean): void => onChange(stateKey, val)}
+        />
       )}
       title={title}
     />
   );
 };
+
+const styles = StyleSheet.create({
+  itemSwitch: {
+    marginLeft: 4,
+  },
+});
 
 export default BehavioursScreenListItemSwitch;

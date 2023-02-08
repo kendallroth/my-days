@@ -1,4 +1,4 @@
-import { flatListIdExtractor } from "./list.util";
+import { flatListIdExtractor } from "../list.util";
 
 describe("'flatListIdExtractor'", () => {
   it("extracts key properly", () => {

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Ability to share days via config link
+- Behaviour setting to confirm adding a shared day
+
+### Changed
+
+- Indicate when countdown/countup day is current date
+
 ## [0.1.1] - 2023-02-05
 
 ### Changed

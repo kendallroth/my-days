@@ -34,7 +34,7 @@ const ConfirmDialog = (props: ConfirmDialogProps): ReactElement => {
   const { children, dismissable = false, title, visible, onCancel, onConfirm } = props;
 
   const { t } = useTranslation(["common"]);
-  const { colors } = useTheme();
+  const { colors, fonts } = useTheme();
 
   cancelText = cancelText ?? t("common:choices.cancel");
   confirmText = confirmText ?? t("common:choices.confirm");
@@ -42,7 +42,7 @@ const ConfirmDialog = (props: ConfirmDialogProps): ReactElement => {
   return (
     <Portal>
       <Dialog dismissable={dismissable} visible={visible} onDismiss={onCancel}>
-        <Dialog.Title>{title}</Dialog.Title>
+        <Dialog.Title style={{ ...fonts.titleLarge, fontWeight: "normal" }}>{title}</Dialog.Title>
         {Boolean(children) && <Dialog.Content>{children}</Dialog.Content>}
         <Dialog.Actions compact>
           {Boolean(onCancel) && (

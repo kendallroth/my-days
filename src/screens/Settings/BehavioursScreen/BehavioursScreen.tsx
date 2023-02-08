@@ -34,11 +34,10 @@ const BehavioursScreen = (): ReactElement => {
       <AppBar title={t("screens:settingsBehaviours.title")} />
       <ScrollView contentContainerStyle={styles.pageContent}>
         <BehavioursScreenListItemSwitch
-          // TODO: Remove type-checking skip!
-          // @ts-ignore
-          stateKey=""
-          title={t("common:errors.notImplemented")}
-          value={false}
+          description={t("screens:settingsBehaviours.behaviourItemConfirmSharedDaysDescription")}
+          stateKey="confirmSharedDays"
+          title={t("screens:settingsBehaviours.behaviourItemConfirmSharedDaysTitle")}
+          value={appBehaviours.confirmSharedDays}
           onChange={onBooleanChange}
         />
       </ScrollView>

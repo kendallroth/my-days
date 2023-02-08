@@ -21,6 +21,7 @@ Simple app that counts down/up to important dates!
 - [ ] Reorder dates in list (via drag)
 - [ ] Customize date count unit
 - [ ] Show date details (additional units)
+- [x] Ability to share days (via config link)
 - [x] Add new dates
 - [x] Edit existing dates
 - [x] Delete existing dates

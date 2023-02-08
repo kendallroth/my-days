@@ -1,4 +1,4 @@
-import { formatDateString } from "./date.util";
+import { formatDateString } from "../date.util";
 
 describe("'formatDateString'", () => {
   it("formats with default readable format", () => {
