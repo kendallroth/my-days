@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 
 /** Insert space between elements (exploiting 'flexGrow') */
-const Spacer = (): ReactElement => {
+const Spacer = () => {
   return <View style={styles.spacer} />;
 };
 

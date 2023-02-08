@@ -1,13 +1,13 @@
 import { openURL } from "expo-linking";
-import React, { ReactElement } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Avatar, Chip, IconButton, Text, useTheme } from "react-native-paper";
 
 import { getShadowStyles } from "@styles/utilities";
+import { type LeftRight, type MaterialCommunityIcons } from "@typings/app.types";
 import { getInitials } from "@utilities/string";
 
-import type { Contributor, ContributorActionType } from "./ContributorsScreen";
-import type { LeftRight, MaterialCommunityIcons } from "@typings/app.types";
+import { type Contributor, type ContributorActionType } from "./ContributorsScreen";
 
 type ContributorListItemProps = {
   /** List item alignment */
@@ -23,7 +23,7 @@ const ContributorActionIconMap: Record<ContributorActionType, keyof MaterialComm
   testing: "test-tube",
 };
 
-const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
+const ContributorListItem = (props: ContributorListItemProps) => {
   const { align, contributor } = props;
 
   const { colors } = useTheme();
@@ -38,7 +38,7 @@ const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
   };
 
   /** Open an external link */
-  const onLink = (link: string): void => {
+  const onLink = (link: string) => {
     openURL(link);
   };
 
@@ -59,7 +59,7 @@ const ContributorListItem = (props: ContributorListItemProps): ReactElement => {
       <View style={styles.contributorContent}>
         <Text variant="titleMedium">{contributor.name}</Text>
         <View style={styles.contributorActions}>
-          {contributor.actions.map((a): ReactElement => {
+          {contributor.actions.map((a) => {
             const icon = ContributorActionIconMap[a.type];
             return (
               <Chip key={a.type} icon={icon} style={styles.contributorActionsChip} mode="outlined">

@@ -1,15 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import * as Linking from "expo-linking";
-import { QueryParams } from "expo-linking";
+import { type QueryParams } from "expo-linking";
 import { useTranslation } from "react-i18next";
 
 import { CodedError } from "@errors";
 import { useMounted, useSnackbar } from "@hooks";
 import { store } from "@store";
-import { Day } from "@typings/day.types";
+import { type Day } from "@typings/day.types";
 import { parseDay } from "@utilities/day-parse.util";
 
-import { RootRouterNavigation } from "./AppRouter";
+import { type RootRouterNavigation } from "./AppRouter";
 
 /** Detect and handle external links used to open the app */
 export const useAppOpenLink = () => {

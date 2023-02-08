@@ -1,10 +1,10 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-import React, { ReactElement } from "react";
-import { StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native";
+import React, { type ReactElement } from "react";
+import { type StyleProp, StyleSheet, type TextStyle, View, type ViewStyle } from "react-native";
 import { Text } from "react-native-paper";
 
 import { useAppTheme } from "@hooks";
-import { MaterialCommunityIcons } from "@typings/app.types";
+import { type MaterialCommunityIcons } from "@typings/app.types";
 
 type AlertType = "info" | "error" | "warning";
 
@@ -23,7 +23,7 @@ type AlertProps = {
   type?: AlertType;
 };
 
-const Alert = (props: AlertProps): ReactElement | null => {
+const Alert = (props: AlertProps) => {
   const {
     children,
     icon = "alert-decagram",

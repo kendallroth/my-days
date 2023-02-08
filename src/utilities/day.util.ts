@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 
-import { DATE_FORMAT_ISO_SHORT } from "./date.util";
+import { type Day } from "@typings/day.types";
 
-import type { Day } from "@typings/day.types";
+import { DATE_FORMAT_ISO_SHORT } from "./date.util";
 
 interface IDayCountDisplay {
   /** Day count value (can be negative if invalid!) */

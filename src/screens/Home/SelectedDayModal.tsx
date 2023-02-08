@@ -1,13 +1,12 @@
-import React, { forwardRef, ReactElement } from "react";
+import React, { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { List, Text } from "react-native-paper";
 
 import { BottomSheet } from "@components/dialogs";
-
-import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import type { MaterialCommunityIcons, UpDown } from "@typings/app.types";
-import type { Day } from "@typings/day.types";
+import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
+import { type MaterialCommunityIcons, type UpDown } from "@typings/app.types";
+import { type Day } from "@typings/day.types";
 
 type SelectedDayModalProps = {
   day: Day | null;
@@ -27,7 +26,7 @@ interface SelectedDayOption {
 }
 
 const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
-  (props: SelectedDayModalProps, ref): ReactElement => {
+  (props: SelectedDayModalProps, ref) => {
     const { day, dayPosition, onClose, onEdit, onDelete, onMove, onShare } = props;
 
     const { t } = useTranslation(["screens"]);

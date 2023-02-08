@@ -1,9 +1,9 @@
-import { NavigatorScreenParams } from "@react-navigation/native";
+import { type NavigatorScreenParams } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
-  NativeStackNavigationProp,
+  type NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
-import React, { ReactElement } from "react";
+import React from "react";
 
 import { HomeScreen } from "@screens/Home";
 import { SettingsRouter } from "@screens/Settings";
@@ -24,7 +24,7 @@ export type RootRouterNavigation = NativeStackNavigationProp<RootRouterParams>;
 
 const Stack = createNativeStackNavigator<RootRouterParams>();
 
-const AppRouter = (): ReactElement => {
+const AppRouter = () => {
   // TODO: Investigate adapting React Navigation theme to use MD3 colors
   // Source: https://callstack.github.io/react-native-paper/theming.html
 

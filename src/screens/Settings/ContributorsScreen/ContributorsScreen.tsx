@@ -1,5 +1,5 @@
 import { openURL } from "expo-linking";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
@@ -42,11 +42,11 @@ const contributors: Contributor[] = [
   },
 ];
 
-const ContributorsScreen = (): ReactElement => {
+const ContributorsScreen = () => {
   const { t } = useTranslation(["screens"]);
 
   /** Open an external link */
-  const onLink = (link: string): void => {
+  const onLink = (link: string) => {
     openURL(link);
   };
 
@@ -56,15 +56,9 @@ const ContributorsScreen = (): ReactElement => {
       <ScrollView contentContainerStyle={styles.pageContent}>
         <Quote>{t("screens:settingsContributors.contributorThanks")}</Quote>
         <View style={styles.aboutContributorsList}>
-          {contributors.map(
-            (c, idx): ReactElement => (
-              <ContributorListItem
-                key={c.name}
-                align={idx % 2 ? "left" : "right"}
-                contributor={c}
-              />
-            ),
-          )}
+          {contributors.map((c, idx) => (
+            <ContributorListItem key={c.name} align={idx % 2 ? "left" : "right"} contributor={c} />
+          ))}
         </View>
         <View style={styles.aboutContributorsPrompt}>
           <Text variant="bodyMedium">{t("screens:settingsContributors.contributorPrompt")}</Text>

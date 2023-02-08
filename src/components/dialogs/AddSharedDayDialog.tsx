@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
 import { Text } from "react-native-paper";

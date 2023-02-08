@@ -1,8 +1,8 @@
-import React, { ComponentPropsWithoutRef, Fragment, ReactElement } from "react";
-import { Control, useController } from "react-hook-form";
+import React, { type ComponentPropsWithoutRef, Fragment } from "react";
+import { type Control, useController } from "react-hook-form";
 import { Checkbox as RNPCheckbox } from "react-native-paper";
 
-import { Optional } from "@typings/app.types";
+import { type Optional } from "@typings/app.types";
 
 import InputHelperText from "./InputHelperText";
 
@@ -16,7 +16,7 @@ type CheckboxProps = {
   name: string;
 } & Optional<ComponentPropsWithoutRef<typeof RNPCheckbox.Item>, "status">;
 
-const Checkbox = (props: CheckboxProps): ReactElement => {
+const Checkbox = (props: CheckboxProps) => {
   const { control, hint, hideHint, name, position = "trailing", ...rest } = props;
 
   const { field, fieldState, formState } = useController({

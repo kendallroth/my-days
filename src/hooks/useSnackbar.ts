@@ -1,7 +1,7 @@
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback, useContext } from "react";
 
-import { ISnackbarContext, SnackbarContext } from "@contexts";
+import { type ISnackbarContext, SnackbarContext } from "@contexts";
 
 interface ISnackbarHookOptions {
   /** Whether snackbar should be dismissed on screen transition */

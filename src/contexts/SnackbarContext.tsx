@@ -1,4 +1,4 @@
-import React, { ReactElement, useReducer } from "react";
+import React, { type ReactElement, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 import { Snackbar, useTheme } from "react-native-paper";
 
@@ -74,7 +74,7 @@ const reducer = (state: ISnackbarState, action: ISnackbarAction): ISnackbarState
 // @ts-ignore - Will be set by context provider
 const SnackbarContext = React.createContext<ISnackbarContext>({});
 
-const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
+const SnackbarProvider = (props: SnackbarProviderProps) => {
   const { children } = props;
   const [snackbar, snackbarDispatch] = useReducer(reducer, initialState);
 
@@ -118,7 +118,7 @@ const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
    * @param message - Notification message
    * @param options - Snackbar options
    */
-  const notify = (message: string, options: SnackbarOptions = {}): void => {
+  const notify = (message: string, options: SnackbarOptions = {}) => {
     // Close the previous notification
     closeNotification();
 
@@ -134,7 +134,7 @@ const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
    * @param message - Notification message
    * @param options - Snackbar options
    */
-  const notifyError = (message: string, options: SnackbarOptions = {}): void => {
+  const notifyError = (message: string, options: SnackbarOptions = {}) => {
     notify(message, { ...options, type: "error" });
   };
 
@@ -143,7 +143,7 @@ const SnackbarProvider = (props: SnackbarProviderProps): ReactElement => {
    *
    * @param options - Snackbar options
    */
-  const notifyNotImplemented = (options: SnackbarOptions = {}): void => {
+  const notifyNotImplemented = (options: SnackbarOptions = {}) => {
     notify(t("common:errors.notImplemented"), { ...options, type: "error" });
   };
 

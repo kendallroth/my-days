@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { List, useTheme } from "react-native-paper";
 
@@ -15,7 +15,7 @@ type SettingsModalListItemProps = {
   onPress: () => void;
 };
 
-const SettingsModalListItem = (props: SettingsModalListItemProps): ReactElement => {
+const SettingsModalListItem = (props: SettingsModalListItemProps) => {
   const { disabled = false, selected = false, title, onPress, ...rest } = props;
 
   const { colors } = useTheme();
@@ -27,7 +27,7 @@ const SettingsModalListItem = (props: SettingsModalListItemProps): ReactElement 
       style={[disabled ? styles.itemDisabled : undefined]}
       title={title}
       titleStyle={[selected ? styles.itemTitleSelected : undefined]}
-      right={(rightProps): ReactElement | null =>
+      right={(rightProps) =>
         selected ? <List.Icon {...rightProps} color={colors.primary} icon="check-circle" /> : null
       }
       onPress={onPress}

@@ -1,12 +1,11 @@
-import React, { forwardRef, ReactElement, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
 import { Button, Checkbox, useTheme } from "react-native-paper";
 
 import { BottomSheet } from "@components/dialogs";
-
-import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import type { IAppResetOptions } from "@typings/settings.types";
+import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
+import { type IAppResetOptions } from "@typings/settings.types";
 
 type AppResetModalProps = {
   /** App reset handler */
@@ -21,7 +20,7 @@ const initialOptions: IAppResetOptions = {
 };
 
 const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
-  (props: AppResetModalProps, ref): ReactElement => {
+  (props: AppResetModalProps, ref) => {
     const { onReset } = props;
 
     const [resetOptions, setResetOptions] = useState<IAppResetOptions>(initialOptions);
@@ -49,7 +48,7 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
      *
      * @param key - Selected reset option
      */
-    const onOptionPress = (key: AppResetOptionKeys): void => {
+    const onOptionPress = (key: AppResetOptionKeys) => {
       const newOptions: IAppResetOptions = {
         ...resetOptions,
         [key]: !resetOptions[key],
@@ -67,16 +66,14 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
         onOpen={onModalOpen}
       >
         <View style={styles.listItems}>
-          {resetOptionList.map(
-            (option): ReactElement => (
-              <Checkbox.Item
-                key={option}
-                label={resetOptionsMap[option]}
-                status={resetOptions[option] ? "checked" : "unchecked"}
-                onPress={() => onOptionPress(option)}
-              />
-            ),
-          )}
+          {resetOptionList.map((option) => (
+            <Checkbox.Item
+              key={option}
+              label={resetOptionsMap[option]}
+              status={resetOptions[option] ? "checked" : "unchecked"}
+              onPress={() => onOptionPress(option)}
+            />
+          ))}
         </View>
         <Button
           disabled={!hasSelection}

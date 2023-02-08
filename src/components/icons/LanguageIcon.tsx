@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
-import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
+import React from "react";
+import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 import { Badge } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 
@@ -18,7 +18,7 @@ type LanguageIconProps = {
   style?: StyleProp<ViewStyle>;
 };
 
-const LanguageIcon = (props: LanguageIconProps): ReactElement => {
+const LanguageIcon = (props: LanguageIconProps) => {
   const { beta = false, flag, selected = false, size, style } = props;
 
   const { colors } = useAppTheme();

@@ -1,15 +1,15 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { type NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
 import * as Linking from "expo-linking";
-import React, { ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Share, StyleSheet, Vibration, View } from "react-native";
 import { Text } from "react-native-paper";
 
 import {
   AddSharedDayDialog,
-  BottomSheetRef,
+  type BottomSheetRef,
   DeleteDayDialog,
   ManageDaySheet,
 } from "@components/dialogs";
@@ -17,18 +17,17 @@ import { AppBar, Page, ScreenFAB } from "@components/layout";
 import { useAppDispatch, useAppSelector, useAppTheme, useScrollingFab, useSnackbar } from "@hooks";
 import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
 import { selectBehaviours } from "@store/slices/settings";
+import { type UpDown } from "@typings/app.types";
+import { type Day, type DayNew } from "@typings/day.types";
 import { SHARED_DAY_VERSION } from "@utilities/day-parse.util";
+import { type RootRouterParams } from "src/AppRouter";
 
 import DayList from "./DayList";
 import SelectedDayModal from "./SelectedDayModal";
 
-import type { UpDown } from "@typings/app.types";
-import type { Day, DayNew } from "@typings/day.types";
-import type { RootRouterParams } from "src/AppRouter";
-
 type HomeScreenRouteProps = NativeStackScreenProps<RootRouterParams, "HomeScreen">;
 
-const HomeScreen = (): ReactElement | null => {
+const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenRouteProps["navigation"]>();
   const route = useRoute<HomeScreenRouteProps["route"]>();
 

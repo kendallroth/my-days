@@ -5,8 +5,10 @@
  */
 
 import * as SplashScreen from "expo-splash-screen";
-import React, { useEffect, useState } from "react";
-import { Persistor, PersistorSubscribeCallback } from "redux-persist/es/types";
+import { useEffect, useState } from "react";
+import { type Persistor, type PersistorSubscribeCallback } from "redux-persist/es/types";
+
+import type React from "react";
 
 type AppDataLoaderProps = {
   children: React.ReactElement;
@@ -61,7 +63,7 @@ const AppDataLoader = (props: AppDataLoaderProps): React.ReactElement | null => 
    *
    * @param {function} unsubscribe - Persistor watch unsubscribe function
    */
-  const handlePersistor = (unsubscribe: () => void): void => {
+  const handlePersistor = (unsubscribe: () => void) => {
     const { bootstrapped } = persistor.getState();
     if (!bootstrapped) return;
 

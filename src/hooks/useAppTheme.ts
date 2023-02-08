@@ -1,6 +1,6 @@
 import { useTheme } from "react-native-paper";
 
-import { lightTheme } from "@styles/theme";
+import { type lightTheme } from "@styles/theme";
 
 export type AppTheme = typeof lightTheme;
 

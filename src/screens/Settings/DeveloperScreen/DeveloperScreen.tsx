@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import * as Device from "expo-device";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, ScrollView, StyleSheet } from "react-native";
 import { Button, List, useTheme } from "react-native-paper";
@@ -9,14 +9,13 @@ import { Button, List, useTheme } from "react-native-paper";
 import { AppBar, Page } from "@components/layout";
 import config from "@config";
 import { useAppDispatch, useAppLoader, useSnackbar } from "@hooks";
+import { type SettingsRouterNavigation } from "@screens/Settings/SettingsRouter";
 import { addDebugDataThunk, setAppDeveloper } from "@store/slices/settings";
+import { type IAppPopulateOptions } from "@typings/settings.types";
 
 import DeveloperListItem from "./DeveloperListItem";
 
-import type { SettingsRouterNavigation } from "@screens/Settings/SettingsRouter";
-import type { IAppPopulateOptions } from "@typings/settings.types";
-
-const DeveloperScreen = (): ReactElement => {
+const DeveloperScreen = () => {
   const loader = useAppLoader();
   const dispatch = useAppDispatch();
   const navigator = useNavigation<SettingsRouterNavigation>();
@@ -123,7 +122,7 @@ const DeveloperScreen = (): ReactElement => {
         </List.Subheader>
         <List.Item
           description={t("screens:settingsDeveloper.listItemPopulateDescription")}
-          left={(leftProps): ReactElement => <List.Icon {...leftProps} icon="database-plus" />}
+          left={(leftProps) => <List.Icon {...leftProps} icon="database-plus" />}
           title={t("screens:settingsDeveloper.listItemPopulateTitle")}
           onLongPress={onAppPopulate}
           onPress={() => {}}

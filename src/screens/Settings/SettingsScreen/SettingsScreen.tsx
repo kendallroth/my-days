@@ -1,9 +1,10 @@
 import { openURL } from "expo-linking";
-import React, { ReactElement, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Platform, StyleSheet, View } from "react-native";
 import { List, Text, useTheme } from "react-native-paper";
 
+import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
 import { LanguageIcon } from "@components/icons";
 import { AppBar, Page } from "@components/layout";
 import config from "@config";
@@ -17,6 +18,7 @@ import {
   setAppLanguage,
   setAppTheme,
 } from "@store/slices/settings";
+import { type AppLanguage, type AppTheme, type IAppResetOptions } from "@typings/settings.types";
 import { LANGUAGES } from "@utilities/constants";
 import { sleep } from "@utilities/misc.util";
 
@@ -25,12 +27,9 @@ import { LanguageModal } from "./LanguageModal";
 import SettingsListItem from "./SettingsListItem";
 import { ThemeModal } from "./ThemeModal";
 
-import type { BottomSheetRef } from "@components/dialogs/BottomSheet";
-import type { AppLanguage, AppTheme, IAppResetOptions } from "@typings/settings.types";
-
 const DEVELOPER_MODE_TAPS = 10;
 
-const SettingsScreen = (): ReactElement => {
+const SettingsScreen = () => {
   const appResetRef = useRef<BottomSheetRef>(null);
   const languageRef = useRef<BottomSheetRef>(null);
   const themeRef = useRef<BottomSheetRef>(null);
@@ -52,21 +51,21 @@ const SettingsScreen = (): ReactElement => {
   /**
    * Open the language selector
    */
-  const onOpenLanguage = (): void => {
+  const onOpenLanguage = () => {
     languageRef.current?.open();
   };
 
   /**
    * Open the theme selector
    */
-  const onOpenTheme = (): void => {
+  const onOpenTheme = () => {
     themeRef.current?.open();
   };
 
   /**
    * Open the app reset selector
    */
-  const onOpenAppReset = (): void => {
+  const onOpenAppReset = () => {
     appResetRef.current?.open();
   };
 
@@ -75,7 +74,7 @@ const SettingsScreen = (): ReactElement => {
    *
    * @param resetOptions - App reset options
    */
-  const onAppReset = (resetOptions: IAppResetOptions): void => {
+  const onAppReset = (resetOptions: IAppResetOptions) => {
     Alert.alert(
       t("screens:settingsDeveloper.resetDataTitle"),
       t("screens:settingsDeveloper.resetDataDescription"),
@@ -106,7 +105,7 @@ const SettingsScreen = (): ReactElement => {
    *
    * @param value - App language
    */
-  const onSelectLanguage = (value: AppLanguage): void => {
+  const onSelectLanguage = (value: AppLanguage) => {
     // Skip updating app language if selection is current language
     if (value === languageConfig.code) {
       languageRef.current?.close();
@@ -133,7 +132,7 @@ const SettingsScreen = (): ReactElement => {
    *
    * @param value - App theme
    */
-  const onSelectTheme = (value: AppTheme): void => {
+  const onSelectTheme = (value: AppTheme) => {
     dispatch(setAppTheme(value));
 
     themeRef.current?.close();
@@ -142,14 +141,14 @@ const SettingsScreen = (): ReactElement => {
   /**
    * Allow users to suggest an improvement (via email)
    */
-  const onSuggestImprovement = (): void => {
+  const onSuggestImprovement = () => {
     openURL(`mailto:${config.links.developerEmail}?subject="My Days" Suggestion`);
   };
 
   /**
    * Increase developer tap counter
    */
-  const onTapVersion = (): void => {
+  const onTapVersion = () => {
     if (developerMode) return;
 
     const newCount = debugCounter + 1;
@@ -175,7 +174,7 @@ const SettingsScreen = (): ReactElement => {
       <List.Subheader>{t("screens:settings.listSectionCustomize")}</List.Subheader>
       <SettingsListItem
         icon="flag"
-        right={(rightProps): ReactElement => (
+        right={(rightProps) => (
           <LanguageIcon
             {...rightProps}
             beta={languageConfig.beta}
@@ -188,7 +187,7 @@ const SettingsScreen = (): ReactElement => {
       />
       <SettingsListItem
         icon="palette"
-        right={(rightProps): ReactElement => <List.Icon {...rightProps} icon={themeConfig.icon} />}
+        right={(rightProps) => <List.Icon {...rightProps} icon={themeConfig.icon} />}
         title={t("screens:settings.listItemAppearance")}
         onPress={onOpenTheme}
       />
@@ -202,17 +201,15 @@ const SettingsScreen = (): ReactElement => {
       <SettingsListItem
         icon="lightbulb-on"
         title={t("screens:settings.listItemSuggestion")}
-        right={(rightProps): ReactElement => <List.Icon {...rightProps} icon="email-send" />}
+        right={(rightProps) => <List.Icon {...rightProps} icon="email-send" />}
         onPress={onSuggestImprovement}
       />
       <List.Item
         description={t("screens:settingsDeveloper.listItemResetDescription")}
-        left={(leftProps): ReactElement => (
-          <List.Icon {...leftProps} color={colors.primary} icon="lock-reset" />
-        )}
+        left={(leftProps) => <List.Icon {...leftProps} color={colors.primary} icon="lock-reset" />}
         title={t("screens:settingsDeveloper.listItemResetTitle")}
         onLongPress={onOpenAppReset}
-        onPress={(): void => {}}
+        onPress={() => {}}
       />
       {developerMode && (
         <SettingsListItem

@@ -1,16 +1,15 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet } from "react-native";
 
 import { AppBar, Page } from "@components/layout";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { selectBehaviours, setAppBehaviour } from "@store/slices/settings";
+import { type IAppBehaviours } from "@typings/settings.types";
 
 import BehavioursScreenListItemSwitch from "./BehavioursScreenListItemSwitch";
 
-import type { IAppBehaviours } from "@typings/settings.types";
-
-const BehavioursScreen = (): ReactElement => {
+const BehavioursScreen = () => {
   const dispatch = useAppDispatch();
   const appBehaviours = useAppSelector(selectBehaviours);
   const { t } = useTranslation(["common", "screens"]);
@@ -21,7 +20,7 @@ const BehavioursScreen = (): ReactElement => {
    * @param key   - Behaviour setting key
    * @param value - Behaviour value
    */
-  const onBooleanChange = (key: keyof IAppBehaviours, value: boolean): void => {
+  const onBooleanChange = (key: keyof IAppBehaviours, value: boolean) => {
     dispatch(
       setAppBehaviour({
         [key]: value,

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import { List, Text } from "react-native-paper";
 
@@ -9,12 +9,12 @@ type DeveloperListItemProps = {
   value: string;
 };
 
-const DeveloperListItem = (props: DeveloperListItemProps): ReactElement => {
+const DeveloperListItem = (props: DeveloperListItemProps) => {
   const { title, value } = props;
 
   return (
     <List.Item
-      right={(rightProps: any): ReactElement => <Text {...rightProps}>{value}</Text>}
+      right={(rightProps: any) => <Text {...rightProps}>{value}</Text>}
       style={styles.listItem}
       title={title}
     />

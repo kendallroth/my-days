@@ -1,15 +1,14 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { ReactElement, useCallback } from "react";
+import React, { type ReactElement, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { List, useTheme } from "react-native-paper";
 
 import { useSnackbar } from "@hooks";
-
-import type {
-  SettingsRouterNavigation,
-  SettingsRouterParams,
+import {
+  type SettingsRouterNavigation,
+  type SettingsRouterParams,
 } from "@screens/Settings/SettingsRouter";
-import type { MaterialCommunityIcons } from "@typings/app.types";
+import { type MaterialCommunityIcons } from "@typings/app.types";
 
 export type Props = {
   /** Whether list item is disabled */
@@ -28,7 +27,7 @@ export type Props = {
   onPress?: () => void;
 };
 
-const SettingsListItem = (props: Props): ReactElement => {
+const SettingsListItem = (props: Props) => {
   const { disabled = false, implemented = true, icon, right, route, title, onPress } = props;
 
   const navigator = useNavigation<SettingsRouterNavigation>();
@@ -58,7 +57,7 @@ const SettingsListItem = (props: Props): ReactElement => {
    * @param   rightProps - Right props
    * @returns Rendered right icon
    */
-  const renderRight = (rightProps: any): ReactElement | null => {
+  const renderRight = (rightProps: any) => {
     if (right) {
       return right(rightProps);
     } else {
@@ -70,7 +69,7 @@ const SettingsListItem = (props: Props): ReactElement => {
     <List.Item
       {...props}
       disabled={disabled}
-      left={(leftProps): ReactElement => (
+      left={(leftProps) => (
         <List.Icon
           {...leftProps}
           color={!disabled ? colors.primary : leftProps.color}

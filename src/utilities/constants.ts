@@ -3,8 +3,8 @@ import { ES, FR, US } from "country-flag-icons/string/3x2";
 import {
   AppLanguage,
   AppTheme,
-  IAppLanguageConfig,
-  IAppThemeConfig,
+  type IAppLanguageConfig,
+  type IAppThemeConfig,
 } from "@typings/settings.types";
 
 /** Sample ISO date string */

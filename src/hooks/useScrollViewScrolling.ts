@@ -1,8 +1,8 @@
 import { useFocusEffect } from "@react-navigation/native";
-import { RefObject, useCallback, useRef, useState } from "react";
-import { FlatList } from "react-native";
+import { type RefObject, useCallback, useRef, useState } from "react";
+import { type FlatList } from "react-native";
 
-import { ScrollEvent } from "@typings/app.types";
+import { type ScrollEvent } from "@typings/app.types";
 
 interface IScrollProps {
   /** Whether to scroll to top when screen is focused */
@@ -64,7 +64,7 @@ const useScrollViewScrolling = (args?: IScrollProps): IScrollViewScrolling => {
     }, [scrollToTopOnFocus]),
   );
 
-  const onListScroll = (event: ScrollEvent): void => {
+  const onListScroll = (event: ScrollEvent) => {
     const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
 
     // TODO: Determine if height being less than thresholds or screen height will matter?

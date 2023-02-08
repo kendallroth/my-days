@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import { openURL } from "expo-linking";
-import React, { ReactElement } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Chip, Surface, Text, useTheme } from "react-native-paper";
@@ -9,8 +9,7 @@ import { Chip, Surface, Text, useTheme } from "react-native-paper";
 import { AppBar, Page } from "@components/layout";
 import { Quote } from "@components/typography";
 import config from "@config";
-
-import type { MaterialCommunityIcons } from "@typings/app.types";
+import { type MaterialCommunityIcons } from "@typings/app.types";
 
 interface IDeveloperActions {
   icon: keyof MaterialCommunityIcons;
@@ -18,7 +17,7 @@ interface IDeveloperActions {
   url: string;
 }
 
-const AboutScreen = (): ReactElement => {
+const AboutScreen = () => {
   const { t } = useTranslation(["screens"]);
 
   const { colors } = useTheme();
@@ -111,9 +110,7 @@ const AboutScreen = (): ReactElement => {
             {developerActions.map((action) => (
               <Chip
                 key={action.name}
-                icon={(iconProps): ReactElement => (
-                  <Icon {...iconProps} name={action.icon} size={20} />
-                )}
+                icon={(iconProps) => <Icon {...iconProps} name={action.icon} size={20} />}
                 style={styles.aboutDeveloperActionsChip}
                 onPress={() => onLink(action.url)}
               >
