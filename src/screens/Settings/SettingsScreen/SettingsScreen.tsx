@@ -45,7 +45,7 @@ const SettingsScreen = () => {
   const themeConfig = useAppSelector(selectThemeConfig);
   const developerMode = useAppSelector(selectDeveloperMode);
 
-  const releaseString = config.releaseChannel && ` @ ${config.releaseChannel}`;
+  const releaseString = config.build.releaseChannel && ` @ ${config.build.releaseChannel}`;
   const showEnvironment = developerMode && Boolean(releaseString);
 
   /**
@@ -220,7 +220,7 @@ const SettingsScreen = () => {
       )}
       <View style={styles.settingsFooter}>
         <View style={styles.settingsFooterDebug}>
-          <Text onPress={onTapVersion}>v{config.version}</Text>
+          <Text onPress={onTapVersion}>v{config.build.version}</Text>
           {showEnvironment && (
             <Text style={{ color: colors.onSurfaceDisabled }}>{releaseString}</Text>
           )}

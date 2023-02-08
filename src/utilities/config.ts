@@ -6,11 +6,26 @@ import { version as packageVersion } from "../../package.json";
 
 const runningInExpo = Constants.appOwnership === "expo";
 
+// Application versions use the Expo Go version when running through Expo app
 const version = !runningInExpo ? Application.nativeApplicationVersion : packageVersion;
-const versionBuild = !runningInExpo ? Application.nativeBuildVersion : packageVersion;
+const versionBuild = !runningInExpo ? Application.nativeBuildVersion : "N/A";
+
+/** App build information */
+interface AppBuildInfo {
+  /** EAS Build/Update release channel */
+  releaseChannel: string;
+  /** EAS Updates runtime version (limits updates to matching versions) */
+  runtimeVersion: string;
+  /** App version name (semantic) */
+  version: string;
+  /** App version build number */
+  versionBuild: string;
+  /** Git commit SHA associated with build (EAS build only) */
+  versionHash: string;
+}
 
 /** App configuration links */
-interface IAppConfigLinks {
+interface AppConfigLinks {
   /** App developer email */
   developerEmail: string;
   /** App developer URL */
@@ -20,31 +35,27 @@ interface IAppConfigLinks {
 }
 
 /** App configuration */
-interface IAppConfig {
+interface AppConfig {
+  build: AppBuildInfo;
   /** App links */
-  links: IAppConfigLinks;
-  /** Deployment release channel */
-  releaseChannel: string;
-  /** Updates runtime version */
-  runtimeVersion: string;
-  /** App version name (semantic) */
-  version: string;
-  /** App version build number */
-  versionBuild: string;
+  links: AppConfigLinks;
 }
 
-const config: IAppConfig = {
+const config: AppConfig = {
+  build: {
+    // NOTE: Release channel and runtime version are only present with update workflow (and not in development builds)!
+    // NOTE: Loose falsey checks are used to avoid empty strings (development)
+    releaseChannel: Updates.channel || "default",
+    runtimeVersion: Updates.runtimeVersion || "N/A",
+    version: version ?? packageVersion,
+    versionBuild: versionBuild ?? packageVersion,
+    versionHash: Constants.expoConfig?.extra?.EAS_BUILD_GIT_COMMIT_HASH?.substring(0, 8) ?? "N/A",
+  },
   links: {
     developerEmail: "kendall@kendallroth.ca",
     developerUrl: "https://www.kendallroth.ca",
     repositoryUrl: "https://github.com/kendallroth/my-days",
   },
-  // NOTE: Release channel and runtime version are only present with update workflow (and not in development builds)!
-  // NOTE: Loose falsey checks are used to avoid empty strings (development)
-  releaseChannel: Updates.channel || "default",
-  runtimeVersion: Updates.runtimeVersion || "N/A",
-  version: version ?? packageVersion,
-  versionBuild: versionBuild ?? packageVersion,
 };
 
 export default config;

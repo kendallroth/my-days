@@ -24,7 +24,7 @@ interface IStoreExport {
 
 const persistConfig = {
   // Enable separately persisted Redux stores per release channel
-  key: `store_${config.releaseChannel}`,
+  key: `store_${config.build.releaseChannel}`,
   storage: AsyncStorage,
   whitelist: ["days", "settings"],
 };

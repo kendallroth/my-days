@@ -79,20 +79,24 @@ const DeveloperScreen = () => {
         </List.Subheader>
         {/* NOTE: 'Application.nativeAppVersion' shows Expo version if running in Expo! */}
         <DeveloperListItem
-          title={t("screens:settingsDeveloper.listItemVersion")}
-          value={config.version}
+          title={t("screens:settingsDeveloper.listItemBuildVersion")}
+          value={config.build.version}
         />
         <DeveloperListItem
-          title={t("screens:settingsDeveloper.listItemBuild")}
-          value={config.versionBuild}
+          title={t("screens:settingsDeveloper.listItemBuildNumber")}
+          value={config.build.versionBuild}
+        />
+        <DeveloperListItem
+          title={t("screens:settingsDeveloper.listItemBuildHash")}
+          value={config.build.versionHash}
         />
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemReleaseChannel")}
-          value={config.releaseChannel}
+          value={config.build.releaseChannel}
         />
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemRuntimeVersion")}
-          value={config.runtimeVersion}
+          value={config.build.runtimeVersion}
         />
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemExpo")}
@@ -107,6 +111,7 @@ const DeveloperScreen = () => {
         />
         <DeveloperListItem
           title={t("screens:settingsDeveloper.listItemDeviceOS")}
+          // NOTE: Hacky fix for odd bug with lengthy OnePlus OS name
           value={`${Device.osName?.split("/")[0]} @ v${Device.osVersion}`}
         />
         <DeveloperListItem
