@@ -173,9 +173,11 @@ const HomeScreen = () => {
 
   const onDayShare = async (day: Day) => {
     const url = Linking.createURL("day/shared", {
-      // Must use triple slashes to prevent splitting the above path into hostname and path
-      // Source: https://github.com/expo/expo/issues/6497
-      isTripleSlashed: true,
+      // While using triple slashes prevents splitting the path into separate hostname and path,
+      //   it is not suitable as it prevents most applications from detecting a link. Instead,
+      //   a hack has been employed to optionally join the hostname to the path if separated...
+      // Source: https://github.com/expo/expo/issues/6497#issuecomment-574882448
+      isTripleSlashed: false,
       queryParams: {
         date: day.date,
         icon: day.icon,

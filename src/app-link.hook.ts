@@ -21,10 +21,16 @@ export const useAppOpenLink = () => {
   const handleOpeningLink = (link: string | null) => {
     if (!link) return;
 
-    const { path, queryParams } = Linking.parse(link);
-    if (!path || !queryParams) return;
+    // NOTE: Using default double slashes in app link allows other apps to detect/display links,
+    //         but unfortunately is parsed as a separate hostname and path. This hack works
+    //         around by faking the original path as intended in "Linking.createUrl()".
+    // Source: https://github.com/expo/expo/issues/6497#issuecomment-574882448
+    const { hostname, path, queryParams } = Linking.parse(link);
+    if ((!path && !hostname) || !queryParams) return;
 
-    if (path === "day/shared") {
+    const joinedPath = path && hostname ? `${hostname}/${path}` : hostname ?? path;
+
+    if (joinedPath === "day/shared") {
       handleSharedDay(queryParams);
     }
   };
