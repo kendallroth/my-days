@@ -2,6 +2,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { type NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
 import * as Linking from "expo-linking";
+import qs from "qs";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Share, StyleSheet, Vibration, View } from "react-native";
@@ -172,7 +173,7 @@ const HomeScreen = () => {
   };
 
   const onDayShare = async (day: Day) => {
-    const url = Linking.createURL("day/shared", {
+    const mobileUrl = Linking.createURL("day/shared", {
       // While using triple slashes prevents splitting the path into separate hostname and path,
       //   it is not suitable as it prevents most applications from detecting a link. Instead,
       //   a hack has been employed to optionally join the hostname to the path if separated...
@@ -188,7 +189,11 @@ const HomeScreen = () => {
       },
     });
 
-    const shareMessage = `A day has been shared with you from My Days! Follow this link to add '${day.title}' to the app!\n\n${url}`;
+    const redirectSite = "https://my-days.kendallroth.ca";
+    const webUrl = `${redirectSite}/mobile/redirect?${qs.stringify({
+      url: mobileUrl,
+    })}`;
+    const shareMessage = `A day has been shared with you from My Days! Follow this link to add '${day.title}' to the app!\n\n${mobileUrl}\n\nAlternative (web redirect)\n${webUrl}`;
 
     // NOTE: Must either close selection dialog before sharing or not close it at all
     selectedDayRef.current?.close(async () => {

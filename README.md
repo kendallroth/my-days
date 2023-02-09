@@ -63,6 +63,14 @@ Releases can be deployed through Expo Go (for testing) or the Expo managed build
 
 > **NOTE:** Remember to update the semantic `versionName` **and** increment `androidVersionCode`/`iosBuildNumber` in `app.config.ts` before each release/deployment!
 
+### Locally
+
+Builds can be run locally to avoid waiting in Expo Build queues and monthly plan limitations. To run local builds, add the `--local` flag to the `eas build` command.
+
+Android builds produce an `.apk` file that can be installed on a device, while iOS builds produce an `.ipa` that can be installed from a Mac onto a connected device.
+
+> **WARNING:** Local iOS builds seem to fail with not finding `hermes` runtime, and should use `jsc` for the JS engine (do not commit!). Additionally, iOS logs can be found by opening XCode, then selecting "Devices and Simulators" and selecting the connected device.
+
 ### Credentials ([docs](https://docs.expo.dev/app-signing/app-credentials/))
 
 Credentials are managed entirely by EAS, to avoid losing local credentials.
@@ -73,7 +81,7 @@ Credentials are managed entirely by EAS, to avoid losing local credentials.
 
 An APK can be generated for manual device testing with `eas build -p android --profile [profile]`, where profile is either `development` (development build) or `preview` (production-like build). Once the remote build finishes, the resulting APK can be installed by following the directions either from the terminal or Expo site. An APK can be downloaded and will need to be allowed through security and installed on the device.
 
-#### iOS Ad Hock ([docs](https://docs.expo.dev/build/internal-distribution/#22-configure-app-signing-credentials-for-ios))
+#### iOS Ad-Hock ([docs](https://docs.expo.dev/build/internal-distribution/#22-configure-app-signing-credentials-for-ios))
 
 iOS builds can be generated for specifically provisioned phones, via an ad hoc provisioning process (requires registering device via UDID with Apple). Once provisioned, builds can be generated for manual device testing with `eas build -p ios --profile [profile]`, where profile is either `development` (development build) or `preview` (production-like build). Once the remote build finishes, the resulting bundle can be installed on a provisioned device from the terminal or Expo site.
 

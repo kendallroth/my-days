@@ -104,6 +104,7 @@ export default (): ExpoConfig => ({
 
   // iOS overrides
   ios: {
+    appStoreUrl: "https://apps.apple.com/us/app/my-days/id1669868291",
     buildNumber: `${iosBuildNumber}`,
     bundleIdentifier: `ca.kendallroth.my-days${appVariantAppIdSuffix}`,
     // Icon must be 1024x1024 (no transparency)
