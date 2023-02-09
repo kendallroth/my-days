@@ -41,16 +41,8 @@ const AboutScreen = () => {
     },
   ];
 
-  const steps = [
-    t("screens:settingsAbout.guideStep1"),
-    t("screens:settingsAbout.guideStep2"),
-    t("screens:settingsAbout.guideStep3"),
-  ];
-  const tips = [
-    t("screens:settingsAbout.guideTip1"),
-    t("screens:settingsAbout.guideTip2"),
-    t("screens:settingsAbout.guideTip3"),
-  ];
+  const steps = t("screens:settingsAbout.guideSteps", { returnObjects: true });
+  const tips = t("screens:settingsAbout.guideTips", { returnObjects: true });
 
   /** Open an external link */
   const onLink = (link: string) => {

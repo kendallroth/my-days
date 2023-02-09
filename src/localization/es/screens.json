@@ -58,13 +58,17 @@
     "appDeveloper": "Desarrollado por Kendall Roth © {{date}}",
     "appReason": "¡Creado con ❤️ para una persona especial!",
     "appSummary": "¡“My Days” es una aplicación móvil simple para contar hacia atrás/hasta fechas importantes!",
-    "guideStep1": "Agregar y administrar fechas",
-    "guideStep2": "Ver detalles de la fecha",
-    "guideStep3": "Seguimiento de fechas en el tablero",
+    "guideSteps": [
+      "Agregar y administrar fechas",
+      "Seguimiento de fechas en el tablero",
+      "Compartir fechas con amigos"
+    ],
     "guideTipTitle": "Consejos",
-    "guideTip1": "Las fechas se pueden administrar presionando prolongadamente un elemento de la lista y seleccionando \"Editar\" o \"Eliminar\" en el menú de selección.",
-    "guideTip2": "Las fechas se pueden reordenar desde el menú de selección de elementos de la lista.",
-    "guideTip3": "Los iconos se pueden agregar tocando el icono en los cuadros de diálogo \"Agregar\" o \"Editar\".",
+    "guideTips": [
+      "Las fechas se pueden administrar presionando prolongadamente un elemento de la lista y seleccionando \"Editar\" o \"Eliminar\" en el menú de selección.",
+      "Las fechas se pueden reordenar desde el menú de selección de elementos de la lista.",
+      "Los iconos se pueden agregar tocando el icono en los cuadros de diálogo \"Agregar\" o \"Editar\"."
+    ],
     "chipContact": "Contacto",
     "chipPortfolio": "Portafolio",
     "chipRepository": "Repositorio"
