@@ -1,9 +1,9 @@
 import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
-import dayjs from "dayjs";
+import Constants from "expo-constants";
 import { openURL } from "expo-linking";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Platform, ScrollView, StyleSheet, View } from "react-native";
 import { Chip, Surface, Text, useTheme } from "react-native-paper";
 
 import { AppBar, Page } from "@components/layout";
@@ -11,10 +11,10 @@ import { Quote } from "@components/typography";
 import config from "@config";
 import { type MaterialCommunityIcons } from "@typings/app.types";
 
-interface IDeveloperActions {
+interface DeveloperActions {
   icon: keyof MaterialCommunityIcons;
   name: string;
-  url: string;
+  url: string | null;
 }
 
 const AboutScreen = () => {
@@ -23,23 +23,41 @@ const AboutScreen = () => {
   const { colors } = useTheme();
 
   const { links } = config;
-  const developerActions: IDeveloperActions[] = [
+
+  const appStoreAction: DeveloperActions | null =
+    Platform.select<DeveloperActions>({
+      android: {
+        icon: "google-play",
+        name: "Google",
+        url: Constants.expoConfig?.android?.playStoreUrl ?? null,
+      },
+      ios: {
+        icon: "apple",
+        name: "Apple",
+        url: Constants.expoConfig?.ios?.appStoreUrl ?? null,
+      },
+    }) ?? null;
+
+  const developerActions: DeveloperActions[] = [
     {
       icon: "account",
       name: t("screens:settingsAbout.chipPortfolio"),
       url: links.developerUrl,
     },
     {
-      icon: "github",
-      name: t("screens:settingsAbout.chipRepository"),
-      url: links.repositoryUrl,
-    },
-    {
       icon: "email",
       name: t("screens:settingsAbout.chipContact"),
       url: `mailto:${links.developerEmail}`,
     },
+    {
+      icon: "github",
+      name: t("screens:settingsAbout.chipRepository"),
+      url: links.repositoryUrl,
+    },
   ];
+  if (appStoreAction) {
+    developerActions.push(appStoreAction);
+  }
 
   const steps = t("screens:settingsAbout.guideSteps", { returnObjects: true });
   const tips = t("screens:settingsAbout.guideTips", { returnObjects: true });
@@ -93,23 +111,24 @@ const AboutScreen = () => {
         </View>
         <View style={styles.aboutSpace} />
         <View style={styles.aboutDeveloper}>
-          <Text style={styles.aboutDeveloperText}>
-            {t("screens:settingsAbout.appDeveloper", {
-              date: dayjs().format("YYYY"),
-            })}
-          </Text>
           <View style={styles.aboutDeveloperActions}>
             {developerActions.map((action) => (
               <Chip
                 key={action.name}
+                disabled={!action.url}
                 icon={(iconProps) => <Icon {...iconProps} name={action.icon} size={20} />}
                 style={styles.aboutDeveloperActionsChip}
-                onPress={() => onLink(action.url)}
+                onPress={action.url ? () => onLink(action.url!) : undefined}
               >
                 {action.name}
               </Chip>
             ))}
           </View>
+          <Text style={styles.aboutDeveloperText}>
+            {t("screens:settingsAbout.appDeveloper", {
+              date: "2023",
+            })}
+          </Text>
           <Surface
             elevation={0}
             style={[styles.aboutReason, { backgroundColor: colors.tertiaryContainer }]}
@@ -138,13 +157,13 @@ const styles = StyleSheet.create({
   aboutDeveloperActions: {
     flexDirection: "row",
     flexWrap: "wrap",
-    marginTop: 16,
   },
   aboutDeveloperActionsChip: {
     marginBottom: 8,
     marginRight: 8,
   },
   aboutDeveloperText: {
+    marginTop: 16,
     textAlign: "center",
   },
   aboutSteps: {

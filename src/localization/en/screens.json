@@ -61,9 +61,10 @@
     "guideSteps": ["Add and manage dates", "Track dates on dashboard", "Share dates with friends"],
     "guideTipTitle": "Tips",
     "guideTips": [
-      "Dates can be managed by long pressing on a list item and selecting \"Edit\" or \"Delete\" from the selection menu.",
+      "Dates can be managed by long pressing on a list item and using the selection menu.",
       "Dates can be reordered from the list item selection menu.",
-      "Icons can be modified by tapping the icon in the \"Add\" or \"Edit\" dialogs."
+      "Icons can be modified by tapping the icon in the \"Add\" or \"Edit\" dialogs.",
+      "Share a date with friends to keep track of it together!"
     ],
     "chipContact": "Contact",
     "chipPortfolio": "Portfolio",
