@@ -1,0 +1,46 @@
+.redirect-card {
+  margin: auto;
+  width: 100%;
+  max-width: 400px;
+}
+
+.redirect-card__description {
+  margin-bottom: 16px;
+}
+
+.redirect-card__alert {
+  margin-top: 16px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  background-color: var(--color--error-container);
+  color: var(--color--on-error-container);
+}
+
+.redirect-card__input {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 200px;
+  max-height: 200px;
+}
+
+.redirect-card__link {
+  overflow-wrap: anywhere;
+  font-size: 0.9rem;
+  color: var(--color--primary);
+}
+
+.redirect-card__link-error {
+  margin-top: 16px;
+  color: var(--color--error);
+}
+
+.redirect-card__input-error {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--color--error);
+}
+
+.redirect-card__submit {
+  margin-top: 16px;
+}
+

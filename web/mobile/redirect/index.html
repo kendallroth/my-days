@@ -1,0 +1,126 @@
+<script async src="https://ga.jspm.io/npm:es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
+    }
+  }
+</script>
+
+<div id="app" class="redirect-card content-card">
+  <head>
+    <title>My Days | Redirect Tool</title>
+  </head>
+  <link rel="stylesheet" href="../../base.css" />
+  <link rel="stylesheet" href="./index.css" />
+
+  <div class="content-card__title">Mobile Redirect Tool</div>
+  <template v-if="!redirectUrl">
+    <div class="redirect-card__description">
+      Enter a shared message (with link) from the My Days app to parse and open in the mobile app.
+    </div>
+    <textarea
+      v-model.trim="linkInput"
+      class="text-input redirect-card__input"
+      :disabled="redirecting"
+      placeholder="Enter shared text"
+      type="url"
+    ></textarea>
+    <div v-if="linkError" class="redirect-card__input-error">{{ linkError }}</div>
+    <div class="redirect-card__alert">
+      If mobile app does not open via link, make sure it is installed!
+    </div>
+    <button
+      class="button redirect-card__submit"
+      :disabled="!linkInput || redirecting"
+      @click="handleSubmitRedirect"
+    >
+      Redirect
+    </button>
+  </template>
+  <template v-else>
+    <div class="redirect-card__description">
+      Open this link in My Days app to add the shared day!
+    </div>
+    <a class="redirect-card__link" :href="redirectUrl">{{ redirectUrl }}</a>
+    <div class="redirect-card__alert">
+      If mobile app does not open via link, make sure it installed!
+    </div>
+    <button class="button redirect-card__submit" @click="clearInitialParse">Parse message</button>
+  </template>
+</div>
+
+<script type="module">
+  import { createApp } from "vue";
+
+  // A day has been shared with you from My Days! Follow this link to add 'Android Test' to the app!
+  // https://my-days.kendallroth.ca/mobile/redirect?mobileRedirectUrl={{url}}
+
+  createApp({
+    data() {
+      return {
+        linkInput: "",
+        linkError: null,
+        redirecting: false,
+        redirectUrl: null,
+      };
+    },
+    mounted() {
+      this.parseInitialUrl(window.location.search);
+    },
+    methods: {
+      clearInitialParse() {
+        this.redirectUrl = null;
+        this.linkError = null;
+      },
+      parseInitialUrl(queryString) {
+        // URL params are used to send information from redirect link for future mobile app redirect
+        const urlParams = new URLSearchParams(queryString);
+
+        const mobileRedirectUrl = urlParams.get("url") ?? null;
+        if (!mobileRedirectUrl) return;
+
+        this.redirectUrl = mobileRedirectUrl;
+
+        this.redirectToApp(mobileRedirectUrl);
+      },
+      handleSubmitRedirect() {
+        this.linkError = null;
+        this.redirecting = false;
+
+        if (!this.linkInput) {
+          this.linkError = "Message text is required";
+          return;
+        }
+
+        const urlRegex =
+          /(\b(exp|my-days(\-preview|\-dev)?):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+        const [urlMatch] = this.linkInput.match(urlRegex) ?? [];
+        if (!urlMatch) {
+          this.linkError = "Valid redirect URL not found";
+          return;
+        }
+
+        try {
+          const parsedUrl = new URL(urlMatch);
+        } catch {
+          this.linkError = "Valid redirect URL not found";
+          return;
+        }
+
+        console.log("Parsed URL", urlMatch);
+        this.redirectToApp(urlMatch);
+      },
+      redirectToApp(appLink) {
+        // Redirection will fail if the app is not installed, and cannot be caught easily...
+        setTimeout(() => {
+          this.redirecting = false;
+        }, 1000);
+
+        this.redirecting = true;
+        window.location.replace(appLink);
+      },
+    },
+  }).mount("#app");
+</script>

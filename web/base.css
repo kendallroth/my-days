@@ -1,0 +1,95 @@
+:root {
+  --color--primary: rgb(0, 98, 158);
+  --color--on-primary: rgb(255, 255, 255);
+  --color--primary-container: rgb(207, 229, 255);
+  --color--on-primary-container: rgb(0, 29, 52);
+
+  --color--tertiary: rgb(105, 87, 121);
+  --color--on-tertiary: rgb(255, 255, 255);
+  --color--tertiary-container: rgb(240, 219, 255);
+  --color--on-tertiary-container: rgb(36, 21, 50);
+
+  --color--error: rgb(186, 26, 26);
+  --color--on-error: rgb(255, 255, 255);
+  --color--error-container: rgb(255, 218, 214);
+  --color--on-error-container: rgb(65, 0, 2);
+
+  --color--surface: rgb(252, 252, 255);
+  --color--on-surface: rgb(26, 28, 30);
+
+  --color--outline: rgb(114, 119, 127);
+  --color--outline-variant: rgb(194, 199, 207);
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  background-color: var(--color--primary);
+  color: var(--color--on-primary);
+  font-family: Mulish, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+/* ===== Content card ===== */
+.content-card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border-radius: 8px;
+  background-color: var(--color--surface);
+  color: var(--color--on-surface);
+}
+
+.content-card__title {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.content-card__description {
+  margin-bottom: 16px;
+}
+
+/* ===== Text input ===== */
+.text-input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color--outline);
+  outline: 2px solid transparent;
+  transition: outline 0.1s ease-in-out;
+  font-family: "Mulish", sans-serif;
+}
+.text-input:focus {
+  outline-color: var(--color--primary);
+}
+
+/* ===== Button ===== */
+.button {
+  padding: 8px;
+  margin: auto;
+  background-color: var(--color--primary-container);
+  color: var(--color--on-primary-container);
+  text-decoration: none;
+  font: inherit;
+  transition: outline 0.1s ease-in-out;
+  outline: 2px solid transparent;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+.button:disabled {
+  cursor: not-allowed;
+  background-color: rgba(26, 28, 30, 0.12);
+}
+.button:not(:disabled):hover {
+  outline-color: var(--color--primary);
+}
