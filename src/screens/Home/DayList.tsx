@@ -11,12 +11,13 @@ import { type Day } from "@typings/day.types";
 interface DayListProps {
   days: Day[];
   style?: StyleProp<ViewStyle>;
+  onItemPress?: (day: Day) => void;
   onItemLongPress?: (day: Day) => void;
   onScroll?: (event: ScrollEvent) => void;
 }
 
 const DayList = (props: DayListProps) => {
-  const { days, style, onItemLongPress, onScroll } = props;
+  const { days, style, onItemPress, onItemLongPress, onScroll } = props;
 
   const { t } = useTranslation(["common", "screens"]);
 
@@ -34,7 +35,9 @@ const DayList = (props: DayListProps) => {
       ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
       keyExtractor={(item) => item.id}
       ListEmptyComponent={<Alert>{t("common:errors.noDays")}</Alert>}
-      renderItem={({ item }) => <DayListItem day={item} onLongPress={onItemLongPress} />}
+      renderItem={({ item }) => (
+        <DayListItem day={item} onPress={onItemPress} onLongPress={onItemLongPress} />
+      )}
       onScroll={onScroll}
     />
   );

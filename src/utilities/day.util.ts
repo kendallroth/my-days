@@ -4,13 +4,25 @@ import { type Day } from "@typings/day.types";
 
 import { DATE_FORMAT_ISO_SHORT } from "./date.util";
 
-interface IDayCountDisplay {
+interface DayCountDisplay {
   /** Day count value (can be negative if invalid!) */
   count: number;
+  /**
+   * Whether count is moving towards or away from date
+   *
+   * NOTE: Today is considered to still be a countdown.
+   */
+  direction: "down" | "up";
   /** Day count label (ie. "days", etc) */
   label: string;
-  /** Whether today is within expected countdown/countup range */
-  valid: boolean;
+  /** Whether date is today */
+  today: boolean;
+  stats: {
+    days: number;
+    weeks: number;
+    months: number;
+    years: number;
+  };
 }
 
 /**
@@ -48,13 +60,25 @@ const getDayCounter = (targetDate: Day, startDate?: string): number => {
  * @param   startDate  - Optional start date (defaults to today)
  * @returns Day display label
  */
-const getDayDisplay = (targetDate: Day, startDate?: string): IDayCountDisplay => {
-  const count = getDayCounter(targetDate, startDate);
+const getDayDisplay = (targetDate: Day, startDate?: string): DayCountDisplay => {
+  const maxDecimalMultiplier = 1000;
+  const dayCount = getDayCounter(targetDate, startDate);
+  const weekCount = Math.round((dayCount / 7) * maxDecimalMultiplier) / maxDecimalMultiplier;
+  const monthCount = Math.round((dayCount / 30.417) * maxDecimalMultiplier) / maxDecimalMultiplier;
+  const yearCount = Math.round((dayCount / 365) * maxDecimalMultiplier) / maxDecimalMultiplier;
 
   return {
-    count,
+    // TODO: Modify count to consider selected day unit
+    count: dayCount,
+    direction: dayCount >= 0 ? "down" : "up",
     label: "days",
-    valid: count >= 0,
+    today: dayCount === 0,
+    stats: {
+      days: dayCount,
+      weeks: weekCount,
+      months: monthCount,
+      years: yearCount,
+    },
   };
 };
 

@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/native-stack";
 import React from "react";
 
+import { DetailsScreen } from "@screens/Details";
 import { HomeScreen } from "@screens/Home";
 import { SettingsRouter } from "@screens/Settings";
 import { type SettingsRouterParams } from "@screens/Settings/SettingsRouter";
@@ -13,10 +14,16 @@ import { type Day } from "@typings/day.types";
 import { useAppOpenLink } from "./app-link.hook";
 
 export type RootRouterParams = {
-  HomeScreen: {
-    /** Shared day parsed from external link  */
-    sharedDay?: Day;
+  DetailsScreen: {
+    /** Selected day ID */
+    dayId: string;
   };
+  HomeScreen:
+    | {
+        /** Shared day parsed from external link  */
+        sharedDay?: Day;
+      }
+    | undefined;
   SettingsRouter: NavigatorScreenParams<SettingsRouterParams> | undefined;
 };
 
@@ -34,6 +41,7 @@ const AppRouter = () => {
   return (
     <Stack.Navigator initialRouteName="HomeScreen" screenOptions={{ headerShown: false }}>
       <Stack.Screen component={HomeScreen} name="HomeScreen" />
+      <Stack.Screen component={DetailsScreen} name="DetailsScreen" />
       <Stack.Screen component={SettingsRouter} name="SettingsRouter" />
     </Stack.Navigator>
   );

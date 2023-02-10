@@ -13,11 +13,12 @@ import { getDayDisplay } from "@utilities/day.util";
 type DayDisplayProps = {
   day: Day;
   style?: StyleProp<ViewStyle>;
+  onPress?: (day: Day) => void;
   onLongPress?: (day: Day) => void;
 };
 
 const DayListItem = (props: DayDisplayProps) => {
-  const { day, style, onLongPress } = props;
+  const { day, style, onPress, onLongPress } = props;
 
   const { colors } = useAppTheme();
   const { t } = useTranslation(["common", "screens"]);
@@ -27,9 +28,7 @@ const DayListItem = (props: DayDisplayProps) => {
     date: dayjs(day.date),
   });
   const dateCount = getDayDisplay(day);
-
-  const isToday = dateCount.count === 0;
-  const countingDown = dateCount.count >= 0;
+  const countingDown = dateCount.direction === "down";
 
   const countdownColor = colors.primary;
   const countupColor = colors.tertiary;
@@ -41,7 +40,7 @@ const DayListItem = (props: DayDisplayProps) => {
   return (
     <TouchableRipple
       rippleColor="transparent"
-      onPress={() => {}}
+      onPress={onPress ? () => onPress(day) : () => {}}
       onLongPress={() => onLongPress?.(day)}
     >
       <Surface
@@ -52,7 +51,7 @@ const DayListItem = (props: DayDisplayProps) => {
           {
             backgroundColor: backgroundColor,
             borderColor: mainColor,
-            borderWidth: isToday ? 4 : 2,
+            borderWidth: dateCount.today ? 4 : 2,
           },
         ]}
       >
@@ -78,7 +77,7 @@ const DayListItem = (props: DayDisplayProps) => {
         </View>
 
         <View style={[styles.dayStats, { backgroundColor: mainColor }]}>
-          {!isToday ? (
+          {!dateCount.today ? (
             <Fragment>
               <View
                 style={[

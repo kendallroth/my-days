@@ -16,14 +16,16 @@ import { sharedColors } from "@styles/theme";
 import AppBarMenu from "./AppBarMenu";
 
 export type Props = {
+  /** Whether back navigation is enabled */
+  back?: boolean;
+  /** Back icon color */
+  backColor?: string;
   /** Background color */
   background?: string;
   /** App bar actions (right side) */
   children?: any;
   /** App header content style */
   contentStyle?: StyleProp<TextStyle>;
-  /** Whether back navigation is enabled */
-  back?: boolean;
   /** Whether logo should be shown */
   logo?: boolean;
   /** Custom status bar height */
@@ -37,8 +39,9 @@ export type Props = {
 
 const AppBar = (props: Props) => {
   const {
-    background,
     back = true,
+    backColor,
+    background,
     children,
     contentStyle,
     logo = false,
@@ -72,7 +75,9 @@ const AppBar = (props: Props) => {
           />
         </View>
       )}
-      {back && <RNPAppBar.BackAction onPress={onBack ? onBack : navigation.goBack} />}
+      {back && (
+        <RNPAppBar.BackAction color={backColor} onPress={onBack ? onBack : navigation.goBack} />
+      )}
       <RNPAppBar.Content style={contentStyle} title={title ?? ""} titleStyle={titleStyle} />
       {children}
     </RNPAppBar.Header>

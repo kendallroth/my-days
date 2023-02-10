@@ -204,6 +204,10 @@ const HomeScreen = () => {
     });
   };
 
+  const onDayView = (day: Day) => {
+    navigation.navigate("DetailsScreen", { dayId: day.id });
+  };
+
   return (
     <Page invertStatusBar>
       <AppBar
@@ -236,7 +240,12 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.pageContent}>
-        <DayList days={days} onItemLongPress={onDaySelect} onScroll={onListScroll} />
+        <DayList
+          days={days}
+          onItemPress={onDayView}
+          onItemLongPress={onDaySelect}
+          onScroll={onListScroll}
+        />
       </View>
       <ScreenFAB
         icon="calendar-plus"
