@@ -119,22 +119,22 @@ const DetailScreen = () => {
     {
       number: dateCount.stats.days,
       unit: "day",
-      unitLabel: t("common:timeUnits.days", { count: dateCount.stats.days }),
+      unitLabel: t("common:timeUnits.day", { count: dateCount.stats.days }),
     },
     {
       number: dateCount.stats.months,
       unit: "month",
-      unitLabel: t("common:timeUnits.months", { count: dateCount.stats.months }),
+      unitLabel: t("common:timeUnits.month", { count: dateCount.stats.months }),
     },
     {
       number: dateCount.stats.weeks,
       unit: "week",
-      unitLabel: t("common:timeUnits.weeks", { count: dateCount.stats.weeks }),
+      unitLabel: t("common:timeUnits.week", { count: dateCount.stats.weeks }),
     },
     {
       number: dateCount.stats.years,
       unit: "year",
-      unitLabel: t("common:timeUnits.years", { count: dateCount.stats.years }),
+      unitLabel: t("common:timeUnits.year", { count: dateCount.stats.years }),
     },
   ];
 

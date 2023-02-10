@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - View date details and various time units
+- Change individual date display time units
 - Store URL in About screen developer chips
 - Behaviour setting to swap theme on "Details" screen
 

@@ -31,6 +31,9 @@ const DayListItem = (props: DayDisplayProps) => {
   const dateCount = getDayDisplay(day);
   const countingDown = dateCount.direction === "down";
 
+  const displayNumber = Math.abs(Math.round(dateCount.count * 10) / 10);
+  const displayUnit = t(`common:timeUnits.${day.unit}`, { count: displayNumber });
+
   const countdownColor = colors.primary;
   const countupColor = colors.tertiary;
 
@@ -97,20 +100,15 @@ const DayListItem = (props: DayDisplayProps) => {
                 style={[styles.dayStatsCount, { color: mainColorText }]}
                 variant="headlineMedium"
               >
-                {Math.abs(dateCount.count)}
+                {displayNumber}
               </Text>
               <Text style={[styles.dayStatsUnit, { color: mainColorText }]} variant="bodySmall">
-                {t("common:timeUnits.days", { count: Math.abs(dateCount.count) })}
+                {displayUnit}
               </Text>
             </Fragment>
           ) : (
             <Fragment>
-              <Icon
-                color={colors.warning}
-                // name="calendar-check"
-                name="alert-decagram"
-                style={styles.dayStatsTodayIcon}
-              />
+              <Icon color={colors.warning} name="alert-decagram" style={styles.dayStatsTodayIcon} />
             </Fragment>
           )}
         </View>

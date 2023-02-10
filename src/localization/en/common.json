@@ -32,14 +32,14 @@
     "search": "Search"
   },
   "timeUnits": {
-    "days_one": "day",
-    "days_other": "days",
-    "months_one": "month",
-    "months_other": "months",
-    "weeks_one": "week",
-    "weeks_other": "weeks",
-    "years_one": "year",
-    "years_other": "years"
+    "day_one": "day",
+    "day_other": "days",
+    "month_one": "month",
+    "month_other": "months",
+    "week_one": "week",
+    "week_other": "weeks",
+    "year_one": "year",
+    "year_other": "years"
   },
   "validations": {
     "invalid": "{{path}} is invalid",

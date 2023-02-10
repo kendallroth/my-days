@@ -41,6 +41,39 @@ index 963ad89..0071fc6 100644
    return /*#__PURE__*/React.createElement(_TouchableRipple.default, _extends({}, rest, {
      style: [theme.isV3 ? styles.containerV3 : styles.container, style],
      onPress: onPress,
+diff --git a/node_modules/react-native-paper/lib/commonjs/components/SegmentedButtons/SegmentedButtonItem.js b/node_modules/react-native-paper/lib/commonjs/components/SegmentedButtons/SegmentedButtonItem.js
+index c98ba84..0513461 100644
+--- a/node_modules/react-native-paper/lib/commonjs/components/SegmentedButtons/SegmentedButtonItem.js
++++ b/node_modules/react-native-paper/lib/commonjs/components/SegmentedButtons/SegmentedButtonItem.js
+@@ -25,6 +25,7 @@ const SegmentedButtonItem = _ref => {
+     icon,
+     testID,
+     label,
++    labelStyle,
+     onPress,
+     segment,
+     density = 'regular',
+@@ -142,7 +143,7 @@ const SegmentedButtonItem = _ref => {
+     color: disabled ? textColor : undefined
+   })) : null, /*#__PURE__*/React.createElement(_Text.default, {
+     variant: "labelLarge",
+-    style: [styles.label, labelTextStyle],
++    style: [styles.label, labelTextStyle, labelStyle],
+     selectable: false,
+     numberOfLines: 1
+   }, label))));
+diff --git a/node_modules/react-native-paper/lib/commonjs/components/SegmentedButtons/SegmentedButtons.js b/node_modules/react-native-paper/lib/commonjs/components/SegmentedButtons/SegmentedButtons.js
+index b056fd6..7879036 100644
+--- a/node_modules/react-native-paper/lib/commonjs/components/SegmentedButtons/SegmentedButtons.js
++++ b/node_modules/react-native-paper/lib/commonjs/components/SegmentedButtons/SegmentedButtons.js
+@@ -94,6 +94,7 @@ const SegmentedButtons = _ref => {
+       checked: checked,
+       segment: segment,
+       density: density,
++      labelStyle: item.labelStyle,
+       onPress: onPress,
+       style: [item.style, disabledChildStyle],
+       theme: theme
 diff --git a/node_modules/react-native-paper/lib/module/components/Dialog/DialogActions.js b/node_modules/react-native-paper/lib/module/components/Dialog/DialogActions.js
 index 0434b3d..89f3fd9 100644
 --- a/node_modules/react-native-paper/lib/module/components/Dialog/DialogActions.js
@@ -84,6 +117,39 @@ index 8633697..5fff053 100644
    return /*#__PURE__*/React.createElement(TouchableRipple, _extends({}, rest, {
      style: [theme.isV3 ? styles.containerV3 : styles.container, style],
      onPress: onPress,
+diff --git a/node_modules/react-native-paper/lib/module/components/SegmentedButtons/SegmentedButtonItem.js b/node_modules/react-native-paper/lib/module/components/SegmentedButtons/SegmentedButtonItem.js
+index 11e3274..0d762e6 100644
+--- a/node_modules/react-native-paper/lib/module/components/SegmentedButtons/SegmentedButtonItem.js
++++ b/node_modules/react-native-paper/lib/module/components/SegmentedButtons/SegmentedButtonItem.js
+@@ -16,6 +16,7 @@ const SegmentedButtonItem = _ref => {
+     icon,
+     testID,
+     label,
++    labelStyle,
+     onPress,
+     segment,
+     density = 'regular',
+@@ -133,7 +134,7 @@ const SegmentedButtonItem = _ref => {
+     color: disabled ? textColor : undefined
+   })) : null, /*#__PURE__*/React.createElement(Text, {
+     variant: "labelLarge",
+-    style: [styles.label, labelTextStyle],
++    style: [styles.label, labelTextStyle, labelStyle],
+     selectable: false,
+     numberOfLines: 1
+   }, label))));
+diff --git a/node_modules/react-native-paper/lib/module/components/SegmentedButtons/SegmentedButtons.js b/node_modules/react-native-paper/lib/module/components/SegmentedButtons/SegmentedButtons.js
+index 9c54e28..256d4d6 100644
+--- a/node_modules/react-native-paper/lib/module/components/SegmentedButtons/SegmentedButtons.js
++++ b/node_modules/react-native-paper/lib/module/components/SegmentedButtons/SegmentedButtons.js
+@@ -85,6 +85,7 @@ const SegmentedButtons = _ref => {
+       checked: checked,
+       segment: segment,
+       density: density,
++      labelStyle: item.labelStyle,
+       onPress: onPress,
+       style: [item.style, disabledChildStyle],
+       theme: theme
 diff --git a/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts b/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts
 index a3031be..179e1c7 100644
 --- a/node_modules/react-native-paper/lib/typescript/components/Dialog/DialogActions.d.ts
@@ -146,3 +212,52 @@ index 2a5b3f6..03d051b 100644
      : color(theme.colors.text).alpha(0.54).rgb().string();
  
    return (
+diff --git a/node_modules/react-native-paper/src/components/SegmentedButtons/SegmentedButtonItem.tsx b/node_modules/react-native-paper/src/components/SegmentedButtons/SegmentedButtonItem.tsx
+index f50186a..28b8525 100644
+--- a/node_modules/react-native-paper/src/components/SegmentedButtons/SegmentedButtonItem.tsx
++++ b/node_modules/react-native-paper/src/components/SegmentedButtons/SegmentedButtonItem.tsx
+@@ -52,6 +52,7 @@ export type Props = {
+    * Label text of the button.
+    */
+   label?: string;
++  labelStyle?: StyleProp<ViewStyle>;
+   /**
+    * Button segment.
+    */
+@@ -84,6 +85,7 @@ const SegmentedButtonItem = ({
+   icon,
+   testID,
+   label,
++  labelStyle,
+   onPress,
+   segment,
+   density = 'regular',
+@@ -199,7 +201,7 @@ const SegmentedButtonItem = ({
+           ) : null}
+           <Text
+             variant="labelLarge"
+-            style={[styles.label, labelTextStyle]}
++            style={[styles.label, labelTextStyle, labelStyle]}
+             selectable={false}
+             numberOfLines={1}
+           >
+diff --git a/node_modules/react-native-paper/src/components/SegmentedButtons/SegmentedButtons.tsx b/node_modules/react-native-paper/src/components/SegmentedButtons/SegmentedButtons.tsx
+index 7239ce7..9a92b67 100644
+--- a/node_modules/react-native-paper/src/components/SegmentedButtons/SegmentedButtons.tsx
++++ b/node_modules/react-native-paper/src/components/SegmentedButtons/SegmentedButtons.tsx
+@@ -65,6 +65,7 @@ export type Props = {
+     accessibilityLabel?: string;
+     onPress?: (event: GestureResponderEvent) => void;
+     label?: string;
++    labelStyle?: StyleProp<ViewStyle>;
+     showSelectedCheck?: boolean;
+     style?: StyleProp<ViewStyle>;
+     testID?: string;
+@@ -172,6 +173,7 @@ const SegmentedButtons = ({
+             checked={checked}
+             segment={segment}
+             density={density}
++            labelStyle={item.labelStyle}
+             onPress={onPress}
+             style={[item.style, disabledChildStyle]}
+             theme={theme}

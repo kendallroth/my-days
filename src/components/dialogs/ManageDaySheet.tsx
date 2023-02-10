@@ -3,14 +3,14 @@ import React, { forwardRef, useEffect, useRef } from "react";
 import { useController, useForm } from "react-hook-form";
 import { type TFunction, useTranslation } from "react-i18next";
 import { type TextInput as RNPTextInput, StyleSheet, View } from "react-native";
-import { Badge, Button, Dialog, IconButton, useTheme } from "react-native-paper";
+import { Badge, Button, Dialog, IconButton, SegmentedButtons, useTheme } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
 import { DayIcon } from "@components/icons";
 import { type MaterialCommunityIcons } from "@typings/app.types";
-import { type Day, type DayNew } from "@typings/day.types";
+import { type Day, type DayNew, type DayUnit } from "@typings/day.types";
 import { dayIcons } from "@utilities/icons.util";
 
 import BottomSheet from "./BottomSheet";
@@ -21,6 +21,7 @@ interface IFormData {
   icon?: keyof MaterialCommunityIcons;
   title: string;
   repeats: boolean;
+  unit: DayUnit;
 }
 
 type ManageDaySheetProps = {
@@ -67,9 +68,20 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
         icon: day?.icon ?? undefined,
         title: day?.title ?? "",
         repeats: day?.repeats ?? false,
+        unit: day?.unit ?? "day",
       },
       resolver: yupResolver(getSchema(t)),
     });
+
+    const timeUnits: DayUnit[] = ["day", "week", "month", "year"];
+    const timeUnitOptions: { label: string; value: DayUnit }[] = timeUnits.map((unit) => ({
+      label: t(`common:timeUnits.${unit}`, { count: 2 }),
+      labelStyle: {
+        // Allow more space for longer labels
+        marginHorizontal: -8,
+      },
+      value: unit,
+    }));
 
     // NOTE: Need dynamic access to the selected icon for display purposes
     const {
@@ -77,6 +89,14 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
     } = useController({
       control: form.control,
       name: "icon",
+    });
+
+    // NOTE: Need dynamic access to the selected unit
+    const {
+      field: { value: unitValue },
+    } = useController({
+      control: form.control,
+      name: "unit",
     });
 
     const editing = Boolean(day);
@@ -88,6 +108,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
         icon: day?.icon ?? undefined,
         title: day?.title ?? "",
         repeats: day?.repeats ?? false,
+        unit: day?.unit ?? "day",
       });
     }, [day, form]);
 
@@ -131,7 +152,6 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
         onAdd({
           ...data,
           id: uuidv4(),
-          unit: "day",
         });
       } else {
         if (!onEdit) return;
@@ -200,11 +220,18 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
           returnKeyType="next"
           style={{ marginTop: 4 }}
         />
+        <SegmentedButtons
+          buttons={timeUnitOptions}
+          style={{ marginBottom: 8 }}
+          value={unitValue}
+          onValueChange={(v) => form.setValue("unit", v as DayUnit)}
+        />
         <Checkbox
           control={form.control}
           hideHint
           label={t("screens:dayAddEdit.dayRepeatsLabel")}
           name="repeats"
+          style={{ paddingVertical: 4 }}
         />
         <Dialog.Actions style={styles.sheetActions}>
           <Button textColor={colors.secondary} onPress={onCancel}>
@@ -222,6 +249,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
 const styles = StyleSheet.create({
   sheetActions: {
     marginTop: 8,
+    marginBottom: -8,
     paddingBottom: 0,
     paddingHorizontal: 0,
   },

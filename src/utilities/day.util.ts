@@ -61,15 +61,28 @@ const getDayCounter = (targetDate: Day, startDate?: string): number => {
  * @returns Day display label
  */
 const getDayDisplay = (targetDate: Day, startDate?: string): DayCountDisplay => {
+  // Support a maximum of 3 decimals places
   const maxDecimalMultiplier = 1000;
   const dayCount = getDayCounter(targetDate, startDate);
   const weekCount = Math.round((dayCount / 7) * maxDecimalMultiplier) / maxDecimalMultiplier;
   const monthCount = Math.round((dayCount / 30.417) * maxDecimalMultiplier) / maxDecimalMultiplier;
   const yearCount = Math.round((dayCount / 365) * maxDecimalMultiplier) / maxDecimalMultiplier;
 
+  let count = dayCount;
+  switch (targetDate.unit) {
+    case "week":
+      count = weekCount;
+      break;
+    case "month":
+      count = monthCount;
+      break;
+    case "year":
+      count = yearCount;
+      break;
+  }
+
   return {
-    // TODO: Modify count to consider selected day unit
-    count: dayCount,
+    count,
     direction: dayCount >= 0 ? "down" : "up",
     label: "days",
     today: dayCount === 0,
