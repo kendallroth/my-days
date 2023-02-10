@@ -18,7 +18,7 @@ import {
   setAppLanguage,
   setAppTheme,
 } from "@store/slices/settings";
-import { type AppLanguage, type AppTheme, type IAppResetOptions } from "@typings/settings.types";
+import { type AppLanguage, type AppResetOptions, type AppTheme } from "@typings/settings.types";
 import { LANGUAGES } from "@utilities/constants";
 import { sleep } from "@utilities/misc.util";
 
@@ -74,7 +74,7 @@ const SettingsScreen = () => {
    *
    * @param resetOptions - App reset options
    */
-  const onAppReset = (resetOptions: IAppResetOptions) => {
+  const onAppReset = (resetOptions: AppResetOptions) => {
     Alert.alert(
       t("screens:settingsDeveloper.resetDataTitle"),
       t("screens:settingsDeveloper.resetDataDescription"),

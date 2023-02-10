@@ -30,18 +30,18 @@ const lightenedPrimaryColor = "#00629E";
  * Android - 'versionName'
  * iOS     - 'CFBundleShortVersionString'
  */
-const versionName = "0.2.0";
+const versionName = "0.3.0";
 /**
  * Android build code (must increment with each submitted build)
  */
-const androidVersionCode = 3;
+const androidVersionCode = 4;
 /**
  * iOS semantic build code (increment with each submitted build)
  *
  * NOTE: Different from Android version code in that it may be reset
  *         with each version change; however, this is deemed confusing!
  */
-const iosBuildNumber = 3;
+const iosBuildNumber = 4;
 
 /**
  * Runtime version associated with build manifest, used when applying OTA updates.

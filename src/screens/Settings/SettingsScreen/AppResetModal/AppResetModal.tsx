@@ -5,16 +5,16 @@ import { Button, Checkbox, useTheme } from "react-native-paper";
 
 import { BottomSheet } from "@components/dialogs";
 import { type BottomSheetRef } from "@components/dialogs/BottomSheet";
-import { type IAppResetOptions } from "@typings/settings.types";
+import { type AppResetOptions } from "@typings/settings.types";
 
 type AppResetModalProps = {
   /** App reset handler */
-  onReset: (resetOptions: IAppResetOptions) => void;
+  onReset: (resetOptions: AppResetOptions) => void;
 };
 
-type AppResetOptionKeys = keyof IAppResetOptions;
+type AppResetOptionKeys = keyof AppResetOptions;
 
-const initialOptions: IAppResetOptions = {
+const initialOptions: AppResetOptions = {
   days: false,
   settings: false,
 };
@@ -23,7 +23,7 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
   (props: AppResetModalProps, ref) => {
     const { onReset } = props;
 
-    const [resetOptions, setResetOptions] = useState<IAppResetOptions>(initialOptions);
+    const [resetOptions, setResetOptions] = useState<AppResetOptions>(initialOptions);
 
     const { t } = useTranslation(["screens"]);
     const { colors } = useTheme();
@@ -49,7 +49,7 @@ const AppResetModal = forwardRef<BottomSheetRef, AppResetModalProps>(
      * @param key - Selected reset option
      */
     const onOptionPress = (key: AppResetOptionKeys) => {
-      const newOptions: IAppResetOptions = {
+      const newOptions: AppResetOptions = {
         ...resetOptions,
         [key]: !resetOptions[key],
       };

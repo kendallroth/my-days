@@ -5,7 +5,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { AppBar, Page } from "@components/layout";
 import { useAppDispatch, useAppSelector } from "@hooks";
 import { selectBehaviours, setAppBehaviour } from "@store/slices/settings";
-import { type IAppBehaviours } from "@typings/settings.types";
+import { type AppBehaviours } from "@typings/settings.types";
 
 import BehavioursScreenListItemSwitch from "./BehavioursScreenListItemSwitch";
 
@@ -20,7 +20,7 @@ const BehavioursScreen = () => {
    * @param key   - Behaviour setting key
    * @param value - Behaviour value
    */
-  const onBooleanChange = (key: keyof IAppBehaviours, value: boolean) => {
+  const onBooleanChange = (key: keyof AppBehaviours, value: boolean) => {
     dispatch(
       setAppBehaviour({
         [key]: value,
@@ -37,6 +37,13 @@ const BehavioursScreen = () => {
           stateKey="confirmSharedDays"
           title={t("screens:settingsBehaviours.behaviourItemConfirmSharedDaysTitle")}
           value={appBehaviours.confirmSharedDays}
+          onChange={onBooleanChange}
+        />
+        <BehavioursScreenListItemSwitch
+          description={t("screens:settingsBehaviours.behaviourItemSwapDetailsThemeDescription")}
+          stateKey="swapThemeOnDetails"
+          title={t("screens:settingsBehaviours.behaviourItemSwapDetailsThemeTitle")}
+          value={appBehaviours.swapThemeOnDetails}
           onChange={onBooleanChange}
         />
       </ScrollView>

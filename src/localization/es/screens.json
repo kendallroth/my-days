@@ -92,7 +92,9 @@
   "settingsBehaviours": {
     "title": "Comportamientos",
     "behaviourItemConfirmSharedDaysDescription": "Si los días compartidos a través del enlace deben confirmarse antes de agregar (seguridad).",
-    "behaviourItemConfirmSharedDaysTitle": "Confirmar días compartidos"
+    "behaviourItemConfirmSharedDaysTitle": "Confirmar días compartidos",
+    "behaviourItemSwapDetailsThemeDescription": "Si se debe cambiar el tema de la pantalla 'Detalles' (claro u oscuro).",
+    "behaviourItemSwapDetailsThemeTitle": "Cambiar el tema de la pantalla 'Detalles'"
   },
   "settingsContributors": {
     "title": "Colaboradores",

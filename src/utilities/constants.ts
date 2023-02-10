@@ -2,16 +2,16 @@ import { ES, FR, US } from "country-flag-icons/string/3x2";
 
 import {
   AppLanguage,
+  type AppLanguageConfig,
   AppTheme,
-  type IAppLanguageConfig,
-  type IAppThemeConfig,
+  type AppThemeConfig,
 } from "@typings/settings.types";
 
 /** Sample ISO date string */
 export const SAMPLE_ISO_DATE = "2021-11-28T05:03:59.744Z";
 
 // TODO: Move to better location (likely store?) or at least populate store
-export const LANGUAGES: Record<AppLanguage, IAppLanguageConfig> = {
+export const LANGUAGES: Record<AppLanguage, AppLanguageConfig> = {
   [AppLanguage.ENGLISH]: {
     code: AppLanguage.ENGLISH,
     flag: US,
@@ -31,7 +31,7 @@ export const LANGUAGES: Record<AppLanguage, IAppLanguageConfig> = {
   },
 };
 
-export const THEMES: Record<AppTheme, IAppThemeConfig> = {
+export const THEMES: Record<AppTheme, AppThemeConfig> = {
   [AppTheme.AUTO]: {
     code: AppTheme.AUTO,
     icon: "brightness-auto",
