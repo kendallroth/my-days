@@ -14,19 +14,6 @@ Simple app that counts down/up to important dates!
   <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1675641600" alt="Download on the App Store" height="64" style="padding: 10px; box-sizing: border-box" >
 </a>
 
-## Task List
-
-- [x] Display dates in list
-- [x] Reorder dates in list (via menu)
-- [ ] Reorder dates in list (via drag)
-- [ ] Customize date count unit
-- [ ] Show date details (additional units)
-- [x] Ability to share days (via config link)
-- [x] Add new dates
-- [x] Edit existing dates
-- [x] Delete existing dates
-- [x] Customize date icon
-
 ## Contributing
 
 Thanks to [all those](CONTRIBUTORS.md) who have contributed to this project so far!
