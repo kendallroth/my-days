@@ -30,7 +30,7 @@ const fakeDays: Day[] = [
     unit: "day",
   }),
   createFakeDay({
-    date: dayjs().add(17, "days").format(DATE_FORMAT_ISO_SHORT),
+    date: dayjs().add(18, "days").format(DATE_FORMAT_ISO_SHORT),
     icon: "airplane",
     title: "Vacation",
     repeats: false,
@@ -41,6 +41,20 @@ const fakeDays: Day[] = [
     icon: "ring",
     title: "Friend's Wedding",
     repeats: false,
+    unit: "month",
+  }),
+  createFakeDay({
+    date: dayjs().subtract(151, "days").format(DATE_FORMAT_ISO_SHORT),
+    icon: "baby",
+    title: "Baby!",
+    repeats: false,
+    unit: "week",
+  }),
+  createFakeDay({
+    date: dayjs(dayjs()).format(DATE_FORMAT_ISO_SHORT),
+    icon: "cake",
+    title: "Birthday",
+    repeats: true,
     unit: "day",
   }),
   createFakeDay({
@@ -53,13 +67,6 @@ const fakeDays: Day[] = [
     date: dayjs("2000-12-25").format(DATE_FORMAT_ISO_SHORT),
     icon: "pine-tree",
     title: "Christmas",
-    repeats: true,
-    unit: "day",
-  }),
-  createFakeDay({
-    date: dayjs(dayjs().add(108, "days")).format(DATE_FORMAT_ISO_SHORT),
-    icon: "cake",
-    title: "Birthday",
     repeats: true,
     unit: "day",
   }),
