@@ -3,13 +3,13 @@ import i18n from "i18next";
 
 import { SettingsService } from "@services";
 import {
+  type AppBehaviours,
   type AppLanguage,
+  type AppLanguageConfig,
+  type AppPopulateOptions,
+  type AppResetOptions,
   type AppTheme,
-  type IAppBehaviours,
-  type IAppLanguageConfig,
-  type IAppPopulateOptions,
-  type IAppResetOptions,
-  type IAppThemeConfig,
+  type AppThemeConfig,
 } from "@typings/settings.types";
 import { LANGUAGES, THEMES } from "@utilities/constants";
 
@@ -18,7 +18,7 @@ import { addDebugDataAction, resetAppAction } from "../actions";
 
 interface SettingsState {
   /** App behaviour settings */
-  behaviours: IAppBehaviours;
+  behaviours: AppBehaviours;
   /** Whether app is in development mode */
   developer: boolean;
   /** App language (for internationalization) */
@@ -35,6 +35,7 @@ interface SettingsState {
 const initialState: SettingsState = {
   behaviours: {
     confirmSharedDays: true,
+    swapThemeOnDetails: true,
   },
   developer: false,
   language: SettingsService.getDeviceLanguage(),
@@ -45,7 +46,7 @@ const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
-    setAppBehaviour: (state, action: PayloadAction<Partial<IAppBehaviours>>) => {
+    setAppBehaviour: (state, action: PayloadAction<Partial<AppBehaviours>>) => {
       state.behaviours = {
         ...state.behaviours,
         ...action.payload,
@@ -79,7 +80,7 @@ const settingsSlice = createSlice({
 // Add debug data to the store
 const addDebugDataThunk = createAsyncThunk(
   "settings/addDebugData",
-  async (options: IAppPopulateOptions, { dispatch }) => {
+  async (options: AppPopulateOptions, { dispatch }) => {
     // NOTE: Delay the action to make it feel that something is happening
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -90,7 +91,7 @@ const addDebugDataThunk = createAsyncThunk(
 // Reset the store state
 const resetAppThunk = createAsyncThunk(
   "settings/resetApp",
-  async (options: IAppResetOptions, { dispatch }) => {
+  async (options: AppResetOptions, { dispatch }) => {
     // NOTE: Delay the action to make it feel that something is happening
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -107,13 +108,12 @@ const resetAppThunk = createAsyncThunk(
 // Selectors
 ////////////////////////////////////////////////////////////////////////////////
 
-export const selectBehaviours = (state: RootState): IAppBehaviours => state.settings.behaviours;
+export const selectBehaviours = (state: RootState): AppBehaviours => state.settings.behaviours;
 export const selectDeveloperMode = (state: RootState): boolean => state.settings.developer;
 export const selectLanguage = (state: RootState): AppLanguage => state.settings.language;
-export const selectLanguageConfig = (state: RootState): IAppLanguageConfig =>
+export const selectLanguageConfig = (state: RootState): AppLanguageConfig =>
   LANGUAGES[state.settings.language];
-export const selectThemeConfig = (state: RootState): IAppThemeConfig =>
-  THEMES[state.settings.theme];
+export const selectThemeConfig = (state: RootState): AppThemeConfig => THEMES[state.settings.theme];
 
 export { addDebugDataThunk, resetAppThunk };
 export const { setAppBehaviour, setAppDeveloper, setAppLanguage, setAppTheme } =

@@ -15,6 +15,13 @@
     "description": "Are you sure you want to remove this day?",
     "deleteSuccess": "Removed \"{{title}}\""
   },
+  "dayDetails": {
+    "dayDate": "{{date, MMMM DD, YYYY}}",
+    "dayDate_noYear": "{{date, MMMM DD}}",
+    "menuEdit": "Edit",
+    "menuDelete": "Delete",
+    "menuShare": "Share"
+  },
   "dayList": {
     "title": "Days"
   },
@@ -58,10 +65,11 @@
     "appDeveloper": "Developed by Kendall Roth © {{date}}",
     "appReason": "Created with ❤️ for a special person!",
     "appSummary": "“My Days” is a simple mobile app to count down/up to important dates!",
-    "guideSteps": ["Add and manage dates", "Track dates on dashboard", "Share dates with friends"],
+    "guideSteps": ["Add and manage dates", "View date details / stats", "Track dates on dashboard", "Share dates with friends"],
     "guideTipTitle": "Tips",
     "guideTips": [
-      "Dates can be managed by long pressing on a list item and using the selection menu.",
+      "View more information and time units for a date by selecting a list item.",
+      "Access a quick-access menu by long pressing on a day list item.",
       "Dates can be reordered from the list item selection menu.",
       "Icons can be modified by tapping the icon in the \"Add\" or \"Edit\" dialogs.",
       "Share a date with friends to keep track of it together!"
@@ -79,7 +87,9 @@
   "settingsBehaviours": {
     "title": "Behaviours",
     "behaviourItemConfirmSharedDaysDescription": "Whether days shared via link must be confirmed before adding (safety).",
-    "behaviourItemConfirmSharedDaysTitle": "Confirm shared days"
+    "behaviourItemConfirmSharedDaysTitle": "Confirm shared days",
+    "behaviourItemSwapDetailsThemeDescription": "Whether the 'Details' screen theme should be swapped (light vs dark).",
+    "behaviourItemSwapDetailsThemeTitle": "Swap 'Details' screen theme"
   },
   "settingsContributors": {
     "title": "Contributors",

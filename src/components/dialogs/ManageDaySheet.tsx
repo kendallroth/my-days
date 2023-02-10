@@ -3,13 +3,14 @@ import React, { forwardRef, useEffect, useRef } from "react";
 import { useController, useForm } from "react-hook-form";
 import { type TFunction, useTranslation } from "react-i18next";
 import { type TextInput as RNPTextInput, StyleSheet, View } from "react-native";
-import { Badge, Button, Dialog, IconButton, useTheme } from "react-native-paper";
+import { Badge, Button, Dialog, IconButton, SegmentedButtons, useTheme } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
+import { DayIcon } from "@components/icons";
 import { type MaterialCommunityIcons } from "@typings/app.types";
-import { type Day, type DayNew } from "@typings/day.types";
+import { type Day, type DayNew, type DayUnit } from "@typings/day.types";
 import { dayIcons } from "@utilities/icons.util";
 
 import BottomSheet from "./BottomSheet";
@@ -20,6 +21,7 @@ interface IFormData {
   icon?: keyof MaterialCommunityIcons;
   title: string;
   repeats: boolean;
+  unit: DayUnit;
 }
 
 type ManageDaySheetProps = {
@@ -33,6 +35,8 @@ type ManageDaySheetProps = {
   onEdit?: (day: Day) => void;
 };
 
+const maxTitleLength = 40;
+
 const getSchema = (t: TFunction<("common" | "screens")[], undefined>) => {
   return yup.object({
     date: yup
@@ -40,7 +44,12 @@ const getSchema = (t: TFunction<("common" | "screens")[], undefined>) => {
       .label(t("screens:dayAddEdit.dayDateLabel"))
       .required()
       .matches(/^\d{4}-\d{2}-\d{2}$/, t("screens:dayAddEdit.dayDateFormatError")),
-    title: yup.string().label(t("screens:dayAddEdit.dayTitleLabel")).required().min(2),
+    title: yup
+      .string()
+      .label(t("screens:dayAddEdit.dayTitleLabel"))
+      .required()
+      .min(2)
+      .max(maxTitleLength),
   });
 };
 
@@ -59,9 +68,20 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
         icon: day?.icon ?? undefined,
         title: day?.title ?? "",
         repeats: day?.repeats ?? false,
+        unit: day?.unit ?? "day",
       },
       resolver: yupResolver(getSchema(t)),
     });
+
+    const timeUnits: DayUnit[] = ["day", "week", "month", "year"];
+    const timeUnitOptions: { label: string; value: DayUnit }[] = timeUnits.map((unit) => ({
+      label: t(`common:timeUnits.${unit}`, { count: 2 }),
+      labelStyle: {
+        // Allow more space for longer labels
+        marginHorizontal: -8,
+      },
+      value: unit,
+    }));
 
     // NOTE: Need dynamic access to the selected icon for display purposes
     const {
@@ -69,6 +89,14 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
     } = useController({
       control: form.control,
       name: "icon",
+    });
+
+    // NOTE: Need dynamic access to the selected unit
+    const {
+      field: { value: unitValue },
+    } = useController({
+      control: form.control,
+      name: "unit",
     });
 
     const editing = Boolean(day);
@@ -80,6 +108,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
         icon: day?.icon ?? undefined,
         title: day?.title ?? "",
         repeats: day?.repeats ?? false,
+        unit: day?.unit ?? "day",
       });
     }, [day, form]);
 
@@ -123,7 +152,6 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
         onAdd({
           ...data,
           id: uuidv4(),
-          unit: "day",
         });
       } else {
         if (!onEdit) return;
@@ -148,9 +176,16 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
               onPress={() => onIconCycle("back")}
             />
             <IconButton
-              containerColor={iconValue ? colors.primary : colors.secondary}
-              iconColor={colors.surface}
-              icon={iconValue ?? "help"}
+              icon={({ size }) => (
+                <DayIcon
+                  backgroundColor={colors.primary}
+                  icon={iconValue}
+                  iconColor={colors.surface}
+                  // NOTE: Hack to fill icon button completely, taken from 'IconButton' source
+                  // const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
+                  size={size + 2 * 8}
+                />
+              )}
               size={24}
               style={{
                 marginVertical: -8,
@@ -170,6 +205,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
           control={form.control}
           innerRef={titleRef}
           label={t("screens:dayAddEdit.dayTitleLabel")}
+          maxLength={maxTitleLength}
           name="title"
           returnKeyType="next"
           onSubmitEditing={() => dateRef.current?.focus()}
@@ -184,11 +220,18 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
           returnKeyType="next"
           style={{ marginTop: 4 }}
         />
+        <SegmentedButtons
+          buttons={timeUnitOptions}
+          style={{ marginBottom: 8 }}
+          value={unitValue}
+          onValueChange={(v) => form.setValue("unit", v as DayUnit)}
+        />
         <Checkbox
           control={form.control}
           hideHint
           label={t("screens:dayAddEdit.dayRepeatsLabel")}
           name="repeats"
+          style={{ paddingVertical: 4 }}
         />
         <Dialog.Actions style={styles.sheetActions}>
           <Button textColor={colors.secondary} onPress={onCancel}>
@@ -206,6 +249,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
 const styles = StyleSheet.create({
   sheetActions: {
     marginTop: 8,
+    marginBottom: -8,
     paddingBottom: 0,
     paddingHorizontal: 0,
   },

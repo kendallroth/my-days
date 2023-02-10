@@ -3,8 +3,9 @@ import dayjs from "dayjs";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
-import { Avatar, Surface, Text, TouchableRipple } from "react-native-paper";
+import { Surface, Text, TouchableRipple } from "react-native-paper";
 
+import { DayIcon } from "@components/icons";
 import { useAppTheme } from "@hooks";
 import { sharedColors } from "@styles/theme";
 import { type Day } from "@typings/day.types";
@@ -13,11 +14,12 @@ import { getDayDisplay } from "@utilities/day.util";
 type DayDisplayProps = {
   day: Day;
   style?: StyleProp<ViewStyle>;
+  onPress?: (day: Day) => void;
   onLongPress?: (day: Day) => void;
 };
 
 const DayListItem = (props: DayDisplayProps) => {
-  const { day, style, onLongPress } = props;
+  const { day, style, onPress, onLongPress } = props;
 
   const { colors } = useAppTheme();
   const { t } = useTranslation(["common", "screens"]);
@@ -27,9 +29,10 @@ const DayListItem = (props: DayDisplayProps) => {
     date: dayjs(day.date),
   });
   const dateCount = getDayDisplay(day);
+  const countingDown = dateCount.direction === "down";
 
-  const isToday = dateCount.count === 0;
-  const countingDown = dateCount.count >= 0;
+  const displayNumber = Math.abs(Math.round(dateCount.count * 10) / 10);
+  const displayUnit = t(`common:timeUnits.${day.unit}`, { count: displayNumber });
 
   const countdownColor = colors.primary;
   const countupColor = colors.tertiary;
@@ -41,7 +44,7 @@ const DayListItem = (props: DayDisplayProps) => {
   return (
     <TouchableRipple
       rippleColor="transparent"
-      onPress={() => {}}
+      onPress={onPress ? () => onPress(day) : () => {}}
       onLongPress={() => onLongPress?.(day)}
     >
       <Surface
@@ -52,15 +55,16 @@ const DayListItem = (props: DayDisplayProps) => {
           {
             backgroundColor: backgroundColor,
             borderColor: mainColor,
-            borderWidth: isToday ? 4 : 2,
+            borderWidth: dateCount.today ? 4 : 2,
           },
         ]}
       >
-        <Avatar.Icon
-          color={backgroundColor}
-          icon={day.icon ?? ""}
+        <DayIcon
+          backgroundColor={mainColor}
+          icon={day.icon}
+          iconColor={backgroundColor}
           size={40}
-          style={[styles.dayIcon, { backgroundColor: mainColor }]}
+          style={styles.dayIcon}
         />
 
         <View style={styles.dayContent}>
@@ -78,7 +82,7 @@ const DayListItem = (props: DayDisplayProps) => {
         </View>
 
         <View style={[styles.dayStats, { backgroundColor: mainColor }]}>
-          {!isToday ? (
+          {!dateCount.today ? (
             <Fragment>
               <View
                 style={[
@@ -96,20 +100,15 @@ const DayListItem = (props: DayDisplayProps) => {
                 style={[styles.dayStatsCount, { color: mainColorText }]}
                 variant="headlineMedium"
               >
-                {Math.abs(dateCount.count)}
+                {displayNumber}
               </Text>
               <Text style={[styles.dayStatsUnit, { color: mainColorText }]} variant="bodySmall">
-                {t("common:timeUnits.days", { count: Math.abs(dateCount.count) })}
+                {displayUnit}
               </Text>
             </Fragment>
           ) : (
             <Fragment>
-              <Icon
-                color={colors.warning}
-                // name="calendar-check"
-                name="alert-decagram"
-                style={styles.dayStatsTodayIcon}
-              />
+              <Icon color={colors.warning} name="alert-decagram" style={styles.dayStatsTodayIcon} />
             </Fragment>
           )}
         </View>

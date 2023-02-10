@@ -11,7 +11,10 @@ import { type Day } from "@typings/day.types";
 type SelectedDayModalProps = {
   day: Day | null;
   dayPosition: { count: number; position: number } | null;
-  onClose: () => void;
+  /** Close callback */
+  onClose?: () => void;
+  /** Hide callback (triggered after close animation finishes) */
+  onHide?: () => void;
   onEdit: (day: Day) => void;
   onDelete: (day: Day) => void;
   onMove: (day: Day, direction: UpDown) => void;
@@ -27,15 +30,15 @@ interface SelectedDayOption {
 
 const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
   (props: SelectedDayModalProps, ref) => {
-    const { day, dayPosition, onClose, onEdit, onDelete, onMove, onShare } = props;
+    const { day, dayPosition, onClose, onHide, onEdit, onDelete, onMove, onShare } = props;
 
     const { t } = useTranslation(["screens"]);
 
     const selectedDayOptions: SelectedDayOption[] = [
       {
-        icon: "pencil",
-        label: t("screens:daySelectMenu.edit"),
-        onPress: onEdit,
+        icon: "share",
+        label: t("screens:daySelectMenu.share"),
+        onPress: onShare,
       },
       {
         disabled: dayPosition ? dayPosition.position <= 1 : false,
@@ -50,9 +53,9 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
         onPress: () => onMove(day!, "down"),
       },
       {
-        icon: "share",
-        label: t("screens:daySelectMenu.share"),
-        onPress: onShare,
+        icon: "pencil",
+        label: t("screens:daySelectMenu.edit"),
+        onPress: onEdit,
       },
       {
         icon: "delete",
@@ -78,6 +81,7 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
           ) : undefined
         }
         onClose={onClose}
+        onHide={onHide}
       >
         {selectedDayOptions.map((option) => (
           <List.Item
@@ -95,6 +99,7 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
 
 const styles = StyleSheet.create({
   titleRight: {
+    marginLeft: 16,
     opacity: 0.8,
   },
 });

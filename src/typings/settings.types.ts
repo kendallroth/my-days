@@ -1,7 +1,9 @@
 /** Customizable app behaviour settings */
-export interface IAppBehaviours {
+export interface AppBehaviours {
   /** Whether to prompt for confirmation before adding shared day via link */
   confirmSharedDays: boolean;
+  /** Whether light/dark theming should be swapped on Details screen (due to colouring) */
+  swapThemeOnDetails: boolean;
 }
 
 /** Supported app languages */
@@ -12,7 +14,7 @@ export enum AppLanguage {
 }
 
 /** App language configuration */
-export interface IAppLanguageConfig {
+export interface AppLanguageConfig {
   /** Whether language is in beta (partially complete) */
   beta?: boolean;
   /** Language code */
@@ -35,13 +37,13 @@ export enum AppTheme {
 }
 
 /** App debug populate portions */
-export interface IAppPopulateOptions {
+export interface AppPopulateOptions {
   /** Whether to populate with sample days */
   days: boolean;
 }
 
 /** App reset portions */
-export interface IAppResetOptions {
+export interface AppResetOptions {
   /** Whether to reset days */
   days: boolean;
   /** Whether to reset settings */
@@ -49,7 +51,7 @@ export interface IAppResetOptions {
 }
 
 /** App theme configuration */
-export interface IAppThemeConfig {
+export interface AppThemeConfig {
   /** Theme code/key */
   code: AppTheme;
   /** Whether theme is disabled */

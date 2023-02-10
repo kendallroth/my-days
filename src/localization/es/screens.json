@@ -15,6 +15,13 @@
     "description": "¿Está seguro de que desea eliminar esta día?",
     "deleteSuccess": "\"{{title}}\" eliminado"
   },
+  "dayDetails": {
+    "dayDate": "{{date, DD [de] MMMM [de] YYYY}}",
+    "dayDate_noYear": "{{date, DD [de] MMMM}}",
+    "menuEdit": "Editar",
+    "menuDelete": "Borrar",
+    "menuShare": "Compartir"
+  },
   "dayList": {
     "title": "Días"
   },
@@ -60,12 +67,14 @@
     "appSummary": "¡“My Days” es una aplicación móvil simple para contar hacia atrás/hasta fechas importantes!",
     "guideSteps": [
       "Agregar y administrar fechas",
+      "Ver detalles de la fecha / estadísticas",
       "Seguimiento de fechas en el tablero",
       "Compartir fechas con amigos"
     ],
     "guideTipTitle": "Consejos",
     "guideTips": [
-      "Las fechas se pueden administrar presionando prolongadamente un elemento de la lista y usando el menú de selección.",
+      "Vea más información y unidades de tiempo para una fecha seleccionando un elemento de la lista.",
+      "Acceda a un menú de acceso rápido manteniendo presionado un elemento de la lista de días.",
       "Las fechas se pueden reordenar desde el menú de selección de elementos de la lista.",
       "Los iconos se pueden agregar tocando el icono en los cuadros de diálogo \"Agregar\" o \"Editar\".",
       "¡Comparte una cita con amigos para seguirla juntos!"
@@ -83,7 +92,9 @@
   "settingsBehaviours": {
     "title": "Comportamientos",
     "behaviourItemConfirmSharedDaysDescription": "Si los días compartidos a través del enlace deben confirmarse antes de agregar (seguridad).",
-    "behaviourItemConfirmSharedDaysTitle": "Confirmar días compartidos"
+    "behaviourItemConfirmSharedDaysTitle": "Confirmar días compartidos",
+    "behaviourItemSwapDetailsThemeDescription": "Si se debe cambiar el tema de la pantalla 'Detalles' (claro u oscuro).",
+    "behaviourItemSwapDetailsThemeTitle": "Cambiar el tema de la pantalla 'Detalles'"
   },
   "settingsContributors": {
     "title": "Colaboradores",

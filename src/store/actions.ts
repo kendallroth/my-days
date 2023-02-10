@@ -1,11 +1,11 @@
 import { createAction } from "@reduxjs/toolkit";
 
-import { type IAppPopulateOptions, type IAppResetOptions } from "@typings/settings.types";
+import { type AppPopulateOptions, type AppResetOptions } from "@typings/settings.types";
 
 /** DEBUG: Action to add dummy data */
-const addDebugDataAction = createAction<IAppPopulateOptions>("addDebugData");
+const addDebugDataAction = createAction<AppPopulateOptions>("addDebugData");
 
 /** Reset parts of the app data */
-const resetAppAction = createAction<IAppResetOptions>("resetApp");
+const resetAppAction = createAction<AppResetOptions>("resetApp");
 
 export { addDebugDataAction, resetAppAction };

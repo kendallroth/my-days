@@ -1,8 +1,6 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { type NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
-import * as Linking from "expo-linking";
-import qs from "qs";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Share, StyleSheet, Vibration, View } from "react-native";
@@ -15,12 +13,18 @@ import {
   ManageDaySheet,
 } from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
-import { useAppDispatch, useAppSelector, useAppTheme, useScrollingFab, useSnackbar } from "@hooks";
-import { addDay, moveDay, removeDay, selectDays, updateDay } from "@store/slices/days";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useAppTheme,
+  useDayActions,
+  useDayDeleteDialog,
+  useScrollingFab,
+  useSnackbar,
+} from "@hooks";
+import { addDay, selectDays } from "@store/slices/days";
 import { selectBehaviours } from "@store/slices/settings";
-import { type UpDown } from "@typings/app.types";
-import { type Day, type DayNew } from "@typings/day.types";
-import { SHARED_DAY_VERSION } from "@utilities/day-parse.util";
+import { type Day } from "@typings/day.types";
 import { type RootRouterParams } from "src/AppRouter";
 
 import DayList from "./DayList";
@@ -51,7 +55,34 @@ const HomeScreen = () => {
   const manageDayRef = useRef<BottomSheetRef>(null);
   const [editedDay, setEditedDay] = useState<Day | null>(null);
 
-  const [deletedDay, setDeletedDay] = useState<Day | null>(null);
+  const { onDayAdd, onDayDelete, onDayEdit, onDayMove, onDayShare, onDayView } = useDayActions({
+    onDayAddCallback: () => {
+      manageDayRef.current?.close();
+    },
+    onDayEditCallback: () => {
+      manageDayRef.current?.close(() => {
+        setEditedDay(null);
+      });
+    },
+    onDayDeleteCallback: () => {
+      // Ensure FAB can be seen (if deleting last scrollable item when FAB was hidden)
+      setTimeout(() => {
+        toggleFab(true);
+      }, 250);
+    },
+    onDayShareCallback: (day, message) => {
+      // NOTE: Must either close selection dialog before sharing or not close it at all
+      selectedDayRef.current?.close(async () => {
+        await Share.share({
+          message,
+        });
+      });
+    },
+  });
+
+  const { deletedDay, setDeletedDay, onDeleteCancel, onDeleteConfirm } = useDayDeleteDialog({
+    onConfirm: onDayDelete,
+  });
 
   const today = dayjs();
 
@@ -86,6 +117,7 @@ const HomeScreen = () => {
 
   /** Open selected day options menu */
   const onDaySelect = (day: Day) => {
+    // Clean up all potential dialog state when selecting a new day (fail-safe)
     setSelectedDay(day);
     setDeletedDay(null);
     setEditedDay(null);
@@ -111,36 +143,6 @@ const HomeScreen = () => {
     });
   };
 
-  const onDayDeleteCancel = () => {
-    setDeletedDay(null);
-  };
-
-  const onDayDeleteConfirm = () => {
-    if (!deletedDay) return;
-
-    const deletedDayTitle = deletedDay.title;
-    setDeletedDay(null);
-    dispatch(removeDay(deletedDay.id));
-
-    // Ensure FAB can be seen (if deleting last scrollable item when FAB was hidden)
-    setTimeout(() => {
-      toggleFab(true);
-    }, 250);
-
-    notify(
-      t("screens:dayDelete.deleteSuccess", {
-        title: deletedDayTitle,
-      }),
-    );
-  };
-
-  const onDayManageAdd = (day: DayNew) => {
-    dispatch(addDay(day));
-
-    manageDayRef.current?.close();
-    notify(t("screens:dayAddEdit.dayAddSuccess", { title: day.title }));
-  };
-
   /** Cleanup day add/edit dialog */
   const onDayManageCancel = () => {
     manageDayRef.current?.close();
@@ -157,50 +159,6 @@ const HomeScreen = () => {
       setSelectedDay(null);
 
       manageDayRef.current?.open();
-    });
-  };
-
-  const onDayManageEdit = (day: Day) => {
-    dispatch(updateDay(day));
-
-    manageDayRef.current?.close();
-    setEditedDay(null);
-    notify(t("screens:dayAddEdit.dayEditSuccess", { title: day.title }));
-  };
-
-  const onDayMove = (day: Day, direction: UpDown) => {
-    dispatch(moveDay({ id: day.id, direction }));
-  };
-
-  const onDayShare = async (day: Day) => {
-    const mobileUrl = Linking.createURL("day/shared", {
-      // While using triple slashes prevents splitting the path into separate hostname and path,
-      //   it is not suitable as it prevents most applications from detecting a link. Instead,
-      //   a hack has been employed to optionally join the hostname to the path if separated...
-      // Source: https://github.com/expo/expo/issues/6497#issuecomment-574882448
-      isTripleSlashed: false,
-      queryParams: {
-        date: day.date,
-        icon: day.icon,
-        id: day.id,
-        repeats: day.repeats ? "true" : "false",
-        title: day.title,
-        version: `${SHARED_DAY_VERSION}`,
-      },
-    });
-
-    const redirectSite = "https://my-days.kendallroth.ca";
-    const webUrl = `${redirectSite}/mobile/redirect?${qs.stringify({
-      url: mobileUrl,
-    })}`;
-    const shareMessage = `A day has been shared with you from My Days! Follow this link to add '${day.title}' to the app!\n\n${mobileUrl}\n\nAlternative (web redirect)\n${webUrl}`;
-
-    // NOTE: Must either close selection dialog before sharing or not close it at all
-    selectedDayRef.current?.close(async () => {
-      await Share.share({
-        // Decided to use message over link as it contains more description (and link is iOS-only)
-        message: shareMessage,
-      });
     });
   };
 
@@ -236,7 +194,12 @@ const HomeScreen = () => {
       </View>
 
       <View style={styles.pageContent}>
-        <DayList days={days} onItemLongPress={onDaySelect} onScroll={onListScroll} />
+        <DayList
+          days={days}
+          onItemPress={onDayView}
+          onItemLongPress={onDaySelect}
+          onScroll={onListScroll}
+        />
       </View>
       <ScreenFAB
         icon="calendar-plus"
@@ -255,23 +218,23 @@ const HomeScreen = () => {
       <ManageDaySheet
         ref={manageDayRef}
         day={editedDay}
-        onAdd={onDayManageAdd}
+        onAdd={onDayAdd}
         onCancel={onDayManageCancel}
-        onEdit={onDayManageEdit}
+        onEdit={onDayEdit}
       />
       <DeleteDayDialog
         day={deletedDay}
         visible={!!deletedDay}
-        onCancel={onDayDeleteCancel}
-        onConfirm={onDayDeleteConfirm}
+        onCancel={onDeleteCancel}
+        onConfirm={onDeleteConfirm}
       />
       <SelectedDayModal
         ref={selectedDayRef}
         day={selectedDay}
         dayPosition={selectedDayPosition}
-        onClose={onDaySelectCancel}
         onEdit={onDayEditPress}
         onDelete={onDayDeletePress}
+        onHide={onDaySelectCancel}
         onMove={onDayMove}
         onShare={onDayShare}
       />

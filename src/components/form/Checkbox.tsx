@@ -1,5 +1,6 @@
 import React, { type ComponentPropsWithoutRef, Fragment } from "react";
 import { type Control, useController } from "react-hook-form";
+import { StyleSheet } from "react-native";
 import { Checkbox as RNPCheckbox } from "react-native-paper";
 
 import { type Optional } from "@typings/app.types";
@@ -28,10 +29,8 @@ const Checkbox = (props: CheckboxProps) => {
 
   // Show errors when field has been touched or submitted (apparently does not touch fields...)
   const errorShown = Boolean(error?.message) && (isTouched || isSubmitted);
-  // Numbers must be cast to strings (type warnings)
-  const fieldValue = field.value ? `${field.value}` : field.value;
 
-  const checkboxStatus: ComponentPropsWithoutRef<typeof RNPCheckbox.Item>["status"] = fieldValue
+  const checkboxStatus: ComponentPropsWithoutRef<typeof RNPCheckbox.Item>["status"] = field.value
     ? "checked"
     : "unchecked";
 
@@ -43,7 +42,8 @@ const Checkbox = (props: CheckboxProps) => {
         mode="android"
         position={position}
         status={checkboxStatus}
-        onPress={() => field.onChange(!fieldValue)}
+        style={[styles.checkbox, rest.style]}
+        onPress={() => field.onChange(!field.value)}
       />
       {!hideHint && (
         <InputHelperText error={error?.message} hint={hint} visible={Boolean(errorShown || hint)} />
@@ -51,5 +51,12 @@ const Checkbox = (props: CheckboxProps) => {
     </Fragment>
   );
 };
+
+const styles = StyleSheet.create({
+  checkbox: {
+    paddingLeft: 8,
+    paddingRight: 6,
+  },
+});
 
 export default Checkbox;

@@ -13,7 +13,7 @@ import config from "@config";
 import { useAppDispatch, useAppLoader, useSnackbar } from "@hooks";
 import { type SettingsRouterNavigation } from "@screens/Settings/SettingsRouter";
 import { addDebugDataThunk, setAppDeveloper } from "@store/slices/settings";
-import { type IAppPopulateOptions } from "@typings/settings.types";
+import { type AppPopulateOptions } from "@typings/settings.types";
 
 import DeveloperListItem from "./DeveloperListItem";
 
@@ -29,7 +29,7 @@ const DeveloperScreen = () => {
    * Populate the app state
    */
   const onAppPopulate = () => {
-    const populateOptions: IAppPopulateOptions = {
+    const populateOptions: AppPopulateOptions = {
       days: true,
     };
 

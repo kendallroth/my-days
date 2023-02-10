@@ -33,7 +33,7 @@ const DeleteDayDialog = (props: DeleteDayDialogProps) => {
       onConfirm={onConfirm}
     >
       <Text>{t("screens:dayDelete.description")}</Text>
-      <Text style={styles.deleteDialogDay} variant="titleMedium">
+      <Text numberOfLines={1} style={styles.deleteDialogDay} variant="titleMedium">
         {day.title}
       </Text>
     </ConfirmDialog>

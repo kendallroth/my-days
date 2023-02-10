@@ -2,20 +2,20 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { List, Switch } from "react-native-paper";
 
-import { type IAppBehaviours } from "@typings/settings.types";
+import { type AppBehaviours } from "@typings/settings.types";
 
 type BehavioursScreenListItemSwitchProps = {
   /** Switch description */
   description?: string;
   disabled?: boolean;
   /** Behaviour state key */
-  stateKey: keyof IAppBehaviours;
+  stateKey: keyof AppBehaviours;
   /** Switch title */
   title: string;
   /** Switch value */
   value: boolean;
   /** Change handler */
-  onChange: (behaviourKey: keyof IAppBehaviours, value: boolean) => void;
+  onChange: (behaviourKey: keyof AppBehaviours, value: boolean) => void;
 };
 
 const BehavioursScreenListItemSwitch = (props: BehavioursScreenListItemSwitchProps) => {
@@ -40,6 +40,7 @@ const BehavioursScreenListItemSwitch = (props: BehavioursScreenListItemSwitchPro
 
 const styles = StyleSheet.create({
   itemSwitch: {
+    alignSelf: "center",
     marginLeft: 4,
   },
 });
