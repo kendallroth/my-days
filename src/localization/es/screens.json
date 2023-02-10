@@ -65,9 +65,10 @@
     ],
     "guideTipTitle": "Consejos",
     "guideTips": [
-      "Las fechas se pueden administrar presionando prolongadamente un elemento de la lista y seleccionando \"Editar\" o \"Eliminar\" en el menú de selección.",
+      "Las fechas se pueden administrar presionando prolongadamente un elemento de la lista y usando el menú de selección.",
       "Las fechas se pueden reordenar desde el menú de selección de elementos de la lista.",
-      "Los iconos se pueden agregar tocando el icono en los cuadros de diálogo \"Agregar\" o \"Editar\"."
+      "Los iconos se pueden agregar tocando el icono en los cuadros de diálogo \"Agregar\" o \"Editar\".",
+      "¡Comparte una cita con amigos para seguirla juntos!"
     ],
     "chipContact": "Contacto",
     "chipPortfolio": "Portafolio",

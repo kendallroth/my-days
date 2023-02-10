@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Store URL in About screen developer chips
+
 ## [0.2.0] - 2023-02-09
 
 ### Added
