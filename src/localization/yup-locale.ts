@@ -53,6 +53,10 @@ export const yupLocale = {
       key: "common:validations.match",
       values: { path },
     }),
+    max: ({ path, max }) => ({
+      key: "common:validations.stringMax",
+      values: { path, max },
+    }),
     min: ({ path, min }) => ({
       key: "common:validations.stringMin",
       values: { path, min },

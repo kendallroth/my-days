@@ -2,24 +2,33 @@ import { MaterialCommunityIcons as Icon } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { type NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
-import React from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
-import { Avatar, Text } from "react-native-paper";
+import { ScrollView, Share, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
+import { Avatar, Menu, Text } from "react-native-paper";
 
+import { type BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
 import { AppBar, Page } from "@components/layout";
-import { useAppSelector, useAppTheme, useSnackbar } from "@hooks";
+import { type AppBarMenuRef } from "@components/layout/AppBarMenu";
+import {
+  useAppSelector,
+  useAppTheme,
+  useDayActions,
+  useDayDeleteDialog,
+  useSnackbar,
+} from "@hooks";
 import { selectDay } from "@store/slices/days";
 import { type DayUnit } from "@typings/day.types";
 import { getDayDisplay } from "@utilities/day.util";
 import { type RootRouterParams } from "src/AppRouter";
+
+import DayStat from "./DayStat";
 
 type DetailsScreenRouteProps = NativeStackScreenProps<RootRouterParams, "DetailsScreen">;
 
 interface CountStat {
   number: number;
   unit: DayUnit;
-  /** Unit localization key */
   unitLabel: string;
 }
 
@@ -32,20 +41,73 @@ const DetailScreen = () => {
 
   const { colors } = useAppTheme();
 
-  const day = useAppSelector((s) => selectDay(s, route.params.dayId));
-  if (!day) {
+  const selectedDay = useAppSelector((s) => selectDay(s, route.params.dayId));
+
+  const menuActionRef = useRef<AppBarMenuRef>(null);
+  const manageDayRef = useRef<BottomSheetRef>(null);
+
+  const { onDayDelete, onDayEdit, onDayShare } = useDayActions({
+    onDayEditCallback: () => {
+      manageDayRef.current?.close();
+    },
+    onDayDeleteCallback: () => {},
+    onDayShareCallback: async (day, message) => {
+      await Share.share({
+        message,
+      });
+    },
+  });
+
+  /** Prepare deletion confirmation dialog (in response to selection menu choice) */
+  const onDeletePress = () => {
+    menuActionRef.current?.close();
+    if (!selectedDay) return;
+
+    setDeletedDay(selectedDay);
+  };
+
+  /** Prepare edit dialog (in response to selection menu choice) */
+  const onEditPress = () => {
+    menuActionRef.current?.close();
+    if (!selectedDay) return;
+
+    manageDayRef.current?.open();
+  };
+
+  const onEditCancel = () => {
+    manageDayRef.current?.close();
+  };
+
+  const onSharePress = () => {
+    menuActionRef.current?.close();
+    if (!selectedDay) return;
+
+    onDayShare(selectedDay);
+  };
+
+  const { deletedDay, setDeletedDay, onDeleteCancel, onDeleteConfirm } = useDayDeleteDialog({
+    onConfirm: (day) => {
+      navigation.navigate("HomeScreen");
+
+      setTimeout(() => {
+        onDayDelete(day);
+      }, 100);
+    },
+  });
+
+  // NOTE: Must come after all hooks (as it ends render abruptly)
+  if (!selectedDay) {
     notifyError("Invalid day selected");
     navigation.navigate("HomeScreen");
     return null;
   }
 
-  const dateCount = getDayDisplay(day);
+  const dateCount = getDayDisplay(selectedDay);
   const countingDown = dateCount.direction === "down";
 
-  // TODO: Update localization key
-  const dateString = t("screens:home.listItemDate", {
-    context: day.repeats ? "noYear" : undefined,
-    date: dayjs(day.date),
+  const dateString = t("screens:dayDetails.dayDate", {
+    context: selectedDay.repeats ? "noYear" : undefined,
+    date: dayjs(selectedDay.date),
   });
 
   const mainColor = countingDown ? colors.primary : colors.tertiary;
@@ -75,7 +137,7 @@ const DetailScreen = () => {
     },
   ];
 
-  const dayIconStyle: StyleProp<ViewStyle> = day.icon
+  const dayIconStyle: StyleProp<ViewStyle> = selectedDay.icon
     ? {
         backgroundColor: mainColorContainer,
       }
@@ -92,79 +154,72 @@ const DetailScreen = () => {
         background={mainColor}
         titleStyle={{ color: mainColorText, opacity: 0.75 }}
       >
-        <AppBar.Action color={mainColorText} icon="pencil" onPress={() => {}} />
-        <AppBar.Action color={mainColorText} icon="dots-vertical" onPress={() => {}} />
+        <AppBar.Action color={mainColorText} icon="share" onPress={onSharePress} />
+        <AppBar.ActionMenu ref={menuActionRef}>
+          <Menu.Item
+            leadingIcon="pencil"
+            title={t("screens:dayDetails.menuEdit")}
+            onPress={onEditPress}
+          />
+          <Menu.Item
+            leadingIcon="delete"
+            title={t("screens:dayDetails.menuDelete")}
+            onPress={onDeletePress}
+          />
+        </AppBar.ActionMenu>
       </AppBar>
 
       <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
-        <View style={styles.dayDetails}>
-          <View style={styles.dayIcons}>
-            <Avatar.Icon
-              color={day.icon ? mainColor : mainColorContainer}
-              icon={day.icon ?? "plus"}
-              size={60}
-              style={dayIconStyle}
-            />
-            {dateCount.today && <Icon color={colors.warning} name="alert-decagram" size={48} />}
-          </View>
-          <Text style={[styles.dayDetailsTitle, { color: mainColorText }]} variant="headlineLarge">
-            {day.title}
+        <View style={styles.dayHeaderIcons}>
+          <Avatar.Icon
+            color={selectedDay.icon ? mainColor : mainColorContainer}
+            icon={selectedDay.icon ?? "plus"}
+            size={60}
+            style={dayIconStyle}
+          />
+          {dateCount.today && <Icon color={colors.warning} name="alert-decagram" size={48} />}
+        </View>
+        <Text style={[styles.dayHeaderTitle, { color: mainColorText }]} variant="headlineLarge">
+          {selectedDay.title}
+        </Text>
+        <View style={styles.dayHeaderDateRow}>
+          <Text style={[styles.dayHeaderDate, { color: mainColorText }]} variant="bodyLarge">
+            {dateString}
           </Text>
-          <View style={styles.dayDetailsDateRow}>
-            <Text style={[styles.dayDetailsDate, { color: mainColorText }]} variant="bodyLarge">
-              {dateString}
-            </Text>
-            {day.repeats && (
-              <Icon
-                color={mainColorText}
-                name="update"
-                size={22}
-                style={styles.dayDetailsRepeats}
-              />
-            )}
-          </View>
-          <View style={styles.dayCounts}>
-            {stats.map((stat, idx) => {
-              const isDisplayUnit = stat.unit === day.unit;
-              const displayNumber = Math.abs(stat.number).toFixed(stat.unit === "day" ? 0 : 2);
-              const textColor = isDisplayUnit ? mainColorText : mainColorContainer;
+          {selectedDay.repeats && (
+            <Icon color={mainColorText} name="update" size={22} style={styles.dayHeaderRepeats} />
+          )}
+        </View>
 
-              return (
-                <View
-                  key={stat.unit}
-                  style={[styles.dayCount, idx > 0 ? { marginTop: pagePadding / 1.5 } : undefined]}
-                >
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text
-                      style={[
-                        styles.dayCountNumber,
-                        {
-                          color: textColor,
-                          fontWeight: isDisplayUnit ? "bold" : undefined,
-                        },
-                      ]}
-                      variant={isDisplayUnit ? "displayLarge" : "displayMedium"}
-                    >
-                      {displayNumber}
-                    </Text>
-                    {isDisplayUnit && !dateCount.today && (
-                      <Icon
-                        color={mainColorContainer}
-                        name={countingDown ? "arrow-down" : "arrow-up"}
-                        size={40}
-                        style={{ marginLeft: 8, marginTop: -6 }}
-                      />
-                    )}
-                  </View>
-                  <Text style={[styles.dayCountUnit, { color: textColor }]} variant="bodyLarge">
-                    {stat.unitLabel}
-                  </Text>
-                </View>
-              );
-            })}
-          </View>
+        <View style={styles.dayStats}>
+          {stats.map((stat, idx) => (
+            <DayStat
+              key={stat.unit}
+              colorHighlight={mainColorText}
+              colorNormal={mainColorContainer}
+              number={stat.number}
+              unitLabel={stat.unitLabel}
+              decimals={stat.unit === "day" ? 0 : 2}
+              highlighted={stat.unit === selectedDay.unit}
+              today={dateCount.today}
+              style={idx > 0 ? { marginTop: pagePadding / 1.5 } : undefined}
+            />
+          ))}
         </View>
       </ScrollView>
+
+      <ManageDaySheet
+        ref={manageDayRef}
+        day={selectedDay}
+        onCancel={onEditCancel}
+        onEdit={onDayEdit}
+      />
+      <DeleteDayDialog
+        day={deletedDay}
+        visible={!!deletedDay}
+        onCancel={onDeleteCancel}
+        onConfirm={onDeleteConfirm}
+      />
     </Page>
   );
 };
@@ -175,43 +230,32 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   pageScroll: {
+    paddingHorizontal: pagePadding,
     flex: 1,
   },
-  dayDetails: {
-    paddingHorizontal: pagePadding,
-  },
-  dayDetailsTitle: {
-    marginTop: 32,
-    fontWeight: "bold",
-  },
-  dayDetailsDateRow: {
+  dayHeaderDateRow: {
     flexDirection: "row",
     alignItems: "center",
     opacity: 0.75,
   },
-  dayDetailsDate: {
+  dayHeaderDate: {
     marginTop: 4,
   },
-  dayDetailsRepeats: {
-    marginTop: 4,
-    marginLeft: 8,
-  },
-  dayIcons: {
+  dayHeaderIcons: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
-  dayCounts: {
+  dayHeaderRepeats: {
+    marginTop: 4,
+    marginLeft: 8,
+  },
+  dayHeaderTitle: {
+    marginTop: 32,
+    fontWeight: "bold",
+  },
+  dayStats: {
     marginVertical: pagePadding,
-  },
-  dayCount: {},
-  dayCountNumber: {
-    // TODO: Determine if a monospace font looks best
-    // fontFamily: Platform.OS === "android" ? "monospace" : undefined,
-    // fontVariant: ["tabular-nums"],
-  },
-  dayCountUnit: {
-    marginTop: -4,
   },
 });
 

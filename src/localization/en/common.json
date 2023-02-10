@@ -46,6 +46,6 @@
     "invalidType": "{{path}} must be a {{type}}",
     "match": "{{path}} has invalid format",
     "required": "{{path}} is required",
-    "stringMin": "{{path}} must be at least {{min}} characters"
-  }
+    "stringMin": "{{path}} must be at least {{min}} characters",
+    "stringMax": "{{path}} must be less than {{max}} characters" }
 }

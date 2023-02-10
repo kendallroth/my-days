@@ -36,9 +36,9 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
 
     const selectedDayOptions: SelectedDayOption[] = [
       {
-        icon: "pencil",
-        label: t("screens:daySelectMenu.edit"),
-        onPress: onEdit,
+        icon: "share",
+        label: t("screens:daySelectMenu.share"),
+        onPress: onShare,
       },
       {
         disabled: dayPosition ? dayPosition.position <= 1 : false,
@@ -53,9 +53,9 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
         onPress: () => onMove(day!, "down"),
       },
       {
-        icon: "share",
-        label: t("screens:daySelectMenu.share"),
-        onPress: onShare,
+        icon: "pencil",
+        label: t("screens:daySelectMenu.edit"),
+        onPress: onEdit,
       },
       {
         icon: "delete",
@@ -99,6 +99,7 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
 
 const styles = StyleSheet.create({
   titleRight: {
+    marginLeft: 16,
     opacity: 0.8,
   },
 });

@@ -15,6 +15,13 @@
     "description": "¿Está seguro de que desea eliminar esta día?",
     "deleteSuccess": "\"{{title}}\" eliminado"
   },
+  "dayDetails": {
+    "dayDate": "{{date, DD [de] MMMM [de] YYYY}}",
+    "dayDate_noYear": "{{date, DD [de] MMMM}}",
+    "menuEdit": "Editar",
+    "menuDelete": "Borrar",
+    "menuShare": "Compartir"
+  },
   "dayList": {
     "title": "Días"
   },

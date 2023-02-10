@@ -13,9 +13,15 @@ type AppBarMenuProps = {
   style?: ViewStyle;
 };
 
+type HideCallback = () => void;
+
 export type AppBarMenuRef = {
-  /** Close the menu */
-  close: () => void;
+  /**
+   * Close the modal
+   *
+   * @param onHide - Callback executed after modal should be closed
+   */
+  close: (onHide?: HideCallback) => void;
 };
 
 const AppBarMenu = forwardRef<AppBarMenuRef, AppBarMenuProps>((props: AppBarMenuProps, ref) => {
@@ -26,18 +32,34 @@ const AppBarMenu = forwardRef<AppBarMenuRef, AppBarMenuProps>((props: AppBarMenu
 
   useImperativeHandle(ref, (): AppBarMenuRef => {
     return {
-      close: () => setMenuOpen(false),
+      close,
     };
   });
 
+  const close = (onHide?: HideCallback) => {
+    if (!menuOpen) return;
+    setMenuOpen(false);
+
+    // Wait until menu should be close to call the 'onHide' callback
+    // TODO: Figure out a way to detect when menu actually closes (no 'onHide' prop like 'BottomSheet')...
+    setTimeout(() => {
+      if (onHide && typeof onHide === "function") {
+        onHide();
+      }
+    }, 250);
+  };
+
+  const open = () => {
+    if (menuOpen) return;
+    setMenuOpen(true);
+  };
+
   return (
     <Menu
-      anchor={
-        <Appbar.Action color={colors.onPrimary} icon={icon} onPress={() => setMenuOpen(true)} />
-      }
+      anchor={<Appbar.Action color={colors.onPrimary} icon={icon} onPress={open} />}
       style={[styles.menuStyle, style]}
       visible={menuOpen}
-      onDismiss={() => setMenuOpen(false)}
+      onDismiss={close}
     >
       {children}
     </Menu>

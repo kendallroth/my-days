@@ -33,6 +33,8 @@ type ManageDaySheetProps = {
   onEdit?: (day: Day) => void;
 };
 
+const maxTitleLength = 40;
+
 const getSchema = (t: TFunction<("common" | "screens")[], undefined>) => {
   return yup.object({
     date: yup
@@ -40,7 +42,12 @@ const getSchema = (t: TFunction<("common" | "screens")[], undefined>) => {
       .label(t("screens:dayAddEdit.dayDateLabel"))
       .required()
       .matches(/^\d{4}-\d{2}-\d{2}$/, t("screens:dayAddEdit.dayDateFormatError")),
-    title: yup.string().label(t("screens:dayAddEdit.dayTitleLabel")).required().min(2),
+    title: yup
+      .string()
+      .label(t("screens:dayAddEdit.dayTitleLabel"))
+      .required()
+      .min(2)
+      .max(maxTitleLength),
   });
 };
 
@@ -170,6 +177,7 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
           control={form.control}
           innerRef={titleRef}
           label={t("screens:dayAddEdit.dayTitleLabel")}
+          maxLength={maxTitleLength}
           name="title"
           returnKeyType="next"
           onSubmitEditing={() => dateRef.current?.focus()}
