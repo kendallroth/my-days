@@ -269,9 +269,9 @@ const HomeScreen = () => {
         ref={selectedDayRef}
         day={selectedDay}
         dayPosition={selectedDayPosition}
-        onClose={onDaySelectCancel}
         onEdit={onDayEditPress}
         onDelete={onDayDeletePress}
+        onHide={onDaySelectCancel}
         onMove={onDayMove}
         onShare={onDayShare}
       />

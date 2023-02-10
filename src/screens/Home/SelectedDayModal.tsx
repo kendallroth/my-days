@@ -11,7 +11,10 @@ import { type Day } from "@typings/day.types";
 type SelectedDayModalProps = {
   day: Day | null;
   dayPosition: { count: number; position: number } | null;
-  onClose: () => void;
+  /** Close callback */
+  onClose?: () => void;
+  /** Hide callback (triggered after close animation finishes) */
+  onHide?: () => void;
   onEdit: (day: Day) => void;
   onDelete: (day: Day) => void;
   onMove: (day: Day, direction: UpDown) => void;
@@ -27,7 +30,7 @@ interface SelectedDayOption {
 
 const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
   (props: SelectedDayModalProps, ref) => {
-    const { day, dayPosition, onClose, onEdit, onDelete, onMove, onShare } = props;
+    const { day, dayPosition, onClose, onHide, onEdit, onDelete, onMove, onShare } = props;
 
     const { t } = useTranslation(["screens"]);
 
@@ -78,6 +81,7 @@ const SelectedDayModal = forwardRef<BottomSheetRef, SelectedDayModalProps>(
           ) : undefined
         }
         onClose={onClose}
+        onHide={onHide}
       >
         {selectedDayOptions.map((option) => (
           <List.Item

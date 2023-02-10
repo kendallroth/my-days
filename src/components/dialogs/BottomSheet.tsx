@@ -22,6 +22,8 @@ export type BottomSheetProps = {
   titleStyle?: StyleProp<ViewStyle>;
   /** Close callback */
   onClose?: () => void;
+  /** Hide callback (triggered after close animation finishes) */
+  onHide?: () => void;
   /** Open callback */
   onOpen?: () => void;
 };
@@ -51,6 +53,7 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>((props: BottomS
     titleRight,
     titleStyle = {},
     onClose,
+    onHide: onHideProp,
     onOpen,
   } = props;
 
@@ -112,11 +115,13 @@ const BottomSheet = forwardRef<BottomSheetRef, BottomSheetProps>((props: BottomS
     onOpen?.();
   };
 
+  /** Modal hide callback (after animation finishes) */
   const onHide = () => {
     // Call the closure callback once hide animation has finished, at which point another modal
     //   could be displayed (earliest point). However, this still isn't quite enough and sometimes
     //   requires waiting an additional brief period to ensure modal has completely hidden.
     setTimeout(() => {
+      onHideProp?.();
       onHideCallbackRef.current?.();
     }, 10);
 
