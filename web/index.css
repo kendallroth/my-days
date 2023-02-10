@@ -1,3 +1,18 @@
 .page-message {
-  margin: auto;
+  margin: 24px;
+  max-width: 400px;
+}
+
+.page-quote {
+  margin: 0;
+  margin-bottom: 16px;
+  opacity: 0.8;
+  border-left: 4px solid lightgrey;
+  padding-left: 16px;
+}
+
+.page-links {
+}
+.page-links > :not(:first-child) {
+  margin-left: 16px;
 }

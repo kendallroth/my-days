@@ -1,7 +1,6 @@
 .redirect-card {
-  margin: auto;
-  width: 100%;
-  max-width: 400px;
+  margin: 24px;
+  max-width: 500px;
 }
 
 .redirect-card__description {

@@ -8,47 +8,72 @@
   }
 </script>
 
-<div id="app" class="redirect-card content-card">
-  <head>
-    <title>My Days | Redirect Tool</title>
-  </head>
-  <link rel="stylesheet" href="../../base.css" />
-  <link rel="stylesheet" href="./index.css" />
+<div class="layout-content">
+  <div id="app" class="redirect-card content-card">
+    <head>
+      <title>My Days | Redirect Tool</title>
+    </head>
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="stylesheet" href="./index.css" />
 
-  <div class="content-card__title">Mobile Redirect Tool</div>
-  <template v-if="!redirectUrl">
-    <div class="redirect-card__description">
-      Enter a shared message (with link) from the My Days app to parse and open in the mobile app.
-    </div>
-    <textarea
-      v-model.trim="linkInput"
-      class="text-input redirect-card__input"
-      :disabled="redirecting"
-      placeholder="Enter shared text"
-      type="url"
-    ></textarea>
-    <div v-if="linkError" class="redirect-card__input-error">{{ linkError }}</div>
-    <div class="redirect-card__alert">
-      If mobile app does not open via link, make sure it is installed!
-    </div>
-    <button
-      class="button redirect-card__submit"
-      :disabled="!linkInput || redirecting"
-      @click="handleSubmitRedirect"
+    <div class="content-card__title">Mobile Redirect Tool</div>
+    <template v-if="!redirectUrl">
+      <div class="redirect-card__description">
+        Enter a shared message (with link) from the My Days app to parse and open in the mobile app.
+      </div>
+      <textarea
+        v-model.trim="linkInput"
+        class="text-input redirect-card__input"
+        :disabled="redirecting"
+        placeholder="Enter shared text"
+        type="url"
+      ></textarea>
+      <div v-if="linkError" class="redirect-card__input-error">{{ linkError }}</div>
+      <div class="redirect-card__alert">
+        If mobile app does not open via link, make sure it is installed!
+      </div>
+      <button
+        class="button redirect-card__submit"
+        :disabled="!linkInput || redirecting"
+        @click="handleSubmitRedirect"
+      >
+        Redirect
+      </button>
+    </template>
+    <template v-else>
+      <div class="redirect-card__description">
+        Open this link in My Days app to add the shared day!
+      </div>
+      <a class="redirect-card__link" :href="redirectUrl">{{ redirectUrl }}</a>
+      <div class="redirect-card__alert">
+        If mobile app does not open via link, make sure it installed!
+      </div>
+      <button class="button redirect-card__submit" @click="clearInitialParse">Parse message</button>
+    </template>
+  </div>
+  <div class="layout-links">
+    <a
+      href="https://play.google.com/store/apps/details?id=ca.kendallroth.my_days&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+      target="_blank"
     >
-      Redirect
-    </button>
-  </template>
-  <template v-else>
-    <div class="redirect-card__description">
-      Open this link in My Days app to add the shared day!
-    </div>
-    <a class="redirect-card__link" :href="redirectUrl">{{ redirectUrl }}</a>
-    <div class="redirect-card__alert">
-      If mobile app does not open via link, make sure it installed!
-    </div>
-    <button class="button redirect-card__submit" @click="clearInitialParse">Parse message</button>
-  </template>
+      <img
+        alt="Get it on Google Play"
+        height="64"
+        src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+      />
+    </a>
+    <a
+      href="https://apps.apple.com/us/app/my-days/id1669868291?itsct=apps_box_badge&amp;itscg=30200"
+      target="_blank"
+    >
+      <img
+        src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1675641600"
+        alt="Download on the App Store"
+        height="64"
+        style="padding: 10px; box-sizing: border-box"
+      />
+    </a>
+  </div>
 </div>
 
 <script type="module">
