@@ -1,5 +1,6 @@
-import { useAppTheme } from "@hooks";
 import { darkTheme, lightTheme } from "@styles/theme";
+
+import { useAppTheme } from "./useAppTheme";
 
 export interface SwapTheme {
   /** Input (regular) theme */
