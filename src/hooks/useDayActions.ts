@@ -93,6 +93,7 @@ export const useDayActions = (props: DayActionsProps): DayActions => {
         id: day.id,
         repeats: day.repeats ? "true" : "false",
         title: day.title,
+        unit: day.unit,
         version: `${SHARED_DAY_VERSION}`,
       },
     });
