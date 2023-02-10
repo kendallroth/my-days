@@ -7,3 +7,4 @@ export * from "./useScrollingFab";
 export * from "./useScrollViewScrolling";
 export * from "./useSnackbar";
 export * from "./useStore";
+export * from "./useSwapTheme";

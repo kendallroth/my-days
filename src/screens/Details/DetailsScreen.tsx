@@ -24,6 +24,7 @@ import { getDayDisplay } from "@utilities/day.util";
 import { type RootRouterParams } from "src/AppRouter";
 
 import DayStat from "./DayStat";
+import SwapDetailsTheme from "./SwapDetailsTheme";
 
 type DetailsScreenRouteProps = NativeStackScreenProps<RootRouterParams, "DetailsScreen">;
 
@@ -146,18 +147,20 @@ const DetailScreen = () => {
         titleStyle={{ color: mainColorText, opacity: 0.75 }}
       >
         <AppBar.Action color={mainColorText} icon="share" onPress={onSharePress} />
-        <AppBar.ActionMenu ref={menuActionRef}>
-          <Menu.Item
-            leadingIcon="pencil"
-            title={t("screens:dayDetails.menuEdit")}
-            onPress={onEditPress}
-          />
-          <Menu.Item
-            leadingIcon="delete"
-            title={t("screens:dayDetails.menuDelete")}
-            onPress={onDeletePress}
-          />
-        </AppBar.ActionMenu>
+        <SwapDetailsTheme>
+          <AppBar.ActionMenu ref={menuActionRef} anchorColor={colors.inverseOnSurface}>
+            <Menu.Item
+              leadingIcon="pencil"
+              title={t("screens:dayDetails.menuEdit")}
+              onPress={onEditPress}
+            />
+            <Menu.Item
+              leadingIcon="delete"
+              title={t("screens:dayDetails.menuDelete")}
+              onPress={onDeletePress}
+            />
+          </AppBar.ActionMenu>
+        </SwapDetailsTheme>
       </AppBar>
 
       <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
@@ -200,18 +203,20 @@ const DetailScreen = () => {
         </View>
       </ScrollView>
 
-      <ManageDaySheet
-        ref={manageDayRef}
-        day={selectedDay}
-        onCancel={onEditCancel}
-        onEdit={onDayEdit}
-      />
-      <DeleteDayDialog
-        day={deletedDay}
-        visible={!!deletedDay}
-        onCancel={onDeleteCancel}
-        onConfirm={onDeleteConfirm}
-      />
+      <SwapDetailsTheme>
+        <ManageDaySheet
+          ref={manageDayRef}
+          day={selectedDay}
+          onCancel={onEditCancel}
+          onEdit={onDayEdit}
+        />
+        <DeleteDayDialog
+          day={deletedDay}
+          visible={!!deletedDay}
+          onCancel={onDeleteCancel}
+          onConfirm={onDeleteConfirm}
+        />
+      </SwapDetailsTheme>
     </Page>
   );
 };

@@ -1,16 +1,17 @@
 import React, { forwardRef, useImperativeHandle, useState } from "react";
-import { StyleSheet, type ViewStyle } from "react-native";
+import { type StyleProp, StyleSheet, type ViewStyle } from "react-native";
 import { Appbar, Menu, useTheme } from "react-native-paper";
 
 import { type MaterialCommunityIcons } from "@typings/app.types";
 
 type AppBarMenuProps = {
+  anchorColor?: string;
   /** Menu items */
   children: any;
   /** Action icon */
   icon?: keyof MaterialCommunityIcons;
   /** Style */
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
 };
 
 type HideCallback = () => void;
@@ -25,7 +26,7 @@ export type AppBarMenuRef = {
 };
 
 const AppBarMenu = forwardRef<AppBarMenuRef, AppBarMenuProps>((props: AppBarMenuProps, ref) => {
-  const { children, icon = "dots-vertical", style } = props;
+  const { anchorColor, children, icon = "dots-vertical", style } = props;
 
   const [menuOpen, setMenuOpen] = useState(false);
   const { colors } = useTheme();
@@ -56,7 +57,7 @@ const AppBarMenu = forwardRef<AppBarMenuRef, AppBarMenuProps>((props: AppBarMenu
 
   return (
     <Menu
-      anchor={<Appbar.Action color={colors.onPrimary} icon={icon} onPress={open} />}
+      anchor={<Appbar.Action color={anchorColor ?? colors.onPrimary} icon={icon} onPress={open} />}
       style={[styles.menuStyle, style]}
       visible={menuOpen}
       onDismiss={close}

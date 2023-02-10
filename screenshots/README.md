@@ -8,7 +8,8 @@ App screenshots are necessary for promoting the app in the app stores. Screensho
 2. App Dashboard (dark)
 3. Date Selection
 4. Date Edit
-5. Settings
+5. Date Details
+6. Settings
 
 > **NOTE:** Ensure to have a good mixture of day types and states to demonstrate range of functionality!
 
