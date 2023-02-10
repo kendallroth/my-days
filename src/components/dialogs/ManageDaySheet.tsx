@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
+import { DayIcon } from "@components/icons";
 import { type MaterialCommunityIcons } from "@typings/app.types";
 import { type Day, type DayNew } from "@typings/day.types";
 import { dayIcons } from "@utilities/icons.util";
@@ -155,9 +156,16 @@ const ManageDaySheet = forwardRef<BottomSheetRef, ManageDaySheetProps>(
               onPress={() => onIconCycle("back")}
             />
             <IconButton
-              containerColor={iconValue ? colors.primary : colors.secondary}
-              iconColor={colors.surface}
-              icon={iconValue ?? "help"}
+              icon={({ size }) => (
+                <DayIcon
+                  backgroundColor={colors.primary}
+                  icon={iconValue}
+                  iconColor={colors.surface}
+                  // NOTE: Hack to fill icon button completely, taken from 'IconButton' source
+                  // const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
+                  size={size + 2 * 8}
+                />
+              )}
               size={24}
               style={{
                 marginVertical: -8,

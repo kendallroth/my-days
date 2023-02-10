@@ -4,10 +4,11 @@ import { type NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
 import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, Share, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
-import { Avatar, Menu, Text } from "react-native-paper";
+import { ScrollView, Share, StyleSheet, View } from "react-native";
+import { Menu, Text } from "react-native-paper";
 
 import { type BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
+import { DayIcon } from "@components/icons";
 import { AppBar, Page } from "@components/layout";
 import { type AppBarMenuRef } from "@components/layout/AppBarMenu";
 import {
@@ -137,16 +138,6 @@ const DetailScreen = () => {
     },
   ];
 
-  const dayIconStyle: StyleProp<ViewStyle> = selectedDay.icon
-    ? {
-        backgroundColor: mainColorContainer,
-      }
-    : {
-        backgroundColor: "transparent",
-        borderWidth: 4,
-        borderColor: mainColorContainer,
-      };
-
   return (
     <Page invertStatusBar style={{ backgroundColor: mainColor }}>
       <AppBar
@@ -171,11 +162,12 @@ const DetailScreen = () => {
 
       <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
         <View style={styles.dayHeaderIcons}>
-          <Avatar.Icon
-            color={selectedDay.icon ? mainColor : mainColorContainer}
-            icon={selectedDay.icon ?? "plus"}
+          <DayIcon
+            backgroundColor={mainColorContainer}
+            borderWidth={3}
+            icon={selectedDay.icon}
+            iconColor={mainColor}
             size={60}
-            style={dayIconStyle}
           />
           {dateCount.today && <Icon color={colors.warning} name="alert-decagram" size={48} />}
         </View>

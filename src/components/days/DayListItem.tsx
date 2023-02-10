@@ -3,8 +3,9 @@ import dayjs from "dayjs";
 import React, { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
-import { Avatar, Surface, Text, TouchableRipple } from "react-native-paper";
+import { Surface, Text, TouchableRipple } from "react-native-paper";
 
+import { DayIcon } from "@components/icons";
 import { useAppTheme } from "@hooks";
 import { sharedColors } from "@styles/theme";
 import { type Day } from "@typings/day.types";
@@ -55,11 +56,12 @@ const DayListItem = (props: DayDisplayProps) => {
           },
         ]}
       >
-        <Avatar.Icon
-          color={backgroundColor}
-          icon={day.icon ?? ""}
+        <DayIcon
+          backgroundColor={mainColor}
+          icon={day.icon}
+          iconColor={backgroundColor}
           size={40}
-          style={[styles.dayIcon, { backgroundColor: mainColor }]}
+          style={styles.dayIcon}
         />
 
         <View style={styles.dayContent}>
