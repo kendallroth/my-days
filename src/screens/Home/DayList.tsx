@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type RefObject } from "react";
 import { useTranslation } from "react-i18next";
 import { FlatList, type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 
@@ -10,6 +10,7 @@ import { type Day } from "@typings/day.types";
 
 interface DayListProps {
   days: Day[];
+  listRef?: RefObject<FlatList>;
   style?: StyleProp<ViewStyle>;
   onItemPress?: (day: Day) => void;
   onItemLongPress?: (day: Day) => void;
@@ -17,7 +18,7 @@ interface DayListProps {
 }
 
 const DayList = (props: DayListProps) => {
-  const { days, style, onItemPress, onItemLongPress, onScroll } = props;
+  const { days, listRef, style, onItemPress, onItemLongPress, onScroll } = props;
 
   const { t } = useTranslation(["common", "screens"]);
 
@@ -30,6 +31,7 @@ const DayList = (props: DayListProps) => {
 
   return (
     <FlatList
+      ref={listRef}
       contentContainerStyle={[styles.list, style]}
       data={days}
       ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
