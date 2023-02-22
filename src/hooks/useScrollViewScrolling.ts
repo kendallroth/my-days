@@ -4,16 +4,16 @@ import { type FlatList } from "react-native";
 
 import { type ScrollEvent } from "@typings/app.types";
 
-interface IScrollProps {
-  /** Whether to scroll to top when screen is focused */
-  scrollToTopOnFocus?: boolean;
+interface ScrollProps {
+  /** Whether to scroll to top when screen is blurred */
+  scrollToTopOnBlur?: boolean;
   /** Threshold for scrolling "near" detection */
   threshold?: number;
 }
 
-interface IScrollView {
-  /** Scroll direction */
-  direction: "down" | "up";
+interface ScrollView {
+  /** Scroll direction (from last scroll event) */
+  direction: "down" | "up" | null;
   /** Whether scrolling is near top (given a threshold) */
   nearTop: boolean;
   /** Whether scrolling is near bottom (given a threshold) */
@@ -24,9 +24,11 @@ interface IScrollView {
   offsetTop: number;
 }
 
-interface IScrollViewScrolling {
+interface ScrollViewScrolling {
+  /** Clear scroll direction */
+  clearScroll: () => void;
   /** Scroll view stats */
-  scroll: IScrollView;
+  scroll: ScrollView;
   /** Ref for scrollable view */
   scrollViewRef: RefObject<FlatList>;
   /** Scroll event handler (pass to ScrollView) */
@@ -39,10 +41,10 @@ interface IScrollViewScrolling {
  * @param   args - Scroll arguments
  * @returns Scroll progress and scroll callback
  */
-const useScrollViewScrolling = (args?: IScrollProps): IScrollViewScrolling => {
-  const { scrollToTopOnFocus = true, threshold = 0 } = args ?? {};
+const useScrollViewScrolling = (args?: ScrollProps): ScrollViewScrolling => {
+  const { scrollToTopOnBlur = false, threshold = 0 } = args ?? {};
 
-  const [scroll, setScroll] = useState<IScrollView>({
+  const [scroll, setScroll] = useState<ScrollView>({
     direction: "down",
     nearBottom: false,
     nearTop: true,
@@ -57,12 +59,20 @@ const useScrollViewScrolling = (args?: IScrollProps): IScrollViewScrolling => {
     //   This is necessary to show FAB on refocus if hidden previously.
     useCallback(() => {
       return () => {
-        if (scrollToTopOnFocus) {
-          scrollViewRef.current?.scrollToOffset({ animated: false, offset: 0 });
+        if (scrollToTopOnBlur) {
+          // TODO: Enable if this ever becomes desired
+          // scrollViewRef.current?.scrollToOffset({ animated: false, offset: 0 });
         }
       };
-    }, [scrollToTopOnFocus]),
+    }, [scrollToTopOnBlur]),
   );
+
+  const clearScroll = useCallback(() => {
+    setScroll({
+      ...scroll,
+      direction: null,
+    });
+  }, [scroll]);
 
   const onListScroll = (event: ScrollEvent) => {
     const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
@@ -87,6 +97,7 @@ const useScrollViewScrolling = (args?: IScrollProps): IScrollViewScrolling => {
   };
 
   return {
+    clearScroll,
     scroll,
     scrollViewRef,
     onListScroll,

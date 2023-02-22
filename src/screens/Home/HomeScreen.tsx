@@ -3,7 +3,7 @@ import { type NativeStackScreenProps } from "@react-navigation/native-stack";
 import dayjs from "dayjs";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Share, StyleSheet, Vibration, View } from "react-native";
+import { AppState, Share, StyleSheet, Vibration, View } from "react-native";
 import { Text } from "react-native-paper";
 
 import {
@@ -50,7 +50,7 @@ const HomeScreen = () => {
   const selectedDayRef = useRef<BottomSheetRef>(null);
 
   // FAB should disappear when scrolling down and reappear when scrolling back up
-  const { fabVisible, toggleFab, onListScroll } = useScrollingFab();
+  const { fabVisible, scrollViewRef, toggleFab, onListScroll } = useScrollingFab();
 
   const manageDayRef = useRef<BottomSheetRef>(null);
   const [editedDay, setEditedDay] = useState<Day | null>(null);
@@ -98,6 +98,7 @@ const HomeScreen = () => {
     [dispatch, notify, t],
   );
 
+  // Handle opening app via shared day config link
   useEffect(() => {
     const day = route.params?.sharedDay;
     if (!day) return;
@@ -114,6 +115,25 @@ const HomeScreen = () => {
     // Avoid re-handling shared day again on route re-render (if param is kept)!
     navigation.setParams({ sharedDay: undefined });
   }, [appBehaviours, navigation, route.params, onSharedDayConfirm]);
+
+  // Ensure FAB is displayed whenever app regains focus
+  useEffect(() => {
+    // Display FAB when screen gains focus from internal navigation (ie. back actions, etc)
+    const navigationUnsubscribe = navigation.addListener("focus", () => {
+      toggleFab(true);
+    });
+
+    // Display FAB when app regains focus from phone background
+    const appStateSubscription = AppState.addEventListener("change", (state) => {
+      if (state !== "active") return;
+      toggleFab(true);
+    });
+
+    return () => {
+      appStateSubscription.remove();
+      navigationUnsubscribe();
+    };
+  }, [navigation, toggleFab]);
 
   /** Open selected day options menu */
   const onDaySelect = (day: Day) => {
@@ -196,6 +216,7 @@ const HomeScreen = () => {
       <View style={styles.pageContent}>
         <DayList
           days={days}
+          listRef={scrollViewRef}
           onItemPress={onDayView}
           onItemLongPress={onDaySelect}
           onScroll={onListScroll}
