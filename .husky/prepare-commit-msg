@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Must call script via bash as Husky only supports running sh scripts...
+bash ./scripts/prepare-commit-msg.sh "$@"
