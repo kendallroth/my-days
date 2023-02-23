@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prepend commit messages with issue number (from branch)
 
 ### Fixed
+- Improve date difference calculations
 - Ensure FAB is visible whenever refocusing Home screen
 
 
