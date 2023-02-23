@@ -16,6 +16,9 @@ type AppDataLoaderProps = {
   persistor: Persistor;
 };
 
+// Prevent hiding the splash screen automatically (ignore errors)
+SplashScreen.preventAutoHideAsync();
+
 /**
  * Data Loader to keep splash screen until important data is loaded
  */
@@ -25,11 +28,6 @@ const AppDataLoader = (props: AppDataLoaderProps): React.ReactElement | null => 
   // NOTE: Need to track Redux Persist loading status separately!
   const [isAppReady, setIsAppReady] = useState(false);
   const [isReduxReady, setIsReduxReady] = useState(false);
-
-  useEffect(() => {
-    // Prevent hiding the splash screen automatically (ignore errors)
-    SplashScreen.preventAutoHideAsync().catch();
-  }, []);
 
   // Load persisted Redux data into store
   useEffect(() => {
@@ -46,8 +44,8 @@ const AppDataLoader = (props: AppDataLoaderProps): React.ReactElement | null => 
   //         https://docs.expo.io/versions/latest/sdk/splash-screen/
   useEffect(() => {
     const prepare = async (): Promise<void> => {
-      // TODO: Load
       try {
+        // TODO: Load any required assets, etc
       } catch {
         // TODO: Handle errors...
       } finally {
@@ -79,9 +77,14 @@ const AppDataLoader = (props: AppDataLoaderProps): React.ReactElement | null => 
   // Only hide the splash screen once data is fully loaded; otherwise there
   //   will be a brief flash of the loading screen!
   useEffect(() => {
-    if (isAppReady && isReduxReady) {
+    if (!isAppReady || !isReduxReady) return;
+
+    // Briefly pause before hiding splash screen to let components fully render. Unfortunately this
+    //   cannot be applied via 'onReady' in the root NavigationContainer as it does not seem to
+    //   properly wait currently (still has a flicker).
+    setTimeout(() => {
       SplashScreen.hideAsync();
-    }
+    }, 10);
   }, [isAppReady, isReduxReady]);
 
   if (!isAppReady || !isReduxReady) return null;
