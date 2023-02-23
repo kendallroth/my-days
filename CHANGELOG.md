@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
 ### Updated
+- Added a few more transportation icons
 - Added GitHub issue templates
 - Prepend commit messages with issue number (from branch)
 

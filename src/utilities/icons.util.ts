@@ -12,6 +12,9 @@ export const dayIcons: (keyof MaterialCommunityIcons)[] = [
   "airplane",
   "beach",
   "earth",
+  "bicycle",
+  "car",
+  "sail-boat",
   // Events
   "party-popper",
   "campfire",
