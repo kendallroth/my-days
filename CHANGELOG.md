@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 - Added GitHub issue templates
+- Prepend commit messages with issue number (from branch)
 
 ### Fixed
 - Ensure FAB is visible whenever refocusing Home screen
