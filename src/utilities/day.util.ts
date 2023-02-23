@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 
-import { type Day } from "@typings/day.types";
+import { type Day, type DayUnit } from "@typings/day.types";
 
-import { DATE_FORMAT_ISO_SHORT } from "./date.util";
+import { roundNumber } from "./number.util";
 
 interface DayCountDisplay {
   /** Day count value (can be negative if invalid!) */
@@ -25,32 +25,36 @@ interface DayCountDisplay {
   };
 }
 
+export type DiffDayArgs = Pick<Day, "date" | "repeats">;
+
 /**
- * Count days since a countdown/countup
+ * Count time units since a countdown/countup
  *
  * @param   targetDate - Target date
+ * @param   unit       - Unit of time to measure
  * @param   startDate  - Optional start date (defaults to today)
- * @returns Day count since date
+ * @returns Time unit count since date (positive indicates moving towards date)
  */
-const getDayCounter = (targetDate: Day, startDate?: string): number => {
-  // NOTE: Must zero out today's date for accurate calculations!
-  const baseDate = startDate ? dayjs(startDate) : dayjs(dayjs().format(DATE_FORMAT_ISO_SHORT));
-  let comparison = dayjs(targetDate.date);
+export const getDayDiff = (targetDate: DiffDayArgs, unit: DayUnit, startDate?: string): number => {
+  // NOTE: Must zero out both target and today's date for accurate calculations!
+  const baseDate = dayjs(startDate).startOf("day");
+  let comparison = dayjs(targetDate.date).startOf("day");
 
   if (targetDate.repeats) {
     const todayYear = baseDate.year();
     const dateInThisYear = comparison.clone().set("year", todayYear);
-    // Use next year if date has already occurred this year
     if (baseDate.isSame(dateInThisYear, "day")) {
       return 0;
     } else if (baseDate.isBefore(dateInThisYear, "day")) {
       comparison = dateInThisYear;
     } else {
+      // Use next year if date has already occurred this year
       comparison = dateInThisYear.add(1, "year");
     }
   }
 
-  return comparison.diff(baseDate, "days");
+  // Must allow returning decimal values (for non-day units)
+  return comparison.diff(baseDate, unit, true);
 };
 
 /**
@@ -60,13 +64,13 @@ const getDayCounter = (targetDate: Day, startDate?: string): number => {
  * @param   startDate  - Optional start date (defaults to today)
  * @returns Day display label
  */
-const getDayDisplay = (targetDate: Day, startDate?: string): DayCountDisplay => {
-  // Support a maximum of 3 decimals places
-  const maxDecimalMultiplier = 1000;
-  const dayCount = getDayCounter(targetDate, startDate);
-  const weekCount = Math.round((dayCount / 7) * maxDecimalMultiplier) / maxDecimalMultiplier;
-  const monthCount = Math.round((dayCount / 30.417) * maxDecimalMultiplier) / maxDecimalMultiplier;
-  const yearCount = Math.round((dayCount / 365) * maxDecimalMultiplier) / maxDecimalMultiplier;
+export const getDayDisplay = (targetDate: Day, startDate?: string): DayCountDisplay => {
+  // Support a maximum of 4 decimals places
+  const maxDecimals = 4;
+  const dayCount = roundNumber(getDayDiff(targetDate, "day", startDate), maxDecimals);
+  const weekCount = roundNumber(getDayDiff(targetDate, "week", startDate), maxDecimals);
+  const monthCount = roundNumber(getDayDiff(targetDate, "month", startDate), maxDecimals);
+  const yearCount = roundNumber(getDayDiff(targetDate, "year", startDate), maxDecimals);
 
   let count = dayCount;
   switch (targetDate.unit) {
@@ -94,5 +98,3 @@ const getDayDisplay = (targetDate: Day, startDate?: string): DayCountDisplay => 
     },
   };
 };
-
-export { getDayCounter, getDayDisplay };

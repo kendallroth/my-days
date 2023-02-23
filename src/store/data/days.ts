@@ -30,14 +30,14 @@ const fakeDays: Day[] = [
     unit: "day",
   }),
   createFakeDay({
-    date: dayjs().add(18, "days").format(DATE_FORMAT_ISO_SHORT),
+    date: dayjs().add(3, "weeks").format(DATE_FORMAT_ISO_SHORT),
     icon: "airplane",
     title: "Vacation",
     repeats: false,
     unit: "day",
   }),
   createFakeDay({
-    date: dayjs().add(64, "days").format(DATE_FORMAT_ISO_SHORT),
+    date: dayjs().add(2, "months").format(DATE_FORMAT_ISO_SHORT),
     icon: "ring",
     title: "Friend's Wedding",
     repeats: false,
