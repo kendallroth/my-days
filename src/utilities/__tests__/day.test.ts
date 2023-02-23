@@ -61,7 +61,7 @@ describe("day.util", () => {
       },
     ];
 
-    test.each(cases)("$date => $todayDate ($unit)", ({ date, expected, todayDate, unit }) => {
+    test.each(cases)("$todayDate => $date ($unit)", ({ date, expected, todayDate, unit }) => {
       const dayDiff = getDayDiff({ date, repeats: false }, unit, todayDate);
       expect(dayDiff).toBe(expected);
     });
