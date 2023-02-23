@@ -18,13 +18,14 @@ if [ ! -z "$branch_name" ] && [ "$branch_name" != "HEAD" ] && [ "$SKIP_PREPARE_C
   [[ $branch_name =~ $prefix_pattern ]]
 
   prefix=${BASH_REMATCH[0]}
-  prefix_in_commit=$(grep -c "\[$prefix\]" $1)
+  prefix_in_commit=$(grep -c "\[#$prefix\]" $1)
 
   if ! [[ -n "$prefix" ]]; then
     echo "Branch name does not contain an issue number"
     exit 1
   fi
 
+  # Avoid adding prefix to message more than once
   if ! [[ $prefix_in_commit -ge 1 ]]; then
     sed -i.bak -e "1s~^~[#$prefix] ~" $1
   fi
