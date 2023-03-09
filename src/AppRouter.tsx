@@ -6,6 +6,7 @@ import {
 import React from "react";
 
 import { useAppSelector } from "@hooks";
+import { DayFormScreen } from "@screens/DayForm";
 import { DetailsScreen } from "@screens/Details";
 import { HomeScreen } from "@screens/Home";
 import { SettingsRouter } from "@screens/Settings";
@@ -17,6 +18,10 @@ import { useAppOpenLink } from "./app-link.hook";
 import { useMounted } from "./hooks/useMounted";
 
 export type RootRouterParams = {
+  DayFormScreen: {
+    /** Day to update (if editing) */
+    day: Day | null;
+  };
   DetailsScreen: {
     /** Selected day ID */
     dayId: string;
@@ -56,6 +61,7 @@ const AppRouter = () => {
     <Stack.Navigator initialRouteName="HomeScreen" screenOptions={{ headerShown: false }}>
       <Stack.Screen component={HomeScreen} name="HomeScreen" />
       <Stack.Screen component={DetailsScreen} name="DetailsScreen" />
+      <Stack.Screen component={DayFormScreen} name="DayFormScreen" />
       <Stack.Screen component={SettingsRouter} name="SettingsRouter" />
     </Stack.Navigator>
   );

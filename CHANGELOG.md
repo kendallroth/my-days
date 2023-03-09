@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Select a day to open with app launch
+- Page for adding and editing days
 
 ### Updated
 - Added a few more transportation icons
@@ -17,7 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Prepend commit messages with issue number (from branch)
 - Upgrade to Expo SDK 48
 
+### Removed
+- Dialog workflow for adding and editing days
+
 ### Fixed
+- Proper order of time units on "Details" screen
 - Scale font size in list item view for large numbers
 - Reduce flicker when initially hiding splash screen
 - Improve date difference calculations
