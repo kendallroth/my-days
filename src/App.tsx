@@ -1,5 +1,6 @@
-// Polyfill for 'getRandomValues': https://github.com/uuidjs/uuid#getrandomvalues-not-supported
-import "react-native-get-random-values";
+// Shim for replacing missing 'getRandomValues' with 'expo-crypto'
+import "./utilities/expo-random-shim";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import React from "react";

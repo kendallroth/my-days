@@ -8,16 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Select a day to open with app launch
 
 ### Updated
 - Added a few more transportation icons
 - Added GitHub issue templates
 - Prepend commit messages with issue number (from branch)
+- Upgrade to Expo SDK 48
 
 ### Fixed
 - Reduce flicker when initially hiding splash screen
 - Improve date difference calculations
 - Ensure FAB is visible whenever refocusing Home screen
+- Regression with `react-native-get-random-values` (from `uuid`) caused by Expo SDK update
 
 
 ## [0.3.0] - 2023-02-10
