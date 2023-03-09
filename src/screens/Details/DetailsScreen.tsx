@@ -214,19 +214,27 @@ const DetailScreen = () => {
         </View>
 
         <View style={styles.dayStats}>
-          {stats.map((stat, idx) => (
-            <DayStat
-              key={stat.unit}
-              colorHighlight={mainColorText}
-              colorNormal={mainColorContainer}
-              number={stat.number}
-              unitLabel={stat.unitLabel}
-              decimals={stat.unit === "day" ? 0 : 2}
-              highlighted={stat.unit === selectedDay.unit}
-              today={dateCount.today}
-              style={idx > 0 ? { marginTop: pagePadding / 1.5 } : undefined}
-            />
-          ))}
+          {stats.map((stat, idx) => {
+            const decimals = stat.unit === "day" ? 0 : 2;
+
+            return (
+              <DayStat
+                key={stat.unit}
+                colorHighlight={mainColorText}
+                colorNormal={mainColorContainer}
+                number={t("common:numbers", {
+                  value: stat.number,
+                  signDisplay: "never",
+                  maximumFractionDigits: decimals,
+                  minimumFractionDigits: decimals,
+                })}
+                unitLabel={stat.unitLabel}
+                highlighted={stat.unit === selectedDay.unit}
+                today={dateCount.today}
+                style={idx > 0 ? { marginTop: pagePadding / 1.5 } : undefined}
+              />
+            );
+          })}
         </View>
       </ScrollView>
 

@@ -33,8 +33,15 @@ const DayListItem = (props: DayDisplayProps) => {
   const countingDown = dateCount.direction === "down";
   const dayStartsOpen = day.startOpen ?? false;
 
-  const displayNumber = Math.abs(Math.round(dateCount.count * 10) / 10);
-  const displayUnit = t(`common:timeUnits.${day.unit}`, { count: displayNumber });
+  const maxDecimals = day.unit === "day" ? 0 : 1;
+  const displayNumber = t("common:numbers", {
+    value: dateCount.count,
+    signDisplay: "never",
+    maximumFractionDigits: maxDecimals,
+    // TODO: Determine if non-day units should always display a decimal place
+    minimumFractionDigits: maxDecimals,
+  });
+  const displayUnit = t(`common:timeUnits.${day.unit}`, { count: dateCount.count });
 
   const countdownColor = colors.primary;
   const countupColor = colors.tertiary;

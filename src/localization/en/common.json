@@ -25,6 +25,7 @@
       "invalidParsedDayVersion": "Invalid parsed day version (please update app)"
     }
   },
+  "numbers": "{{value, number}}",
   "phrases": {
     "beta": "beta",
     "comingSoon": "Coming Soon!",

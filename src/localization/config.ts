@@ -1,5 +1,16 @@
 import "dayjs/locale/es";
-import "intl-pluralrules";
+
+// Required formatting polyfills for Intl API (used by 'react-i18n')
+// Source: https://www.i18next.com/translation-function/formatting
+import "@formatjs/intl-getcanonicallocales/polyfill";
+import "@formatjs/intl-locale/polyfill";
+import "@formatjs/intl-pluralrules/polyfill";
+import "@formatjs/intl-pluralrules/locale-data/en";
+import "@formatjs/intl-pluralrules/locale-data/es";
+import "@formatjs/intl-numberformat/polyfill";
+import "@formatjs/intl-numberformat/locale-data/en";
+import "@formatjs/intl-numberformat/locale-data/es";
+
 import dayjs from "dayjs";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
@@ -24,7 +35,6 @@ export const resources = {
   },
 } as const;
 
-// NOTE: 'intl-pluralrules' was installed as a pluralization polyfill (for i18next 21+)
 i18n
   .use(initReactI18next)
   .use(languageDetector)
@@ -34,9 +44,19 @@ i18n
     interpolation: {
       // NOTE: Not needed for React!
       escapeValue: false,
-      format: (value, format, language) => {
+      // NOTE: Apparently a legacy way of formatting that prevents using the built-in formatting
+      //         function that are based on Intl API (have handled numbers and dates though).
+      // Source: https://www.i18next.com/translation-function/formatting#legacy-format-function-i18next-less-than-21.3.0
+      format: (value, format, language, options) => {
         if (dayjs.isDayjs(value)) {
           return value.locale(language ?? "en").format(format);
+        }
+        // Numeric formatting passes additional options to 'toLocaleString'
+        else if (format === "number") {
+          const number = parseFloat(value);
+          if (isNaN(number)) return value;
+
+          return number.toLocaleString(language, options as any);
         }
 
         return value;
