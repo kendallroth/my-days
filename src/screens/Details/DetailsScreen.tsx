@@ -160,13 +160,6 @@ const DetailScreen = () => {
         <SwapDetailsTheme>
           <AppBar.ActionMenu ref={menuActionRef} anchorColor={colors.inverseOnSurface}>
             <Menu.Item
-              leadingIcon="open-in-new"
-              title={t("screens:dayDetails.menuStartOpen")}
-              titleStyle={{ marginRight: 8 }}
-              trailingIcon={selectedDay.startOpen ? "check-circle" : "blank"}
-              onPress={onStartOpenPress}
-            />
-            <Menu.Item
               leadingIcon="pencil"
               title={t("screens:dayDetails.menuEdit")}
               onPress={onEditPress}
@@ -175,6 +168,13 @@ const DetailScreen = () => {
               leadingIcon="delete"
               title={t("screens:dayDetails.menuDelete")}
               onPress={onDeletePress}
+            />
+            <Menu.Item
+              leadingIcon="open-in-new"
+              title={t("screens:dayDetails.menuStartOpen")}
+              titleStyle={{ marginRight: 8 }}
+              trailingIcon={selectedDay.startOpen ? "check-circle" : "blank"}
+              onPress={onStartOpenPress}
             />
           </AppBar.ActionMenu>
         </SwapDetailsTheme>
