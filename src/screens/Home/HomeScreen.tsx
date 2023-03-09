@@ -225,7 +225,7 @@ const HomeScreen = () => {
       <ScreenFAB
         icon="calendar-plus"
         visible={fabVisible}
-        // TODO: Consider raising FAB when snackbar is open (needs to handle dynamic height though...)
+        // TODO: Consider raising FAB when snackbar is open (needs to handle dynamic snackbar height though...)
         // style={{ marginBottom: snackbar.open ? 64 : undefined }}
         onPress={() => manageDayRef.current?.open()}
       />

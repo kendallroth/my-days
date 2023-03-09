@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 
-import { type Day, type DayUnit } from "@typings/day.types";
+import { type Day, type DayExtended, type DayUnit } from "@typings/day.types";
 
 import { roundNumber } from "./number.util";
 
@@ -96,5 +96,13 @@ export const getDayDisplay = (targetDate: Day, startDate?: string): DayCountDisp
       months: monthCount,
       years: yearCount,
     },
+  };
+};
+
+/** Map a base day with extended properties */
+export const mapDayExtended = (day: Day, args: Pick<DayExtended, "startOpen">): DayExtended => {
+  return {
+    ...day,
+    startOpen: args.startOpen,
   };
 };

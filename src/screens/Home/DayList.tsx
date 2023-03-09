@@ -6,14 +6,14 @@ import { DayListItem } from "@components/days";
 import { EmptyMessage } from "@components/layout";
 import { Alert } from "@components/typography";
 import { type ScrollEvent } from "@typings/app.types";
-import { type Day } from "@typings/day.types";
+import { type DayExtended } from "@typings/day.types";
 
 interface DayListProps {
-  days: Day[];
+  days: DayExtended[];
   listRef?: RefObject<FlatList>;
   style?: StyleProp<ViewStyle>;
-  onItemPress?: (day: Day) => void;
-  onItemLongPress?: (day: Day) => void;
+  onItemPress?: (day: DayExtended) => void;
+  onItemLongPress?: (day: DayExtended) => void;
   onScroll?: (event: ScrollEvent) => void;
 }
 

@@ -22,4 +22,11 @@ export interface Day {
   unit: DayUnit;
 }
 
+export interface DayExtended extends Day {
+  // TODO: Include calculated day offset/count
+
+  /** Whether day details should be displayed upon opening app */
+  startOpen: boolean;
+}
+
 export type DayNew = Optional<Day, "createdAt">;

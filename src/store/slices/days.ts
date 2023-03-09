@@ -7,25 +7,27 @@ import {
 import dayjs from "dayjs";
 
 import { type UpDown } from "@typings/app.types";
-import { type Day, type DayNew } from "@typings/day.types";
+import { type Day, type DayExtended, type DayNew } from "@typings/day.types";
+import { mapDayExtended } from "@utilities/day.util";
 
 import { type RootState } from "..";
 import { addDebugDataAction, resetAppAction } from "../actions";
 import { fakeDays } from "../data/days";
 
 interface DaysState {
-  // NOTE: Additional state items can be added here
+  /** Optional day to automatically open app to when opening app */
+  startOpenDayId: string | null;
 }
 
-export const daysAdapter = createEntityAdapter<Day>({
-  // sortComparer: (a, b) => b.date.localeCompare(a.date),
-});
+export const daysAdapter = createEntityAdapter<Day>({});
 
 ////////////////////////////////////////////////////////////////////////////////
 // Slice
 ////////////////////////////////////////////////////////////////////////////////
 
-const initialState = daysAdapter.getInitialState<DaysState>({});
+const initialState = daysAdapter.getInitialState<DaysState>({
+  startOpenDayId: null,
+});
 
 const daysSlice = createSlice({
   name: "days",
@@ -56,6 +58,9 @@ const daysSlice = createSlice({
     },
     removeDay(state, action: PayloadAction<string>) {
       daysAdapter.removeOne(state, action.payload);
+    },
+    setStartOpenDay(state, action: PayloadAction<string | null>) {
+      state.startOpenDayId = action.payload;
     },
     updateDay(state, action: PayloadAction<Day>) {
       const update: Update<Day> = {
@@ -100,27 +105,34 @@ export const daysSelectors = daysAdapter.getSelectors<RootState>((state) => stat
 
 // TODO: Expand selectors to calculate day offset
 
-/**
- * Select a specific day
- *
- * @param   state - Store state
- * @param   id    - Day ID
- * @returns Selected day
- */
-export const selectDay = (state: RootState, id: string): Day | undefined =>
-  daysSelectors.selectById(state, id);
-/**
- * Select a list of all days (ordered by date)
- *
- * @param   state - Store state
- * @returns All days
- */
-export const selectDays = daysSelectors.selectAll;
-/**
- * Total number of days
- */
+/** Select a specific day (by ID) */
+export const selectDay = (state: RootState, id: string): DayExtended | undefined => {
+  const day = daysSelectors.selectById(state, id);
+  if (!day) return;
+
+  return mapDayExtended(day, { startOpen: day.id === state.days.startOpenDayId });
+};
+
+/** Select a list of all days (respects order) */
+export const selectDays = (state: RootState): DayExtended[] =>
+  daysSelectors
+    .selectAll(state)
+    .map((d) => mapDayExtended(d, { startOpen: d.id === state.days.startOpenDayId }));
+
+/** Total number of days */
 export const selectDaysCount = daysSelectors.selectTotal;
 
-export const { addDay, removeDay, moveDay, updateDay } = daysSlice.actions;
+/** Select the optional day that should start open with the app */
+export const selectStartOpenDay = (state: RootState): DayExtended | undefined => {
+  const { startOpenDayId } = state.days;
+  if (!startOpenDayId) return;
+
+  const day = daysSelectors.selectAll(state).find((d) => d.id === startOpenDayId);
+  if (!day) return;
+
+  return mapDayExtended(day, { startOpen: true });
+};
+
+export const { addDay, removeDay, moveDay, setStartOpenDay, updateDay } = daysSlice.actions;
 
 export default daysSlice.reducer;

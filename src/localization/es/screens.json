@@ -20,7 +20,8 @@
     "dayDate_noYear": "{{date, DD [de] MMMM}}",
     "menuEdit": "Editar",
     "menuDelete": "Borrar",
-    "menuShare": "Compartir"
+    "menuShare": "Compartir",
+    "menuStartOpen": "Abierto con la app"
   },
   "dayList": {
     "title": "Días"

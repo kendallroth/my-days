@@ -20,7 +20,8 @@
     "dayDate_noYear": "{{date, MMMM DD}}",
     "menuEdit": "Edit",
     "menuDelete": "Delete",
-    "menuShare": "Share"
+    "menuShare": "Share",
+    "menuStartOpen": "Open with app"
   },
   "dayList": {
     "title": "Days"
