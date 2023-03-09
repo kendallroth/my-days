@@ -69,7 +69,6 @@ export default (): ExpoConfig => ({
   owner: "kendallroth",
   orientation: "portrait",
   platforms: ["android", "ios"],
-  entryPoint: "index.js",
   primaryColor: lightenedPrimaryColor,
 
   jsEngine: "hermes",
