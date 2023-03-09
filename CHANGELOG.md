@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Upgrade to Expo SDK 48
 
 ### Fixed
+- Scale font size in list item view for large numbers
 - Reduce flicker when initially hiding splash screen
 - Improve date difference calculations
 - Ensure FAB is visible whenever refocusing Home screen

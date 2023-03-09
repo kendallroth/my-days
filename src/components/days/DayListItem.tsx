@@ -102,16 +102,22 @@ const DayListItem = (props: DayDisplayProps) => {
               <View
                 style={[
                   styles.dayStatsIconOutline,
-                  { backgroundColor: countingDown ? mainColor : backgroundColor },
+                  // TODO: Support "inset" icon with alignment fix for lengthy numbers...
+                  // { backgroundColor: countingDown ? mainColor : backgroundColor },
+                  { backgroundColor: mainColor },
                 ]}
               >
                 <Icon
-                  color={countingDown ? backgroundColor : mainColor}
+                  // TODO: Support "inset" icon with alignment fix for lengthy numbers...
+                  // color={countingDown ? backgroundColor : mainColor}
+                  color={backgroundColor}
                   name={countingDown ? "menu-down" : "menu-up"}
                   style={styles.dayStatsIcon}
                 />
               </View>
               <Text
+                adjustsFontSizeToFit
+                numberOfLines={1}
                 style={[styles.dayStatsCount, { color: mainColorText }]}
                 variant="headlineMedium"
               >
@@ -167,6 +173,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: counterWidth,
+    padding: 8,
     flexShrink: 0,
   },
   dayStatsCount: {

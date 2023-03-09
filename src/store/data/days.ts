@@ -70,6 +70,13 @@ const fakeDays: Day[] = [
     repeats: true,
     unit: "day",
   }),
+  createFakeDay({
+    date: dayjs().subtract(48, "years").subtract(90, "days").format(DATE_FORMAT_ISO_SHORT),
+    icon: "baby",
+    title: "Born...",
+    repeats: true,
+    unit: "day",
+  }),
 ];
 
 export { createFakeDay, fakeDays };
