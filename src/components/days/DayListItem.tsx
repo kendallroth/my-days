@@ -33,8 +33,15 @@ const DayListItem = (props: DayDisplayProps) => {
   const countingDown = dateCount.direction === "down";
   const dayStartsOpen = day.startOpen ?? false;
 
-  const displayNumber = Math.abs(Math.round(dateCount.count * 10) / 10);
-  const displayUnit = t(`common:timeUnits.${day.unit}`, { count: displayNumber });
+  const maxDecimals = day.unit === "day" ? 0 : 1;
+  const displayNumber = t("common:numbers", {
+    value: dateCount.count,
+    signDisplay: "never",
+    maximumFractionDigits: maxDecimals,
+    // TODO: Determine if non-day units should always display a decimal place
+    minimumFractionDigits: maxDecimals,
+  });
+  const displayUnit = t(`common:timeUnits.${day.unit}`, { count: dateCount.count });
 
   const countdownColor = colors.primary;
   const countupColor = colors.tertiary;
@@ -102,16 +109,22 @@ const DayListItem = (props: DayDisplayProps) => {
               <View
                 style={[
                   styles.dayStatsIconOutline,
-                  { backgroundColor: countingDown ? mainColor : backgroundColor },
+                  // TODO: Support "inset" icon with alignment fix for lengthy numbers...
+                  // { backgroundColor: countingDown ? mainColor : backgroundColor },
+                  { backgroundColor: mainColor },
                 ]}
               >
                 <Icon
-                  color={countingDown ? backgroundColor : mainColor}
+                  // TODO: Support "inset" icon with alignment fix for lengthy numbers...
+                  // color={countingDown ? backgroundColor : mainColor}
+                  color={backgroundColor}
                   name={countingDown ? "menu-down" : "menu-up"}
                   style={styles.dayStatsIcon}
                 />
               </View>
               <Text
+                adjustsFontSizeToFit
+                numberOfLines={1}
                 style={[styles.dayStatsCount, { color: mainColorText }]}
                 variant="headlineMedium"
               >
@@ -167,6 +180,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: counterWidth,
+    padding: 8,
     flexShrink: 0,
   },
   dayStatsCount: {

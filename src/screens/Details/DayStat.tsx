@@ -6,27 +6,16 @@ import { Text } from "react-native-paper";
 interface DayStatProps {
   colorHighlight: string;
   colorNormal: string;
-  decimals?: number;
   highlighted?: boolean;
-  number: number;
+  number: number | string;
   style?: StyleProp<ViewStyle>;
   today?: boolean;
   unitLabel: string;
 }
 
 const DayStat = (props: DayStatProps) => {
-  const {
-    colorHighlight,
-    colorNormal,
-    decimals = 0,
-    highlighted,
-    number,
-    style,
-    today,
-    unitLabel,
-  } = props;
+  const { colorHighlight, colorNormal, highlighted, number, style, today, unitLabel } = props;
 
-  const displayNumber = Math.abs(number).toFixed(decimals);
   const textColor = highlighted ? colorHighlight : colorNormal;
   const countdown = number >= 0;
 
@@ -34,6 +23,8 @@ const DayStat = (props: DayStatProps) => {
     <View style={[styles.dayStat, style]}>
       <View style={styles.dayStatNumberRow}>
         <Text
+          adjustsFontSizeToFit
+          numberOfLines={1}
           style={[
             styles.dayStatNumber,
             {
@@ -43,7 +34,7 @@ const DayStat = (props: DayStatProps) => {
           ]}
           variant={highlighted ? "displayLarge" : "displayMedium"}
         >
-          {displayNumber}
+          {number}
         </Text>
         {highlighted && !today && (
           <Icon
