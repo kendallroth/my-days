@@ -6,16 +6,17 @@ import { type StyleProp, StyleSheet, View, type ViewStyle } from "react-native";
 import { Surface, Text, TouchableRipple } from "react-native-paper";
 
 import { DayIcon } from "@components/icons";
+import { Stack } from "@components/layout";
 import { useAppTheme } from "@hooks";
 import { sharedColors } from "@styles/theme";
-import { type Day } from "@typings/day.types";
+import { type DayExtended } from "@typings/day.types";
 import { getDayDisplay } from "@utilities/day.util";
 
 type DayDisplayProps = {
-  day: Day;
+  day: DayExtended;
   style?: StyleProp<ViewStyle>;
-  onPress?: (day: Day) => void;
-  onLongPress?: (day: Day) => void;
+  onPress?: (day: DayExtended) => void;
+  onLongPress?: (day: DayExtended) => void;
 };
 
 const DayListItem = (props: DayDisplayProps) => {
@@ -30,6 +31,7 @@ const DayListItem = (props: DayDisplayProps) => {
   });
   const dateCount = getDayDisplay(day);
   const countingDown = dateCount.direction === "down";
+  const dayStartsOpen = day.startOpen ?? false;
 
   const displayNumber = Math.abs(Math.round(dateCount.count * 10) / 10);
   const displayUnit = t(`common:timeUnits.${day.unit}`, { count: displayNumber });
@@ -68,17 +70,30 @@ const DayListItem = (props: DayDisplayProps) => {
         />
 
         <View style={styles.dayContent}>
-          <Text numberOfLines={1} style={{ color: colors.onSurfaceVariant }} variant="titleMedium">
-            {day.title}
-          </Text>
-          <View style={styles.dayContentFooter}>
+          <Stack alignItems="center" direction="row" spacing={0.5}>
+            <Text
+              numberOfLines={1}
+              style={[
+                // NOTE: Do not expand text when icon is shown (would force to right)
+                { color: colors.onSurfaceVariant, flexGrow: dayStartsOpen ? 0 : 1 },
+                styles.dayContentTitle,
+              ]}
+              variant="titleMedium"
+            >
+              {day.title}
+            </Text>
+            {dayStartsOpen && (
+              <Icon color={mainColor} name="open-in-new" size={18} style={{ opacity: 0.8 }} />
+            )}
+          </Stack>
+          <Stack alignItems="center" direction="row" spacing={0.5} style={styles.dayContentFooter}>
             <Text numberOfLines={1} variant="bodySmall">
               {dateDisplay}
             </Text>
             {day.repeats && (
-              <Icon color={colors.secondary} name="update" style={styles.dayContentFooterIcon} />
+              <Icon color={colors.secondary} name="update" size={14} style={{ marginTop: -2 }} />
             )}
-          </View>
+          </Stack>
         </View>
 
         <View style={[styles.dayStats, { backgroundColor: mainColor }]}>
@@ -132,17 +147,16 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     paddingHorizontal: 12,
     paddingVertical: 14,
+    // Must layout content above the up/down arrow (due to background color interference)
+    zIndex: 1,
+  },
+  dayContentTitle: {
+    // Flex shrink must be set to properly shrink title when icon is shown
+    flexShrink: 1,
   },
   dayContentFooter: {
-    flexDirection: "row",
-    alignItems: "center",
     marginTop: 2,
     opacity: 0.6,
-  },
-  dayContentFooterIcon: {
-    marginTop: -2,
-    marginLeft: 4,
-    fontSize: 14,
   },
   dayIcon: {
     alignSelf: "center",

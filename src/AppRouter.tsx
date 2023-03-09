@@ -1,17 +1,20 @@
-import { type NavigatorScreenParams } from "@react-navigation/native";
+import { type NavigatorScreenParams, useNavigation } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   type NativeStackNavigationProp,
 } from "@react-navigation/native-stack";
 import React from "react";
 
+import { useAppSelector } from "@hooks";
 import { DetailsScreen } from "@screens/Details";
 import { HomeScreen } from "@screens/Home";
 import { SettingsRouter } from "@screens/Settings";
 import { type SettingsRouterParams } from "@screens/Settings/SettingsRouter";
+import { selectStartOpenDay } from "@store/slices/days";
 import { type Day } from "@typings/day.types";
 
 import { useAppOpenLink } from "./app-link.hook";
+import { useMounted } from "./hooks/useMounted";
 
 export type RootRouterParams = {
   DetailsScreen: {
@@ -36,6 +39,17 @@ const AppRouter = () => {
   // Source: https://callstack.github.io/react-native-paper/theming.html
 
   useAppOpenLink();
+
+  const startDay = useAppSelector(selectStartOpenDay);
+  const navigation = useNavigation<RootRouterNavigation>();
+
+  // Immediately open selected day when app mounts (if selected)
+  // NOTE: This should only happen once! If router somehow remounts, consider using Redux to limit once.
+  useMounted(() => {
+    if (!startDay) return;
+
+    navigation.navigate("DetailsScreen", { dayId: startDay.id });
+  });
 
   // NOTE: Main 'NavigationContainer' is rendered by parent to allow accessing router here
   return (

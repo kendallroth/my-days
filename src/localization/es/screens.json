@@ -20,7 +20,8 @@
     "dayDate_noYear": "{{date, DD [de] MMMM}}",
     "menuEdit": "Editar",
     "menuDelete": "Borrar",
-    "menuShare": "Compartir"
+    "menuShare": "Compartir",
+    "menuStartOpen": "Abierta al inicio"
   },
   "dayList": {
     "title": "Días"
@@ -74,10 +75,11 @@
     "guideTipTitle": "Consejos",
     "guideTips": [
       "Vea más información y unidades de tiempo para una fecha seleccionando un elemento de la lista.",
-      "Acceda a un menú de acceso rápido manteniendo presionado un elemento de la lista de días.",
+      "Abra a un menú de acceso rápido manteniendo presionado un elemento de la lista de días.",
       "Las fechas se pueden reordenar desde el menú de selección de elementos de la lista.",
       "Los iconos se pueden agregar tocando el icono en los cuadros de diálogo \"Agregar\" o \"Editar\".",
-      "¡Comparte una cita con amigos para seguirla juntos!"
+      "¡Comparte una cita con amigos para seguirla juntos!",
+      "Establezca un día para abrir con la aplicación desde el menú de la pantalla \"Detalles\"."
     ],
     "chipContact": "Contacto",
     "chipPortfolio": "Portafolio",

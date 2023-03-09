@@ -9,16 +9,17 @@ import { Menu, Text } from "react-native-paper";
 
 import { type BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
 import { DayIcon } from "@components/icons";
-import { AppBar, Page } from "@components/layout";
+import { AppBar, Page, Stack } from "@components/layout";
 import { type AppBarMenuRef } from "@components/layout/AppBarMenu";
 import {
+  useAppDispatch,
   useAppSelector,
   useAppTheme,
   useDayActions,
   useDayDeleteDialog,
   useSnackbar,
 } from "@hooks";
-import { selectDay } from "@store/slices/days";
+import { selectDay, setStartOpenDay } from "@store/slices/days";
 import { type DayUnit } from "@typings/day.types";
 import { getDayDisplay } from "@utilities/day.util";
 import { type RootRouterParams } from "src/AppRouter";
@@ -39,11 +40,13 @@ const DetailScreen = () => {
   const navigation = useNavigation<DetailsScreenRouteProps["navigation"]>();
 
   const { t } = useTranslation(["common", "screens"]);
+  const dispatch = useAppDispatch();
   const { notifyError } = useSnackbar();
 
   const { colors } = useAppTheme();
 
   const selectedDay = useAppSelector((s) => selectDay(s, route.params.dayId));
+  const dayStartsOpen = selectedDay?.startOpen ?? false;
 
   const menuActionRef = useRef<AppBarMenuRef>(null);
   const manageDayRef = useRef<BottomSheetRef>(null);
@@ -85,6 +88,13 @@ const DetailScreen = () => {
     if (!selectedDay) return;
 
     onDayShare(selectedDay);
+  };
+
+  const onStartOpenPress = () => {
+    menuActionRef.current?.close();
+    if (!selectedDay) return;
+
+    dispatch(setStartOpenDay(dayStartsOpen ? null : selectedDay.id));
   };
 
   const { deletedDay, setDeletedDay, onDeleteCancel, onDeleteConfirm } = useDayDeleteDialog({
@@ -159,6 +169,13 @@ const DetailScreen = () => {
               title={t("screens:dayDetails.menuDelete")}
               onPress={onDeletePress}
             />
+            <Menu.Item
+              leadingIcon="open-in-new"
+              title={t("screens:dayDetails.menuStartOpen")}
+              titleStyle={{ marginRight: 8 }}
+              trailingIcon={selectedDay.startOpen ? "check-circle" : "blank"}
+              onPress={onStartOpenPress}
+            />
           </AppBar.ActionMenu>
         </SwapDetailsTheme>
       </AppBar>
@@ -172,7 +189,17 @@ const DetailScreen = () => {
             iconColor={mainColor}
             size={60}
           />
-          {dateCount.today && <Icon color={colors.warning} name="alert-decagram" size={48} />}
+          <Stack alignItems="center" direction="row" spacing={2}>
+            {dayStartsOpen && (
+              <Icon
+                color={mainColorContainer}
+                name="open-in-new"
+                size={32}
+                style={{ opacity: 0.8 }}
+              />
+            )}
+            {dateCount.today && <Icon color={colors.warning} name="alert-decagram" size={48} />}
+          </Stack>
         </View>
         <Text style={[styles.dayHeaderTitle, { color: mainColorText }]} variant="headlineLarge">
           {selectedDay.title}

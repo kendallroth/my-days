@@ -20,7 +20,8 @@
     "dayDate_noYear": "{{date, MMMM DD}}",
     "menuEdit": "Edit",
     "menuDelete": "Delete",
-    "menuShare": "Share"
+    "menuShare": "Share",
+    "menuStartOpen": "Open on start"
   },
   "dayList": {
     "title": "Days"
@@ -69,10 +70,11 @@
     "guideTipTitle": "Tips",
     "guideTips": [
       "View more information and time units for a date by selecting a day list item.",
-      "Access a quick-access menu by long-pressing on a day list item.",
+      "Open a quick-access menu by long-pressing on a day list item.",
       "Dates can be reordered from the list item selection menu.",
       "Icons can be modified by tapping the icon in the \"Add\" or \"Edit\" dialogs.",
-      "Share a date with friends to keep track of it together!"
+      "Share a date with friends to keep track of it together!",
+      "Set a day to open with the app from the \"Details\" screen menu."
     ],
     "chipContact": "Contact",
     "chipPortfolio": "Portfolio",
