@@ -13,7 +13,8 @@ import { type BottomSheetRef, IconSelectSheet } from "@components/dialogs";
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
 import { DayIcon } from "@components/icons";
 import { AppBar, Page, Spacer, Stack } from "@components/layout";
-import { useAppTheme, useDayActions, useMounted } from "@hooks";
+import { useAppSelector, useAppTheme, useDayActions, useMounted } from "@hooks";
+import { selectBehaviours } from "@store/slices/settings";
 import { type MaterialCommunityIcons } from "@typings/app.types";
 import { type DayUnit } from "@typings/day.types";
 import { type RootRouterParams } from "src/AppRouter";
@@ -63,6 +64,7 @@ const DayFormScreen = () => {
   const dateRef = useRef<RNPTextInput | null>(null);
 
   const iconSheetRef = useRef<BottomSheetRef | null>(null);
+  const appBehaviours = useAppSelector(selectBehaviours);
 
   const form = useForm<IFormData>({
     defaultValues: {
@@ -246,7 +248,12 @@ const DayFormScreen = () => {
         </Card>
       </ScrollView>
 
-      <IconSelectSheet ref={iconSheetRef} value={iconValue} onSelect={onIconSelectChoose} />
+      <IconSelectSheet
+        ref={iconSheetRef}
+        searchTags={appBehaviours.includeTagsInIconSearch}
+        value={iconValue}
+        onSelect={onIconSelectChoose}
+      />
     </Page>
   );
 };

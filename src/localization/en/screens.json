@@ -96,6 +96,8 @@
     "title": "Behaviours",
     "behaviourItemConfirmSharedDaysDescription": "Whether days shared via link must be confirmed before adding (safety).",
     "behaviourItemConfirmSharedDaysTitle": "Confirm shared days",
+    "behaviourItemIncludeTagsInIconSearchDescription": "Whether tags should also be searched with icon names (more matches but slower).",
+    "behaviourItemIncludeTagsInIconSearchTitle": "Include tags in icon search",
     "behaviourItemSwapDetailsThemeDescription": "Whether the 'Details' screen theme should be swapped (light vs dark).",
     "behaviourItemSwapDetailsThemeTitle": "Swap 'Details' screen theme"
   },

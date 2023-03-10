@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2023-03-10
+
+### Added
+- Behaviour setting to ignore icon tags in search (performance)
+- Add more day icons
+- State storage migration workflow
+
+### Fixed
+- Remove "start on open" day flag if day is removed (prevents crash)
+
 ## [0.4.0] - 2023-03-09
 
 ### Added
@@ -14,10 +24,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Page for adding and editing days
 
 ### Updated
-- Improved icon selection workflow (added display, search)
-- Added a few more transportation icons
+- Improve icon selection workflow (added display, search)
+- Add a few more transportation icons
 - Support locale-based numeric formatting
-- Added GitHub issue templates
+- Add GitHub issue templates
 - Prepend commit messages with issue number (from branch)
 - Upgrade to Expo SDK 48
 

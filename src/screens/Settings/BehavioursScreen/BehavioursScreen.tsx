@@ -46,6 +46,15 @@ const BehavioursScreen = () => {
           value={appBehaviours.swapThemeOnDetails}
           onChange={onBooleanChange}
         />
+        <BehavioursScreenListItemSwitch
+          description={t(
+            "screens:settingsBehaviours.behaviourItemIncludeTagsInIconSearchDescription",
+          )}
+          stateKey="includeTagsInIconSearch"
+          title={t("screens:settingsBehaviours.behaviourItemIncludeTagsInIconSearchTitle")}
+          value={appBehaviours.includeTagsInIconSearch}
+          onChange={onBooleanChange}
+        />
       </ScrollView>
     </Page>
   );

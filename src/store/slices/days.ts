@@ -58,6 +58,10 @@ const daysSlice = createSlice({
     },
     removeDay(state, action: PayloadAction<string>) {
       daysAdapter.removeOne(state, action.payload);
+
+      if (state.startOpenDayId === action.payload) {
+        state.startOpenDayId = null;
+      }
     },
     setStartOpenDay(state, action: PayloadAction<string | null>) {
       state.startOpenDayId = action.payload;
@@ -93,6 +97,7 @@ const daysSlice = createSlice({
       if (!action.payload.days) return;
 
       daysAdapter.removeAll(state);
+      state.startOpenDayId = null;
     });
   },
 });
