@@ -34,7 +34,7 @@ const DayListItem = (props: DayDisplayProps) => {
   const dayStartsOpen = day.startOpen ?? false;
 
   const maxDecimals = day.unit === "day" ? 0 : 1;
-  const displayNumber = t("common:numbers", {
+  const displayNumber = t("common:format.number", {
     value: dateCount.count,
     signDisplay: "never",
     maximumFractionDigits: maxDecimals,

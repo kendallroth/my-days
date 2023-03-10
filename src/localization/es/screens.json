@@ -1,15 +1,5 @@
 {
   "_comment": "src/localization/es/screens.json",
-  "dayAddEdit": {
-    "titleAdd": "Agregar día",
-    "titleEdit": "Actualizar día",
-    "dayAddSuccess": "\"{{title}}\" agregada",
-    "dayEditSuccess": "\"{{title}}\" actualizado",
-    "dayDateLabel": "Día",
-    "dayDateFormatError": "Formato 'YYYY-MM-DD'",
-    "dayRepeatsLabel": "Repeticiones (anuales)",
-    "dayTitleLabel": "Título"
-  },
   "dayDelete": {
     "title": "Eliminar Día",
     "description": "¿Está seguro de que desea eliminar esta día?",
@@ -22,6 +12,22 @@
     "menuDelete": "Borrar",
     "menuShare": "Compartir",
     "menuStartOpen": "Abierta al inicio"
+  },
+  "dayForm": {
+    "titleAdd": "Agregar día",
+    "titleEdit": "Actualizar día",
+    "dayAddSuccess": "\"{{title}}\" agregada",
+    "dayEditSuccess": "\"{{title}}\" actualizado",
+    "dayDateLabel": "Día",
+    "dayDateFormatError": "Formato 'YYYY-MM-DD'",
+    "dayIconAdd": "Añadir icono",
+    "dayIconChange": "Cambiar el ícono",
+    "dayRepeatsLabel": "Repeticiones (anuales)",
+    "dayTitleLabel": "Título"
+  },
+  "dayIconSelect": {
+    "title": "Seleccionar icono",
+    "noMatches": "Ningún icono coincide con la búsqueda"
   },
   "dayList": {
     "title": "Días"

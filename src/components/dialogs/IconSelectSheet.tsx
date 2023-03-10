@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { IconButton, Text, TextInput as TextFieldRNP, useTheme } from "react-native-paper";
 
@@ -18,6 +19,7 @@ const IconSelectSheet = forwardRef<BottomSheetRef, IconSelectProps>(
     const { value, onSelect } = props;
 
     const { colors } = useTheme();
+    const { t } = useTranslation(["common", "screens"]);
 
     const [iconSearch, setIconSearch] = useState("");
 
@@ -39,11 +41,11 @@ const IconSelectSheet = forwardRef<BottomSheetRef, IconSelectProps>(
     }, [filteredSearch]);
 
     return (
-      <BottomSheet ref={ref} dismissable title={"Select Icon"}>
+      <BottomSheet ref={ref} dismissable title={t("screens:dayIconSelect.title")}>
         <TextFieldRNP
           autoCapitalize="none"
           dense
-          placeholder="Search"
+          placeholder={t("common:phrases.search")}
           left={<TextFieldRNP.Icon icon="magnify" />}
           right={
             !!iconSearch && <TextFieldRNP.Icon icon="close" onPress={() => setIconSearch("")} />
@@ -67,7 +69,9 @@ const IconSelectSheet = forwardRef<BottomSheetRef, IconSelectProps>(
               />
             </View>
           ))}
-          {!filteredIcons.length && <Text style={{ paddingHorizontal: 16 }}>No icons found</Text>}
+          {!filteredIcons.length && (
+            <Text style={{ paddingHorizontal: 16 }}>{t("screens:dayIconSelect.noMatches")}</Text>
+          )}
         </ScrollView>
       </BottomSheet>
     );

@@ -219,7 +219,7 @@ const DetailScreen = () => {
                 key={stat.unit}
                 colorHighlight={mainColorText}
                 colorNormal={mainColorContainer}
-                number={t("common:numbers", {
+                number={t("common:format.number", {
                   value: stat.number,
                   signDisplay: "never",
                   maximumFractionDigits: decimals,

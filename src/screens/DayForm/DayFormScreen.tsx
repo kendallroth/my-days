@@ -34,12 +34,12 @@ const getSchema = (t: TFunction<("common" | "screens")[], undefined>) => {
   return yup.object({
     date: yup
       .string()
-      .label(t("screens:dayAddEdit.dayDateLabel"))
+      .label(t("screens:dayForm.dayDateLabel"))
       .required()
-      .matches(/^\d{4}-\d{2}-\d{2}$/, t("screens:dayAddEdit.dayDateFormatError")),
+      .matches(/^\d{4}-\d{2}-\d{2}$/, t("screens:dayForm.dayDateFormatError")),
     title: yup
       .string()
-      .label(t("screens:dayAddEdit.dayTitleLabel"))
+      .label(t("screens:dayForm.dayTitleLabel"))
       .required()
       .min(2)
       .max(maxTitleLength),
@@ -150,12 +150,11 @@ const DayFormScreen = () => {
   };
 
   return (
-    // <Page invertStatusBar style={{ backgroundColor: mainColor }}>
     <Page invertStatusBar>
       <AppBar
         backColor={colors.onPrimary}
         background={colors.primary}
-        title={editing ? "Update Day" : "Add Day"}
+        title={editing ? t("screens:dayForm.titleEdit") : t("screens:dayForm.titleAdd")}
         titleStyle={{ color: colors.onPrimary }}
       />
 
@@ -182,7 +181,7 @@ const DayFormScreen = () => {
             onLongPress={onIconClear}
           />
           <Button mode="text" onPress={onIconSelectOpen}>
-            {iconValue ? "Change icon" : "Add icon"}
+            {iconValue ? t("screens:dayForm.dayIconChange") : t("screens:dayForm.dayIconAdd")}
           </Button>
           {!!iconValue && (
             <IconButton
@@ -198,7 +197,7 @@ const DayFormScreen = () => {
           blurOnSubmit={false}
           control={form.control}
           innerRef={titleRef}
-          label={t("screens:dayAddEdit.dayTitleLabel")}
+          label={t("screens:dayForm.dayTitleLabel")}
           maxLength={maxTitleLength}
           name="title"
           returnKeyType="next"
@@ -209,7 +208,7 @@ const DayFormScreen = () => {
           blurOnSubmit={false}
           control={form.control}
           innerRef={dateRef}
-          label={t("screens:dayAddEdit.dayDateLabel")}
+          label={t("screens:dayForm.dayDateLabel")}
           name="date"
           returnKeyType="next"
           style={{ marginTop: 4 }}
@@ -223,7 +222,7 @@ const DayFormScreen = () => {
         <Checkbox
           control={form.control}
           hideHint
-          label={t("screens:dayAddEdit.dayRepeatsLabel")}
+          label={t("screens:dayForm.dayRepeatsLabel")}
           name="repeats"
           style={{ paddingVertical: 4 }}
         />
@@ -235,10 +234,10 @@ const DayFormScreen = () => {
           style={{ marginTop: 16 }}
         >
           <Button mode="text" textColor={colors.secondary} onPress={onCancelPress}>
-            Cancel
+            {t("common:actions.cancel")}
           </Button>
           <Button mode="contained" onPress={form.handleSubmit(onSubmitPress)}>
-            Save
+            {t("common:actions.save")}
           </Button>
         </Stack>
       </ScrollView>

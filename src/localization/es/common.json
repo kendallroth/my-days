@@ -3,6 +3,7 @@
   "actions": {
     "add": "Agregar",
     "back": "Regresar",
+    "cancel": "Cancelar",
     "delete": "Borrar",
     "edit": "Editar",
     "remove": "Eliminar",

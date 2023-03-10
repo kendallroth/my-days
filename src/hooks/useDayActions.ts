@@ -53,7 +53,7 @@ export const useDayActions = (props: DayActionsProps): DayActions => {
   const dayAdd = (day: DayNew) => {
     dispatch(addDay(day));
 
-    notify(t("screens:dayAddEdit.dayAddSuccess", { title: day.title }));
+    notify(t("screens:dayForm.dayAddSuccess", { title: day.title }));
 
     onDayAddCallback?.(day);
   };
@@ -69,7 +69,7 @@ export const useDayActions = (props: DayActionsProps): DayActions => {
   const dayEdit = (day: Day) => {
     dispatch(updateDay(day));
 
-    notify(t("screens:dayAddEdit.dayEditSuccess", { title: day.title }));
+    notify(t("screens:dayForm.dayEditSuccess", { title: day.title }));
 
     onDayEditCallback?.(day);
   };
