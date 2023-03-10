@@ -11,7 +11,7 @@ interface DayIcon {
 
 export const dayIcons: DayIcon[] = [
   // Assorted
-  { name: "calendar", tags: [] },
+  { name: "calendar", tags: ["day", "event"] },
   { name: "star", tags: ["favourite"] },
   { name: "clock", tags: ["time"] },
   // Travel
@@ -30,7 +30,7 @@ export const dayIcons: DayIcon[] = [
   { name: "google-controller", tags: ["game"] },
   { name: "video-vintage", tags: ["movie"] },
   { name: "cash", tags: ["money"] },
-  { name: "ticket-confirmation", tags: [] },
+  { name: "ticket-confirmation", tags: ["event"] },
   // Relationships
   { name: "heart", tags: ["love"] },
   { name: "account", tags: ["person", "people"] },

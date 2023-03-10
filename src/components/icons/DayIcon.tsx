@@ -7,8 +7,8 @@ import { type MaterialCommunityIcons } from "@typings/app.types";
 interface DayIconProps {
   backgroundColor?: string;
   borderWidth?: number;
-  defaultIcon?: keyof MaterialCommunityIcons | undefined;
-  icon: keyof MaterialCommunityIcons | undefined;
+  defaultIcon?: keyof MaterialCommunityIcons;
+  icon: keyof MaterialCommunityIcons | null;
   iconColor?: string;
   size?: number;
   style?: StyleProp<ViewStyle>;

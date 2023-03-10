@@ -8,7 +8,7 @@ export interface Day {
   createdAt: string;
   /** Day occurrence */
   date: string;
-  icon?: keyof MaterialCommunityIcons;
+  icon?: keyof MaterialCommunityIcons | null;
   /**
    * Whether interval repeats each year
    *
