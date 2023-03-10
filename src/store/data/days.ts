@@ -74,7 +74,7 @@ const fakeDays: Day[] = [
     date: dayjs().subtract(48, "years").subtract(90, "days").format(DATE_FORMAT_ISO_SHORT),
     icon: "baby",
     title: "Born...",
-    repeats: true,
+    repeats: false,
     unit: "day",
   }),
 ];

@@ -60,7 +60,7 @@ const parseSharedDayLinkV1 = (day: QueryParams): Partial<Day> => {
     createdAt: parseParamString(day, "createdAt"),
     date: parseParamString(day, "date"),
     id: parseParamString(day, "id"),
-    icon: parseParamString(day, "icon") as keyof MaterialCommunityIcons | undefined,
+    icon: (parseParamString(day, "icon") as keyof MaterialCommunityIcons | undefined) ?? null,
     repeats: parseParamString(day, "repeats") === "true",
     title: parseParamString(day, "title"),
     unit: parseParamString(day, "unit") as DayUnit | undefined,

@@ -3,6 +3,7 @@
   "actions": {
     "add": "Add",
     "back": "Back",
+    "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
     "remove": "Remove",
@@ -25,7 +26,9 @@
       "invalidParsedDayVersion": "Invalid parsed day version (please update app)"
     }
   },
-  "numbers": "{{value, number}}",
+  "format": {
+    "number": "{{value, number}}"
+  },
   "phrases": {
     "beta": "beta",
     "comingSoon": "Coming Soon!",
@@ -48,5 +51,6 @@
     "match": "{{path}} has invalid format",
     "required": "{{path}} is required",
     "stringMin": "{{path}} must be at least {{min}} characters",
-    "stringMax": "{{path}} must be less than {{max}} characters" }
+    "stringMax": "{{path}} must be less than {{max}} characters"
+  }
 }

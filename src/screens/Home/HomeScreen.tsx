@@ -6,12 +6,7 @@ import { useTranslation } from "react-i18next";
 import { AppState, Share, StyleSheet, Vibration, View } from "react-native";
 import { Text } from "react-native-paper";
 
-import {
-  AddSharedDayDialog,
-  type BottomSheetRef,
-  DeleteDayDialog,
-  ManageDaySheet,
-} from "@components/dialogs";
+import { AddSharedDayDialog, type BottomSheetRef, DeleteDayDialog } from "@components/dialogs";
 import { AppBar, Page, ScreenFAB } from "@components/layout";
 import {
   useAppDispatch,
@@ -52,18 +47,7 @@ const HomeScreen = () => {
   // FAB should disappear when scrolling down and reappear when scrolling back up
   const { fabVisible, scrollViewRef, toggleFab, onListScroll } = useScrollingFab();
 
-  const manageDayRef = useRef<BottomSheetRef>(null);
-  const [editedDay, setEditedDay] = useState<Day | null>(null);
-
-  const { onDayAdd, onDayDelete, onDayEdit, onDayMove, onDayShare, onDayView } = useDayActions({
-    onDayAddCallback: () => {
-      manageDayRef.current?.close();
-    },
-    onDayEditCallback: () => {
-      manageDayRef.current?.close(() => {
-        setEditedDay(null);
-      });
-    },
+  const { onDayDelete, onDayMove, onDayShare, onDayView } = useDayActions({
     onDayDeleteCallback: () => {
       // Ensure FAB can be seen (if deleting last scrollable item when FAB was hidden)
       setTimeout(() => {
@@ -140,7 +124,6 @@ const HomeScreen = () => {
     // Clean up all potential dialog state when selecting a new day (fail-safe)
     setSelectedDay(day);
     setDeletedDay(null);
-    setEditedDay(null);
     Vibration.vibrate(100);
     selectedDayRef.current?.open();
   };
@@ -163,22 +146,19 @@ const HomeScreen = () => {
     });
   };
 
-  /** Cleanup day add/edit dialog */
-  const onDayManageCancel = () => {
-    manageDayRef.current?.close();
-    setEditedDay(null);
+  const onDayAddPress = () => {
+    navigation.navigate("DayFormScreen", { day: null });
   };
 
-  /** Prepare edit dialog (in response to selection menu choice) */
   const onDayEditPress = () => {
+    if (!selectedDay) return;
+
     // NOTE: Ensure previous modal has finished closing before displaying another
     selectedDayRef.current?.close(() => {
       if (!selectedDay) return;
 
-      setEditedDay(selectedDay);
+      navigation.push("DayFormScreen", { day: selectedDay });
       setSelectedDay(null);
-
-      manageDayRef.current?.open();
     });
   };
 
@@ -211,6 +191,9 @@ const HomeScreen = () => {
         <Text style={[{ color: colors.onPrimary }]} variant="headlineSmall">
           {t("screens:home.todayDate", { date: today })}
         </Text>
+        <View style={[styles.pageHeaderShape, { backgroundColor: colors.primary }]}>
+          <View style={[styles.pageHeaderShapeOverlay, { backgroundColor: colors.background }]} />
+        </View>
       </View>
 
       <View style={styles.pageContent}>
@@ -227,7 +210,7 @@ const HomeScreen = () => {
         visible={fabVisible}
         // TODO: Consider raising FAB when snackbar is open (needs to handle dynamic snackbar height though...)
         // style={{ marginBottom: snackbar.open ? 64 : undefined }}
-        onPress={() => manageDayRef.current?.open()}
+        onPress={onDayAddPress}
       />
 
       <AddSharedDayDialog
@@ -235,13 +218,6 @@ const HomeScreen = () => {
         visible={!!sharedDay}
         onCancel={() => setSharedDay(null)}
         onConfirm={() => onSharedDayConfirm(sharedDay!)}
-      />
-      <ManageDaySheet
-        ref={manageDayRef}
-        day={editedDay}
-        onAdd={onDayAdd}
-        onCancel={onDayManageCancel}
-        onEdit={onDayEdit}
       />
       <DeleteDayDialog
         day={deletedDay}
@@ -264,13 +240,28 @@ const HomeScreen = () => {
 };
 
 const pagePadding = 24;
+// App header radius cannot exceed page padding (will clip list items when scrolling)
+const headerShapeRadius = Math.min(24, pagePadding);
+
 const styles = StyleSheet.create({
   pageContent: {
     flex: 1,
   },
   pageHeader: {
+    position: "relative",
     padding: pagePadding,
     paddingTop: 0,
+    borderBottomRightRadius: headerShapeRadius,
+  },
+  pageHeaderShape: {
+    position: "absolute",
+    bottom: -headerShapeRadius,
+    height: headerShapeRadius,
+    width: headerShapeRadius,
+  },
+  pageHeaderShapeOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    borderTopLeftRadius: headerShapeRadius,
   },
   pageHeaderDay: {
     fontWeight: "700",

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { ScrollView, Share, StyleSheet, View } from "react-native";
 import { Menu, Text } from "react-native-paper";
 
-import { type BottomSheetRef, DeleteDayDialog, ManageDaySheet } from "@components/dialogs";
+import { type BottomSheetRef, DeleteDayDialog } from "@components/dialogs";
 import { DayIcon } from "@components/icons";
 import { AppBar, Page, Stack } from "@components/layout";
 import { type AppBarMenuRef } from "@components/layout/AppBarMenu";
@@ -51,7 +51,7 @@ const DetailScreen = () => {
   const menuActionRef = useRef<AppBarMenuRef>(null);
   const manageDayRef = useRef<BottomSheetRef>(null);
 
-  const { onDayDelete, onDayEdit, onDayShare } = useDayActions({
+  const { onDayDelete, onDayShare } = useDayActions({
     onDayEditCallback: () => {
       manageDayRef.current?.close();
     },
@@ -73,14 +73,11 @@ const DetailScreen = () => {
 
   /** Prepare edit dialog (in response to selection menu choice) */
   const onEditPress = () => {
+    // NOTE: May be smoother (but slower) to wait until menu has closed to trigger the navigation???
     menuActionRef.current?.close();
     if (!selectedDay) return;
 
-    manageDayRef.current?.open();
-  };
-
-  const onEditCancel = () => {
-    manageDayRef.current?.close();
+    navigation.push("DayFormScreen", { day: selectedDay });
   };
 
   const onSharePress = () => {
@@ -133,14 +130,14 @@ const DetailScreen = () => {
       unitLabel: t("common:timeUnits.day", { count: dateCount.stats.days }),
     },
     {
-      number: dateCount.stats.months,
-      unit: "month",
-      unitLabel: t("common:timeUnits.month", { count: dateCount.stats.months }),
-    },
-    {
       number: dateCount.stats.weeks,
       unit: "week",
       unitLabel: t("common:timeUnits.week", { count: dateCount.stats.weeks }),
+    },
+    {
+      number: dateCount.stats.months,
+      unit: "month",
+      unitLabel: t("common:timeUnits.month", { count: dateCount.stats.months }),
     },
     {
       number: dateCount.stats.years,
@@ -222,7 +219,7 @@ const DetailScreen = () => {
                 key={stat.unit}
                 colorHighlight={mainColorText}
                 colorNormal={mainColorContainer}
-                number={t("common:numbers", {
+                number={t("common:format.number", {
                   value: stat.number,
                   signDisplay: "never",
                   maximumFractionDigits: decimals,
@@ -239,12 +236,6 @@ const DetailScreen = () => {
       </ScrollView>
 
       <SwapDetailsTheme>
-        <ManageDaySheet
-          ref={manageDayRef}
-          day={selectedDay}
-          onCancel={onEditCancel}
-          onEdit={onDayEdit}
-        />
         <DeleteDayDialog
           day={deletedDay}
           visible={!!deletedDay}

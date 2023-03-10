@@ -7,14 +7,23 @@ import { type MaterialCommunityIcons } from "@typings/app.types";
 interface DayIconProps {
   backgroundColor?: string;
   borderWidth?: number;
-  icon: keyof MaterialCommunityIcons | undefined;
+  defaultIcon?: keyof MaterialCommunityIcons;
+  icon?: keyof MaterialCommunityIcons | null;
   iconColor?: string;
   size?: number;
   style?: StyleProp<ViewStyle>;
 }
 
 const DayIcon = (props: DayIconProps) => {
-  const { backgroundColor, borderWidth = 2, icon, iconColor, size, style } = props;
+  const {
+    backgroundColor,
+    borderWidth = 2,
+    defaultIcon = "plus",
+    icon,
+    iconColor,
+    size,
+    style,
+  } = props;
 
   const iconStyle: StyleProp<ViewStyle> = icon
     ? {
@@ -29,7 +38,7 @@ const DayIcon = (props: DayIconProps) => {
   return (
     <Avatar.Icon
       color={icon ? iconColor : backgroundColor}
-      icon={icon ?? "plus"}
+      icon={icon ?? defaultIcon}
       size={size}
       style={[iconStyle, style]}
     />
