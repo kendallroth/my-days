@@ -210,7 +210,6 @@ const HomeScreen = () => {
         visible={fabVisible}
         // TODO: Consider raising FAB when snackbar is open (needs to handle dynamic snackbar height though...)
         // style={{ marginBottom: snackbar.open ? 64 : undefined }}
-        // onPress={() => manageDayRef.current?.open()}
         onPress={onDayAddPress}
       />
 
