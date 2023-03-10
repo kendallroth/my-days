@@ -101,6 +101,8 @@
     "title": "Comportamientos",
     "behaviourItemConfirmSharedDaysDescription": "Si los días compartidos a través del enlace deben confirmarse antes de agregar (seguridad).",
     "behaviourItemConfirmSharedDaysTitle": "Confirmar días compartidos",
+    "behaviourItemIncludeTagsInIconSearchDescription": "Si las etiquetas también deben buscarse con nombres de iconos (más coincidencias pero más lento).",
+    "behaviourItemIncludeTagsInIconSearchTitle": "Incluir etiquetas en la búsqueda de iconos",
     "behaviourItemSwapDetailsThemeDescription": "Si se debe cambiar el tema de la pantalla 'Detalles' (claro u oscuro).",
     "behaviourItemSwapDetailsThemeTitle": "Cambiar el tema de la pantalla 'Detalles'"
   },

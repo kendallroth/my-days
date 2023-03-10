@@ -1,7 +1,7 @@
 {
   "name": "my-days",
   "description": "Simple mobile app to track time to/from an important date.",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "main": "index.js",
   "keywords": [
     "app",

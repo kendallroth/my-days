@@ -54,7 +54,7 @@ Releases can be deployed through Expo Go (for testing) or the Expo managed build
 
 Builds can be run locally to avoid waiting in Expo Build queues and monthly plan limitations. To run local builds, add the `--local` flag to the `eas build` command.
 
-Android builds produce an `.apk` file that can be installed on a device, while iOS builds produce an `.ipa` that can be installed from a Mac onto a connected device.
+Android builds produce an `.apk` file that can be installed on a device. iOS builds produce an `.ipa` file that can be installed from a Mac onto a connected device, visible through "Devices and Simulators > Devices > Connected" through XCode.
 
 > **WARNING:** Local iOS builds seem to fail with not finding `hermes` runtime, and should use `jsc` for the JS engine (do not commit!). Additionally, iOS logs can be found by opening XCode, then selecting "Devices and Simulators" and selecting the connected device.
 

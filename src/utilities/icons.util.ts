@@ -19,6 +19,8 @@ export const dayIcons: DayIcon[] = [
   { name: "beach", tags: ["vacation"] },
   { name: "earth", tags: ["globe"] },
   { name: "bicycle", tags: ["bike"] },
+  { name: "compass", tags: [] },
+  { name: "map", tags: [] },
   { name: "car", tags: ["truck"] },
   { name: "sail-boat", tags: ["boat"] },
   // Events
@@ -31,6 +33,16 @@ export const dayIcons: DayIcon[] = [
   { name: "video-vintage", tags: ["movie"] },
   { name: "cash", tags: ["money"] },
   { name: "ticket-confirmation", tags: ["event"] },
+  { name: "piggy-bank", tags: [] },
+  { name: "music", tags: ["concert"] },
+  { name: "fish", tags: [] },
+  // Locations / occupations
+  { name: "palette", tags: ["paint"] },
+  { name: "tools", tags: ["job", "work", "repair"] },
+  { name: "bank", tags: ["building"] },
+  { name: "hospital-building", tags: ["medical"] },
+  { name: "stethoscope", tags: ["doctor", "nurse"] },
+  { name: "toothbrush-paste", tags: ["dentist"] },
   // Relationships
   { name: "heart", tags: ["love"] },
   { name: "account", tags: ["person", "people"] },

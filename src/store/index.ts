@@ -15,17 +15,22 @@ import { type Persistor } from "redux-persist/es/types";
 
 import config from "@config";
 
+import { migrations } from "./migrations";
 import reducers from "./reducers";
 
-interface IStoreExport {
+interface StoreExport {
   persistor: Persistor;
   store: typeof store;
 }
 
+// NOTE: Cannot type with 'PersistConfig' as it either introduces a TS circular dependency, since
+//         the type is directly derived from the compiled Redux state or removes types altogether.
 const persistConfig = {
   // Enable separately persisted Redux stores per release channel
   key: `store_${config.build.releaseChannel}`,
+  migrate: migrations,
   storage: AsyncStorage,
+  version: 1,
   whitelist: ["days", "settings"],
 };
 
@@ -47,7 +52,7 @@ const store = configureStore({
  *
  * @returns Redux store and persistance
  */
-const setupStore = (): IStoreExport => {
+const setupStore = (): StoreExport => {
   const persistor = persistStore(store, null, () => {
     // NOTE: Language is loaded when store is rehydrated from async storage
     const language = store.getState().settings.language;

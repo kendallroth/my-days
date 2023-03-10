@@ -35,6 +35,7 @@ interface SettingsState {
 const initialState: SettingsState = {
   behaviours: {
     confirmSharedDays: true,
+    includeTagsInIconSearch: true,
     swapThemeOnDetails: true,
   },
   developer: false,

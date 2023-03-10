@@ -2,6 +2,8 @@
 export interface AppBehaviours {
   /** Whether to prompt for confirmation before adding shared day via link */
   confirmSharedDays: boolean;
+  /** Whether to also search tags when searching for icons (slower) */
+  includeTagsInIconSearch: boolean;
   /** Whether light/dark theming should be swapped on Details screen (due to colouring) */
   swapThemeOnDetails: boolean;
 }

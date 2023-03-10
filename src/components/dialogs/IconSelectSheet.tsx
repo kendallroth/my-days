@@ -10,13 +10,15 @@ import { dayIcons } from "@utilities/icons.util";
 import BottomSheet, { type BottomSheetRef } from "./BottomSheet";
 
 interface IconSelectProps {
+  /** Whether to also search tags when searching icons (slower) */
+  searchTags?: boolean;
   value: keyof MaterialCommunityIcons | null;
   onSelect: (icon: keyof MaterialCommunityIcons) => void;
 }
 
 const IconSelectSheet = forwardRef<BottomSheetRef, IconSelectProps>(
   (props: IconSelectProps, ref) => {
-    const { value, onSelect } = props;
+    const { searchTags = true, value, onSelect } = props;
 
     const { colors } = useTheme();
     const { t } = useTranslation(["common", "screens"]);
@@ -29,16 +31,18 @@ const IconSelectSheet = forwardRef<BottomSheetRef, IconSelectProps>(
 
     // TODO: Figure out how to improve performance (mainly rendering issues???)
     useEffect(() => {
-      // TODO: Remove spaces/hyphens when searching (in icon name tags)
       const simpleSearch = filteredSearch.toLowerCase().replace(/[^a-z]gi/, "");
       const icons = dayIcons.reduce((accum, icon) => {
         if (!simpleSearch) return [...accum, icon.name];
-        const matches =
-          icon.name.includes(simpleSearch) || icon.tags.some((tag) => tag.includes(simpleSearch));
+        let matches = icon.name.includes(simpleSearch);
+        if (!matches && searchTags) {
+          // TODO: Remove hyphens when searching (in icon name keys)
+          matches = icon.tags.some((tag) => tag.includes(simpleSearch));
+        }
         return matches ? [...accum, icon.name] : accum;
       }, [] as (keyof MaterialCommunityIcons)[]);
       setFilteredIcons(icons);
-    }, [filteredSearch]);
+    }, [filteredSearch, searchTags]);
 
     return (
       <BottomSheet ref={ref} dismissable title={t("screens:dayIconSelect.title")}>
