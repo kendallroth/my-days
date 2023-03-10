@@ -89,7 +89,7 @@ export const useDayActions = (props: DayActionsProps): DayActions => {
       isTripleSlashed: false,
       queryParams: {
         date: day.date,
-        icon: day.icon,
+        icon: day.icon ?? undefined,
         id: day.id,
         repeats: day.repeats ? "true" : "false",
         title: day.title,
