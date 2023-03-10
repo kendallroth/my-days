@@ -219,16 +219,17 @@ const DetailScreen = () => {
                 key={stat.unit}
                 colorHighlight={mainColorText}
                 colorNormal={mainColorContainer}
-                number={t("common:format.number", {
+                countDirection={dateCount.direction}
+                highlighted={stat.unit === selectedDay.unit}
+                style={idx > 0 ? { marginTop: pagePadding / 1.5 } : undefined}
+                today={dateCount.today}
+                unitLabel={stat.unitLabel}
+                value={t("common:format.number", {
                   value: stat.number,
                   signDisplay: "never",
                   maximumFractionDigits: decimals,
                   minimumFractionDigits: decimals,
                 })}
-                unitLabel={stat.unitLabel}
-                highlighted={stat.unit === selectedDay.unit}
-                today={dateCount.today}
-                style={idx > 0 ? { marginTop: pagePadding / 1.5 } : undefined}
               />
             );
           })}
