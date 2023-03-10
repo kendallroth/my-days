@@ -191,6 +191,9 @@ const HomeScreen = () => {
         <Text style={[{ color: colors.onPrimary }]} variant="headlineSmall">
           {t("screens:home.todayDate", { date: today })}
         </Text>
+        <View style={[styles.pageHeaderShape, { backgroundColor: colors.primary }]}>
+          <View style={[styles.pageHeaderShapeOverlay, { backgroundColor: colors.background }]} />
+        </View>
       </View>
 
       <View style={styles.pageContent}>
@@ -238,13 +241,28 @@ const HomeScreen = () => {
 };
 
 const pagePadding = 24;
+// App header radius cannot exceed page padding (will clip list items when scrolling)
+const headerShapeRadius = Math.min(24, pagePadding);
+
 const styles = StyleSheet.create({
   pageContent: {
     flex: 1,
   },
   pageHeader: {
+    position: "relative",
     padding: pagePadding,
     paddingTop: 0,
+    borderBottomRightRadius: headerShapeRadius,
+  },
+  pageHeaderShape: {
+    position: "absolute",
+    bottom: -headerShapeRadius,
+    height: headerShapeRadius,
+    width: headerShapeRadius,
+  },
+  pageHeaderShapeOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    borderTopLeftRadius: headerShapeRadius,
   },
   pageHeaderDay: {
     fontWeight: "700",
