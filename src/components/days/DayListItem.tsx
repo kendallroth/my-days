@@ -185,6 +185,8 @@ const styles = StyleSheet.create({
   },
   dayStatsCount: {
     fontWeight: "700",
+    // NOTE: Important with 'adjustFontSizeToFit' on iOS!
+    lineHeight: undefined,
   },
   dayStatsIcon: {
     fontSize: iconFontSize,

@@ -12,7 +12,7 @@ import * as yup from "yup";
 import { type BottomSheetRef, IconSelectSheet } from "@components/dialogs";
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
 import { DayIcon } from "@components/icons";
-import { AppBar, Page, Stack } from "@components/layout";
+import { AppBar, Page, Spacer, Stack } from "@components/layout";
 import { useAppTheme, useDayActions, useMounted } from "@hooks";
 import { type MaterialCommunityIcons } from "@typings/app.types";
 import { type DayUnit } from "@typings/day.types";
@@ -190,13 +190,9 @@ const DayFormScreen = () => {
             <Button mode="text" onPress={onIconSelectOpen}>
               {iconValue ? t("screens:dayForm.dayIconChange") : t("screens:dayForm.dayIconAdd")}
             </Button>
-            {!!iconValue && (
-              <IconButton
-                icon="close"
-                style={{ margin: 0, marginLeft: "auto" }}
-                onPress={onIconClear}
-              />
-            )}
+            {/* NOTE: Need to use 'Spacer' component as 'auto margin' does not work on iOS? */}
+            <Spacer />
+            {!!iconValue && <IconButton icon="close" style={{ margin: 0 }} onPress={onIconClear} />}
           </Stack>
           <TextInput
             autoCapitalize="words"
