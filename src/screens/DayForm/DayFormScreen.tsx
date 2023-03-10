@@ -5,7 +5,7 @@ import React, { useRef } from "react";
 import { useController, useForm } from "react-hook-form";
 import { type TFunction, useTranslation } from "react-i18next";
 import { type TextInput as RNPTextInput, ScrollView, StyleSheet } from "react-native";
-import { Button, IconButton, SegmentedButtons } from "react-native-paper";
+import { Button, Card, IconButton, SegmentedButtons } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
 import * as yup from "yup";
 
@@ -55,6 +55,9 @@ const DayFormScreen = () => {
 
   const { t } = useTranslation(["common", "screens"]);
   const { colors } = useAppTheme();
+
+  const pageBackgroundColor = colors.primaryContainer;
+  const onPageBackgroundColor = colors.onPrimaryContainer;
 
   const titleRef = useRef<RNPTextInput | null>(null);
   const dateRef = useRef<RNPTextInput | null>(null);
@@ -108,10 +111,6 @@ const DayFormScreen = () => {
     }, 250);
   });
 
-  const onCancelPress = () => {
-    navigation.goBack();
-  };
-
   const onIconSelectOpen = () => {
     iconSheetRef.current?.open();
   };
@@ -134,6 +133,10 @@ const DayFormScreen = () => {
     },
   });
 
+  const onCancelPress = () => {
+    navigation.goBack();
+  };
+
   const onSubmitPress = (data: IFormData) => {
     // NOTE: Must use 'editingDay' rather than 'editing' due to TypeScript inference
     if (!editingDay) {
@@ -150,96 +153,101 @@ const DayFormScreen = () => {
   };
 
   return (
-    <Page invertStatusBar>
+    <Page>
       <AppBar
-        backColor={colors.onPrimary}
-        background={colors.primary}
+        backColor={onPageBackgroundColor}
+        background={pageBackgroundColor}
         title={editing ? t("screens:dayForm.titleEdit") : t("screens:dayForm.titleAdd")}
-        titleStyle={{ color: colors.onPrimary }}
+        titleStyle={{ color: onPageBackgroundColor }}
       />
 
-      {/* TODO: Add KeyboardAvoidingView */}
-      <ScrollView contentContainerStyle={styles.pageContent} style={styles.pageScroll}>
-        <Stack alignItems="center" direction="row" spacing={1} style={{ marginBottom: 16 }}>
-          <IconButton
-            icon={({ size }) => (
-              <DayIcon
-                backgroundColor={colors.primary}
-                defaultIcon="help"
-                icon={iconValue}
-                iconColor={colors.surface}
-                // NOTE: Hack to fill icon button completely, taken from 'IconButton' source
-                // const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
-                size={size + 2 * 8}
+      {/* TODO: Add KeyboardAvoidingView (if ever needed) */}
+      <ScrollView
+        contentContainerStyle={styles.pageContent}
+        style={[styles.pageScroll, { backgroundColor: pageBackgroundColor }]}
+      >
+        <Card style={[styles.pageForm, { backgroundColor: colors.surface }]}>
+          <Stack alignItems="center" direction="row" spacing={1} style={{ marginBottom: 16 }}>
+            <IconButton
+              icon={({ size }) => (
+                <DayIcon
+                  backgroundColor={colors.primary}
+                  defaultIcon="help"
+                  icon={iconValue}
+                  iconColor={colors.surface}
+                  // NOTE: Hack to fill icon button completely, taken from 'IconButton' source
+                  // const buttonSize = isV3 ? size + 2 * PADDING : size * 1.5;
+                  size={size + 2 * 8}
+                />
+              )}
+              size={32}
+              style={{
+                margin: 0,
+              }}
+              onPress={onIconSelectOpen}
+              onLongPress={onIconClear}
+            />
+            <Button mode="text" onPress={onIconSelectOpen}>
+              {iconValue ? t("screens:dayForm.dayIconChange") : t("screens:dayForm.dayIconAdd")}
+            </Button>
+            {!!iconValue && (
+              <IconButton
+                icon="close"
+                style={{ margin: 0, marginLeft: "auto" }}
+                onPress={onIconClear}
               />
             )}
-            size={32}
-            style={{
-              margin: 0,
-            }}
-            onPress={onIconSelectOpen}
-            onLongPress={onIconClear}
+          </Stack>
+          <TextInput
+            autoCapitalize="words"
+            // Prevent keyboard from flickering when moving to next field
+            blurOnSubmit={false}
+            control={form.control}
+            innerRef={titleRef}
+            label={t("screens:dayForm.dayTitleLabel")}
+            maxLength={maxTitleLength}
+            name="title"
+            returnKeyType="next"
+            onSubmitEditing={() => dateRef.current?.focus()}
           />
-          <Button mode="text" onPress={onIconSelectOpen}>
-            {iconValue ? t("screens:dayForm.dayIconChange") : t("screens:dayForm.dayIconAdd")}
-          </Button>
-          {!!iconValue && (
-            <IconButton
-              icon="close"
-              style={{ margin: 0, marginLeft: "auto" }}
-              onPress={onIconClear}
-            />
-          )}
-        </Stack>
-        <TextInput
-          autoCapitalize="words"
-          // Prevent keyboard from flickering when moving to next field
-          blurOnSubmit={false}
-          control={form.control}
-          innerRef={titleRef}
-          label={t("screens:dayForm.dayTitleLabel")}
-          maxLength={maxTitleLength}
-          name="title"
-          returnKeyType="next"
-          onSubmitEditing={() => dateRef.current?.focus()}
-        />
-        <DateTimeInput
-          // Prevent keyboard from flickering when moving to next field
-          blurOnSubmit={false}
-          control={form.control}
-          innerRef={dateRef}
-          label={t("screens:dayForm.dayDateLabel")}
-          name="date"
-          returnKeyType="next"
-          style={{ marginTop: 4 }}
-        />
-        <SegmentedButtons
-          buttons={timeUnitOptions}
-          style={{ marginBottom: 8 }}
-          value={unitValue}
-          onValueChange={(v) => form.setValue("unit", v as DayUnit)}
-        />
-        <Checkbox
-          control={form.control}
-          hideHint
-          label={t("screens:dayForm.dayRepeatsLabel")}
-          name="repeats"
-          style={{ paddingVertical: 4 }}
-        />
-        <Stack
-          alignItems="center"
-          direction="row"
-          justifyContent="flex-end"
-          spacing={2}
-          style={{ marginTop: 16 }}
-        >
-          <Button mode="text" textColor={colors.secondary} onPress={onCancelPress}>
-            {t("common:actions.cancel")}
-          </Button>
-          <Button mode="contained" onPress={form.handleSubmit(onSubmitPress)}>
-            {t("common:actions.save")}
-          </Button>
-        </Stack>
+          <DateTimeInput
+            // Prevent keyboard from flickering when moving to next field
+            blurOnSubmit={false}
+            control={form.control}
+            innerRef={dateRef}
+            label={t("screens:dayForm.dayDateLabel")}
+            name="date"
+            returnKeyType="next"
+            style={{ marginTop: 4 }}
+          />
+          <SegmentedButtons
+            buttons={timeUnitOptions}
+            style={{ marginBottom: 8 }}
+            value={unitValue}
+            onValueChange={(v) => form.setValue("unit", v as DayUnit)}
+          />
+          <Checkbox
+            control={form.control}
+            hideHint
+            label={t("screens:dayForm.dayRepeatsLabel")}
+            name="repeats"
+            style={{ paddingVertical: 4 }}
+          />
+          <Stack
+            alignItems="center"
+            direction="row"
+            justifyContent="flex-end"
+            spacing={2}
+            style={{ marginTop: 16 }}
+          >
+            <Button mode="text" textColor={colors.secondary} onPress={onCancelPress}>
+              {t("common:actions.cancel")}
+            </Button>
+            <Button mode="contained" onPress={form.handleSubmit(onSubmitPress)}>
+              {t("common:actions.save")}
+            </Button>
+          </Stack>
+        </Card>
       </ScrollView>
 
       <IconSelectSheet ref={iconSheetRef} value={iconValue} onSelect={onIconSelectChoose} />
@@ -247,7 +255,7 @@ const DayFormScreen = () => {
   );
 };
 
-const pagePadding = 32;
+const pagePadding = 16;
 const styles = StyleSheet.create({
   pageContent: {
     flexGrow: 1,
@@ -256,6 +264,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: pagePadding,
     paddingVertical: pagePadding,
     flex: 1,
+  },
+  pageForm: {
+    padding: pagePadding,
   },
 });
 
