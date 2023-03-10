@@ -255,9 +255,9 @@ const styles = StyleSheet.create({
   },
   pageHeaderShape: {
     position: "absolute",
-    bottom: -headerShapeRadius,
-    height: headerShapeRadius,
-    width: headerShapeRadius,
+    bottom: -headerShapeRadius * 2,
+    height: headerShapeRadius * 2,
+    width: headerShapeRadius * 2,
   },
   pageHeaderShapeOverlay: {
     ...StyleSheet.absoluteFillObject,
