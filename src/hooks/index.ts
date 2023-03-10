@@ -2,6 +2,7 @@ export * from "./useAppLoader";
 export * from "./useAppTheme";
 export * from "./useDayActions";
 export * from "./useDayDeleteDialog";
+export * from "./useDebouncedValue";
 export * from "./useMounted";
 export * from "./useScrollingFab";
 export * from "./useScrollViewScrolling";

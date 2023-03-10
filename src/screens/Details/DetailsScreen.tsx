@@ -73,6 +73,7 @@ const DetailScreen = () => {
 
   /** Prepare edit dialog (in response to selection menu choice) */
   const onEditPress = () => {
+    // NOTE: May be smoother (but slower) to wait until menu has closed to trigger the navigation???
     menuActionRef.current?.close();
     if (!selectedDay) return;
 

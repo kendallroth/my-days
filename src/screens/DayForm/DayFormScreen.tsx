@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { type NativeStackScreenProps } from "@react-navigation/native-stack";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useController, useForm } from "react-hook-form";
 import { type TFunction, useTranslation } from "react-i18next";
 import { type TextInput as RNPTextInput, ScrollView, StyleSheet, View } from "react-native";
@@ -19,7 +19,7 @@ import { BottomSheet, type BottomSheetRef } from "@components/dialogs";
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
 import { DayIcon } from "@components/icons";
 import { AppBar, Page, Stack } from "@components/layout";
-import { useAppTheme, useDayActions, useMounted } from "@hooks";
+import { useAppTheme, useDayActions, useDebouncedValue, useMounted } from "@hooks";
 import { type MaterialCommunityIcons } from "@typings/app.types";
 import { type DayUnit } from "@typings/day.types";
 import { dayIcons } from "@utilities/icons.util";
@@ -69,9 +69,22 @@ const DayFormScreen = () => {
   const iconSheetRef = useRef<BottomSheetRef | null>(null);
   const [iconSearch, setIconSearch] = useState("");
 
-  const filteredIcons = dayIcons.filter((d) =>
-    d.toLowerCase().includes(iconSearch.toLowerCase().trim()),
-  );
+  // Limit how often icons are filtered via debouncing
+  const filteredSearch = useDebouncedValue(iconSearch, 100);
+  const [filteredIcons, setFilteredIcons] = useState<(keyof MaterialCommunityIcons)[]>([]);
+
+  // TODO: Figure out how to improve performance (mainly rendering issues???)
+  useEffect(() => {
+    // TODO: Remove spaces/hyphens when searching (in icon name tags)
+    const simpleSearch = filteredSearch.toLowerCase().replace(/[^a-z]gi/, "");
+    const icons = dayIcons.reduce((accum, icon) => {
+      if (!simpleSearch) return [...accum, icon.name];
+      const matches =
+        icon.name.includes(simpleSearch) || icon.tags.some((tag) => tag.includes(simpleSearch));
+      return matches ? [...accum, icon.name] : accum;
+    }, [] as (keyof MaterialCommunityIcons)[]);
+    setFilteredIcons(icons);
+  }, [filteredSearch]);
 
   const form = useForm<IFormData>({
     defaultValues: {
@@ -111,6 +124,9 @@ const DayFormScreen = () => {
   });
 
   useMounted(() => {
+    // Only autofocus when adding a new day (uncertain what should have focus if editing)
+    if (editing) return;
+
     // NOTE: Short timeout necessary to access ref and open keyboard!
     setTimeout(() => {
       titleRef.current?.focus();
@@ -253,6 +269,7 @@ const DayFormScreen = () => {
       </ScrollView>
       <BottomSheet ref={iconSheetRef} dismissable title={"Select Icon"}>
         <TextFieldRNP
+          autoCapitalize="none"
           dense
           placeholder="Search"
           left={<TextFieldRNP.Icon icon="magnify" />}
