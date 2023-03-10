@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Page for adding and editing days
 
 ### Updated
+- Improved icon selection workflow (added display, search)
 - Added a few more transportation icons
 - Support locale-based numeric formatting
 - Added GitHub issue templates
