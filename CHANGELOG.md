@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.2] - 2023-03-10
+
+### Fixed
+- Day Details always showed countdown state
+
 ## [0.4.1] - 2023-03-10
 
 ### Added
