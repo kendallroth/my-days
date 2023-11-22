@@ -34,7 +34,7 @@ const TextInput = (props: TextInputProps) => {
   const fieldValue = field.value ? `${field.value}` : field.value;
 
   return (
-    <Fragment>
+    <>
       <RNPTextInput
         {...rest}
         ref={innerRef}
@@ -44,7 +44,7 @@ const TextInput = (props: TextInputProps) => {
         onChangeText={!readonly ? field.onChange : undefined}
       />
       <InputHelperText error={error?.message} hint={hint} visible={Boolean(errorShown || hint)} />
-    </Fragment>
+    </>
   );
 };
 

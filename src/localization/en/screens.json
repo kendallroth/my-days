@@ -72,7 +72,12 @@
     "appDeveloper": "Developed by Kendall Roth © {{date}}",
     "appReason": "Created with ❤️ for a special person!",
     "appSummary": "“My Days” is a simple mobile app to count down/up to important dates!",
-    "guideSteps": ["Add and manage dates", "View date details / stats", "Track dates on dashboard", "Share dates with friends"],
+    "guideSteps": [
+      "Add and manage dates",
+      "View date details / stats",
+      "Track dates on dashboard",
+      "Share dates with friends"
+    ],
     "guideTipTitle": "Tips",
     "guideTips": [
       "View more information and time units for a date by selecting a day list item.",

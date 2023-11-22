@@ -35,7 +35,7 @@ const Checkbox = (props: CheckboxProps) => {
     : "unchecked";
 
   return (
-    <Fragment>
+    <>
       <RNPCheckbox.Item
         {...rest}
         // TODO: Change color based on error?
@@ -48,7 +48,7 @@ const Checkbox = (props: CheckboxProps) => {
       {!hideHint && (
         <InputHelperText error={error?.message} hint={hint} visible={Boolean(errorShown || hint)} />
       )}
-    </Fragment>
+    </>
   );
 };
 

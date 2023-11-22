@@ -67,5 +67,5 @@ export const dayIcons: DayIcon[] = [
 
 /** Check whether day icon string is valid MUI icon */
 export const isDayIconValid = (icon: string): boolean => {
-  return MuiIcons.glyphMap[icon as keyof typeof MuiIcons.glyphMap] ? true : false;
+  return !!MuiIcons.glyphMap[icon as keyof typeof MuiIcons.glyphMap];
 };

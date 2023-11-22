@@ -7,18 +7,13 @@ module.exports = {
     },
     project: "tsconfig.lint.json",
     sourceType: "module",
-    warnOnUnsupportedTypeScriptVersion: false,
   },
   env: {
     jasmine: true,
     jest: true,
   },
-  extends: [
-    // NOTE: Due to problem with package dependencies, had to install with legacy peer dependencies
-    //         and then patch the Babel ESLint parser version in the package!
-    "@react-native-community",
-  ],
-  plugins: ["import"],
+  extends: ["universe/native"],
+  plugins: ["react-native"],
   rules: {
     "@typescript-eslint/ban-ts-comment": "off",
     // Disable for all files (enable for TS)
