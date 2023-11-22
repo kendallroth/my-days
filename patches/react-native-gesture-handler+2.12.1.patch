@@ -1,8 +1,8 @@
 diff --git a/node_modules/react-native-gesture-handler/lib/typescript/components/Swipeable.d.ts b/node_modules/react-native-gesture-handler/lib/typescript/components/Swipeable.d.ts
-index 4f2413d..ae579ad 100644
+index bf879c9..6789d0f 100644
 --- a/node_modules/react-native-gesture-handler/lib/typescript/components/Swipeable.d.ts
 +++ b/node_modules/react-native-gesture-handler/lib/typescript/components/Swipeable.d.ts
-@@ -115,12 +115,12 @@ export interface SwipeableProps extends Pick<PanGestureHandlerProps, SwipeableEx
+@@ -125,12 +125,12 @@ export interface SwipeableProps extends Pick<PanGestureHandlerProps, SwipeableEx
       * Style object for the container (`Animated.View`), for example to override
       * `overflow: 'hidden'`.
       */
@@ -18,10 +18,10 @@ index 4f2413d..ae579ad 100644
  declare type SwipeableState = {
      dragX: Animated.Value;
 diff --git a/node_modules/react-native-gesture-handler/src/components/Swipeable.tsx b/node_modules/react-native-gesture-handler/src/components/Swipeable.tsx
-index d171e61..2030b98 100644
+index 0b801da..eb721cb 100644
 --- a/node_modules/react-native-gesture-handler/src/components/Swipeable.tsx
 +++ b/node_modules/react-native-gesture-handler/src/components/Swipeable.tsx
-@@ -181,13 +181,13 @@ export interface SwipeableProps
+@@ -194,13 +194,13 @@ export interface SwipeableProps
     * Style object for the container (`Animated.View`), for example to override
     * `overflow: 'hidden'`.
     */

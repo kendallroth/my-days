@@ -7,7 +7,7 @@ WSL2 causes issues with Expo ports and must be configured to enable passing/prox
 - Update Expo QR address
 - _Cleaning up_
 
-> **NOTE:** This has been implemented as a [script](scripts/wsl2_unlock_expo_ports.ps1) that can be executed with administrator privileges. A shortcut can be created with a target of `powershell.exe -ExecutionPolicy Bypass -f <file_path>` to automatically configure when executed!
+> **NOTE:** This has been implemented as a [script](../scripts/wsl2_unlock_ports.ps1) that can be executed with administrator privileges. A shortcut can be created with a target of `powershell.exe -ExecutionPolicy Bypass -f <file_path>` to automatically configure when executed (ensure shortcut has admin privileges)!
 
 ### Configure Windows Firewall
 
@@ -16,8 +16,9 @@ Configure the Windows Firewall to let inbound/outbound traffic on Expo ports thr
 ```ps1
 # Powershell
 
-New-NetFireWallRule -DisplayName 'Expo WSL2 Ports' -Direction Inbound -LocalPort 19000-19006 -Action Allow -Protocol TCP;
-New-NetFireWallRule -DisplayName 'Expo WSL2 Ports' -Direction Outbound -LocalPort 19000-19006 -Action Allow -Protocol TCP;
+Remove-NetFireWallRule -DisplayName 'WSL2 Forwarded Ports';
+New-NetFireWallRule -DisplayName 'WSL2 Forwarded Ports' -Direction Inbound -LocalPort 8081 -Action Allow -Protocol TCP;
+New-NetFireWallRule -DisplayName 'WSL2 Forwarded Ports' -Direction Outbound -LocalPort 8081 -Action Allow -Protocol TCP;
 ```
 
 ### Proxy Expo Ports
@@ -28,20 +29,19 @@ Configure the port proxying from Windows host to WSL2 guest ports.
 # Powershell
 
 $wsl_ip = $(wsl hostname -I).Trim();
-$windows_ip = '0.0.0.0';
+$all_ips = '0.0.0.0';
 
-netsh interface portproxy add v4tov4 listenport=19000 listenaddress=$windows_ip connectport=19000 connectaddress=$wsl_ip;
-netsh interface portproxy add v4tov4 listenport=19001 listenaddress=$windows_ip connectport=19001 connectaddress=$wsl_ip;
+netsh interface portproxy add v4tov4 listenport=8081 listenaddress=$windows_ip connectport=8081 connectaddress=$all_ips;
 
 # Validate proxies
 Invoke-Expression "netsh interface portproxy show v4tov4";
 ```
 
-> **NOTE:** Avoid proxying port `19002` as this will prevent loading the Expo dev tools on the host!
-
 ### Update Expo QR Address
 
 Expo must also be updated to change the scannable QR code JS bundle address!
+
+> **NOTE:** If developing on a machine using a Wi-Fi connection instead of Ethernet, the IP address must selected from the "Wi-Fi" adapter instead (will not work otherwise)!
 
 ```sh
 # WSL Bash
@@ -70,8 +70,8 @@ Cleanup can be performed by removing the Windows Firewall exception and port pro
 # Powershell
 
 # Remove port proxies
-Invoke-Expression "netsh int portproxy reset all"
+Invoke-Expression "netsh interface portproxy delete v4tov4 listenport=8081 listenaddress=0.0.0.0"
 
 # Remove firewall rules
-Invoke-Expression "Remove-NetFireWallRule -DisplayName 'Expo WSL2 Ports' ";
+Invoke-Expression "Remove-NetFireWallRule -DisplayName 'WSL2 Forwarded Ports' ";
 ```

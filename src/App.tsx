@@ -10,7 +10,7 @@ import { enableScreens } from "react-native-screens";
 import { Provider as ReduxProvider } from "react-redux";
 // TODO: Not sure if important or not? Remove it along with upgrading react-native-modal seemed to fix bug with back???
 // import "react-native-gesture-handler";
-import * as yup from "yup";
+import { setLocale as setYupLocale } from "yup";
 
 import { TheAppDataLoader } from "@components/single";
 import ContextProvider from "@contexts/ContextProvider";
@@ -32,7 +32,7 @@ enableScreens();
 
 // Support a custom locale dictionary for validation messages
 // Source: https://github.com/jquense/yup#using-a-custom-locale-dictionary
-yup.setLocale(yupLocale);
+setYupLocale(yupLocale);
 
 const { persistor, store } = setupStore();
 
