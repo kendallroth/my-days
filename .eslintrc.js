@@ -7,6 +7,7 @@ module.exports = {
     },
     project: "tsconfig.lint.json",
     sourceType: "module",
+    warnOnUnsupportedTypeScriptVersion: false,
   },
   env: {
     jasmine: true,
