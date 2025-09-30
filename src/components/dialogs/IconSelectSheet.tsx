@@ -32,15 +32,18 @@ const IconSelectSheet = forwardRef<BottomSheetRef, IconSelectProps>(
     // TODO: Figure out how to improve performance (mainly rendering issues???)
     useEffect(() => {
       const simpleSearch = filteredSearch.toLowerCase().replace(/[^a-z]gi/, "");
-      const icons = dayIcons.reduce((accum, icon) => {
-        if (!simpleSearch) return [...accum, icon.name];
-        let matches = icon.name.includes(simpleSearch);
-        if (!matches && searchTags) {
-          // TODO: Remove hyphens when searching (in icon name keys)
-          matches = icon.tags.some((tag) => tag.includes(simpleSearch));
-        }
-        return matches ? [...accum, icon.name] : accum;
-      }, [] as (keyof MaterialCommunityIcons)[]);
+      const icons = dayIcons.reduce(
+        (accum, icon) => {
+          if (!simpleSearch) return [...accum, icon.name];
+          let matches = icon.name.includes(simpleSearch);
+          if (!matches && searchTags) {
+            // TODO: Remove hyphens when searching (in icon name keys)
+            matches = icon.tags.some((tag) => tag.includes(simpleSearch));
+          }
+          return matches ? [...accum, icon.name] : accum;
+        },
+        [] as (keyof MaterialCommunityIcons)[],
+      );
       setFilteredIcons(icons);
     }, [filteredSearch, searchTags]);
 

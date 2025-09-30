@@ -48,7 +48,7 @@ const DatePickerInput = (props: DatePickerInputProps) => {
   };
 
   return (
-    <Fragment>
+    <>
       <TextInput
         {...rest}
         control={control}
@@ -71,7 +71,7 @@ const DatePickerInput = (props: DatePickerInputProps) => {
         onCancel={onChange}
         onConfirm={onChange}
       />
-    </Fragment>
+    </>
   );
 };
 

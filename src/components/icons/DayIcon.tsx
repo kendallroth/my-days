@@ -26,9 +26,7 @@ const DayIcon = (props: DayIconProps) => {
   } = props;
 
   const iconStyle: StyleProp<ViewStyle> = icon
-    ? {
-        backgroundColor: backgroundColor,
-      }
+    ? { backgroundColor }
     : {
         backgroundColor: "transparent",
         borderWidth,

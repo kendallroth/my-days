@@ -75,6 +75,10 @@ export default (): ExpoConfig => ({
   // External link configuration prefix/scheme
   scheme: `my-days${appVariantSchemeSuffix}`,
 
+  experiments: {
+    tsconfigPaths: true,
+  },
+
   // Theme
   icon: "./assets/icon_shadow.png",
   splash: {

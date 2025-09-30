@@ -2,6 +2,9 @@
 
 `patch-package` allows modifying installed NPM packages directly in `node_modules`, then generating a patch to apply to future installations of that package. This enables modifying package behaviour or fixing bugs without having to wait for upstream changes. "My Days" uses several packages that require patching in some form, whether for bugs or changing functionality.
 
+> [!Note]
+> Editing/patching source files works in development, but the build files must be patched for use in production!
+
 ### React Native Gesture Handler
 
 `react-native-gesture-handler` does not support animated styles on the `Swipeable` component, which is required to animate element opacity when swiping an item. The patch simply modifies the TypeScript definitions and is only necessary in development.

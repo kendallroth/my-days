@@ -1,6 +1,8 @@
 import { type MaterialCommunityIcons, type Optional } from "./app.types";
 
-export type DayUnit = "day" | "week" | "month" | "year";
+export const dayUnits = ["day", "week", "month", "year"] as const;
+
+export type DayUnit = (typeof dayUnits)[number];
 
 /** Day shape */
 export interface Day {
@@ -8,7 +10,7 @@ export interface Day {
   createdAt: string;
   /** Day occurrence */
   date: string;
-  icon?: keyof MaterialCommunityIcons | null;
+  icon: keyof MaterialCommunityIcons | null;
   /**
    * Whether interval repeats each year
    *

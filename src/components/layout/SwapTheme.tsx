@@ -15,7 +15,6 @@ const SwapTheme = (props: SwapThemeProps) => {
 
   const { outputTheme } = useSwapTheme(swap);
 
-  // @ts-expect-error check @callstack/react-theme-provider's children prop
   return <ThemeProvider theme={outputTheme}>{children}</ThemeProvider>;
 };
 

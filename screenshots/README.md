@@ -11,7 +11,8 @@ App screenshots are necessary for promoting the app in the app stores. Screensho
 5. Date Details
 6. Settings
 
-> **NOTE:** Ensure to have a good mixture of day types and states to demonstrate range of functionality!
+> [!Note]
+> Ensure to have a good mixture of day types and states to demonstrate range of functionality!
 
 ## Generating Screenshots
 

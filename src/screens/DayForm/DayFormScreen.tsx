@@ -3,11 +3,10 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { type NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useRef } from "react";
 import { useController, useForm } from "react-hook-form";
-import { type TFunction, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { type TextInput as RNPTextInput, ScrollView, StyleSheet } from "react-native";
 import { Button, Card, IconButton, SegmentedButtons } from "react-native-paper";
 import { v4 as uuidv4 } from "uuid";
-import * as yup from "yup";
 
 import { type BottomSheetRef, IconSelectSheet } from "@components/dialogs";
 import { Checkbox, DateTimeInput, TextInput } from "@components/form";
@@ -19,33 +18,9 @@ import { type MaterialCommunityIcons } from "@typings/app.types";
 import { type DayUnit } from "@typings/day.types";
 import { type RootRouterParams } from "src/AppRouter";
 
+import { type DayForm, getFormSchema, maxTitleLength } from "./schema";
+
 type DayFormScreenRouteProps = NativeStackScreenProps<RootRouterParams, "DayFormScreen">;
-
-interface IFormData {
-  date: string;
-  icon: keyof MaterialCommunityIcons | null;
-  title: string;
-  repeats: boolean;
-  unit: DayUnit;
-}
-
-const maxTitleLength = 40;
-
-const getSchema = (t: TFunction<("common" | "screens")[], undefined>) => {
-  return yup.object({
-    date: yup
-      .string()
-      .label(t("screens:dayForm.dayDateLabel"))
-      .required()
-      .matches(/^\d{4}-\d{2}-\d{2}$/, t("screens:dayForm.dayDateFormatError")),
-    title: yup
-      .string()
-      .label(t("screens:dayForm.dayTitleLabel"))
-      .required()
-      .min(2)
-      .max(maxTitleLength),
-  });
-};
 
 const DayFormScreen = () => {
   const route = useRoute<DayFormScreenRouteProps["route"]>();
@@ -66,7 +41,7 @@ const DayFormScreen = () => {
   const iconSheetRef = useRef<BottomSheetRef | null>(null);
   const appBehaviours = useAppSelector(selectBehaviours);
 
-  const form = useForm<IFormData>({
+  const form = useForm<DayForm>({
     defaultValues: {
       date: editingDay?.date ?? "",
       icon: editingDay?.icon ?? null,
@@ -74,7 +49,7 @@ const DayFormScreen = () => {
       repeats: editingDay?.repeats ?? false,
       unit: editingDay?.unit ?? "day",
     },
-    resolver: yupResolver(getSchema(t)),
+    resolver: yupResolver(getFormSchema(t)),
   });
 
   const timeUnits: DayUnit[] = ["day", "week", "month", "year"];
@@ -139,7 +114,7 @@ const DayFormScreen = () => {
     navigation.goBack();
   };
 
-  const onSubmitPress = (data: IFormData) => {
+  const onSubmitPress = (data: DayForm) => {
     // NOTE: Must use 'editingDay' rather than 'editing' due to TypeScript inference
     if (!editingDay) {
       onDayAdd({

@@ -62,7 +62,7 @@ const DayListItem = (props: DayDisplayProps) => {
           style,
           styles.day,
           {
-            backgroundColor: backgroundColor,
+            backgroundColor,
             borderColor: mainColor,
             borderWidth: dateCount.today ? 4 : 2,
           },
@@ -105,7 +105,7 @@ const DayListItem = (props: DayDisplayProps) => {
 
         <View style={[styles.dayStats, { backgroundColor: mainColor }]}>
           {!dateCount.today ? (
-            <Fragment>
+            <>
               <View
                 style={[
                   styles.dayStatsIconOutline,
@@ -133,11 +133,11 @@ const DayListItem = (props: DayDisplayProps) => {
               <Text style={[styles.dayStatsUnit, { color: mainColorText }]} variant="bodySmall">
                 {displayUnit}
               </Text>
-            </Fragment>
+            </>
           ) : (
-            <Fragment>
+            <>
               <Icon color={colors.warning} name="alert-decagram" style={styles.dayStatsTodayIcon} />
-            </Fragment>
+            </>
           )}
         </View>
       </Surface>
