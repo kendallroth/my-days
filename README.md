@@ -18,6 +18,14 @@ Simple app that counts down/up to important dates!
 
 Thanks to [all those](CONTRIBUTORS.md) who have contributed to this project so far!
 
+## Setup
+
+- Follow official [React Native setup guide](https://reactnative.dev/docs/set-up-your-environment)
+  - **Important:** Additionally, read [Android](./docs/setup-android.md) or [iOS](./docs/setup-ios.md) setup guides for additional details/information!
+- Copy `.env` file from `.env.example`, then modify as appropriate for environment/target
+- Ensure proper Node version with NVM (`nvm install && nvm use`) (see "Gotchas")
+- Install package dependencies (`npm install`)
+
 ## Development
 
 ```sh
@@ -28,106 +36,97 @@ npm run start
 npm run start -- --clear
 ```
 
+Additional packages can be installed with `npx expo install <package>`, which will install versions compatible with the current Expo SDK version.
+
+## Running the App
+
+Expo is used for generating native code/projects from the managed codebase. After making any native-related changes, whether installing additional packages with native plugins, or adding config/plugins/mods, the native projects can be regenerated with `npx expo prebuild` (with optional `-p` platform flag). Since we are relying on Expo to manage the native code, using `--clean` flag to ensure a clean build is recommended.
+
+> **NOTE**: Expo Prebuild does **not** have to be run after JS changes, only after changes with potential native implications!
+
+- Create a (clean?) prebuild with Expo (generates native android/ios directories)
+  - ⚠️ _Only needs to be run on initial setup or after changes with potential native implications (installing packages, etc)_
+- Run on an emulator/simulator (or connected device)
+  - ⚠️ _Android should work as-is; iOS may require slight XCode configuration (see iOS setup docs)_
+
+```bash
+npx expo prebuild --clean
+
+# Optional: Run commands with env variables loaded
+env $(grep -v "^#" .env | xargs) [command]
+# Optional: Run commands without public variables loaded (ie. local EAS builds, etc)
+env $(grep -vE “^#|EXPO_PUBLIC_” .env | xargs) [command]
+```
+
+### Emulator/Simulator vs Connected Device
+
+The app can be run either on an emulator/simulator (easiest, but with limitations) _or_ connected physical device (requires additional setup for Apple). Running on an emulator/simulator is the easiest to configure and run, but cannot access the camera (native only). However, using a physical device requires the use of a network proxy to expose the local API to the connected devices (works automatically with emulator/simulator). Additionally, development on physical iOS devices may require adding them to the project somehow (maybe in Expo somewhere?) for authorization. Use the `--device` flag when starting the Metro bundler to run on a connected device (also required when first installing a development build).
+
+> [!Note]
+> Running on an emulator/simulator requires a different `API_URL` per platform (if using local API)! For example, Android must use `http://10.0.2.2:<port>` while iOS must use `http://localhost:<port>`!
+
+Using a connected physical device requires either proxying the local API in order to be accessible by the phone **or** using the local server's network IP. A forwarding service like `ngrok` ([docs](https://ngrok.com/download)) can be used to easily forward the local API to the public internet. After downloading and configuring `ngrok`, simply run `ngrok http <port>` to expose the local API port on a remote URL. Next, update the mobile `.env` file with the correct `API_BASE_URL`, restart the mobile bundler, and you should be able to access the local API from a difference device!
+
+> [!Note]
+> When running on a connected physical device, the API **must** be exposed "publicly" (ie. either via the local server's network IP **or** using a service like `ngrok`, etc) in order for the app to be able to access the API!
+
+### Dev Client
+
+Expo Dev Client is used to generate a [development build](https://docs.expo.dev/develop/development-builds/introduction/) of the application with the Expo Devtools built-in (similar to Expo Go devtools) using `expo-dev-client`. These development builds (generated with `npm run [ios|android]`) are capable of hot reloading changes, in addition to other Expo Devtool flows.
+
+> [!Note]
+> While Expo Go is sufficient for quick prototyping, it prevents using any packages with native changes (if not already included in Expo Go native app). By comparison, Expo Dev Client effectively allows creating a native app with Expo Go's debug tools _but_ with support for custom native code.
+
+### Troubleshooting
+
+If you run into trouble with local builds, try running `npx expo-doctor` to (potentially) provide insight on what is wrong.
+
+### Expo Dev Client vs Expo Go
+
+While Expo Go is sufficient (and incredibly helpful) for quick prototyping, it prevents using any packages with native changes (if not already included in Expo Go native app) and is only intended for quick prototyping. By comparison, Expo Dev Client can be used to generate a [development build](https://docs.expo.dev/develop/development-builds/introduction/) of the application with the Expo Devtools built-in (similar to Expo Go devtools) using `expo-dev-client`. These development builds (generated with `npm run [ios|android]`) are capable of hot reloading changes, in addition to other Expo Devtool flows.
+
 ### Windows WSL2
 
 Developing in WSL2 requires some [additional configuration](./docs/expo-with-wsl2.md) and different start up process.
 
 ## Environment Variables
 
-Environment variables can be used to configure the build process (`app.config.ts`) or the app itself (accessed via `Constants.expoConfig.extras`). However, env variables **must** be set differently depending on the execution environment! In development, env variables must be passed into the NPM script. In EAS Build, environment variables come from `eas.json`. In EAS Update, environment variables come from the local environment. Knowing this distinction is crucial to proper build/updates!
+Environment variables can be used to configure the build process (`app.config.ts`) or the app itself (accessed via `Constants.expoConfig.extras`). However, env variables **must** be set differently depending on the execution environment! In development, env variables must be passed into the NPM script (loaded automatically from `.env` when using Expo CLI, but **not** local EAS builds!). In EAS Build, environment variables come from `eas.json`. **However,** when using EAS Build _locally_, non-`eas.json` secrets must be passed into the command manually (see "Secrets" in [EAS Build & Release](./docs/eas-build.md)).
 
 - [EAS Build](https://docs.expo.dev/build-reference/variables/)
 - [EAS Update](https://docs.expo.dev/eas-update/environment-variables/)
 
-| Name | Description |
-|------|-------------|
-| `APP_VARIANT` | App variant determines whether a suffix should be added to Package/Bundle ID to allow multiple installations (non-prod)
+> [!Note]
+> Public (ie. bundled) environment variables **must** be prefixed with `EXPO_PUBLIC_` in order to be substituted in the build phase!
 
+> [!Note]
+> Environment variables are validated during the build step and will prevent builds with missing/invalid values! When running Expo commands locally, it may be necessary to load the environment variables prior to executing commands (see examples above using `env`).
 
-## Releases
+| Name          | Description                                                                                   |
+| ------------- | --------------------------------------------------------------------------------------------- |
+| `APP_VARIANT` | App variant/environment allows multiple (non-prod) installations via package/bundle ID suffix |
 
-Releases can be deployed through Expo Go (for testing) or the Expo managed build system (for release). The app version is taken from the `package.json`, which should be updated before every major deployment. App environment configuration is possible with the `expo-updates` package, which exposes the value of the `releaseChannel` used when building the app.
+### App Variants (via `APP_VARIANT`)
 
-> **NOTE:** Remember to update the semantic `versionName` **and** increment `androidVersionCode`/`iosBuildNumber` in `app.config.ts` before each release/deployment!
+The `APP_VARIANT` environment variable enables multiple installations (of different variants) on the same device. The variant determines the suffix that will be applied to the app name, app ID, package/bundle ID, linking scheme, etc. Additionally, this value may be used to determine whether app is considered production or development (Sentry logs, etc).
 
-### Locally
+- `development` - Development build (for development/testing, etc)
+- `preview` - Staging production-like build (for testing, etc)
+- `production` - Production build (suitable for app stores)
 
-Builds can be run locally to avoid waiting in Expo Build queues and monthly plan limitations. To run local builds, add the `--local` flag to the `eas build` command.
+> [!Note]
+> The `APP_VARIANT` will/should usually match `channel` (which is only used for EAS Update and is relatively flaky/unreliable).
 
-Android builds produce an `.apk` file that can be installed on a device. iOS builds produce an `.ipa` file that can be installed from a Mac onto a connected device, visible through "Devices and Simulators > Devices > Connected" through XCode.
+> [!Note]
+> Some projects may not be able to use different package/bundle IDs if dependencies rely on a single of package/bundle ID (ie. Google SDK, etc). In this case, simply remove the non-applicable parts in the conditional statements. However, the app variant itself can still be useful for per-environment app configuration 🤷.
 
-> **WARNING:** Local iOS builds seem to fail with not finding `hermes` runtime, and should use `jsc` for the JS engine (do not commit!). Additionally, iOS logs can be found by opening XCode, then selecting "Devices and Simulators" and selecting the connected device.
+## Build / Submit
 
-### Credentials ([docs](https://docs.expo.dev/app-signing/app-credentials/))
+EAS Build and EAS Submit can be used to automate the build and submission process ([build documentation](./docs/eas-build.md)).
 
-Credentials are managed entirely by EAS, to avoid losing local credentials.
+## Patches
 
-### Testing Releases ([docs](https://docs.expo.dev/build/internal-distribution/))
-
-#### Android (APK) ([docs](https://docs.expo.dev/build-reference/apk/))
-
-An APK can be generated for manual device testing with `eas build -p android --profile [profile]`, where profile is either `development` (development build) or `preview` (production-like build). Once the remote build finishes, the resulting APK can be installed by following the directions either from the terminal or Expo site. An APK can be downloaded and will need to be allowed through security and installed on the device.
-
-#### iOS Ad-Hock ([docs](https://docs.expo.dev/build/internal-distribution/#22-configure-app-signing-credentials-for-ios))
-
-iOS builds can be generated for specifically provisioned phones, via an ad hoc provisioning process (requires registering device via UDID with Apple). Once provisioned, builds can be generated for manual device testing with `eas build -p ios --profile [profile]`, where profile is either `development` (development build) or `preview` (production-like build). Once the remote build finishes, the resulting bundle can be installed on a provisioned device from the terminal or Expo site.
-
-### Production Releases
-
-Production builds and releases are handled with [EAS Build](https://docs.expo.dev/build/introduction/) and [EAS Submit](https://docs.expo.dev/submit/introduction/).
-
-> **NOTE:** Remember to properly update the `version` (`package.json`) and increment the `androidVersionCode`/`iosBuildNumber` (`app.config.ts`) before each release intended for submission!
-
-#### Production Builds ([EAS Build](https://docs.expo.dev/build/introduction/))
-
-Production builds utilize the [EAS CLI](https://github.com/expo/eas-cli) and [EAS Build](https://docs.expo.dev/build/introduction/) to automatically upload and build native artifacts for later submission. The EAS CLI requires some minor input for both Android and iOS platforms (credentials, paths, etc), which could be abstracted to `eas.json` but is not for security. Once the build(s) have been started, links are provided to view the build progress. An artifact download link will be generated once the build has completed; however, EAS Submit can automatically pull builds from EAS Build.
-
-```sh
-# Build for all platforms
-eas build
-
-# Build for a specific platform
-eas build --platform android
-eas build --platform ios
-```
-
-By default, these artifacts are intended for submission and cannot be used for testing (due to output format).
-
-#### Production Submission ([EAS Submit](https://docs.expo.dev/submit/introduction/))
-
-Production builds utilize the [EAS CLI](https://github.com/expo/eas-cli) and [EAS Submit](https://docs.expo.dev/submit/introduction/) to automatically submit builds to the app stores. The EAS CLI requires some minor input for both Android and iOS platforms (bundle, credentials, etc), similar to the build workflow. Submission is typically a very fast process, and once the apps have been submitted they may be included in app store releases.
-
-```sh
-# Submit for a specific platform
-eas submit --platform android
-eas submit --platform ios
-```
-
-Once a production app has been built and submitted, a release can be created in the appropriate app store.
-
-##### Google Play Store
-
-Google Play submissions are automatically released to the "Internal" track, which does not require submission approval before testing. After internal testing, the app can be promoted to either a Closed/Open test, or directly to production, after it has been approved. Release notes and details can be specified each time a release is promoted, although typically they will be changed only when promoting out of Internal testing. Promoting an app to the production track will officially release the new version to users.
-
-##### Apple App Store
-
-Apple submissions are not automatically released to an internal testing track, but instead must have a new release created from the App Connect dashboard. The new release will inherit information from previous releases, and needs to have its version updated, release notes added, and a bundle selected. The release can then be submitted to TestFlight, allowing internal testing, before submitting for production review.
-
-#### Production Updates ([EAS Update](https://docs.expo.dev/eas-update/how-eas-update-works/))
-
-> **NOTE:** Apparently a custom `runtimeVersion` field prevents using the Expo app both in development and for released update previews (see "Caveats" below)!
-
-EAS Update is used to provide minor bug fixes and improvements over-the-air, without requiring publishing an update to app stores and waiting for users to download it. Changes made this way should then be made into a published fix/patch or batched with a variety of similar changes. Since the app version technically does not get incremented during OTA updates (since they are non-native), any changes should be considered part of the subsequent version.
-
-Updates are only applied if the "runtime version" of the installed build and the target "runtime version" of the update are identical (currently set to `appVersion` in config).
-
-Updates can be created with `eas update --auto`, which will auto-populate the EAS branch and update message from last Git commit. Optionally, branches can be specified specifically with `eas update --branch [branch] --message [message]`.
-
-##### Caveats
-
-Apparently updates published with a custom `runtimeVersion` field **cannot** be used in the Expo Go app! Additionally, Expo Go cannot even be used for development with a non-SDK version specified! This is very poorly documented in ([EAS Build docs](https://docs.expo.dev/build/updates/#previewing-updates-in-development-builds)), with no mention in EAS Update docs!
-
-Due to this major caveat, EAS Update must _only_ be used for critical bug fixes and tweaks, and absolutely avoided if there are any native packages changed/added!
+Read [patch documentation](./patches/README.md) for details on using `patch-package` to patch a variety of bugs or undesired functionality in a few packages.
 
 ## UI
 
@@ -150,7 +149,3 @@ Icons were generated with the [Build Icon](https://buildicon.netlify.app) tool o
 - [Environment Configuration](https://docs.expo.dev/distribution/release-channels/#using-release-channels-for-environment-variable-configuration)
 - [i18n Localization](https://brainsandbeards.com/blog/i18n-in-react-native-apps)
 - [React Navigation TypeScript](https://reactnavigation.org/docs/typescript)
-
-#### Patchas
-
-`patch-package` is used to patch a variety of bugs or undesired functionality in a few packages. Note that editing/patching source files works in development, but the build files must be patched for use in production!
