@@ -36,7 +36,7 @@
       }
     },
     "production": {
-      "node": "16.6.0",
+      "node": "22.6.0",
       "channel": "production"
     }
   },
